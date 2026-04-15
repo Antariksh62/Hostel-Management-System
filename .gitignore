@@ -7,16 +7,35 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Dependencies
+node_modules/
+frontend-react/node_modules/
+backend/node_modules/
 
-# Editor directories and files
+# Build folders
+dist/
+dist-ssr/
+build/
+
+# Environment variables (VERY IMPORTANT 🚨)
+.env
+backend/.env
+frontend-react/.env
+
+# Uploads (user images/files)
+uploads/
+backend/uploads/
+
+# OS files
+.DS_Store
+
+# IDE files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
+
+# Misc
+*.local
 *.suo
 *.ntvs*
 *.njsproj
