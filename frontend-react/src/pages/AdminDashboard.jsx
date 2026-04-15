@@ -1,26 +1,41 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
-import { LogOut, Users, AlertCircle, FileText, CheckCircle, Trash2 } from 'lucide-react';
+import { LogOut, User, CheckCircle, Clock, AlertCircle, Trash2 } from 'lucide-react';
 
 const AdminDashboard = () => {
     const { user, logout } = useContext(AuthContext);
     const [complaints, setComplaints] = useState([]);
     const [students, setStudents] = useState([]);
+    const [staff, setStaff] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchData();
+        
+        // Auto-refresh the dashboard every 5 seconds to get new complaints automatically
+        const intervalId = setInterval(() => {
+            fetchData();
+        }, 5000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
+    // ✅ SINGLE CLEAN fetchData
     const fetchData = async () => {
         try {
-            const [complaintsRes, studentsRes] = await Promise.all([
+            const [complaintsRes, studentsRes, usersRes] = await Promise.all([
                 api.get('/complaints/all'),
-                api.get('/users/students')
+                api.get('/users/students'),
+                api.get('/users')
             ]);
+
             setComplaints(complaintsRes.data);
             setStudents(studentsRes.data);
+
+            const staffOnly = usersRes.data.filter(u => u.role === "STAFF");
+            setStaff(staffOnly);
+
             setLoading(false);
         } catch (error) {
             console.error('Failed to fetch admin data', error);
@@ -28,38 +43,49 @@ const AdminDashboard = () => {
         }
     };
 
+    // ✅ STATUS UPDATE
     const handleStatusUpdate = async (id, newStatus) => {
         try {
             await api.put(`/complaints/${id}/status`, { status: newStatus });
-            fetchData(); // Refresh list
+            fetchData();
         } catch (error) {
             alert('Failed to update status');
         }
     };
 
+    // ✅ DELETE
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this complaint?')) return;
         try {
             await api.delete(`/complaints/${id}`);
             fetchData();
         } catch (error) {
-            alert('Failed to delete complaint');
+            alert('Failed to delete');
         }
     };
 
-    // Calculate stats
-    const totalStudents = students.length;
-    const totalComplaints = complaints.length;
-    const pendingComplaints = complaints.filter(c => c.status === 'Pending').length;
-    const resolvedComplaints = complaints.filter(c => c.status === 'Resolved').length;
+    // ✅ ASSIGN (NEW)
+    const handleAssign = async (id, staffId) => {
+        try {
+            await api.put(`/complaints/assign/${id}`, { staffId });
+            fetchData();
+        } catch (error) {
+            alert("Failed to assign complaint");
+        }
+    };
 
     const StatusBadge = ({ status }) => {
-        switch (status) {
-            case 'Pending': return <span className="badge badge-pending">Pending</span>;
-            case 'In Progress': return <span className="badge badge-progress">In Progress</span>;
-            case 'Resolved': return <span className="badge badge-resolved">Resolved</span>;
-            default: return <span className="badge">{status}</span>;
-        }
+        if (status === 'Pending') return <span className="badge badge-pending">Pending</span>;
+        if (status === 'In Progress') return <span className="badge badge-progress">In Progress</span>;
+        if (status === 'Resolved') return <span className="badge badge-resolved">Resolved</span>;
+        return <span className="badge">{status}</span>;
+    };
+
+    const StatusIcon = ({ status }) => {
+        if (status === 'Pending') return <Clock className="text-warning" size={20} />;
+        if (status === 'In Progress') return <AlertCircle className="text-primary" size={20} />;
+        if (status === 'Resolved') return <CheckCircle className="text-success" size={20} />;
+        return null;
     };
 
     return (
@@ -71,10 +97,10 @@ const AdminDashboard = () => {
                 <div className="sidebar-nav">
                     <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                         <div className="stat-icon" style={{ margin: '0 auto 1rem', width: '5rem', height: '5rem' }}>
-                            <Users size={32} />
+                            <User size={32} />
                         </div>
                         <h3 style={{ fontSize: '1.125rem', fontWeight: '600' }}>{user?.name}</h3>
-                        <p className="text-muted" style={{ fontSize: '0.875rem' }}>{user?.role}</p>
+                        <p className="text-muted" style={{ fontSize: '0.875rem' }}>{user?.email}</p>
                     </div>
                 </div>
                 <div className="sidebar-footer">
@@ -86,104 +112,82 @@ const AdminDashboard = () => {
             </aside>
 
             <main className="dashboard-content">
-                <div className="stats-grid">
-                    <div className="stat-card">
-                        <div>
-                            <h3>Total Students</h3>
-                            <div className="value">{totalStudents}</div>
-                        </div>
-                        <div className="stat-icon"><Users size={24} /></div>
-                    </div>
-                    <div className="stat-card">
-                        <div>
-                            <h3>Total Complaints</h3>
-                            <div className="value">{totalComplaints}</div>
-                        </div>
-                        <div className="stat-icon"><FileText size={24} /></div>
-                    </div>
-                    <div className="stat-card">
-                        <div>
-                            <h3>Pending Issues</h3>
-                            <div className="value" style={{ color: 'var(--warning)' }}>{pendingComplaints}</div>
-                        </div>
-                        <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: 'var(--warning)' }}>
-                            <AlertCircle size={24} />
-                        </div>
-                    </div>
-                    <div className="stat-card">
-                        <div>
-                            <h3>Resolved</h3>
-                            <div className="value" style={{ color: 'var(--success)' }}>{resolvedComplaints}</div>
-                        </div>
-                        <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)' }}>
-                            <CheckCircle size={24} />
-                        </div>
-                    </div>
-                </div>
-
                 <div className="card-panel">
                     <h3 style={{ marginBottom: '1.5rem' }}>All Complaints Management</h3>
                     {loading ? (
                         <p>Loading...</p>
                     ) : complaints.length === 0 ? (
-                        <p className="text-muted">No complaints found.</p>
+                        <p className="text-muted">No complaints found in the system at the moment.</p>
                     ) : (
                         <div className="complaint-list">
                             {complaints.map(complaint => (
-                                <div key={complaint._id} className="complaint-item" style={{ display: 'flex', gap: '1.5rem' }}>
-                                    <div style={{ flex: '1' }}>
-                                        <div className="complaint-header">
-                                            <div>
+                                <div key={complaint._id} className="complaint-item" style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+                                    <div style={{ display: 'flex', gap: '1rem' }}>
+                                        <div style={{ flex: '1' }}>
+                                            <div className="complaint-header">
                                                 <h4 className="complaint-title">{complaint.title}</h4>
-                                                <div style={{ fontSize: '0.875rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                                                    Reported by: {complaint.studentId?.name} ({complaint.studentId?.email})
+                                                <div className="flex items-center gap-2">
+                                                    <StatusBadge status={complaint.status} />
+                                                    <StatusIcon status={complaint.status} />
                                                 </div>
                                             </div>
-                                            <StatusBadge status={complaint.status} />
-                                        </div>
-                                        <p className="text-muted" style={{ fontSize: '0.875rem', marginBottom: '1rem' }}>
-                                            {complaint.description}
-                                        </p>
-                                        
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex gap-2 items-center">
-                                                <select 
-                                                    className="form-control" 
-                                                    style={{ width: 'auto', padding: '0.4rem', fontSize: '0.875rem' }}
-                                                    value={complaint.status}
-                                                    onChange={(e) => handleStatusUpdate(complaint._id, e.target.value)}
-                                                >
-                                                    <option value="Pending">Pending</option>
-                                                    <option value="In Progress">In Progress</option>
-                                                    <option value="Resolved">Resolved</option>
-                                                </select>
-                                                <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
-                                                    {new Date(complaint.createdAt).toLocaleDateString()}
-                                                </span>
+                                            <p className="text-muted" style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>
+                                                {complaint.description}
+                                            </p>
+                                            <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '1rem' }}>
+                                                Submitted by: {complaint.studentId?.name || 'Unknown User'} | Date: {new Date(complaint.createdAt).toLocaleDateString()}
+                                            </p>
+
+                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                                                
+                                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                    <label style={{ fontSize: '0.75rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Update Status:</label>
+                                                    <select
+                                                        value={complaint.status}
+                                                        onChange={(e) => handleStatusUpdate(complaint._id, e.target.value)}
+                                                        className="form-control"
+                                                        style={{ width: '150px', padding: '0.5rem' }}
+                                                    >
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="In Progress">In Progress</option>
+                                                        <option value="Resolved">Resolved</option>
+                                                    </select>
+                                                </div>
+
+                                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                    <label style={{ fontSize: '0.75rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>Assign Staff:</label>
+                                                    <select
+                                                        value={complaint.assignedTo?._id || ""}
+                                                        onChange={(e) => handleAssign(complaint._id, e.target.value)}
+                                                        className="form-control"
+                                                        style={{ width: '180px', padding: '0.5rem' }}
+                                                    >
+                                                        <option value="">Unassigned</option>
+                                                        {staff.map(s => (
+                                                            <option key={s._id} value={s._id}>
+                                                                {s.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+
+                                                <button onClick={() => handleDelete(complaint._id)} className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ef4444', borderColor: '#ef4444', height: 'fit-content', marginTop: 'auto' }}>
+                                                    <Trash2 size={16} /> Delete
+                                                </button>
                                             </div>
-                                            
-                                            <button 
-                                                className="btn btn-danger btn-sm flex items-center gap-2" 
-                                                style={{ width: 'auto' }}
-                                                onClick={() => handleDelete(complaint._id)}
-                                            >
-                                                <Trash2 size={14} /> Delete
-                                            </button>
                                         </div>
-                                    </div>
-                                    
-                                    {complaint.image && (
-                                        <div style={{ width: '150px' }}>
-                                            <a href={`http://localhost:5000${complaint.image}`} target="_blank" rel="noreferrer">
+
+                                        {complaint.image && (
+                                            <div style={{ width: '150px' }}>
                                                 <img 
                                                     src={`http://localhost:5000${complaint.image}`} 
-                                                    alt="Attached evidence" 
+                                                    alt="Complaint attachment" 
                                                     className="img-preview"
-                                                    style={{ width: '100%', height: '120px' }}
+                                                    style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
                                                 />
-                                            </a>
-                                        </div>
-                                    )}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             ))}
                         </div>

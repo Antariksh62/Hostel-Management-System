@@ -32,7 +32,11 @@ exports.getStudentComplaints = async (req, res) => {
 
 exports.getAllComplaints = async (req, res) => {
     try {
-        const complaints = await Complaint.find().populate("studentId", "name email").sort({ createdAt: -1 });
+        const complaints = await Complaint.find()
+            .populate("studentId", "name email")
+            .populate("assignedTo", "name email") // ✅ IMPORTANT
+            .sort({ createdAt: -1 });
+
         res.json(complaints);
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
@@ -44,10 +48,40 @@ exports.updateComplaintStatus = async (req, res) => {
         const { id } = req.params;
         const { status } = req.body;
         
-        const complaint = await Complaint.findByIdAndUpdate(id, { status }, { new: true });
+        const complaint = await Complaint.findByIdAndUpdate(
+            id,
+            { status },
+            { new: true }
+        );
+
         if (!complaint) return res.status(404).json({ message: "Complaint not found" });
         
         res.json({ message: "Status updated successfully", complaint });
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
+// ✅ NEW: ASSIGN COMPLAINT
+exports.assignComplaint = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { staffId } = req.body;
+
+        const complaint = await Complaint.findByIdAndUpdate(
+            id,
+            {
+                assignedTo: staffId,
+                status: "In Progress"
+            },
+            { new: true }
+        );
+
+        if (!complaint) {
+            return res.status(404).json({ message: "Complaint not found" });
+        }
+
+        res.json({ message: "Complaint assigned successfully", complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }
@@ -60,7 +94,6 @@ exports.deleteComplaint = async (req, res) => {
         
         if (!complaint) return res.status(404).json({ message: "Complaint not found" });
         
-        // Remove image if exists
         if (complaint.image) {
             const imagePath = path.join(__dirname, "..", complaint.image);
             if (fs.existsSync(imagePath)) {

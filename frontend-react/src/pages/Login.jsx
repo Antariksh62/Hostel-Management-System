@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LogIn } from 'lucide-react';
 
 const Login = () => {
     const { login } = useContext(AuthContext);
+    const navigate = useNavigate(); // ✅ ADD
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -14,9 +16,23 @@ const Login = () => {
         e.preventDefault();
         setError('');
         setIsSubmitting(true);
+
         try {
-            await login(email, password);
-            // Redirection is handled in App.js based on role
+            const res = await login(email, password); // ✅ capture response
+
+            const user = res?.user || JSON.parse(sessionStorage.getItem("user"));
+
+            // 🔥 ROLE-BASED REDIRECT
+            if (user?.role === "STUDENT") {
+                navigate("/student-dashboard");
+            } else if (user?.role === "WARDEN") {
+                navigate("/admin-dashboard");
+            } else if (user?.role === "STAFF") {
+                navigate("/staff-dashboard");
+            } else {
+                navigate("/"); // fallback
+            }
+
         } catch (err) {
             setError(err.response?.data?.message || 'Failed to login');
         } finally {
@@ -33,8 +49,9 @@ const Login = () => {
                     </div>
                 </div>
                 <h2>Hostel Login</h2>
+
                 {error && <div className="error-msg mb-4">{error}</div>}
-                
+
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Email Address</label>

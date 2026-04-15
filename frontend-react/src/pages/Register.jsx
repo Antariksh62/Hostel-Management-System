@@ -8,7 +8,7 @@ const Register = () => {
     const navigate = useNavigate();
     
     const [formData, setFormData] = useState({
-        name: '', email: '', password: '', role: 'Student'
+        name: '', email: '', password: '', role: 'STUDENT'
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -75,8 +75,9 @@ const Register = () => {
                     <div className="form-group">
                         <label>Role</label>
                         <select name="role" className="form-control" onChange={handleChange} value={formData.role}>
-                            <option value="Student">Student</option>
-                            <option value="Admin">Admin/Warden</option>
+                            <option value="STUDENT">Student</option>
+                            <option value="WARDEN">Warden</option>
+                            <option value="STAFF">Staff</option>
                         </select>
                     </div>
                     

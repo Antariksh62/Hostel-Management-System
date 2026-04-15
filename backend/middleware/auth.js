@@ -17,12 +17,20 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-const adminMiddleware = (req, res, next) => {
-    if (req.user && req.user.role === "Admin") {
+const wardenMiddleware = (req, res, next) => {
+    if (req.user && req.user.role === "WARDEN") {
         next();
     } else {
-        res.status(403).json({ message: "Access denied: Admins only" });
+        res.status(403).json({ message: "Access denied: Wardens only" });
     }
 };
 
-module.exports = { authMiddleware, adminMiddleware };
+const wardenOrStaffMiddleware = (req, res, next) => {
+    if (req.user && (req.user.role === "WARDEN" || req.user.role === "STAFF")) {
+        next();
+    } else {
+        res.status(403).json({ message: "Access denied: Elevate rights required" });
+    }
+};
+
+module.exports = { authMiddleware, wardenMiddleware, wardenOrStaffMiddleware };

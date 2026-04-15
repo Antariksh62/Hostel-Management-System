@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import StudentDashboard from './pages/StudentDashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import StaffDashboard from "./pages/StaffDashboard";
 
 const PrivateRoute = ({ children, allowedRole }) => {
     const { user, loading } = useContext(AuthContext);
@@ -16,7 +17,9 @@ const PrivateRoute = ({ children, allowedRole }) => {
     if (!user) return <Navigate to="/" />;
 
     if (allowedRole && user.role !== allowedRole) {
-        return <Navigate to={user.role === 'Admin' ? '/admin-dashboard' : '/student-dashboard'} />;
+        if (user.role === 'WARDEN') return <Navigate to="/admin-dashboard" />;
+        if (user.role === 'STAFF') return <Navigate to="/staff-dashboard" />;
+        return <Navigate to="/student-dashboard" />;
     }
 
     return children;
@@ -27,23 +30,36 @@ const App = () => {
 
     if (loading) return <div className="loader">Loading...</div>;
 
+    const getDefaultRoute = () => {
+        if (!user) return '/';
+        if (user.role === 'WARDEN') return '/admin-dashboard';
+        if (user.role === 'STAFF') return '/staff-dashboard';
+        return '/student-dashboard';
+    };
+
     return (
         <Router>
             <div className="app-container">
                 <main>
                     <Routes>
-                        <Route path="/" element={user ? <Navigate to={user.role === 'Admin' ? '/admin-dashboard' : '/student-dashboard'} /> : <Login />} />
+                        <Route path="/" element={user ? <Navigate to={getDefaultRoute()} /> : <Login />} />
                         <Route path="/register" element={<Register />} />
                         
                         <Route path="/student-dashboard" element={
-                            <PrivateRoute allowedRole="Student">
+                            <PrivateRoute allowedRole="STUDENT">
                                 <StudentDashboard />
                             </PrivateRoute>
                         } />
                         
                         <Route path="/admin-dashboard" element={
-                            <PrivateRoute allowedRole="Admin">
+                            <PrivateRoute allowedRole="WARDEN">
                                 <AdminDashboard />
+                            </PrivateRoute>
+                        } />
+
+                        <Route path="/staff-dashboard" element={
+                            <PrivateRoute allowedRole="STAFF">
+                                <StaffDashboard />
                             </PrivateRoute>
                         } />
                     </Routes>
