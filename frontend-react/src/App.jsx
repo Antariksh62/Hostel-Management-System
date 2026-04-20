@@ -4,6 +4,7 @@ import { AuthContext } from './context/AuthContext';
 
 // Import Pages
 import Login from './pages/Login';
+import StudentLogin from './pages/StudentLogin';
 import Register from './pages/Register';
 import StudentDashboard from './pages/StudentDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -43,6 +44,7 @@ const App = () => {
                 <main>
                     <Routes>
                         <Route path="/" element={user ? <Navigate to={getDefaultRoute()} /> : <Login />} />
+                        <Route path="/student-login" element={user?.role === 'STUDENT' ? <Navigate to="/student-dashboard" /> : <StudentLogin />} />
                         <Route path="/register" element={<Register />} />
                         
                         <Route path="/student-dashboard" element={

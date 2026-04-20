@@ -286,3 +286,281 @@ main {
 
 /* Image Modal / Preview */
 .img-preview { max-width: 100%; max-height: 200px; border-radius: 0.5rem; margin-top: 0.5rem; object-fit: cover; }
+
+/* ─── OTP / Student Login ──────────────────────────────────────────────────── */
+.otp-bg {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #f0fdf4 100%);
+}
+
+.otp-card {
+  max-width: 500px !important;
+}
+
+.otp-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.otp-logo {
+  width: 64px;
+  height: 64px;
+  background: rgba(79, 70, 229, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+}
+
+.otp-title {
+  font-size: 1.75rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.otp-subtitle {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Step indicator */
+.otp-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 1.75rem;
+}
+
+.otp-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.otp-step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--border-color);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.otp-step--active .otp-step-circle {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+}
+
+.otp-step--done .otp-step-circle {
+  background: var(--success);
+  color: white;
+}
+
+.otp-step-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.otp-step--active .otp-step-label {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.otp-step--done .otp-step-label {
+  color: var(--success);
+}
+
+.otp-step-line {
+  width: 60px;
+  height: 2px;
+  background: var(--border-color);
+  margin-bottom: 1rem;
+  transition: background 0.3s;
+}
+
+.otp-step-line--done {
+  background: var(--success);
+}
+
+/* Form inner */
+.otp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.otp-step-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 0.4rem;
+}
+
+.otp-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.otp-domain-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+/* Large OTP input */
+.otp-input-field {
+  font-size: 1.75rem !important;
+  letter-spacing: 0.5rem;
+  text-align: center;
+  font-weight: 700;
+  padding: 1rem !important;
+}
+
+/* Resend area */
+.otp-resend {
+  text-align: center;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.otp-resend-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background 0.2s;
+}
+
+.otp-resend-btn:hover {
+  background: rgba(79, 70, 229, 0.1);
+}
+
+.otp-back-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.otp-btn {
+  margin-top: 1rem;
+}
+
+/* ─── Login page divider + student CTA ────────────────────────────────────── */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.student-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(79, 70, 229, 0.07);
+  border: 2px solid var(--primary);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.student-login-btn:hover {
+  background: rgba(79, 70, 229, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+  text-decoration: none;
+}
+
+/* ─── Student sidebar info chips ─────────────────────────────────────────── */
+.student-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.student-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--bg-color);
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.4rem;
+}
+
+/* ─── Door number chips ───────────────────────────────────────────────────── */
+.door-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(79, 70, 229, 0.1);
+  color: var(--primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(79, 70, 229, 0.3);
+}
+
+.door-chip--admin {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* ─── Door notice in complaint form ──────────────────────────────────────── */
+.door-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.08);
+  color: #065f46;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+

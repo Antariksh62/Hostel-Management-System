@@ -1,4 +1,5 @@
 const Complaint = require("../models/Complaint");
+const User = require("../models/User");
 const fs = require("fs");
 const path = require("path");
 
@@ -6,11 +7,16 @@ exports.createComplaint = async (req, res) => {
     try {
         const { title, description } = req.body;
         const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+
+        // Auto-fetch the student's door number from their profile
+        const student = await User.findById(req.user.id).select("doorNumber");
+        const doorNumber = student?.doorNumber || "N/A";
         
         const newComplaint = new Complaint({
             title,
             description,
             image: imagePath,
+            doorNumber,
             studentId: req.user.id
         });
         
@@ -33,8 +39,8 @@ exports.getStudentComplaints = async (req, res) => {
 exports.getAllComplaints = async (req, res) => {
     try {
         const complaints = await Complaint.find()
-            .populate("studentId", "name email")
-            .populate("assignedTo", "name email") // ✅ IMPORTANT
+            .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
+            .populate("assignedTo", "name email")
             .sort({ createdAt: -1 });
 
         res.json(complaints);
@@ -47,7 +53,12 @@ exports.updateComplaintStatus = async (req, res) => {
     try {
         const { id } = req.params;
         const { status } = req.body;
-        
+
+        const allowedStatuses = ["Pending", "In Progress", "Resolved"];
+        if (!status || !allowedStatuses.includes(status)) {
+            return res.status(400).json({ message: `Status must be one of: ${allowedStatuses.join(", ")}` });
+        }
+
         const complaint = await Complaint.findByIdAndUpdate(
             id,
             { status },
@@ -55,18 +66,31 @@ exports.updateComplaintStatus = async (req, res) => {
         );
 
         if (!complaint) return res.status(404).json({ message: "Complaint not found" });
-        
+
         res.json({ message: "Status updated successfully", complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };
 
-// ✅ NEW: ASSIGN COMPLAINT
+// ✅ ASSIGN COMPLAINT
 exports.assignComplaint = async (req, res) => {
     try {
         const { id } = req.params;
         const { staffId } = req.body;
+
+        if (!staffId) {
+            return res.status(400).json({ message: "staffId is required" });
+        }
+
+        // Verify the assigned user exists and is actually STAFF
+        const staffMember = await User.findById(staffId);
+        if (!staffMember) {
+            return res.status(404).json({ message: "Staff member not found" });
+        }
+        if (staffMember.role !== "STAFF") {
+            return res.status(400).json({ message: "Assigned user must have STAFF role" });
+        }
 
         const complaint = await Complaint.findByIdAndUpdate(
             id,

@@ -1,17 +1,36 @@
 const mongoose = require("mongoose");
 
 const ComplaintSchema = new mongoose.Schema({
-    title: { type: String, required: true },
+    title:       { type: String, required: true },
     description: { type: String, required: true },
-    category: { type: String, default: "Other" },
-    status: { 
-        type: String, 
-        enum: ["Pending", "In Progress", "Resolved"], 
-        default: "Pending" 
+    category: {
+        type: String,
+        enum: ["Electrical", "Plumbing", "Furniture", "Cleanliness", "Internet", "Other"],
+        default: "Other"
     },
-    image: { type: String }, // path to the image
-    studentId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null }
+    status: {
+        type: String,
+        enum: ["Pending", "In Progress", "Resolved"],
+        default: "Pending"
+    },
+
+    // ─── Media ─────────────────────────────────────────────────────────────────
+    // New: array of { url, type } objects supporting multiple images + optional video
+    media: [{
+        url:  { type: String, required: true },
+        type: { type: String, enum: ["image", "video"], required: true }
+    }],
+    // Legacy: kept for backward compatibility with older complaints
+    image: { type: String },
+
+    // ─── Metadata ──────────────────────────────────────────────────────────────
+    doorNumber: { type: String },               // Auto-populated from student profile
+    studentId:  { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
+
+    // Set when status transitions to "Resolved" — used for avg resolution time analytics
+    resolvedAt: { type: Date, default: null }
+
 }, { timestamps: true });
 
 module.exports = mongoose.model("Complaint", ComplaintSchema);

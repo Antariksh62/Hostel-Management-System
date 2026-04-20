@@ -34,23 +34,28 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    // 🔥 LOGIN
+    // 🔥 WARDEN / STAFF LOGIN (email + password)
     const login = async (email, password) => {
         const res = await api.post('/auth/login', { email, password });
 
         const { token, user } = res.data;
 
-        // ✅ Store token + user
         sessionStorage.setItem('token', token);
         sessionStorage.setItem('user', JSON.stringify(user));
 
-        // ✅ Attach token to axios
         api.defaults.headers.Authorization = `Bearer ${token}`;
-
-        // ✅ Set state
         setUser(user);
 
         return res.data;
+    };
+
+    // 🔥 STUDENT OTP LOGIN — called after OTP verification + profile completion
+    const studentLogin = (token, userData) => {
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('user', JSON.stringify(userData));
+
+        api.defaults.headers.Authorization = `Bearer ${token}`;
+        setUser(userData);
     };
 
     // 🔥 REGISTER
@@ -69,7 +74,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+        <AuthContext.Provider value={{ user, login, studentLogin, register, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );

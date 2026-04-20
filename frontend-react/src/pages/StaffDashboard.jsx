@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from '../context/AuthContext';
 import api from "../services/api";
-import { LogOut, User, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { LogOut, User, CheckCircle, Clock, AlertCircle, DoorOpen } from 'lucide-react';
 
 export default function StaffDashboard() {
   const { user, logout } = useContext(AuthContext);
@@ -115,8 +115,21 @@ export default function StaffDashboard() {
                                         <p className="text-muted" style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>
                                             {complaint.description}
                                         </p>
+                                        {/* Door number + student info */}
+                                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '0.5rem' }}>
+                                            {complaint.doorNumber && (
+                                                <span className="door-chip door-chip--admin">
+                                                    <DoorOpen size={13} /> {complaint.doorNumber}
+                                                </span>
+                                            )}
+                                            <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
+                                                {complaint.studentId?.fullName || complaint.studentId?.name || 'Unknown'}
+                                                {complaint.studentId?.rollNumber && ` · Roll ${complaint.studentId.rollNumber}`}
+                                                {complaint.studentId?.classDiv && ` · ${complaint.studentId.classDiv}`}
+                                            </span>
+                                        </div>
                                         <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '1rem' }}>
-                                            Submitted by: {complaint.studentId?.name || 'Unknown User'} | Date: {new Date(complaint.createdAt).toLocaleDateString()}
+                                            Date: {new Date(complaint.createdAt).toLocaleDateString()}
                                         </p>
 
                                         <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>

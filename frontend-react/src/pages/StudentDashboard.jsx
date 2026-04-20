@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
-import { LogOut, User, PlusCircle, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { LogOut, User, PlusCircle, CheckCircle, Clock, AlertCircle, DoorOpen, Hash, BookOpen, Calendar } from 'lucide-react';
 
 const StudentDashboard = () => {
     const { user, logout } = useContext(AuthContext);
@@ -14,8 +14,6 @@ const StudentDashboard = () => {
     const [image, setImage] = useState(null);
     const [submitStatus, setSubmitStatus] = useState({ error: '', success: '', loading: false });
     const fileInputRef = useRef(null);
-
-    
 
     useEffect(() => {
         fetchComplaints();
@@ -57,7 +55,7 @@ const StudentDashboard = () => {
             setDescription('');
             setImage(null);
             if(fileInputRef.current) fileInputRef.current.value = '';
-            fetchComplaints(); // Refresh list
+            fetchComplaints();
         } catch (error) {
             setSubmitStatus({ error: error.response?.data?.message || 'Submission failed', success: '', loading: false });
         }
@@ -92,8 +90,36 @@ const StudentDashboard = () => {
                         <div className="stat-icon" style={{ margin: '0 auto 1rem', width: '5rem', height: '5rem' }}>
                             <User size={32} />
                         </div>
-                        <h3 style={{ fontSize: '1.125rem', fontWeight: '600' }}>{user?.name}</h3>
+                        <h3 style={{ fontSize: '1.125rem', fontWeight: '600' }}>{user?.fullName || user?.name}</h3>
                         <p className="text-muted" style={{ fontSize: '0.875rem' }}>{user?.email}</p>
+                    </div>
+
+                    {/* Student profile info chips */}
+                    <div className="student-info-list">
+                        {user?.doorNumber && (
+                            <div className="student-info-item">
+                                <DoorOpen size={15} />
+                                <span>Door: <strong>{user.doorNumber}</strong></span>
+                            </div>
+                        )}
+                        {user?.rollNumber && (
+                            <div className="student-info-item">
+                                <Hash size={15} />
+                                <span>Roll No: <strong>{user.rollNumber}</strong></span>
+                            </div>
+                        )}
+                        {user?.classDiv && (
+                            <div className="student-info-item">
+                                <BookOpen size={15} />
+                                <span>Class: <strong>{user.classDiv}</strong></span>
+                            </div>
+                        )}
+                        {user?.year && (
+                            <div className="student-info-item">
+                                <Calendar size={15} />
+                                <span>Year: <strong>{user.year}</strong></span>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="sidebar-footer">
@@ -109,6 +135,13 @@ const StudentDashboard = () => {
                     <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <PlusCircle /> File a New Complaint
                     </h3>
+
+                    {user?.doorNumber && (
+                        <div className="door-notice">
+                            <DoorOpen size={16} />
+                            <span>Your door number <strong>{user.doorNumber}</strong> will be auto-attached to this complaint.</span>
+                        </div>
+                    )}
                     
                     {submitStatus.success && <div className="success-msg mb-4">{submitStatus.success}</div>}
                     {submitStatus.error && <div className="error-msg mb-4">{submitStatus.error}</div>}
@@ -153,9 +186,16 @@ const StudentDashboard = () => {
                                         <p className="text-muted" style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>
                                             {complaint.description}
                                         </p>
-                                        <p style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
-                                            Submitted on {new Date(complaint.createdAt).toLocaleDateString()}
-                                        </p>
+                                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                                            <p style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
+                                                Submitted on {new Date(complaint.createdAt).toLocaleDateString()}
+                                            </p>
+                                            {complaint.doorNumber && (
+                                                <span className="door-chip">
+                                                    <DoorOpen size={12} /> {complaint.doorNumber}
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
                                     {complaint.image && (
                                         <div style={{ width: '120px' }}>
