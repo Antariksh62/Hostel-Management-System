@@ -41,3 +41,19 @@ backend/uploads/
 *.njsproj
 *.sln
 *.sw?
+
+# Graphify / AI cache
+graphify-out/
+.graphify_ast.json
+.graphify_detect.json
+.graphify_python
+.graphify_uncached.txt
+
+# Python env
+venv/
+
+# Screenshots (optional)
+screenshots/
+
+# Tests (optional if not needed)
+tests/
