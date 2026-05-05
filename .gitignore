@@ -7,6 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+.graphify_*
+graphify-out/
+run_ast.py
+
 # Dependencies
 node_modules/
 frontend-react/node_modules/
