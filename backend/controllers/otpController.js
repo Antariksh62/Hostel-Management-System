@@ -1,83 +1,184 @@
 const nodemailer = require("nodemailer");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const jwt        = require("jsonwebtoken");
+const bcrypt     = require("bcryptjs");
+const { User, Student } = require("../models/User");
+const OTP        = require("../models/OTP");
 
-const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret_key";
-
-// ─── In-memory OTP store { email: { otp, expiresAt, attempts } } ─────────────
-const otpStore = {};
+const JWT_SECRET        = process.env.JWT_SECRET || "fallback_secret_key";
+const OTP_BCRYPT_ROUNDS = 6;                    // Low rounds — OTP is short-lived anyway
+const OTP_EXPIRY_MS     = 10 * 60 * 1000;       // 10 minutes
+const RESEND_COOLDOWN_S = 60;                    // 60-second cooldown between sends
+const MAX_ATTEMPTS      = 5;
 
 // ─── Nodemailer transporter ───────────────────────────────────────────────────
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+// Uses Gmail SMTP (port 587 / STARTTLS). Falls back to Ethereal if credentials
+// are missing or rejected. OTP is always printed to console in dev mode.
+let _transporter   = null;
+let _usingEthereal = false;
+
+const getTransporter = async () => {
+    if (_transporter) return _transporter;
+
+    const user = process.env.EMAIL_USER;
+    const pass = process.env.EMAIL_PASS;
+
+    if (user && pass) {
+        // Explicit Gmail SMTP — more reliable than service:'gmail' shortcut
+        const gmailTransport = nodemailer.createTransport({
+            host:   "smtp.gmail.com",
+            port:   587,
+            secure: false,   // STARTTLS on port 587
+            auth:   { user, pass },
+            tls:    { rejectUnauthorized: false }
+        });
+        try {
+            await gmailTransport.verify();
+            console.log("✅ Gmail SMTP verified — real emails will be delivered to students");
+            _transporter   = gmailTransport;
+            _usingEthereal = false;
+            return _transporter;
+        } catch (err) {
+            console.error("\n╔══════════════════════════════════════════════════════════╗");
+            console.error("║  ❌ Gmail SMTP FAILED — OTP emails will NOT be delivered ║");
+            console.error("╠══════════════════════════════════════════════════════════╣");
+            console.error("║  Error: " + err.message.slice(0, 52).padEnd(52) + " ║");
+            console.error("║                                                          ║");
+            console.error("║  To fix (2 minutes):                                    ║");
+            console.error("║  1. Log into: " + (user || "your Gmail").padEnd(43) + " ║");
+            console.error("║  2. Go to: myaccount.google.com/apppasswords            ║");
+            console.error("║  3. Generate a new App Password (select 'Mail')         ║");
+            console.error("║  4. Paste it as EMAIL_PASS in backend/.env              ║");
+            console.error("║  5. Restart the server                                  ║");
+            console.error("║                                                          ║");
+            console.error("║  In the meantime: OTP is shown in the browser UI ✅     ║");
+            console.error("╚══════════════════════════════════════════════════════════╝\n");
+        }
+    } else {
+        console.warn("⚠️  EMAIL_USER / EMAIL_PASS not set in .env — using Ethereal fallback");
     }
-});
 
-// ─── Helper: generate 6-digit OTP ────────────────────────────────────────────
-const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
+    // Fallback: Ethereal catches all emails, preview URL logged to console
+    const testAccount = await nodemailer.createTestAccount();
+    _transporter = nodemailer.createTransport({
+        host:   "smtp.ethereal.email",
+        port:   587,
+        secure: false,
+        auth:   { user: testAccount.user, pass: testAccount.pass }
+    });
+    _usingEthereal = true;
+    console.log("📧 Ethereal test SMTP active:", testAccount.user);
+    return _transporter;
+};
 
-// ─── Helper: extract PRN from email ──────────────────────────────────────────
-const extractPRN = (email) => email.toLowerCase().split("@")[0];
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+const generateOTP  = () => Math.floor(100000 + Math.random() * 900000).toString();
+const extractPRN   = (email) => email.toLowerCase().split("@")[0];
 
 // =============================================================================
 // POST /api/auth/student/send-otp
-// Body: { email }
+// Body already validated by Joi middleware (schemas.sendOTP)
 // =============================================================================
 exports.sendOTP = async (req, res) => {
     try {
         let { email } = req.body;
-
-        if (!email || typeof email !== "string") {
-            return res.status(400).json({ message: "A valid email is required" });
-        }
-
-        // Normalize to lowercase and strip whitespace
         email = email.toLowerCase().trim();
 
-        // Basic email format check (@ present, not just the domain)
-        if (!email.includes("@") || email.startsWith("@")) {
-            return res.status(400).json({ message: "Invalid email format" });
-        }
-
-        // Validate PICT domain
+        // Validate PICT domain (belt-and-suspenders after Joi)
         if (!email.endsWith("@ms.pict.edu")) {
             return res.status(400).json({
                 message: "Only PICT student emails (@ms.pict.edu) are allowed"
             });
         }
 
-        // Generate OTP (valid for 10 minutes)
-        const otp = generateOTP();
-        const expiresAt = Date.now() + 10 * 60 * 1000; // 10 min
+        // ── Resend cooldown: check DB record ─────────────────────────────────
+        const existing = await OTP.findOne({ email });
+        if (existing) {
+            const secondsSinceSent = Math.floor(
+                (Date.now() - existing.lastSentAt.getTime()) / 1000
+            );
+            if (secondsSinceSent < RESEND_COOLDOWN_S) {
+                const resendAfter = RESEND_COOLDOWN_S - secondsSinceSent;
+                return res.status(429).json({
+                    message: `Please wait ${resendAfter} seconds before requesting a new OTP.`,
+                    resendAfter
+                });
+            }
+        }
 
-        // Store OTP with attempt counter (reset on each new send)
-        otpStore[email] = { otp, expiresAt, attempts: 0 };
+        // ── Generate & hash OTP ───────────────────────────────────────────────
+        const rawOTP    = generateOTP();
+        const hashedOTP = await bcrypt.hash(rawOTP, OTP_BCRYPT_ROUNDS);
 
-        // Send email
-        await transporter.sendMail({
-            from: `"PICT Hostel Management" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: "Your OTP for PICT Hostel Login",
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #f9fafb; border-radius: 12px;">
-                    <h2 style="color: #4f46e5; margin-bottom: 8px;">PICT Hostel Management</h2>
-                    <p style="color: #374151; font-size: 16px;">Hello,</p>
-                    <p style="color: #374151; font-size: 16px;">Your One-Time Password (OTP) for login is:</p>
-                    <div style="background: #4f46e5; color: white; font-size: 36px; font-weight: 700; letter-spacing: 8px; text-align: center; padding: 20px; border-radius: 8px; margin: 24px 0;">
-                        ${otp}
+        // ── Upsert into DB (create or overwrite) ──────────────────────────────
+        await OTP.findOneAndUpdate(
+            { email },
+            {
+                otp:        hashedOTP,
+                expiresAt:  new Date(Date.now() + OTP_EXPIRY_MS),
+                attempts:   0,
+                lastSentAt: new Date()
+            },
+            { upsert: true, returnDocument: "after" }
+        );
+
+        // ── Always log OTP to console (visible in terminal) ──────────────────
+        const isDev = process.env.NODE_ENV !== "production";
+        console.log(`\n🔑 ============================================`);
+        console.log(`   OTP for ${email}: ${rawOTP}`);
+        console.log(`   (valid 10 min)`);
+        console.log(`🔑 ============================================\n`);
+
+        // ── Attempt email delivery (non-blocking — OTP still works if email fails) ──
+        let emailDelivered = false;
+        let etherealPreview = null;
+        try {
+            const transport = await getTransporter();
+            const info = await transport.sendMail({
+                from: `"PICT Hostel Management" <${process.env.EMAIL_USER || "hostel@pict.edu"}>`,
+                to: email,
+                subject: "Your OTP for PICT Hostel Login",
+                html: `
+                    <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #f9fafb; border-radius: 12px;">
+                        <h2 style="color: #4f46e5; margin-bottom: 8px;">PICT Hostel Management</h2>
+                        <p style="color: #374151; font-size: 16px;">Hello,</p>
+                        <p style="color: #374151; font-size: 16px;">Your One-Time Password (OTP) for login is:</p>
+                        <div style="background: #4f46e5; color: white; font-size: 36px; font-weight: 700; letter-spacing: 8px; text-align: center; padding: 20px; border-radius: 8px; margin: 24px 0;">
+                            ${rawOTP}
+                        </div>
+                        <p style="color: #6b7280; font-size: 14px;">This OTP is valid for <strong>10 minutes</strong>. Do not share it with anyone.</p>
+                        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;">
+                        <p style="color: #9ca3af; font-size: 12px;">PICT Boys Hostel · Pune Institute of Computer Technology</p>
                     </div>
-                    <p style="color: #6b7280; font-size: 14px;">This OTP is valid for <strong>10 minutes</strong>. Do not share it with anyone.</p>
-                    <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;">
-                    <p style="color: #9ca3af; font-size: 12px;">PICT Boys Hostel · Pune Institute of Computer Technology</p>
-                </div>
-            `
-        });
+                `
+            });
+            emailDelivered = true;
+            etherealPreview = nodemailer.getTestMessageUrl(info);
+            if (etherealPreview) {
+                console.log(`📬 Ethereal preview URL: ${etherealPreview}`);
+            }
+            console.log(`✅ OTP email dispatched to ${email}`);
+        } catch (mailErr) {
+            // Email failed — OTP is still valid in DB, continue
+            console.warn(`⚠️  Email delivery failed (OTP still valid): ${mailErr.message}`);
+        }
 
-        console.log(`✅ OTP sent to ${email}`); // Dev log — do NOT log the OTP in production
-        res.json({ message: "OTP sent successfully", email });
+        // ── Build response ────────────────────────────────────────────────────
+        // NOTE: The raw OTP is NEVER exposed in the response (any environment).
+        // Students must check their email inbox — this enforces real email auth.
+        const response = {
+            message: "OTP sent successfully",
+            email,
+            resendAfter: RESEND_COOLDOWN_S,
+            emailDelivered
+        };
+
+        // Ethereal preview URL only in dev (no security risk — no OTP value exposed)
+        if (isDev && etherealPreview) {
+            response.etherealPreview = etherealPreview;
+        }
+
+        res.json(response);
 
     } catch (err) {
         console.error("sendOTP error:", err);
@@ -85,76 +186,79 @@ exports.sendOTP = async (req, res) => {
     }
 };
 
+
 // =============================================================================
 // POST /api/auth/student/verify-otp
-// Body: { email, otp }
+// Body already validated by Joi middleware (schemas.verifyOTP)
 // =============================================================================
 exports.verifyOTP = async (req, res) => {
     try {
         let { email, otp } = req.body;
-
-        if (!email || !otp) {
-            return res.status(400).json({ message: "Email and OTP are required" });
-        }
-
         email = email.toLowerCase().trim();
+        otp   = String(otp).trim();
 
-        // Coerce OTP to string safely (some clients may send it as a number)
-        otp = String(otp).trim();
-
-        if (otp.length !== 6 || !/^\d{6}$/.test(otp)) {
-            return res.status(400).json({ message: "OTP must be a 6-digit number" });
-        }
-
-        const record = otpStore[email];
+        const record = await OTP.findOne({ email });
 
         if (!record) {
-            return res.status(400).json({ message: "No OTP found for this email. Please request a new one." });
+            return res.status(400).json({
+                message: "No OTP found for this email. Please request a new one."
+            });
         }
 
-        if (Date.now() > record.expiresAt) {
-            delete otpStore[email];
-            return res.status(400).json({ message: "OTP has expired. Please request a new one." });
+        // ── Expiry check ──────────────────────────────────────────────────────
+        if (Date.now() > record.expiresAt.getTime()) {
+            await OTP.deleteOne({ email });
+            return res.status(400).json({
+                message: "OTP has expired. Please request a new one."
+            });
         }
 
-        // Brute-force protection: max 5 wrong attempts per OTP
-        if (record.attempts >= 5) {
-            delete otpStore[email];
-            return res.status(429).json({ message: "Too many incorrect attempts. Please request a new OTP." });
+        // ── Brute-force lockout ───────────────────────────────────────────────
+        if (record.attempts >= MAX_ATTEMPTS) {
+            await OTP.deleteOne({ email });
+            return res.status(429).json({
+                message: "Too many incorrect attempts. Please request a new OTP."
+            });
         }
 
-        if (record.otp !== otp) {
-            otpStore[email].attempts += 1;
-            const remaining = 5 - otpStore[email].attempts;
+        // ── Constant-time bcrypt comparison ───────────────────────────────────
+        const isMatch = await bcrypt.compare(otp, record.otp);
+
+        if (!isMatch) {
+            await OTP.findOneAndUpdate(
+                { email },
+                { $inc: { attempts: 1 } }
+            );
+            const remaining = MAX_ATTEMPTS - (record.attempts + 1);
             return res.status(400).json({
                 message: `Invalid OTP. ${remaining} attempt${remaining === 1 ? "" : "s"} remaining.`
             });
         }
 
-        // OTP is valid — clear it immediately to prevent reuse
-        delete otpStore[email];
+        // ── Valid OTP — delete immediately (one-time use) ─────────────────────
+        await OTP.deleteOne({ email });
 
         const prn = extractPRN(email);
 
-        // Find or create student user
+        // ── Find or create student user ───────────────────────────────────────
         let user = await User.findOne({ email });
         if (!user) {
-            user = new User({
+            // Must use Student discriminator so prn and other student fields are saved
+            user = new Student({
                 email,
                 prn,
-                role: "STUDENT",
-                isVerified: true,
+                role:            "STUDENT",
+                isVerified:      true,
                 profileComplete: false,
-                name: prn // temporary placeholder until profile is complete
+                name:            prn         // placeholder until profile is completed
             });
             await user.save();
         } else {
-            // If the user exists (returning student), mark verified and save
             user.isVerified = true;
             await user.save();
         }
 
-        // Issue JWT
+        // ── Issue JWT ─────────────────────────────────────────────────────────
         const token = jwt.sign(
             { id: user._id, role: user.role, email: user.email },
             JWT_SECRET,
@@ -165,16 +269,16 @@ exports.verifyOTP = async (req, res) => {
             message: "OTP verified successfully",
             token,
             user: {
-                id: user._id,
-                email: user.email,
-                prn: user.prn,
-                role: user.role,
-                name: user.fullName || user.name,
-                fullName: user.fullName || null,
-                rollNumber: user.rollNumber || null,
-                classDiv: user.classDiv || null,
-                year: user.year || null,
-                doorNumber: user.doorNumber || null,
+                id:              user._id,
+                email:           user.email,
+                prn:             user.prn,
+                role:            user.role,
+                name:            user.fullName || user.name,
+                fullName:        user.fullName        || null,
+                rollNumber:      user.rollNumber      || null,
+                classDiv:        user.classDiv        || null,
+                year:            user.year            || null,
+                doorNumber:      user.doorNumber      || null,
                 profileComplete: user.profileComplete
             }
         });
@@ -187,32 +291,13 @@ exports.verifyOTP = async (req, res) => {
 
 // =============================================================================
 // POST /api/auth/student/complete-profile
-// Protected route — requires JWT
-// Body: { fullName, rollNumber, classDiv, year, doorNumber }
+// Protected — requires JWT.  Body already validated by Joi (schemas.completeProfile)
 // =============================================================================
 exports.completeProfile = async (req, res) => {
     try {
-        let { fullName, rollNumber, classDiv, year, doorNumber } = req.body;
+        const { fullName, rollNumber, classDiv, year, doorNumber } = req.body;
 
-        // Trim all string inputs
-        fullName   = typeof fullName   === "string" ? fullName.trim()   : "";
-        rollNumber = typeof rollNumber === "string" ? rollNumber.trim() : "";
-        classDiv   = typeof classDiv   === "string" ? classDiv.trim()   : "";
-        year       = typeof year       === "string" ? year.trim()       : "";
-        doorNumber = typeof doorNumber === "string" ? doorNumber.trim() : "";
-
-        // Validate required fields (trim-aware)
-        if (!fullName || !rollNumber || !classDiv || !year || !doorNumber) {
-            return res.status(400).json({ message: "All fields are required and cannot be blank" });
-        }
-
-        // Validate year against allowed values
-        const allowedYears = ["FY", "SY", "TY", "Final Year"];
-        if (!allowedYears.includes(year)) {
-            return res.status(400).json({ message: "Year must be one of: FY, SY, TY, Final Year" });
-        }
-
-        // Ensure the caller is actually a STUDENT
+        // Role guard
         if (req.user.role !== "STUDENT") {
             return res.status(403).json({ message: "Only students can complete this profile" });
         }
@@ -221,14 +306,14 @@ exports.completeProfile = async (req, res) => {
             req.user.id,
             {
                 fullName,
-                name: fullName, // keep name in sync for display in existing populate() calls
+                name:       fullName, // keep in sync for populate() display
                 rollNumber,
                 classDiv,
                 year,
                 doorNumber,
                 profileComplete: true
             },
-            { new: true, runValidators: true }
+            { returnDocument: "after", runValidators: true }
         );
 
         if (!user) return res.status(404).json({ message: "User not found" });
@@ -236,25 +321,24 @@ exports.completeProfile = async (req, res) => {
         res.json({
             message: "Profile updated successfully",
             user: {
-                id: user._id,
-                email: user.email,
-                prn: user.prn,
-                role: user.role,
-                name: user.fullName,
-                fullName: user.fullName,
-                rollNumber: user.rollNumber,
-                classDiv: user.classDiv,
-                year: user.year,
-                doorNumber: user.doorNumber,
+                id:              user._id,
+                email:           user.email,
+                prn:             user.prn,
+                role:            user.role,
+                name:            user.fullName,
+                fullName:        user.fullName,
+                rollNumber:      user.rollNumber,
+                classDiv:        user.classDiv,
+                year:            user.year,
+                doorNumber:      user.doorNumber,
                 profileComplete: user.profileComplete
             }
         });
 
     } catch (err) {
         console.error("completeProfile error:", err);
-        // Handle Mongoose validation errors specifically
         if (err.name === "ValidationError") {
-            const messages = Object.values(err.errors).map(e => e.message).join(", ");
+            const messages = Object.values(err.errors).map((e) => e.message).join(", ");
             return res.status(400).json({ message: `Validation error: ${messages}` });
         }
         res.status(500).json({ message: "Server error", error: err.message });

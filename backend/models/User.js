@@ -1,29 +1,41 @@
 const mongoose = require("mongoose");
 
+// 1. The Base Schema (Fields everyone has)
+const options = { discriminatorKey: 'role', timestamps: true };
+
 const UserSchema = new mongoose.Schema({
-    // Common fields
     name: { type: String },
     email: { type: String, required: true, unique: true },
-    password: { type: String }, // Not required for students (OTP-based)
+    password: { type: String },
     role: {
         type: String,
         enum: ["STUDENT", "WARDEN", "STAFF"],
         required: true
+    }
+}, options);
+
+const User = mongoose.model("User", UserSchema);
+
+// 2. The Student "Extension"
+// This ONLY applies when role is "STUDENT"
+const Student = User.discriminator("STUDENT", new mongoose.Schema({
+    prn:             { type: String, required: true },
+    fullName:        { type: String },           // Set during profile completion
+    rollNumber:      { type: String },
+    classDiv:        { type: String },           // e.g. "CE-A"
+    year:            { 
+        type: String, 
+        enum: ["FY", "SY", "TY", "Final Year"] 
     },
+    doorNumber:      { type: String },
+    isVerified:      { type: Boolean, default: false },
+    profileComplete: { type: Boolean, default: false }
+}));
 
-    // ─── Student-only fields ─────────────────────────────────────────────
-    prn: { type: String },                  // Extracted from email, e.g. "f24ce307"
-    fullName: { type: String },             // Student's full name
-    rollNumber: { type: String },           // Official roll number
-    classDiv: { type: String },             // e.g. "CE-A", "CE-B"
-    year: {                                 // Year of study
-        type: String,
-        enum: ["FY", "SY", "TY", "Final Year"]
-    },
-    doorNumber: { type: String },           // Boys hostel door number
-    isVerified: { type: Boolean, default: false }, // True after OTP verification
-    profileComplete: { type: Boolean, default: false } // True after profile filled
+// 3. The Warden/Staff "Extension"
+const Warden = User.discriminator("WARDEN", new mongoose.Schema({
+    officeLocation: { type: String },
+    shift: { type: String }
+}));
 
-}, { timestamps: true });
-
-module.exports = mongoose.model("User", UserSchema);
+module.exports = { User, Student, Warden };

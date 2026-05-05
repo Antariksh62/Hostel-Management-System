@@ -13,7 +13,7 @@ let token = req.headers.authorization;
     // Format: Bearer TOKEN
     token = token.split(" ")[1];
 
-    const decoded = jwt.verify(token, "SECRET_KEY");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "fallback_secret_key");
 
     req.user = decoded;
 

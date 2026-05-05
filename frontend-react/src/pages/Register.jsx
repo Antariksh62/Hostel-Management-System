@@ -8,7 +8,7 @@ const Register = () => {
     const navigate = useNavigate();
     
     const [formData, setFormData] = useState({
-        name: '', email: '', password: '', role: 'STUDENT'
+        name: '', email: '', password: '', role: 'WARDEN'
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -75,10 +75,12 @@ const Register = () => {
                     <div className="form-group">
                         <label>Role</label>
                         <select name="role" className="form-control" onChange={handleChange} value={formData.role}>
-                            <option value="STUDENT">Student</option>
                             <option value="WARDEN">Warden</option>
                             <option value="STAFF">Staff</option>
                         </select>
+                        <p style={{ fontSize: '0.78rem', color: '#9ca3af', marginTop: '0.35rem' }}>
+                            Students must register via the <Link to="/student-login" className="text-primary">Student OTP Portal</Link>.
+                        </p>
                     </div>
                     
                     <button type="submit" className="btn mt-4" disabled={isSubmitting}>

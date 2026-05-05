@@ -1,28 +1,44 @@
-const express = require("express");
-const router = express.Router();
+const express  = require("express");
+const router   = express.Router();
 
 const {
     createComplaint,
     getStudentComplaints,
     getAllComplaints,
+    getAnalytics,
     updateComplaintStatus,
     deleteComplaint,
     assignComplaint
 } = require("../controllers/complaintController");
 
 const { authMiddleware, wardenMiddleware, wardenOrStaffMiddleware } = require("../middleware/auth");
-const upload = require("../middleware/upload");
+const { upload, validateFileMagicBytes }                            = require("../middleware/upload");
+const { validate, schemas }                                          = require("../middleware/validate");
 
-// Student routes
-router.post("/", authMiddleware, upload.single("image"), createComplaint);
+// ─── Analytics (warden only) — must come before /:id routes ──────────────────
+router.get("/analytics", authMiddleware, wardenMiddleware, getAnalytics);
+
+// ─── Student routes ───────────────────────────────────────────────────────────
+router.post(
+    "/",
+    authMiddleware,
+    upload.fields([
+        { name: "images", maxCount: 5 },
+        { name: "video",  maxCount: 1 }
+    ]),
+    validateFileMagicBytes,
+    validate(schemas.createComplaint),
+    createComplaint
+);
+
 router.get("/my-complaints", authMiddleware, getStudentComplaints);
 
-// Shared Warden/Staff routes
-router.get("/all", authMiddleware, wardenOrStaffMiddleware, getAllComplaints);
+// ─── Shared Warden / Staff routes ─────────────────────────────────────────────
+router.get("/all",       authMiddleware, wardenOrStaffMiddleware, getAllComplaints);
 router.put("/:id/status", authMiddleware, wardenOrStaffMiddleware, updateComplaintStatus);
 
-// Warden strictly only routes
-router.delete("/:id", authMiddleware, wardenMiddleware, deleteComplaint);
-router.put("/assign/:id", authMiddleware, wardenMiddleware, assignComplaint);
+// ─── Warden-only routes ───────────────────────────────────────────────────────
+router.delete("/:id",       authMiddleware, wardenMiddleware, deleteComplaint);
+router.put("/assign/:id",   authMiddleware, wardenMiddleware, assignComplaint);
 
 module.exports = router;

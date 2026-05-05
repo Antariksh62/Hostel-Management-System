@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");  // ✅ matches installed package
 
-const User = require("./models/User");
+const { User, Student } = require("./models/User");  // ✅ import needed discriminators
 const Complaint = require("./models/Complaint");
 
 const MONGO_URI = "mongodb://127.0.0.1:27017/hostelDB";
@@ -18,22 +18,22 @@ async function seed() {
     // 🔐 Hash password
     const hashedPassword = await bcrypt.hash("123456", 10);
 
-    // 👥 Create users
-    const users = await User.insertMany([
-      { name: "John Doe", email: "student1@test.com", password: hashedPassword, role: "STUDENT" },
-      { name: "Jane Smith", email: "student2@test.com", password: hashedPassword, role: "STUDENT" },
-      { name: "Alice Johnson", email: "student3@test.com", password: hashedPassword, role: "STUDENT" },
+    // 👥 Create users — use correct discriminator so role-specific fields are saved
+    const students = await Student.insertMany([
+      // prn is required by the STUDENT discriminator schema
+      { name: "John Doe",     email: "student1@test.com", password: hashedPassword, prn: "student1" },
+      { name: "Jane Smith",   email: "student2@test.com", password: hashedPassword, prn: "student2" },
+      { name: "Alice Johnson",email: "student3@test.com", password: hashedPassword, prn: "student3" },
+    ]);
 
-      { name: "Head Warden", email: "warden@test.com", password: hashedPassword, role: "WARDEN" },
-
-      { name: "Mike Manager", email: "staff1@test.com", password: hashedPassword, role: "STAFF" },
-      { name: "Bob Builder", email: "staff2@test.com", password: hashedPassword, role: "STAFF" },
+    const staffAndWarden = await User.insertMany([
+      { name: "Head Warden",  email: "warden@test.com",  password: hashedPassword, role: "WARDEN" },
+      { name: "Mike Manager",   email: "staff1@test.com", password: hashedPassword, role: "STAFF" },
+      { name: "Bob Builder",    email: "staff2@test.com", password: hashedPassword, role: "STAFF" },
       { name: "Tom Technician", email: "staff3@test.com", password: hashedPassword, role: "STAFF" }
     ]);
 
-    // 🎯 Separate users by role
-    const students = users.filter(u => u.role === "STUDENT");
-    const staff = users.filter(u => u.role === "STAFF");
+    const staff = staffAndWarden.filter(u => u.role === "STAFF");
 
     // 📝 Create complaints
     await Complaint.insertMany([
@@ -57,7 +57,7 @@ async function seed() {
         studentId: students[2]._id,
         title: "No Internet Connection",
         description: "The router on the 2nd floor is completely dead.",
-        category: "Network",
+        category: "Internet",   // ✅ was "Network" — not in enum
         status: "Pending",
         assignedTo: null
       },
@@ -65,7 +65,7 @@ async function seed() {
         studentId: students[0]._id,
         title: "Broken Window Latch",
         description: "The window on the left side of the room won't lock properly.",
-        category: "Carpentry",
+        category: "Furniture",  // ✅ was "Carpentry" — not in enum
         status: "Pending",
         assignedTo: null
       },
@@ -89,7 +89,7 @@ async function seed() {
         studentId: students[0]._id,
         title: "AC Not Cooling",
         description: "The air conditioner turns on but blows out warm air.",
-        category: "Appliance",
+        category: "Electrical", // ✅ was "Appliance" — not in enum
         status: "Resolved",
         assignedTo: staff[0]._id
       }

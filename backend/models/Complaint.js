@@ -14,8 +14,6 @@ const ComplaintSchema = new mongoose.Schema({
         default: "Pending"
     },
 
-    // ─── Media ─────────────────────────────────────────────────────────────────
-    // New: array of { url, type } objects supporting multiple images + optional video
     media: [{
         url:  { type: String, required: true },
         type: { type: String, enum: ["image", "video"], required: true }
