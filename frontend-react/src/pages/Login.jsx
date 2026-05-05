@@ -22,7 +22,6 @@ const Login = () => {
 
             const user = res?.user || JSON.parse(sessionStorage.getItem("user"));
 
-            // 🔥 ROLE-BASED REDIRECT
             if (user?.role === "STUDENT") {
                 navigate("/student-dashboard");
             } else if (user?.role === "WARDEN") {
@@ -58,42 +57,40 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Email Address</label>
-                        <input 
+                        <input
                             id="staff-email"
-                            type="email" 
-                            className="form-control" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            required 
+                            type="email"
+                            className="form-control"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
                             placeholder="staff@pict.edu"
                         />
                     </div>
-                    
+
                     <div className="form-group">
                         <label>Password</label>
-                        <input 
+                        <input
                             id="staff-password"
-                            type="password" 
-                            className="form-control" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
+                            type="password"
+                            className="form-control"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
                             placeholder="••••••••"
                         />
                     </div>
-                    
+
                     <button id="staff-login-btn" type="submit" className="btn mt-4" disabled={isSubmitting}>
                         <LogIn size={18} style={{ marginRight: 8 }} />
                         {isSubmitting ? 'Signing in...' : 'Sign In'}
                     </button>
                 </form>
 
-                {/* Divider */}
                 <div className="login-divider">
                     <span>or</span>
                 </div>
 
-                {/* Student Login CTA */}
                 <Link to="/student-login" id="student-login-link" className="student-login-btn">
                     <GraduationCap size={20} style={{ marginRight: 8 }} />
                     Student Login (PICT Email OTP)

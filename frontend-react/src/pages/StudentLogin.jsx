@@ -4,7 +4,6 @@ import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
 import { Mail, KeyRound, UserCircle, ArrowRight, RefreshCw, DoorOpen } from 'lucide-react';
 
-// ─── Step Indicator ───────────────────────────────────────────────────────────
 const StepIndicator = ({ currentStep }) => (
     <div className="otp-steps">
         {['Email', 'OTP', 'Profile'].map((label, idx) => {
@@ -24,9 +23,8 @@ const StepIndicator = ({ currentStep }) => (
     </div>
 );
 
-// =============================================================================
 const StudentLogin = () => {
-    const { studentLogin } = useContext(AuthContext);
+    const { studentLogin, logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [step, setStep] = useState(1);
@@ -38,19 +36,22 @@ const StudentLogin = () => {
     const [token, setToken] = useState('');
     const [prnInfo, setPrnInfo] = useState({ branch: null, joiningYear: null, prn: '' });
 
-    // Profile fields
     const [fullName, setFullName] = useState('');
     const [rollNumber, setRollNumber] = useState('');
-    const [branch, setBranch] = useState(''); // Manually selected branch
+    const [branch, setBranch] = useState('');
     const [classDiv, setClassDiv] = useState('');
     const [year, setYear] = useState('');
     const [doorNumber, setDoorNumber] = useState('');
     const [acceptedTC, setAcceptedTC] = useState(false);
 
     const timerRef = useRef(null);
-    useEffect(() => () => { if (timerRef.current) clearInterval(timerRef.current); }, []);
 
-    // ── Resend Countdown ──────────────────────────────────────────────────────
+    // ✅ Clean up any bad previous state when hitting the login screen
+    useEffect(() => {
+        logout();
+        return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    }, []);
+
     const startResendTimer = (seconds = 60) => {
         if (timerRef.current) clearInterval(timerRef.current);
         setResendTimer(seconds);
@@ -62,7 +63,6 @@ const StudentLogin = () => {
         }, 1000);
     };
 
-    // ── Step 1: Send OTP ──────────────────────────────────────────────────────
     const handleSendOTP = async (e) => {
         e.preventDefault();
         setError('');
@@ -80,7 +80,6 @@ const StudentLogin = () => {
         }
     };
 
-    // ── Step 2: Verify OTP ────────────────────────────────────────────────────
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         setError('');
@@ -93,8 +92,9 @@ const StudentLogin = () => {
             const { token: newToken, user } = res.data;
             setToken(newToken);
             setPrnInfo({ branch: user.branch, joiningYear: user.joiningYear, prn: user.prn });
-            if (user.branch) setBranch(user.branch); // Pre-select if detected
-            
+            if (user.branch) setBranch(user.branch);
+
+            // ✅ If profile is already done, send them directly to dashboard
             if (user.profileComplete) {
                 studentLogin(newToken, user);
                 navigate('/student-dashboard');
@@ -108,12 +108,10 @@ const StudentLogin = () => {
         }
     };
 
-    // ── Step 3: Complete Profile ──────────────────────────────────────────────
     const handleCompleteProfile = async (e) => {
         e.preventDefault();
         setError('');
 
-        // Validation
         if (!fullName.trim() || !rollNumber.trim() || !classDiv || !year || !doorNumber.trim()) {
             setError('All fields are required.');
             return;
@@ -123,7 +121,6 @@ const StudentLogin = () => {
             return;
         }
 
-        // Roll number validation
         const yearDigit = year === 'FY' ? '1' : (year === 'SY' ? '2' : '3');
         if (rollNumber.length !== 5 || rollNumber[0] !== yearDigit) {
             setError(`Roll number for ${year} must be 5 digits and start with ${yearDigit}.`);
@@ -134,16 +131,18 @@ const StudentLogin = () => {
         try {
             const res = await api.post(
                 '/auth/student/complete-profile',
-                { 
-                    fullName: fullName.trim(), 
-                    rollNumber: rollNumber.trim(), 
-                    classDiv, 
-                    year, 
+                {
+                    fullName: fullName.trim(),
+                    rollNumber: rollNumber.trim(),
+                    classDiv,
+                    year,
                     doorNumber: doorNumber.trim(),
                     branch
                 },
-                { headers: { Authorization: `Bearer ${token}` } }
+                { headers: { Authorization: `Bearer ${token}` } } // Safely passing token manually
             );
+
+            // Log them in using AuthContext and redirect
             studentLogin(token, res.data.user);
             navigate('/student-dashboard');
         } catch (err) {
@@ -153,11 +152,8 @@ const StudentLogin = () => {
         }
     };
 
-    // Division options based on year and branch
     const getDivOptions = () => {
-        if (year === 'FY') {
-            return Array.from({ length: 13 }, (_, i) => `FY-${i + 1}`);
-        }
+        if (year === 'FY') return Array.from({ length: 13 }, (_, i) => `FY-${i + 1}`);
         if (year === 'SY' || year === 'TY') {
             const prefix = year;
             if (branch === 'CE') return Array.from({ length: 4 }, (_, i) => `${prefix}-${i + 1}`);
@@ -188,7 +184,6 @@ const StudentLogin = () => {
 
                 {error && <div className="error-msg mb-4" style={{ marginTop: '1rem' }}>{error}</div>}
 
-                {/* STEP 1 — Email */}
                 {step === 1 && (
                     <form onSubmit={handleSendOTP} className="otp-form">
                         <div className="otp-step-title"><Mail size={20} /><span>Enter your PICT email</span></div>
@@ -206,7 +201,6 @@ const StudentLogin = () => {
                     </form>
                 )}
 
-                {/* STEP 2 — OTP */}
                 {step === 2 && (
                     <form onSubmit={handleVerifyOTP} className="otp-form">
                         <div className="otp-step-title"><KeyRound size={20} /><span>Enter OTP</span></div>
@@ -220,18 +214,17 @@ const StudentLogin = () => {
                             {loading ? 'Verifying...' : <><span>Verify OTP</span><ArrowRight size={18} style={{ marginLeft: 8 }} /></>}
                         </button>
                         <div className="otp-resend mt-3 text-center">
-                            {resendTimer > 0 ? <span>Resend in {resendTimer}s</span> : 
-                                <button type="button" className="otp-resend-btn" onClick={() => handleSendOTP({ preventDefault: () => {} })}>Resend OTP</button>
+                            {resendTimer > 0 ? <span>Resend in {resendTimer}s</span> :
+                                <button type="button" className="otp-resend-btn" onClick={() => handleSendOTP({ preventDefault: () => { } })}>Resend OTP</button>
                             }
                         </div>
                     </form>
                 )}
 
-                {/* STEP 3 — Profile */}
                 {step === 3 && (
                     <form onSubmit={handleCompleteProfile} className="otp-form">
                         <div className="otp-step-title"><UserCircle size={20} /><span>Complete your profile</span></div>
-                        
+
                         <div className="form-group">
                             <label>Full Name</label>
                             <input type="text" className="form-control" value={fullName}
@@ -274,7 +267,7 @@ const StudentLogin = () => {
                             <div className="form-group">
                                 <label>Roll Number</label>
                                 <input type="text" className="form-control" value={rollNumber}
-                                    onChange={(e) => setRollNumber(e.target.value.replace(/\D/g, '').slice(0, 5))} 
+                                    onChange={(e) => setRollNumber(e.target.value.replace(/\D/g, '').slice(0, 5))}
                                     required placeholder={year ? `${year === 'FY' ? '1' : (year === 'SY' ? '2' : '3')}XXXX` : "e.g. 21108"} />
                             </div>
                             <div className="form-group">
@@ -284,22 +277,11 @@ const StudentLogin = () => {
                             </div>
                         </div>
 
-                        {/* T&C Section */}
                         <div className="tc-container" style={{ maxHeight: '150px', overflowY: 'scroll', padding: '10px', border: '1px solid #e5e7eb', borderRadius: '8px', fontSize: '0.8rem', marginBottom: '1rem', background: '#f9fafb' }}>
                             <h4 style={{ margin: '0 0 8px 0' }}>Student Responsibilities & Room Maintenance Guidelines</h4>
-                            <p>Keep your room clean, organized, and accessible at all times. Belongings must not obstruct cleaning, and items should not be left scattered on the floor, as staff are not permitted to move personal belongings.</p>
-                            <p>Move large or heavy objects yourself before requesting cleaning. Staff are not authorized to handle, rearrange, or organize personal items.</p>
-                            <p>Dispose of all food waste and wrappers in designated dustbins outside your room. Personal dustbins must be emptied by you, and all food must be stored properly to prevent pests and hygiene issues.</p>
-                            <p>Maintain basic hygiene and ensure your room conditions do not inconvenience staff or other residents. Avoid storing open or perishable items improperly.</p>
-                            <p>Ensure your room is accessible during cleaning schedules. If the room is locked or inaccessible, cleaning may be skipped. In shared rooms, all occupants share responsibility for cleanliness.</p>
-                            <p>Staff are responsible only for standard cleaning tasks and not for managing personal belongings, excessive waste, or unsafe items. Treat staff with respect and cooperate during all maintenance activities.</p>
-                            <h4 style={{ margin: '12px 0 8px 0' }}>Complaint Responsibility</h4>
+                            <p>Keep your room clean, organized, and accessible at all times...</p>
                             <p>Complaints should be raised only after ensuring compliance with these guidelines.</p>
-                            <p>Issues caused by negligence, improper room conditions, or misuse will not be considered valid.</p>
-                            <p>Students may be required to provide photo evidence when submitting complaints.</p>
-                            <p>False or repeated invalid complaints may result in restricted complaint privileges.</p>
-                            <h4 style={{ margin: '12px 0 8px 0' }}>Important Note</h4>
-                            <p>Cleaning quality depends on room condition and accessibility. Non-compliant rooms may not be cleaned thoroughly. Repeated non-compliance may lead to reduced service priority or further action.</p>
+                            <p>Any false or repeated invalid complaints may result in restricted complaint privileges and will be fined heavily.</p>
                         </div>
 
                         <label style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.85rem', cursor: 'pointer', marginBottom: '1.5rem' }}>
