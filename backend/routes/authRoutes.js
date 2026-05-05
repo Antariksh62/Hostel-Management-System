@@ -30,4 +30,9 @@ router.post("/student/complete-profile",
     completeProfile
 );
 
+router.patch("/student/update-info",
+    authMiddleware,
+    require("../controllers/otpController").updateInfo
+);
+
 module.exports = router;

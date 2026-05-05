@@ -9,6 +9,7 @@ const StatusBadge = ({ status }) => {
         case 'Pending':     return <span className="badge badge-pending">Pending</span>;
         case 'In Progress': return <span className="badge badge-progress">In Progress</span>;
         case 'Resolved':    return <span className="badge badge-resolved">Resolved</span>;
+        case 'Reopened':    return <span className="badge" style={{ backgroundColor: '#fef3c7', color: '#92400e' }}>Reopened</span>;
         default:            return <span className="badge">{status}</span>;
     }
 };
@@ -17,6 +18,7 @@ const StatusIcon = ({ status }) => {
         case 'Pending':     return <Clock className="text-warning" size={20} />;
         case 'In Progress': return <AlertCircle className="text-primary" size={20} />;
         case 'Resolved':    return <CheckCircle className="text-success" size={20} />;
+        case 'Reopened':    return <AlertCircle className="text-warning" size={20} />;
         default:            return null;
     }
 };
@@ -155,11 +157,11 @@ export default function StaffDashboard() {
                                             </div>
 
                                             <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.75rem' }}>
-                                                📅 {new Date(complaint.createdAt).toLocaleDateString()}
+                                                📅 {new Date(complaint.createdAt).toLocaleString()}
                                             </p>
 
                                             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
-                                                {complaint.status !== 'In Progress' && complaint.status !== 'Resolved' && (
+                                                {(complaint.status === 'Pending' || complaint.status === 'Reopened') && (
                                                     <button onClick={() => updateStatus(complaint._id, 'In Progress')}
                                                         className="btn" style={{ maxWidth: 140, padding: '0.45rem 1rem' }}>
                                                         Start Work
@@ -172,6 +174,19 @@ export default function StaffDashboard() {
                                                     </button>
                                                 )}
                                             </div>
+
+                                            {/* Feedback if reopened */}
+                                            {complaint.status === 'Reopened' && complaint.feedback && (
+                                                <div style={{ marginTop: '0.75rem', padding: '0.75rem', borderRadius: 8, backgroundColor: '#fff1f2', border: '1px solid #f43f5e' }}>
+                                                    <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#991b1b', margin: 0 }}>
+                                                        ⚠️ Student marked as NOT resolved
+                                                    </p>
+                                                    {complaint.feedback.text && (
+                                                        <p style={{ fontSize: '0.8rem', marginTop: '0.25rem', color: '#4b5563' }}>{complaint.feedback.text}</p>
+                                                    )}
+                                                    <MediaGallery media={complaint.feedback.media} />
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
 

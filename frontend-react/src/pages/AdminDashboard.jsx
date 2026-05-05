@@ -16,21 +16,23 @@ const CATEGORY_COLORS = {
     Cleanliness: '#10b981', Internet: '#8b5cf6', Other: '#6b7280'
 };
 
-// ─── Status helpers ────────────────────────────────────────────────────────────
+// ÔöÇÔöÇÔöÇ Status helpers ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 const StatusBadge = ({ status }) => {
     if (status === 'Pending') return <span className="badge badge-pending">Pending</span>;
     if (status === 'In Progress') return <span className="badge badge-progress">In Progress</span>;
     if (status === 'Resolved') return <span className="badge badge-resolved">Resolved</span>;
+    if (status === 'Reopened') return <span className="badge" style={{ backgroundColor: '#fef3c7', color: '#92400e' }}>Reopened</span>;
     return <span className="badge">{status}</span>;
 };
 const StatusIcon = ({ status }) => {
     if (status === 'Pending') return <Clock className="text-warning" size={20} />;
     if (status === 'In Progress') return <AlertCircle className="text-primary" size={20} />;
     if (status === 'Resolved') return <CheckCircle className="text-success" size={20} />;
+    if (status === 'Reopened') return <AlertCircle className="text-warning" size={20} />;
     return null;
 };
 
-// ─── Media gallery (inline on complaint cards) ─────────────────────────────────
+// ÔöÇÔöÇÔöÇ Media gallery (inline on complaint cards) ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 const MediaGallery = ({ media, image }) => {
     const items = media?.length > 0 ? media : (image ? [{ url: image, type: 'image' }] : []);
     if (!items.length) return null;
@@ -49,7 +51,7 @@ const MediaGallery = ({ media, image }) => {
     );
 };
 
-// ─── Analytics Panel ──────────────────────────────────────────────────────────
+// ÔöÇÔöÇÔöÇ Analytics Panel ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 const AnalyticsPanel = ({ analytics, days, onDaysChange, loading }) => {
     if (loading) return (
         <div className="card-panel" style={{ marginBottom: '1.5rem' }}>
@@ -144,7 +146,7 @@ const AnalyticsPanel = ({ analytics, days, onDaysChange, loading }) => {
     );
 };
 
-// ─── Filter Bar ────────────────────────────────────────────────────────────────
+// ÔöÇÔöÇÔöÇ Filter Bar ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 const FilterBar = ({ filters, setFilters, searchInput, setSearchInput }) => {
     const hasActiveFilters = filters.status || filters.category || filters.from || filters.to || searchInput;
 
@@ -192,6 +194,7 @@ const FilterBar = ({ filters, setFilters, searchInput, setSearchInput }) => {
                     <option value="Pending">Pending</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Resolved">Resolved</option>
+                    <option value="Reopened">Reopened</option>
                 </select>
 
                 {/* Category */}
@@ -256,7 +259,7 @@ const AdminDashboard = () => {
     useEffect(() => {
         const id = setInterval(fetchComplaints, 30000);
         return () => clearInterval(id);
-    }, []); // mount/unmount only — filter-driven refresh handled above
+    }, []); // mount/unmount only ÔÇö filter-driven refresh handled above
 
     const buildQuery = useCallback(() => {
         const params = new URLSearchParams();
@@ -355,7 +358,7 @@ const AdminDashboard = () => {
             </aside>
 
             <main className="dashboard-content">
-                {/* ── Analytics ───────────────────────────────────────────── */}
+                {/* ÔöÇÔöÇ Analytics ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */}
                 <AnalyticsPanel
                     analytics={analytics}
                     days={analyticsDays}
@@ -363,7 +366,7 @@ const AdminDashboard = () => {
                     loading={analyticsLoading}
                 />
 
-                {/* ── Filter Bar ───────────────────────────────────────────── */}
+                {/* ÔöÇÔöÇ Filter Bar ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */}
                 <FilterBar
                     filters={filters}
                     setFilters={setFilters}
@@ -371,7 +374,7 @@ const AdminDashboard = () => {
                     setSearchInput={setSearchInput}
                 />
 
-                {/* ── Complaints List ──────────────────────────────────────── */}
+                {/* ÔöÇÔöÇ Complaints List ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */}
                 <div className="card-panel">
                     <h3 style={{ marginBottom: '1rem' }}>
                         All Complaints
@@ -419,17 +422,18 @@ const AdminDashboard = () => {
                                                 )}
                                                 <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
                                                     By: <strong>{complaint.studentId?.fullName || complaint.studentId?.name || 'Unknown'}</strong>
-                                                    {complaint.studentId?.rollNumber && ` · Roll ${complaint.studentId.rollNumber}`}
-                                                    {complaint.studentId?.classDiv && ` · ${complaint.studentId.classDiv}`}
-                                                    {complaint.studentId?.year && ` · ${complaint.studentId.year}`}
+                                                    {complaint.studentId?.prn && ` ┬À PRN: ${complaint.studentId.prn}`}
+                                                    {complaint.studentId?.rollNumber && ` ┬À Roll ${complaint.studentId.rollNumber}`}
+                                                    {complaint.studentId?.classDiv && ` ┬À ${complaint.studentId.classDiv}`}
+                                                    {complaint.studentId?.year && ` ┬À ${complaint.studentId.year}`}
                                                 </span>
                                             </div>
 
                                             <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.75rem' }}>
-                                                📅 {new Date(complaint.createdAt).toLocaleDateString()}
+                                                ­ƒôà {new Date(complaint.createdAt).toLocaleString()}
                                                 {complaint.assignedTo && (
                                                     <span style={{ marginLeft: 8, color: '#6b7280', fontWeight: 600 }}>
-                                                        · 👷 Assigned to: <strong>{complaint.assignedTo.name}</strong>
+                                                        ┬À ­ƒæÀ Assigned to: <strong>{complaint.assignedTo.name}</strong>
                                                     </span>
                                                 )}
                                             </p>
@@ -444,6 +448,7 @@ const AdminDashboard = () => {
                                                         <option value="Pending">Pending</option>
                                                         <option value="In Progress">In Progress</option>
                                                         <option value="Resolved">Resolved</option>
+                                                        <option value="Reopened">Reopened</option>
                                                     </select>
                                                 </div>
                                                 <div>
@@ -455,13 +460,39 @@ const AdminDashboard = () => {
                                                         {staff.map(s => <option key={s._id} value={s._id}>{s.name}</option>)}
                                                     </select>
                                                 </div>
-                                                <button onClick={() => handleDelete(complaint._id)} className="btn btn-outline"
-                                                    style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#ef4444', borderColor: '#ef4444', padding: '0.4rem 0.75rem' }}>
-                                                    <Trash2 size={15} /> Delete
-                                                </button>
+                                                    <button onClick={() => handleDelete(complaint._id)} className="btn btn-outline"
+                                                        style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#ef4444', borderColor: '#ef4444', padding: '0.4rem 0.75rem' }}>
+                                                        <Trash2 size={15} /> Delete
+                                                    </button>
+                                                </div>
+
+                                                {/* Feedback visibility */}
+                                                {complaint.feedback?.isSatisfied !== null && complaint.feedback?.isSatisfied !== undefined && (
+                                                    <div style={{ marginTop: '0.75rem', padding: '1rem', borderRadius: 8, backgroundColor: complaint.feedback.isSatisfied ? '#ecfdf5' : '#fff1f2', border: `2px solid ${complaint.feedback.isSatisfied ? '#10b981' : '#f43f5e'}` }}>
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: complaint.feedback.isSatisfied ? 0 : '0.5rem' }}>
+                                                            <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '2px 10px', borderRadius: 20, backgroundColor: complaint.feedback.isSatisfied ? '#d1fae5' : '#ffe4e6', color: complaint.feedback.isSatisfied ? '#065f46' : '#9f1239' }}>
+                                                                {complaint.feedback.isSatisfied ? '✅ Student Satisfied' : '🚨 NOT SATISFIED'}
+                                                            </span>
+                                                        </div>
+                                                        {!complaint.feedback.isSatisfied && (
+                                                            <>
+                                                                {complaint.feedback.text && (
+                                                                    <p style={{ fontSize: '0.83rem', color: '#7f1d1d', marginBottom: '0.5rem', fontStyle: 'italic' }}>
+                                                                        "{complaint.feedback.text}"
+                                                                    </p>
+                                                                )}
+                                                                {complaint.feedback.media?.length > 0 && (
+                                                                    <>
+                                                                        <p style={{ fontSize: '0.72rem', fontWeight: 700, color: '#9f1239', marginBottom: '0.4rem' }}>Student Proof:</p>
+                                                                        <MediaGallery media={complaint.feedback.media} />
+                                                                    </>
+                                                                )}
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
-                                    </div>
 
                                     {/* Media */}
                                     <MediaGallery media={complaint.media} image={complaint.image} />

@@ -61,13 +61,102 @@ const StatusBadge = ({ status }) => {
     if (status === 'Pending')     return <span className="badge badge-pending">Pending</span>;
     if (status === 'In Progress') return <span className="badge badge-progress">In Progress</span>;
     if (status === 'Resolved')    return <span className="badge badge-resolved">Resolved</span>;
+    if (status === 'Reopened')    return <span className="badge" style={{ backgroundColor: '#fef3c7', color: '#92400e' }}>Reopened</span>;
     return <span className="badge">{status}</span>;
 };
 const StatusIcon = ({ status }) => {
     if (status === 'Pending')     return <Clock className="text-warning" size={18} />;
     if (status === 'In Progress') return <AlertCircle className="text-primary" size={18} />;
     if (status === 'Resolved')    return <CheckCircle className="text-success" size={18} />;
+    if (status === 'Reopened')    return <AlertCircle className="text-warning" size={18} />;
     return null;
+};
+
+
+// ─── Feedback Form Component ──────────────────────────────────────────────────
+const FeedbackForm = ({ complaintId, onSubmitted }) => {
+    const [isSatisfied, setIsSatisfied] = useState(null);
+    const [text, setText] = useState('');
+    const [images, setImages] = useState([]);
+    const [video, setVideo] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const imgRef = useRef(null);
+    const vidRef = useRef(null);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (isSatisfied === false) {
+            if (!text.trim()) {
+                setError('Please explain what went wrong.');
+                return;
+            }
+            if (images.length === 0) {
+                setError('Please upload a photo as proof.');
+                return;
+            }
+            if (!video) {
+                setError('Please upload a video as proof.');
+                return;
+            }
+        }
+        setLoading(true);
+        setError('');
+        try {
+            const fd = new FormData();
+            fd.append('isSatisfied', isSatisfied);
+            fd.append('text', text);
+            if (images[0]) fd.append('images', images[0]);
+            if (video)     fd.append('video',  video);
+
+            await api.post(`/complaints/${complaintId}/feedback`, fd);
+            onSubmitted();
+        } catch (err) {
+            setError(err.response?.data?.message || 'Failed to submit feedback');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="feedback-box" style={{ marginTop: '1rem', padding: '1rem', border: '1px solid #e5e7eb', borderRadius: 8, backgroundColor: '#f9fafb' }}>
+            <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Was your issue resolved to your satisfaction?</p>
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+                <button type="button" className={`btn ${isSatisfied === true ? 'btn-success' : 'btn-outline'}`} 
+                    onClick={() => { setIsSatisfied(true); setError(''); }} style={{ flex: 1 }}>Yes</button>
+                <button type="button" className={`btn ${isSatisfied === false ? 'btn-danger' : 'btn-outline'}`} 
+                    onClick={() => { setIsSatisfied(false); setError(''); }} style={{ flex: 1 }}>No</button>
+            </div>
+
+            {isSatisfied === false && (
+                <div className="fade-in">
+                    <div className="form-group">
+                        <label>What went wrong? How is it not resolved?</label>
+                        <textarea className="form-control" value={text} onChange={e => setText(e.target.value)} rows="2" placeholder="Explain the issue..." />
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+                        <button type="button" className="btn btn-outline" style={{ fontSize: '0.75rem' }} onClick={() => imgRef.current?.click()}>
+                            {images.length ? 'Photo Added' : '+ Add Photo Proof'}
+                        </button>
+                        <button type="button" className="btn btn-outline" style={{ fontSize: '0.75rem' }} onClick={() => vidRef.current?.click()}>
+                            {video ? 'Video Added' : '+ Add Video Proof'}
+                        </button>
+                        <input ref={imgRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={e => setImages([e.target.files[0]])} />
+                        <input ref={vidRef} type="file" accept="video/*" style={{ display: 'none' }} onChange={e => setVideo(e.target.files[0])} />
+                    </div>
+                </div>
+            )}
+
+            {error && <p className="error-msg" style={{ fontSize: '0.8rem', marginBottom: '0.5rem' }}>{error}</p>}
+            
+            {isSatisfied !== null && (
+                <button className="btn" onClick={handleSubmit} disabled={loading} style={{ width: '100%' }}>
+                    {loading ? 'Submitting...' : 'Submit Feedback'}
+                </button>
+            )}
+        </div>
+    );
 };
 
 // =============================================================================
@@ -84,10 +173,68 @@ const StudentDashboard = () => {
     const [videoFile,   setVideoFile]   = useState(null); // File | null
     const [submitStatus, setSubmitStatus] = useState({ error: '', success: '', loading: false });
 
+    // Profile update state
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [updateFields, setUpdateFields] = useState({
+        year: user?.year || '',
+        branch: user?.branch || '',
+        classDiv: user?.classDiv || '',
+        rollNumber: user?.rollNumber || '',
+        doorNumber: user?.doorNumber || ''
+    });
+    const [updateLoading, setUpdateLoading] = useState(false);
+
     const imageInputRef = useRef(null);
     const videoInputRef = useRef(null);
 
-    useEffect(() => { fetchComplaints(); }, []);
+    useEffect(() => { 
+        fetchComplaints(); 
+        if (user) {
+            setUpdateFields({
+                year: user.year || '',
+                branch: user.branch || '',
+                classDiv: user.classDiv || '',
+                rollNumber: user.rollNumber || '',
+                doorNumber: user.doorNumber || ''
+            });
+        }
+    }, [user]);
+
+    const handleUpdateProfile = async (e) => {
+        e.preventDefault();
+        
+        // Roll number validation
+        const yearDigit = updateFields.year === 'FY' ? '1' : (updateFields.year === 'SY' ? '2' : '3');
+        if (updateFields.rollNumber.length !== 5 || updateFields.rollNumber[0] !== yearDigit) {
+            alert(`Roll number for ${updateFields.year} must be 5 digits and start with ${yearDigit}.`);
+            return;
+        }
+
+        setUpdateLoading(true);
+        try {
+            const res = await api.patch('/auth/student/update-info', updateFields);
+            // Update context user (this should trigger re-render if your AuthContext handles it)
+            // For now we might need to refresh or if studentLogin updates state
+            window.location.reload(); // Simplest way to sync state from backend
+        } catch (err) {
+            alert(err.response?.data?.message || 'Update failed');
+        } finally {
+            setUpdateLoading(false);
+        }
+    };
+
+    const getDivOptionsForUpdate = () => {
+        const { year, branch } = updateFields;
+        if (year === 'FY') return Array.from({ length: 13 }, (_, i) => `FY-${i + 1}`);
+        if (year === 'SY' || year === 'TY') {
+            const prefix = year;
+            if (branch === 'CE') return Array.from({ length: 4 }, (_, i) => `${prefix}-${i + 1}`);
+            if (branch === 'ENTC') return Array.from({ length: 4 }, (_, i) => `${prefix}-${i + 5}`);
+            if (branch === 'IT') return Array.from({ length: 3 }, (_, i) => `${prefix}-${i + 9}`);
+            if (branch === 'AIDS' || branch === 'ECE') return [`${prefix}-12`];
+        }
+        return [];
+    };
 
     const fetchComplaints = async () => {
         try {
@@ -189,12 +336,78 @@ const StudentDashboard = () => {
                         {user?.year        && <div className="student-info-item"><Calendar size={15}/><span>Year: <strong>{user.year}</strong></span></div>}
                     </div>
                 </div>
-                <div className="sidebar-footer">
-                    <button className="btn btn-outline" onClick={logout}>
-                        <LogOut size={18} style={{ marginRight: '0.5rem' }} />Logout
+                <div className="sidebar-footer" style={{ padding: '1rem', borderTop: '1px solid #f3f4f6' }}>
+                    <button className="btn btn-outline" style={{ width: '100%', marginBottom: '0.5rem', justifyContent: 'center' }} onClick={() => setShowUpdateModal(true)}>
+                        <User size={18} style={{ marginRight: '0.5rem' }} /> Update Profile
+                    </button>
+                    <button className="btn btn-outline" style={{ width: '100%', justifyContent: 'center', borderColor: '#ef4444', color: '#ef4444' }} onClick={logout}>
+                        <LogOut size={18} style={{ marginRight: '0.5rem' }} /> Logout
                     </button>
                 </div>
             </aside>
+
+            {/* ── Update Profile Modal ────────────────────────────────────── */}
+            {showUpdateModal && (
+                <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+                    <div className="modal-content" style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: 12, width: '100%', maxWidth: 500, boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                            <h3>Update Academic Info</h3>
+                            <button onClick={() => setShowUpdateModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><X size={20} /></button>
+                        </div>
+                        
+                        <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1.5rem' }}>Update your details for the current academic year.</p>
+
+                        <form onSubmit={handleUpdateProfile}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                                <div className="form-group">
+                                    <label>Year</label>
+                                    <select className="form-control" value={updateFields.year} onChange={e => setUpdateFields({...updateFields, year: e.target.value, branch: '', classDiv: ''})} required>
+                                        <option value="FY">1st Year (FY)</option>
+                                        <option value="SY">2nd Year (SY)</option>
+                                        <option value="TY">3rd Year (TY)</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label>Branch</label>
+                                    <select className="form-control" value={updateFields.branch} onChange={e => setUpdateFields({...updateFields, branch: e.target.value, classDiv: ''})} required disabled={!updateFields.year}>
+                                        <option value="">Select Branch</option>
+                                        <option value="CE">CE</option>
+                                        <option value="ENTC">ENTC</option>
+                                        <option value="IT">IT</option>
+                                        <option value="AIDS">AIDS</option>
+                                        <option value="ECE">ECE</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Division</label>
+                                <select className="form-control" value={updateFields.classDiv} onChange={e => setUpdateFields({...updateFields, classDiv: e.target.value})} required disabled={!updateFields.branch}>
+                                    <option value="">Select Division</option>
+                                    {getDivOptionsForUpdate().map(d => <option key={d} value={d}>{d}</option>)}
+                                </select>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                                <div className="form-group">
+                                    <label>Roll Number</label>
+                                    <input type="text" className="form-control" value={updateFields.rollNumber} 
+                                        onChange={e => setUpdateFields({...updateFields, rollNumber: e.target.value.replace(/\D/g, '').slice(0, 5)})} required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Door Number</label>
+                                    <input type="text" className="form-control" value={updateFields.doorNumber} 
+                                        onChange={e => setUpdateFields({...updateFields, doorNumber: e.target.value})} required />
+                                </div>
+                            </div>
+
+                            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={updateLoading}>
+                                {updateLoading ? 'Updating...' : 'Save Changes'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
 
             <main className="dashboard-content">
                 {/* ── Complaint Form ──────────────────────────────────────── */}
@@ -312,11 +525,14 @@ const StudentDashboard = () => {
                                         <span style={{ fontSize:'0.72rem', background:'#e0e7ff', color:'#4f46e5', borderRadius:20, padding:'2px 10px', fontWeight:600 }}>
                                             {complaint.category || 'Other'}
                                         </span>
+                                        <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600 }}>
+                                            {complaint.studentId?.fullName || complaint.studentId?.name || 'Me'}
+                                        </span>
                                         {complaint.doorNumber && (
                                             <span className="door-chip"><DoorOpen size={12} /> {complaint.doorNumber}</span>
                                         )}
                                         <p style={{ fontSize: '0.75rem', color: '#9ca3af', margin: 0 }}>
-                                            {new Date(complaint.createdAt).toLocaleDateString()}
+                                            {new Date(complaint.createdAt).toLocaleString()}
                                         </p>
                                     </div>
 
@@ -328,6 +544,23 @@ const StudentDashboard = () => {
                                     )}
 
                                     <MediaGallery media={complaint.media} image={complaint.image} />
+
+                                    {/* Feedback section */}
+                                    {complaint.status === 'Resolved' && complaint.feedback?.isSatisfied === null && (
+                                        <FeedbackForm complaintId={complaint._id} onSubmitted={fetchComplaints} />
+                                    )}
+
+                                    {complaint.feedback?.isSatisfied !== null && complaint.feedback?.isSatisfied !== undefined && (
+                                        <div style={{ marginTop: '0.75rem', padding: '0.75rem', borderRadius: 8, backgroundColor: complaint.feedback.isSatisfied ? '#ecfdf5' : '#fff1f2', border: `1px solid ${complaint.feedback.isSatisfied ? '#10b981' : '#f43f5e'}` }}>
+                                            <p style={{ fontSize: '0.85rem', fontWeight: 600, margin: 0, color: complaint.feedback.isSatisfied ? '#065f46' : '#991b1b' }}>
+                                                {complaint.feedback.isSatisfied ? '✅ You marked this as resolved' : '❌ You marked this as NOT resolved'}
+                                            </p>
+                                            {complaint.feedback.text && (
+                                                <p style={{ fontSize: '0.8rem', marginTop: '0.25rem', color: '#4b5563' }}>{complaint.feedback.text}</p>
+                                            )}
+                                            <MediaGallery media={complaint.feedback.media} />
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>

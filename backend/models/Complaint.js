@@ -10,7 +10,7 @@ const ComplaintSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Pending", "In Progress", "Resolved"],
+        enum: ["Pending", "In Progress", "Resolved", "Reopened"],
         default: "Pending"
     },
 
@@ -20,6 +20,16 @@ const ComplaintSchema = new mongoose.Schema({
     }],
     // Legacy: kept for backward compatibility with older complaints
     image: { type: String },
+
+    // ─── Feedback ──────────────────────────────────────────────────────────────
+    feedback: {
+        isSatisfied: { type: Boolean, default: null },
+        text: { type: String },
+        media: [{
+            url:  { type: String, required: true },
+            type: { type: String, enum: ["image", "video"], required: true }
+        }]
+    },
 
     // ─── Metadata ──────────────────────────────────────────────────────────────
     doorNumber: { type: String },               // Auto-populated from student profile

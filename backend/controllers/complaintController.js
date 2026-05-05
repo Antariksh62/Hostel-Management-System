@@ -82,6 +82,8 @@ exports.getStudentComplaints = async (req, res) => {
     }
 };
 
+
+
 // =============================================================================
 // GET /api/complaints/all
 // Warden / Staff: view all complaints with optional filters
@@ -236,7 +238,7 @@ exports.updateComplaintStatus = async (req, res) => {
         const { id }     = req.params;
         const { status } = req.body;
 
-        const allowedStatuses = ["Pending", "In Progress", "Resolved"];
+        const allowedStatuses = ["Pending", "In Progress", "Resolved", "Reopened"];
         if (!status || !allowedStatuses.includes(status)) {
             return res.status(400).json({
                 message: `Status must be one of: ${allowedStatuses.join(", ")}`
@@ -307,6 +309,77 @@ exports.deleteComplaint = async (req, res) => {
 
         await Complaint.findByIdAndDelete(id);
         res.json({ message: "Complaint deleted successfully" });
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
+// =============================================================================
+// POST /api/complaints/:id/feedback
+// Student: Submit feedback for a resolved complaint
+// =============================================================================
+exports.submitFeedback = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { isSatisfied, text } = req.body;
+
+        const complaint = await Complaint.findById(id);
+
+        if (!complaint) return res.status(404).json({ message: "Complaint not found" });
+
+        // Ensure user owns the complaint
+        if (complaint.studentId.toString() !== req.user.id) {
+            return res.status(403).json({ message: "Not authorized to leave feedback for this complaint" });
+        }
+
+        if (complaint.status !== "Resolved") {
+            return res.status(400).json({ message: "Can only leave feedback for resolved complaints" });
+        }
+
+        const isSatisfiedBool = isSatisfied === 'true' || isSatisfied === true;
+
+        if (!isSatisfiedBool) {
+            if (!text) {
+                 return res.status(400).json({ message: "Explanation text is required if not satisfied" });
+            }
+            if (!req.files || !req.files['images'] || !req.files['video']) {
+                 return res.status(400).json({ message: "1 image and 1 video are required if not satisfied" });
+            }
+        }
+
+        const media = [];
+        if (req.files) {
+            if (req.files["images"]) {
+                req.files["images"].forEach(file => {
+                    media.push({
+                        url: `/uploads/${file.filename}`,
+                        type: "image"
+                    });
+                });
+            }
+            if (req.files["video"]) {
+                req.files["video"].forEach(file => {
+                    media.push({
+                        url: `/uploads/${file.filename}`,
+                        type: "video"
+                    });
+                });
+            }
+        }
+
+        complaint.feedback = {
+            isSatisfied: isSatisfiedBool,
+            text: text || "",
+            media: media
+        };
+
+        if (!isSatisfiedBool) {
+             complaint.status = "Reopened";
+        }
+
+        await complaint.save();
+
+        res.json({ message: "Feedback submitted successfully", complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }

@@ -55,7 +55,8 @@ const schemas = {
         fullName: Joi.string().trim().min(2).max(80).required(),
         rollNumber: Joi.string().trim().min(1).max(20).required(),
         classDiv: Joi.string().trim().required(),
-        year: Joi.string().valid("FY", "SY", "TY", "Final Year").required(),
+        year: Joi.string().valid("FY", "SY", "TY").required(),
+        branch: Joi.string().valid("CE", "ENTC", "IT", "AIDS", "ECE").required(),
         doorNumber: Joi.string().trim().min(1).max(20).required()
     })
 };

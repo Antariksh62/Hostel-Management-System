@@ -33,6 +33,17 @@ router.post(
 
 router.get("/my-complaints", authMiddleware, getStudentComplaints);
 
+router.post(
+    "/:id/feedback",
+    authMiddleware,
+    upload.fields([
+        { name: "images", maxCount: 1 },
+        { name: "video",  maxCount: 1 }
+    ]),
+    validateFileMagicBytes,
+    require("../controllers/complaintController").submitFeedback
+);
+
 // ─── Shared Warden / Staff routes ─────────────────────────────────────────────
 router.get("/all",       authMiddleware, wardenOrStaffMiddleware, getAllComplaints);
 router.put("/:id/status", authMiddleware, wardenOrStaffMiddleware, updateComplaintStatus);

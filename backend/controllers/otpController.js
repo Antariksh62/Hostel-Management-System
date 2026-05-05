@@ -1,19 +1,19 @@
 const nodemailer = require("nodemailer");
-const jwt        = require("jsonwebtoken");
-const bcrypt     = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const { User, Student } = require("../models/User");
-const OTP        = require("../models/OTP");
+const OTP = require("../models/OTP");
 
-const JWT_SECRET        = process.env.JWT_SECRET || "fallback_secret_key";
+const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret_key";
 const OTP_BCRYPT_ROUNDS = 6;                    // Low rounds — OTP is short-lived anyway
-const OTP_EXPIRY_MS     = 10 * 60 * 1000;       // 10 minutes
+const OTP_EXPIRY_MS = 10 * 60 * 1000;       // 10 minutes
 const RESEND_COOLDOWN_S = 60;                    // 60-second cooldown between sends
-const MAX_ATTEMPTS      = 5;
+const MAX_ATTEMPTS = 5;
 
 // ─── Nodemailer transporter ───────────────────────────────────────────────────
 // Uses Gmail SMTP (port 587 / STARTTLS). Falls back to Ethereal if credentials
 // are missing or rejected. OTP is always printed to console in dev mode.
-let _transporter   = null;
+let _transporter = null;
 let _usingEthereal = false;
 
 const getTransporter = async () => {
@@ -25,16 +25,16 @@ const getTransporter = async () => {
     if (user && pass) {
         // Explicit Gmail SMTP — more reliable than service:'gmail' shortcut
         const gmailTransport = nodemailer.createTransport({
-            host:   "smtp.gmail.com",
-            port:   587,
+            host: "smtp.gmail.com",
+            port: 587,
             secure: false,   // STARTTLS on port 587
-            auth:   { user, pass },
-            tls:    { rejectUnauthorized: false }
+            auth: { user, pass },
+            tls: { rejectUnauthorized: false }
         });
         try {
             await gmailTransport.verify();
             console.log("✅ Gmail SMTP verified — real emails will be delivered to students");
-            _transporter   = gmailTransport;
+            _transporter = gmailTransport;
             _usingEthereal = false;
             return _transporter;
         } catch (err) {
@@ -60,10 +60,10 @@ const getTransporter = async () => {
     // Fallback: Ethereal catches all emails, preview URL logged to console
     const testAccount = await nodemailer.createTestAccount();
     _transporter = nodemailer.createTransport({
-        host:   "smtp.ethereal.email",
-        port:   587,
+        host: "smtp.ethereal.email",
+        port: 587,
         secure: false,
-        auth:   { user: testAccount.user, pass: testAccount.pass }
+        auth: { user: testAccount.user, pass: testAccount.pass }
     });
     _usingEthereal = true;
     console.log("📧 Ethereal test SMTP active:", testAccount.user);
@@ -72,8 +72,29 @@ const getTransporter = async () => {
 
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-const generateOTP  = () => Math.floor(100000 + Math.random() * 900000).toString();
-const extractPRN   = (email) => email.toLowerCase().split("@")[0];
+const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
+const extractPRN = (email) => email.toLowerCase().split("@")[0];
+
+/**
+ * Parses a PICT autonomous PRN (e.g. f24ce307) and returns:
+ *   { branch: 'CE', joiningYear: 2024 }
+ * Supported branch codes: ce → CE, et → ENTC, it → IT, ad → AIDS, ec → ECE
+ */
+const parsePRN = (prn) => {
+    prn = prn.toLowerCase();
+    // Extract joining year digits: f24... → 24 → 2024
+    const yearMatch = prn.match(/^f(\d{2})/);
+    const joiningYear = yearMatch ? 2000 + parseInt(yearMatch[1], 10) : null;
+
+    // Branch code is the letters after the year digits
+    const branchMatch = prn.match(/^f\d{2}([a-z]+)/);
+    const branchCode = branchMatch ? branchMatch[1] : '';
+
+    const branchMap = { ce: 'CE', et: 'ENTC', it: 'IT', ad: 'AIDS', ec: 'ECE' };
+    const branch = branchMap[branchCode] || null;
+
+    return { branch, joiningYear };
+};
 
 // =============================================================================
 // POST /api/auth/student/send-otp
@@ -83,6 +104,8 @@ exports.sendOTP = async (req, res) => {
     try {
         let { email } = req.body;
         email = email.toLowerCase().trim();
+        const existingUser = await User.findOne({ email });
+        const isRegistered = !!existingUser;
 
         // Validate PICT domain (belt-and-suspenders after Joi)
         if (!email.endsWith("@ms.pict.edu")) {
@@ -107,16 +130,16 @@ exports.sendOTP = async (req, res) => {
         }
 
         // ── Generate & hash OTP ───────────────────────────────────────────────
-        const rawOTP    = generateOTP();
+        const rawOTP = generateOTP();
         const hashedOTP = await bcrypt.hash(rawOTP, OTP_BCRYPT_ROUNDS);
 
         // ── Upsert into DB (create or overwrite) ──────────────────────────────
         await OTP.findOneAndUpdate(
             { email },
             {
-                otp:        hashedOTP,
-                expiresAt:  new Date(Date.now() + OTP_EXPIRY_MS),
-                attempts:   0,
+                otp: hashedOTP,
+                expiresAt: new Date(Date.now() + OTP_EXPIRY_MS),
+                attempts: 0,
                 lastSentAt: new Date()
             },
             { upsert: true, returnDocument: "after" }
@@ -170,7 +193,8 @@ exports.sendOTP = async (req, res) => {
             message: "OTP sent successfully",
             email,
             resendAfter: RESEND_COOLDOWN_S,
-            emailDelivered
+            emailDelivered,
+            isRegistered
         };
 
         // Ethereal preview URL only in dev (no security risk — no OTP value exposed)
@@ -195,7 +219,7 @@ exports.verifyOTP = async (req, res) => {
     try {
         let { email, otp } = req.body;
         email = email.toLowerCase().trim();
-        otp   = String(otp).trim();
+        otp = String(otp).trim();
 
         const record = await OTP.findOne({ email });
 
@@ -243,14 +267,17 @@ exports.verifyOTP = async (req, res) => {
         // ── Find or create student user ───────────────────────────────────────
         let user = await User.findOne({ email });
         if (!user) {
+            const { branch, joiningYear } = parsePRN(prn);
             // Must use Student discriminator so prn and other student fields are saved
             user = new Student({
                 email,
                 prn,
-                role:            "STUDENT",
-                isVerified:      true,
+                branch,
+                joiningYear,
+                role: "STUDENT",
+                isVerified: true,
                 profileComplete: false,
-                name:            prn         // placeholder until profile is completed
+                name: prn         // placeholder until profile is completed
             });
             await user.save();
         } else {
@@ -269,22 +296,29 @@ exports.verifyOTP = async (req, res) => {
             message: "OTP verified successfully",
             token,
             user: {
-                id:              user._id,
-                email:           user.email,
-                prn:             user.prn,
-                role:            user.role,
-                name:            user.fullName || user.name,
-                fullName:        user.fullName        || null,
-                rollNumber:      user.rollNumber      || null,
-                classDiv:        user.classDiv        || null,
-                year:            user.year            || null,
-                doorNumber:      user.doorNumber      || null,
+                id: user._id,
+                email: user.email,
+                prn: user.prn,
+                branch: user.branch || null,
+                joiningYear: user.joiningYear || null,
+                role: user.role,
+                name: user.fullName || user.name,
+                fullName: user.fullName || null,
+                rollNumber: user.rollNumber || null,
+                classDiv: user.classDiv || null,
+                year: user.year || null,
+                doorNumber: user.doorNumber || null,
                 profileComplete: user.profileComplete
             }
         });
 
     } catch (err) {
         console.error("verifyOTP error:", err);
+        if (err.code === 11000) {
+            return res.status(400).json({
+                message: "A student with this PRN already exists."
+            });
+        }
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };
@@ -295,7 +329,7 @@ exports.verifyOTP = async (req, res) => {
 // =============================================================================
 exports.completeProfile = async (req, res) => {
     try {
-        const { fullName, rollNumber, classDiv, year, doorNumber } = req.body;
+        const { fullName, rollNumber, classDiv, year, doorNumber, branch } = req.body;
 
         // Role guard
         if (req.user.role !== "STUDENT") {
@@ -306,37 +340,101 @@ exports.completeProfile = async (req, res) => {
             req.user.id,
             {
                 fullName,
-                name:       fullName, // keep in sync for populate() display
+                name: fullName,
                 rollNumber,
                 classDiv,
                 year,
                 doorNumber,
+                branch,
                 profileComplete: true
             },
             { returnDocument: "after", runValidators: true }
         );
 
-        if (!user) return res.status(404).json({ message: "User not found" });
-
+        if (user.profileComplete) {
+            return res.status(400).json({ message: "Profile already completed. Please login." });
+        }
         res.json({
             message: "Profile updated successfully",
             user: {
-                id:              user._id,
-                email:           user.email,
-                prn:             user.prn,
-                role:            user.role,
-                name:            user.fullName,
-                fullName:        user.fullName,
-                rollNumber:      user.rollNumber,
-                classDiv:        user.classDiv,
-                year:            user.year,
-                doorNumber:      user.doorNumber,
+                id: user._id,
+                email: user.email,
+                prn: user.prn,
+                branch: user.branch || null,
+                joiningYear: user.joiningYear || null,
+                role: user.role,
+                name: user.fullName,
+                fullName: user.fullName,
+                rollNumber: user.rollNumber,
+                classDiv: user.classDiv,
+                year: user.year,
+                doorNumber: user.doorNumber,
                 profileComplete: user.profileComplete
             }
         });
 
     } catch (err) {
         console.error("completeProfile error:", err);
+        if (err.name === "ValidationError") {
+            const messages = Object.values(err.errors).map((e) => e.message).join(", ");
+            return res.status(400).json({ message: `Validation error: ${messages}` });
+        }
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
+// =============================================================================
+// PATCH /api/auth/student/update-info
+// Lets a returning student update classDiv, rollNumber, doorNumber and year
+// (e.g. when they move to a new year)
+// =============================================================================
+exports.updateInfo = async (req, res) => {
+    try {
+        if (req.user.role !== "STUDENT") {
+            return res.status(403).json({ message: "Only students can update info" });
+        }
+
+        const { rollNumber, classDiv, year, doorNumber, branch } = req.body;
+        const update = {};
+        if (rollNumber !== undefined) update.rollNumber = rollNumber;
+        if (classDiv !== undefined) update.classDiv = classDiv;
+        if (year !== undefined) update.year = year;
+        if (doorNumber !== undefined) update.doorNumber = doorNumber;
+        if (branch !== undefined) update.branch = branch;
+
+        if (Object.keys(update).length === 0) {
+            return res.status(400).json({ message: "No fields provided to update" });
+        }
+
+        const user = await User.findByIdAndUpdate(
+            req.user.id,
+            update,
+            { returnDocument: "after", runValidators: true }
+        );
+
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        res.json({
+            message: "Info updated successfully",
+            user: {
+                id: user._id,
+                email: user.email,
+                prn: user.prn,
+                branch: user.branch || null,
+                joiningYear: user.joiningYear || null,
+                role: user.role,
+                name: user.fullName,
+                fullName: user.fullName,
+                rollNumber: user.rollNumber,
+                classDiv: user.classDiv,
+                year: user.year,
+                doorNumber: user.doorNumber,
+                profileComplete: user.profileComplete
+            }
+        });
+
+    } catch (err) {
+        console.error("updateInfo error:", err);
         if (err.name === "ValidationError") {
             const messages = Object.values(err.errors).map((e) => e.message).join(", ");
             return res.status(400).json({ message: `Validation error: ${messages}` });
