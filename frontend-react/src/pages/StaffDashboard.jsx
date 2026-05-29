@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from '../context/AuthContext';
 import api from "../services/api";
+import MediaGallery from "../components/MediaGallery";
+import ComplaintTimeline, { fmtDateTime } from "../components/ComplaintTimeline";
 import { LogOut, User, CheckCircle, Clock, AlertCircle, DoorOpen } from 'lucide-react';
 
 // ─── Status helpers ────────────────────────────────────────────────────────────
@@ -23,24 +25,6 @@ const StatusIcon = ({ status }) => {
     }
 };
 
-// ─── Media gallery ─────────────────────────────────────────────────────────────
-const MediaGallery = ({ media, image }) => {
-    const items = media?.length > 0 ? media : (image ? [{ url: image, type: 'image' }] : []);
-    if (!items.length) return null;
-    return (
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
-            {items.map((m, i) =>
-                m.type === 'video' ? (
-                    <video key={i} src={`http://localhost:5000${m.url}`} controls
-                        style={{ width: 180, height: 110, objectFit: 'cover', borderRadius: 8 }} />
-                ) : (
-                    <img key={i} src={`http://localhost:5000${m.url}`} alt={`img-${i}`}
-                        style={{ width: 110, height: 90, objectFit: 'cover', borderRadius: 8 }} />
-                )
-            )}
-        </div>
-    );
-};
 
 // =============================================================================
 export default function StaffDashboard() {
@@ -49,14 +33,19 @@ export default function StaffDashboard() {
     const [loading,    setLoading]    = useState(true);
 
     useEffect(() => {
-        fetchComplaints();
-        const id = setInterval(fetchComplaints, 30000); // refresh every 30s
-        return () => clearInterval(id);
+        let isMounted = true;
+        fetchComplaints(isMounted);
+        const id = setInterval(() => fetchComplaints(isMounted), 30000); // refresh every 30s
+        return () => {
+            isMounted = false;
+            clearInterval(id);
+        };
     }, [user]);
 
-    const fetchComplaints = async () => {
+    const fetchComplaints = async (isMounted = true) => {
         try {
             const res  = await api.get("/complaints/all");
+            if (!isMounted) return;
             const myId = user?.id || user?._id;
             const assigned = res.data.filter(c => {
                 if (!c.assignedTo) return false;
@@ -67,7 +56,7 @@ export default function StaffDashboard() {
         } catch (err) {
             console.error(err);
         } finally {
-            setLoading(false);
+            if (isMounted) setLoading(false);
         }
     };
 
@@ -156,11 +145,21 @@ export default function StaffDashboard() {
                                                 </span>
                                             </div>
 
-                                            <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.75rem' }}>
-                                                📅 {new Date(complaint.createdAt).toLocaleString()}
-                                            </p>
+                                            {/* Timestamps */}
+                                            <div style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                                                <span>📅 Raised: <strong style={{ color: '#6b7280' }}>{fmtDateTime(complaint.createdAt)}</strong></span>
+                                                {complaint.assignedAt && (
+                                                    <span>🔧 Assigned to you: <strong style={{ color: '#6b7280' }}>{fmtDateTime(complaint.assignedAt)}</strong></span>
+                                                )}
+                                                {complaint.resolvedAt && (
+                                                    <span>✅ Resolved: <strong style={{ color: '#059669' }}>{fmtDateTime(complaint.resolvedAt)}</strong></span>
+                                                )}
+                                            </div>
 
-                                            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                                            {/* Full lifecycle timeline */}
+                                            <ComplaintTimeline complaint={complaint} compact />
+
+                                            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.75rem' }}>
                                                 {(complaint.status === 'Pending' || complaint.status === 'Reopened') && (
                                                     <button onClick={() => updateStatus(complaint._id, 'In Progress')}
                                                         className="btn" style={{ maxWidth: 140, padding: '0.45rem 1rem' }}>
@@ -181,6 +180,11 @@ export default function StaffDashboard() {
                                                     <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#991b1b', margin: 0 }}>
                                                         ⚠️ Student marked as NOT resolved
                                                     </p>
+                                                    {complaint.feedback.submittedAt && (
+                                                        <p style={{ fontSize: '0.72rem', color: '#9ca3af', margin: '2px 0 4px' }}>
+                                                            Feedback at {fmtDateTime(complaint.feedback.submittedAt)}
+                                                        </p>
+                                                    )}
                                                     {complaint.feedback.text && (
                                                         <p style={{ fontSize: '0.8rem', marginTop: '0.25rem', color: '#4b5563' }}>{complaint.feedback.text}</p>
                                                     )}

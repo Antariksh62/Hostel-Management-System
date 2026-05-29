@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthContext } from './context/AuthContext';
+
+const queryClient = new QueryClient();
 
 // Import Pages
 import Login from './pages/Login';
@@ -39,8 +42,9 @@ const App = () => {
     };
 
     return (
-        <Router>
-            <div className="app-container">
+        <QueryClientProvider client={queryClient}>
+            <Router>
+                <div className="app-container">
                 <main>
                     <Routes>
                         <Route path="/" element={user ? <Navigate to={getDefaultRoute()} /> : <Login />} />
@@ -67,7 +71,8 @@ const App = () => {
                     </Routes>
                 </main>
             </div>
-        </Router>
+            </Router>
+        </QueryClientProvider>
     );
 };
 

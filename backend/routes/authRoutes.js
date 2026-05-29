@@ -4,12 +4,13 @@ const router   = express.Router();
 const { register, login }                          = require("../controllers/authController");
 const { sendOTP, verifyOTP, completeProfile }      = require("../controllers/otpController");
 const { authMiddleware }                            = require("../middleware/auth");
-const { otpSendLimiter, otpVerifyLimiter, loginLimiter } = require("../middleware/rateLimiter");
+const { otpSendLimiter, otpVerifyLimiter, loginLimiter, registerLimiter } = require("../middleware/rateLimiter");
 const { validate, schemas }                         = require("../middleware/validate");
 
 // ─── Staff / Warden — email + password ────────────────────────────────────────
-router.post("/register", validate(schemas.register), register);
+router.post("/register", registerLimiter, validate(schemas.register), register);
 router.post("/login",    loginLimiter, validate(schemas.login), login);
+router.post("/refresh",  require("../controllers/authController").refresh);
 
 // ─── Student — OTP flow ───────────────────────────────────────────────────────
 router.post("/student/send-otp",

@@ -3,22 +3,27 @@ const { User }  = require("../models/User");
 const fs        = require("fs");
 const path      = require("path");
 
-// ─── Helper: delete physical files for a complaint ────────────────────────────
 const deleteComplaintFiles = (complaint) => {
-    // Delete media[] files
-    (complaint.media || []).forEach(({ url }) => {
+    // Helper to safely delete a file given its URL
+    const safeDelete = (url) => {
         if (!url) return;
         const filePath = path.join(__dirname, "..", url);
         if (fs.existsSync(filePath)) {
             try { fs.unlinkSync(filePath); } catch (_) {}
         }
-    });
+    };
+
+    // Delete media[] files
+    (complaint.media || []).forEach(({ url }) => safeDelete(url));
+    
     // Delete legacy image field
     if (complaint.image) {
-        const filePath = path.join(__dirname, "..", complaint.image);
-        if (fs.existsSync(filePath)) {
-            try { fs.unlinkSync(filePath); } catch (_) {}
-        }
+        safeDelete(complaint.image);
+    }
+
+    // Delete feedback media files
+    if (complaint.feedback && complaint.feedback.media) {
+        (complaint.feedback.media || []).forEach(({ url }) => safeDelete(url));
     }
 };
 
@@ -47,13 +52,17 @@ exports.createComplaint = async (req, res) => {
             media.push({ url: `/uploads/${req.file.filename}`, type: "image" });
         }
 
+        const now = new Date();
+
         const newComplaint = new Complaint({
             title,
             description,
             category: category || "Other",
             media,
             doorNumber,
-            studentId: req.user.id
+            studentId: req.user.id,
+            // Seed initial history entry so the timeline always starts at "Raised"
+            statusHistory: [{ status: "Pending", timestamp: now, note: "Complaint raised by student" }]
         });
 
         await newComplaint.save();
@@ -95,8 +104,9 @@ exports.getAllComplaints = async (req, res) => {
 
         const filter = {};
 
-        if (status)   filter.status   = status;
-        if (category) filter.category = category;
+        // Patch: Force string type to prevent object injection
+        if (status)   filter.status   = String(status);
+        if (category) filter.category = String(category);
 
         if (from || to) {
             filter.createdAt = {};
@@ -110,8 +120,9 @@ exports.getAllComplaints = async (req, res) => {
 
         if (search) {
             filter.$or = [
-                { title:       { $regex: search, $options: "i" } },
-                { description: { $regex: search, $options: "i" } }
+                // Patch: Force string type to prevent regex object injection
+                { title:       { $regex: String(search), $options: "i" } },
+                { description: { $regex: String(search), $options: "i" } }
             ];
         }
 
@@ -245,9 +256,20 @@ exports.updateComplaintStatus = async (req, res) => {
             });
         }
 
-        const update = { status };
+        const now  = new Date();
+        const note = {
+            "Pending":     "Status set back to Pending",
+            "In Progress": "Work started by staff",
+            "Resolved":    "Marked as resolved",
+            "Reopened":    "Complaint reopened"
+        }[status] || "";
+
+        const update = {
+            status,
+            $push: { statusHistory: { status, timestamp: now, note } }
+        };
         if (status === "Resolved") {
-            update.resolvedAt = new Date(); // Capture resolution timestamp for analytics
+            update.resolvedAt = now; // Capture resolution timestamp for analytics
         }
 
         const complaint = await Complaint.findByIdAndUpdate(id, update, { returnDocument: "after" });
@@ -280,9 +302,17 @@ exports.assignComplaint = async (req, res) => {
             return res.status(400).json({ message: "Assigned user must have STAFF role" });
         }
 
+        const now  = new Date();
+        const note = `Assigned to ${staffMember.name}`;
+
         const complaint = await Complaint.findByIdAndUpdate(
             id,
-            { assignedTo: staffId, status: "In Progress" },
+            {
+                assignedTo: staffId,
+                assignedAt: now,
+                status:     "In Progress",
+                $push: { statusHistory: { status: "In Progress", timestamp: now, note } }
+            },
             { returnDocument: "after" }
         );
 
@@ -367,14 +397,29 @@ exports.submitFeedback = async (req, res) => {
             }
         }
 
+        const now = new Date();
+
         complaint.feedback = {
             isSatisfied: isSatisfiedBool,
-            text: text || "",
-            media: media
+            text:        text || "",
+            submittedAt: now,
+            media:       media
         };
 
         if (!isSatisfiedBool) {
-             complaint.status = "Reopened";
+            complaint.status = "Reopened";
+            complaint.statusHistory.push({
+                status:    "Reopened",
+                timestamp: now,
+                note:      "Student marked complaint as NOT resolved"
+            });
+        } else {
+            // Student confirmed satisfied — record that in the timeline too
+            complaint.statusHistory.push({
+                status:    "Resolved",
+                timestamp: now,
+                note:      "Student confirmed issue resolved"
+            });
         }
 
         await complaint.save();

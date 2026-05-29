@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
+import MediaGallery from '../components/MediaGallery';
+import ComplaintTimeline, { fmtDateTime } from '../components/ComplaintTimeline';
 import {
     LogOut, User, PlusCircle, CheckCircle, Clock, AlertCircle,
     DoorOpen, Hash, BookOpen, Calendar, X, ImagePlus, Video
@@ -8,24 +10,7 @@ import {
 
 const CATEGORIES = ['Electrical', 'Plumbing', 'Furniture', 'Cleanliness', 'Internet', 'Other'];
 
-// ─── Media Gallery ────────────────────────────────────────────────────────────
-const MediaGallery = ({ media, image }) => {
-    const items = media?.length > 0 ? media : (image ? [{ url: image, type: 'image' }] : []);
-    if (!items.length) return null;
-    return (
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
-            {items.map((m, i) =>
-                m.type === 'video' ? (
-                    <video key={i} src={`http://localhost:5000${m.url}`} controls
-                        style={{ width: 160, height: 100, objectFit: 'cover', borderRadius: 8 }} />
-                ) : (
-                    <img key={i} src={`http://localhost:5000${m.url}`} alt={`attachment-${i}`}
-                        style={{ width: 100, height: 80, objectFit: 'cover', borderRadius: 8 }} />
-                )
-            )}
-        </div>
-    );
-};
+
 
 // ─── File Preview strip (before submission) ───────────────────────────────────
 const FilePreview = ({ files, onRemove }) => {
@@ -188,7 +173,8 @@ const StudentDashboard = () => {
     const videoInputRef = useRef(null);
 
     useEffect(() => { 
-        fetchComplaints(); 
+        let isMounted = true;
+        fetchComplaints(isMounted); 
         if (user) {
             setUpdateFields({
                 year: user.year || '',
@@ -198,6 +184,7 @@ const StudentDashboard = () => {
                 doorNumber: user.doorNumber || ''
             });
         }
+        return () => { isMounted = false; };
     }, [user]);
 
     const handleUpdateProfile = async (e) => {
@@ -236,14 +223,14 @@ const StudentDashboard = () => {
         return [];
     };
 
-    const fetchComplaints = async () => {
+    const fetchComplaints = async (isMounted = true) => {
         try {
             const res = await api.get('/complaints/my-complaints');
-            setComplaints(res.data);
+            if (isMounted) setComplaints(res.data);
         } catch (err) {
             console.error('Failed to fetch complaints', err);
         } finally {
-            setLoading(false);
+            if (isMounted) setLoading(false);
         }
     };
 
@@ -520,28 +507,37 @@ const StudentDashboard = () => {
                                         {complaint.description}
                                     </p>
 
-                                    {/* Category chip */}
+                                    {/* Category + meta row */}
                                     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '0.25rem' }}>
                                         <span style={{ fontSize:'0.72rem', background:'#e0e7ff', color:'#4f46e5', borderRadius:20, padding:'2px 10px', fontWeight:600 }}>
                                             {complaint.category || 'Other'}
                                         </span>
-                                        <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600 }}>
-                                            {complaint.studentId?.fullName || complaint.studentId?.name || 'Me'}
-                                        </span>
                                         {complaint.doorNumber && (
                                             <span className="door-chip"><DoorOpen size={12} /> {complaint.doorNumber}</span>
                                         )}
-                                        <p style={{ fontSize: '0.75rem', color: '#9ca3af', margin: 0 }}>
-                                            {new Date(complaint.createdAt).toLocaleString()}
-                                        </p>
                                     </div>
 
-                                    {/* Staff assignment visibility */}
+                                    {/* Staff assignment visibility + time */}
                                     {complaint.assignedTo && (
-                                        <p style={{ fontSize: '0.78rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+                                        <p style={{ fontSize: '0.78rem', color: '#6b7280', marginBottom: '0.25rem' }}>
                                             🔧 <strong>Handled by:</strong> {complaint.assignedTo.name}
+                                            {complaint.assignedAt && (
+                                                <span style={{ marginLeft: 6, color: '#9ca3af' }}>
+                                                    · Assigned at {fmtDateTime(complaint.assignedAt)}
+                                                </span>
+                                            )}
                                         </p>
                                     )}
+
+                                    {/* Resolved timestamp */}
+                                    {complaint.resolvedAt && (
+                                        <p style={{ fontSize: '0.78rem', color: '#059669', marginBottom: '0.25rem' }}>
+                                            ✅ <strong>Resolved at:</strong> {fmtDateTime(complaint.resolvedAt)}
+                                        </p>
+                                    )}
+
+                                    {/* Full lifecycle timeline */}
+                                    <ComplaintTimeline complaint={complaint} />
 
                                     <MediaGallery media={complaint.media} image={complaint.image} />
 
@@ -555,6 +551,11 @@ const StudentDashboard = () => {
                                             <p style={{ fontSize: '0.85rem', fontWeight: 600, margin: 0, color: complaint.feedback.isSatisfied ? '#065f46' : '#991b1b' }}>
                                                 {complaint.feedback.isSatisfied ? '✅ You marked this as resolved' : '❌ You marked this as NOT resolved'}
                                             </p>
+                                            {complaint.feedback.submittedAt && (
+                                                <p style={{ fontSize: '0.72rem', color: '#9ca3af', margin: '2px 0 0' }}>
+                                                    Feedback submitted at {fmtDateTime(complaint.feedback.submittedAt)}
+                                                </p>
+                                            )}
                                             {complaint.feedback.text && (
                                                 <p style={{ fontSize: '0.8rem', marginTop: '0.25rem', color: '#4b5563' }}>{complaint.feedback.text}</p>
                                             )}

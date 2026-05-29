@@ -1,9 +1,10 @@
 const { User } = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const generateTokens = require("../utils/generateTokens");
 
 // Read at call-time so dotenv is guaranteed to have run already
-const getJwtSecret = () => process.env.JWT_SECRET || "fallback_secret_key";
+const getJwtSecret = () => process.env.JWT_SECRET;
 
 exports.register = async (req, res) => {
     try {
@@ -68,16 +69,34 @@ exports.login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
 
-        // Create token
-        const payload = {
-            id: user._id,
-            role: user.role
-        };
-        const token = jwt.sign(payload, getJwtSecret(), { expiresIn: "1d" });
+        // Create tokens
+        const accessToken = generateTokens(res, user);
 
         res.json({
-            token,
+            token: accessToken,
             user: { id: user._id, name: user.name, email: user.email, role: user.role }
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
+exports.refresh = async (req, res) => {
+    try {
+        const refreshToken = req.cookies.jwt;
+        if (!refreshToken) return res.status(401).json({ message: "Unauthorized" });
+
+        jwt.verify(refreshToken, getJwtSecret(), async (err, decoded) => {
+            if (err) return res.status(403).json({ message: "Forbidden" });
+            const user = await User.findById(decoded.id);
+            if (!user) return res.status(401).json({ message: "Unauthorized" });
+
+            const accessToken = jwt.sign(
+                { id: user._id, role: user.role, email: user.email },
+                getJwtSecret(),
+                { expiresIn: "15m" }
+            );
+            res.json({ token: accessToken });
         });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });

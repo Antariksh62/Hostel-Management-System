@@ -1,6 +1,9 @@
-﻿import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import api from '../services/api';
+import MediaGallery from '../components/MediaGallery';
+import ComplaintTimeline, { fmtDateTime } from '../components/ComplaintTimeline';
 import {
     LogOut, User, CheckCircle, Clock, AlertCircle, Trash2,
     DoorOpen, Search, Filter, X, BarChart2, TrendingUp
@@ -30,25 +33,6 @@ const StatusIcon = ({ status }) => {
     if (status === 'Resolved') return <CheckCircle className="text-success" size={20} />;
     if (status === 'Reopened') return <AlertCircle className="text-warning" size={20} />;
     return null;
-};
-
-// Media gallery (inline on complaint cards)
-const MediaGallery = ({ media, image }) => {
-    const items = media?.length > 0 ? media : (image ? [{ url: image, type: 'image' }] : []);
-    if (!items.length) return null;
-    return (
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
-            {items.map((m, i) =>
-                m.type === 'video' ? (
-                    <video key={i} src={`http://localhost:5000${m.url}`} controls
-                        style={{ width: 150, height: 100, objectFit: 'cover', borderRadius: 8 }} />
-                ) : (
-                    <img key={i} src={`http://localhost:5000${m.url}`} alt={`img-${i}`}
-                        style={{ width: 100, height: 80, objectFit: 'cover', borderRadius: 8 }} />
-                )
-            )}
-        </div>
-    );
 };
 
 // Analytics Panel
@@ -230,11 +214,9 @@ const FilterBar = ({ filters, setFilters, searchInput, setSearchInput }) => {
 const AdminDashboard = () => {
     const { user, logout } = useContext(AuthContext);
 
-    const [complaints, setComplaints] = useState([]);
+    const queryClient = useQueryClient();
+
     const [staff, setStaff] = useState([]);
-    const [analytics, setAnalytics] = useState(null);
-    const [complaintsLoading, setComplaintsLoading] = useState(true);
-    const [analyticsLoading, setAnalyticsLoading] = useState(true);
     const [analyticsDays, setAnalyticsDays] = useState(7);
 
     // Filters
@@ -248,19 +230,6 @@ const AdminDashboard = () => {
         return () => clearTimeout(t);
     }, [searchInput]);
 
-    // Fetch complaints when filters or search change
-    useEffect(() => { fetchComplaints(); }, [filters, debouncedSearch]);
-
-    // Fetch analytics when days toggle changes
-    useEffect(() => { fetchAnalytics(); }, [analyticsDays]);
-
-    // Auto-refresh complaints every 30s
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => {
-        const id = setInterval(fetchComplaints, 30000);
-        return () => clearInterval(id);
-    }, []); // mount/unmount only ÔÇö filter-driven refresh handled above
-
     const buildQuery = useCallback(() => {
         const params = new URLSearchParams();
         if (filters.status) params.set('status', filters.status);
@@ -272,30 +241,24 @@ const AdminDashboard = () => {
         return params.toString();
     }, [filters, debouncedSearch]);
 
-    const fetchComplaints = async () => {
-        setComplaintsLoading(true);
-        try {
+    const { data: complaints = [], isLoading: complaintsLoading } = useQuery({
+        queryKey: ['complaints', filters, debouncedSearch],
+        queryFn: async () => {
             const qs = buildQuery();
             const res = await api.get(`/complaints/all${qs ? `?${qs}` : ''}`);
-            setComplaints(res.data);
-        } catch (err) {
-            console.error('Failed to fetch complaints', err);
-        } finally {
-            setComplaintsLoading(false);
-        }
-    };
+            return res.data;
+        },
+        refetchInterval: 30000 // Polls every 30s safely
+    });
 
-    const fetchAnalytics = async () => {
-        setAnalyticsLoading(true);
-        try {
+    const { data: analytics = null, isLoading: analyticsLoading } = useQuery({
+        queryKey: ['analytics', analyticsDays],
+        queryFn: async () => {
             const res = await api.get(`/complaints/analytics?days=${analyticsDays}`);
-            setAnalytics(res.data);
-        } catch (err) {
-            console.error('Failed to fetch analytics', err);
-        } finally {
-            setAnalyticsLoading(false);
-        }
-    };
+            return res.data;
+        },
+        refetchInterval: 30000
+    });
 
     const fetchStaff = async () => {
         try {
@@ -312,8 +275,8 @@ const AdminDashboard = () => {
     const handleStatusUpdate = async (id, newStatus) => {
         try {
             await api.put(`/complaints/${id}/status`, { status: newStatus });
-            fetchComplaints();
-            fetchAnalytics();
+            queryClient.invalidateQueries({ queryKey: ['complaints'] });
+            queryClient.invalidateQueries({ queryKey: ['analytics'] });
         } catch { alert('Failed to update status'); }
     };
 
@@ -321,8 +284,8 @@ const AdminDashboard = () => {
         if (!window.confirm('Delete this complaint and all its attachments?')) return;
         try {
             await api.delete(`/complaints/${id}`);
-            fetchComplaints();
-            fetchAnalytics();
+            queryClient.invalidateQueries({ queryKey: ['complaints'] });
+            queryClient.invalidateQueries({ queryKey: ['analytics'] });
         } catch { alert('Failed to delete'); }
     };
 
@@ -330,7 +293,7 @@ const AdminDashboard = () => {
         if (!staffId) return;
         try {
             await api.put(`/complaints/assign/${id}`, { staffId });
-            fetchComplaints();
+            queryClient.invalidateQueries({ queryKey: ['complaints'] });
         } catch { alert('Failed to assign complaint'); }
     };
 
@@ -429,17 +392,26 @@ const AdminDashboard = () => {
                                                 </span>
                                             </div>
 
-                                            <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.75rem' }}>
-                                                {new Date(complaint.createdAt).toLocaleString()}
+                                            {/* Timestamps row */}
+                                            <div style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                                                <span>📅 Raised: <strong style={{ color: '#6b7280' }}>{fmtDateTime(complaint.createdAt)}</strong></span>
                                                 {complaint.assignedTo && (
-                                                    <span style={{ marginLeft: 8, color: '#6b7280', fontWeight: 600 }}>
-                                                        Assigned to: <strong>{complaint.assignedTo.name}</strong>
+                                                    <span>🔧 Assigned to: <strong style={{ color: '#6b7280' }}>{complaint.assignedTo.name}</strong>
+                                                        {complaint.assignedAt && (
+                                                            <> at <strong style={{ color: '#6b7280' }}>{fmtDateTime(complaint.assignedAt)}</strong></>  
+                                                        )}
                                                     </span>
                                                 )}
-                                            </p>
+                                                {complaint.resolvedAt && (
+                                                    <span>✅ Resolved: <strong style={{ color: '#059669' }}>{fmtDateTime(complaint.resolvedAt)}</strong></span>
+                                                )}
+                                            </div>
+
+                                            {/* Full lifecycle timeline */}
+                                            <ComplaintTimeline complaint={complaint} compact />
 
                                             {/* Action row */}
-                                            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                                            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'flex-end', marginTop: '0.75rem' }}>
                                                 <div>
                                                     <label style={{ fontSize: '0.72rem', fontWeight: 700, display: 'block', marginBottom: 3 }}>Status</label>
                                                     <select value={complaint.status}
@@ -473,6 +445,11 @@ const AdminDashboard = () => {
                                                         <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '2px 10px', borderRadius: 20, backgroundColor: complaint.feedback.isSatisfied ? '#d1fae5' : '#ffe4e6', color: complaint.feedback.isSatisfied ? '#065f46' : '#9f1239' }}>
                                                             {complaint.feedback.isSatisfied ? '✅ Student Satisfied' : '🚨 NOT SATISFIED'}
                                                         </span>
+                                                        {complaint.feedback.submittedAt && (
+                                                            <span style={{ fontSize: '0.7rem', color: '#9ca3af' }}>
+                                                                · Feedback at {fmtDateTime(complaint.feedback.submittedAt)}
+                                                            </span>
+                                                        )}
                                                     </div>
                                                     {!complaint.feedback.isSatisfied && (
                                                         <>

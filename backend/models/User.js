@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     password: { type: String },
     role: {
         type: String,
-        enum: ["STUDENT", "WARDEN", "STAFF"],
+        enum: ["STUDENT", "WARDEN", "STAFF", "HEADWARDEN", "INCHARGE"],
         required: true
     }
 }, options);
@@ -40,4 +40,13 @@ const Warden = User.discriminator("WARDEN", new mongoose.Schema({
     shift: { type: String }
 }));
 
-module.exports = { User, Student, Warden };
+// 4. HeadWarden and Incharge Extensions
+const HeadWarden = User.discriminator("HEADWARDEN", new mongoose.Schema({
+    officeLocation: { type: String }
+}));
+
+const Incharge = User.discriminator("INCHARGE", new mongoose.Schema({
+    officeLocation: { type: String }
+}));
+
+module.exports = { User, Student, Warden, HeadWarden, Incharge };

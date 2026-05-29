@@ -564,3 +564,44 @@ main {
   margin-bottom: 1.25rem;
 }
 
+/* ─── Complaint Timeline ─────────────────────────────────────────────────── */
+/*
+ * Styles for ComplaintTimeline.jsx
+ * The component uses mostly inline styles for portability, but these
+ * classes provide animation and the animated "active" pulse on the
+ * most recent (last) timeline node.
+ */
+
+/* Slide-in animation when timeline first renders */
+@keyframes timelineFadeIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Subtle pulse on the latest node bubble to show "this is current state" */
+@keyframes timelinePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.25); }
+  50%       { box-shadow: 0 0 0 6px rgba(79, 70, 229, 0); }
+}
+
+/* Applied by the component to each event row for a staggered entry */
+.timeline-event {
+  animation: timelineFadeIn 0.3s ease both;
+}
+
+/* The latest event's icon bubble gets a living pulse */
+.timeline-event--last .timeline-bubble {
+  animation: timelinePulse 2.5s ease-in-out infinite;
+}
+
+/* Compact variant used in admin / staff dense list views */
+.timeline-compact .timeline-event {
+  margin-bottom: 0.6rem;
+}
+
+/* Utility: tabular number rendering for timestamps */
+.timeline-ts {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+

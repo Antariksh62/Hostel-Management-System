@@ -3,8 +3,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { User, Student } = require("../models/User");
 const OTP = require("../models/OTP");
+const logger = require("../utils/logger");
+const generateTokens = require("../utils/generateTokens");
 
-const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret_key";
+const JWT_SECRET = process.env.JWT_SECRET;
 const OTP_BCRYPT_ROUNDS = 6;                    // Low rounds — OTP is short-lived anyway
 const OTP_EXPIRY_MS = 10 * 60 * 1000;       // 10 minutes
 const RESEND_COOLDOWN_S = 60;                    // 60-second cooldown between sends
@@ -30,17 +32,15 @@ const getTransporter = async () => {
         });
         try {
             await gmailTransport.verify();
-            console.log("✅ Gmail SMTP verified — real emails will be delivered to students");
+            logger.info("✅ Gmail SMTP verified — real emails will be delivered to students");
             _transporter = gmailTransport;
             _usingEthereal = false;
             return _transporter;
         } catch (err) {
-            console.error("\n╔══════════════════════════════════════════════════════════╗");
-            console.error("║  ❌ Gmail SMTP FAILED — OTP emails will NOT be delivered ║");
-            console.error("╚══════════════════════════════════════════════════════════╝\n");
+            logger.error("❌ Gmail SMTP FAILED — OTP emails will NOT be delivered");
         }
     } else {
-        console.warn("⚠️  EMAIL_USER / EMAIL_PASS not set in .env — using Ethereal fallback");
+        logger.warn("⚠️  EMAIL_USER / EMAIL_PASS not set in .env — using Ethereal fallback");
     }
 
     const testAccount = await nodemailer.createTestAccount();
@@ -51,7 +51,7 @@ const getTransporter = async () => {
         auth: { user: testAccount.user, pass: testAccount.pass }
     });
     _usingEthereal = true;
-    console.log("📧 Ethereal test SMTP active:", testAccount.user);
+    logger.info("📧 Ethereal test SMTP active: " + testAccount.user);
     return _transporter;
 };
 
@@ -116,9 +116,7 @@ exports.sendOTP = async (req, res) => {
         );
 
         const isDev = process.env.NODE_ENV !== "production";
-        console.log(`\n🔑 ============================================`);
-        console.log(`   OTP for ${email}: ${rawOTP}`);
-        console.log(`🔑 ============================================\n`);
+        logger.info(`OTP generated for ${email}: ${rawOTP}`);
 
         let emailDelivered = false;
         let etherealPreview = null;
@@ -133,7 +131,7 @@ exports.sendOTP = async (req, res) => {
             emailDelivered = true;
             etherealPreview = nodemailer.getTestMessageUrl(info);
         } catch (mailErr) {
-            console.warn(`⚠️  Email delivery failed (OTP still valid): ${mailErr.message}`);
+            logger.warn(`⚠️  Email delivery failed (OTP still valid): ${mailErr.message}`);
         }
 
         const response = {
@@ -150,7 +148,7 @@ exports.sendOTP = async (req, res) => {
 
         res.json(response);
     } catch (err) {
-        console.error("sendOTP error:", err);
+        logger.error("sendOTP error:", err);
         res.status(500).json({ message: "Failed to send OTP. Please try again.", error: err.message });
     }
 };
@@ -212,15 +210,11 @@ exports.verifyOTP = async (req, res) => {
             user = await Student.findById(user._id); // Refetch to ensure latest state
         }
 
-        const token = jwt.sign(
-            { id: user._id, role: user.role, email: user.email },
-            JWT_SECRET,
-            { expiresIn: "1d" }
-        );
+        const accessToken = generateTokens(res, user);
 
         res.json({
             message: "OTP verified successfully",
-            token,
+            token: accessToken,
             user: {
                 id: user._id,
                 email: user.email,
@@ -238,7 +232,7 @@ exports.verifyOTP = async (req, res) => {
             }
         });
     } catch (err) {
-        console.error("verifyOTP error:", err);
+        logger.error("verifyOTP error:", err);
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };
@@ -282,7 +276,7 @@ exports.completeProfile = async (req, res) => {
 
         updatedUser = await Student.findById(updatedUser._id);
 
-        console.log("PROFILE COMPLETED SUCCESSFULLY FOR:", updatedUser.email);
+        logger.info("PROFILE COMPLETED SUCCESSFULLY FOR: " + updatedUser.email);
 
         res.json({
             message: "Profile updated successfully",
@@ -303,7 +297,7 @@ exports.completeProfile = async (req, res) => {
             }
         });
     } catch (err) {
-        console.error("completeProfile error:", err);
+        logger.error("completeProfile error:", err);
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };
@@ -356,7 +350,7 @@ exports.updateInfo = async (req, res) => {
             }
         });
     } catch (err) {
-        console.error("updateInfo error:", err);
+        logger.error("updateInfo error:", err);
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };

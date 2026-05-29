@@ -1,3 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.agents/
+.venv/
+venv/
+env/
+graphify_build.py
+
+# Coverage
+coverage/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# VS Code
+*.code-workspace
+
 # Logs
 logs
 *.log
@@ -7,6 +26,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Graphify / AI cache
 .graphify_*
 graphify-out/
 run_ast.py
@@ -21,12 +41,11 @@ dist/
 dist-ssr/
 build/
 
-# Environment variables (VERY IMPORTANT 🚨)
+# Environment variables
+*.env
 .env
-backend/.env
-frontend-react/.env
 
-# Uploads (user images/files)
+# Uploads
 uploads/
 backend/uploads/
 
@@ -36,7 +55,7 @@ backend/uploads/
 # IDE files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 
 # Misc
 *.local
@@ -46,18 +65,6 @@ backend/uploads/
 *.sln
 *.sw?
 
-# Graphify / AI cache
-graphify-out/
-.graphify_ast.json
-.graphify_detect.json
-.graphify_python
-.graphify_uncached.txt
-
-# Python env
-venv/
-
-# Screenshots (optional)
-screenshots/
-
-# Tests (optional if not needed)
-tests/
+# Generated media
+img*.jpg
+VID_*.mp4

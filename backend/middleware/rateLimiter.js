@@ -33,4 +33,26 @@ const loginLimiter = rateLimit({
     }
 });
 
-module.exports = { otpSendLimiter, otpVerifyLimiter, loginLimiter };
+// ─── Staff/Warden Register: 3 attempts per hour per IP ──────────────────────
+const registerLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 3,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        message: "Too many accounts created from this IP. Please try again after an hour."
+    }
+});
+
+// ─── Room Booking/Allocation: 10 attempts per 15 minutes per IP ─────────────
+const roomLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 10,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        message: "Too many room allocation requests from this IP."
+    }
+});
+
+module.exports = { otpSendLimiter, otpVerifyLimiter, loginLimiter, registerLimiter, roomLimiter };

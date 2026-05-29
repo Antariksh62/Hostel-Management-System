@@ -1,19 +1,25 @@
 require("dotenv").config();
-const express  = require("express");
+const express = require("express");
 const mongoose = require("mongoose");
-const cors     = require("cors");
-const path     = require("path");
-const fs       = require("fs");
+const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
+const helmet = require("helmet");
+const cookieParser = require("cookie-parser");
+const logger = require("./utils/logger");
 
 const app = express();
 
 // ─── Core middleware ───────────────────────────────────────────────────────────
-app.use(cors());
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); // Allow serving uploads to frontend
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 // Request logger
 app.use((req, _res, next) => {
-    console.log(`${req.method} ${req.url}`);
+    logger.info(`${req.method} ${req.url}`);
     next();
 });
 
@@ -23,15 +29,15 @@ if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 app.use("/uploads", express.static(uploadDir));
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
-const authRoutes      = require("./routes/authRoutes");
+const authRoutes = require("./routes/authRoutes");
 const complaintRoutes = require("./routes/complaintRoutes");
-const userRoutes      = require("./routes/userRoutes");
-const roomRoutes      = require("./routes/roomRoutes");   // ← was never mounted before
+const userRoutes = require("./routes/userRoutes");
+const roomRoutes = require("./routes/roomRoutes");
 
-app.use("/api/auth",       authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/complaints", complaintRoutes);
-app.use("/api/users",      userRoutes);
-app.use("/api/rooms",      roomRoutes);                   // ← now properly mounted
+app.use("/api/users", userRoutes);
+app.use("/api/rooms", roomRoutes);
 
 // ─── Global error handler for Multer / validation errors ──────────────────────
 app.use((err, _req, res, _next) => {
@@ -44,16 +50,16 @@ app.use((err, _req, res, _next) => {
     if (err.message?.includes("File type not allowed")) {
         return res.status(400).json({ message: err.message });
     }
-    console.error("Unhandled error:", err);
+    logger.error("Unhandled error:", err);
     res.status(500).json({ message: "Internal server error" });
 });
 
 // ─── MongoDB ──────────────────────────────────────────────────────────────────
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/hostelDB";
 mongoose.connect(MONGO_URI)
-    .then(() => console.log("✅ MongoDB Connected:", MONGO_URI))
-    .catch((err) => console.log("❌ DB Error:", err));
+    .then(() => logger.info("✅ MongoDB Connected: " + MONGO_URI))
+    .catch((err) => logger.error("❌ DB Error:", err));
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => logger.info(`🚀 Server running on port ${PORT}`));

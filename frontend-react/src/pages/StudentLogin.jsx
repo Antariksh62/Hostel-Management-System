@@ -282,6 +282,36 @@ const StudentLogin = () => {
                             <p>Keep your room clean, organized, and accessible at all times...</p>
                             <p>Complaints should be raised only after ensuring compliance with these guidelines.</p>
                             <p>Any false or repeated invalid complaints may result in restricted complaint privileges and will be fined heavily.</p>
+                            <p>Student Responsibilities & Room Maintenance Guidelines :
+
+                                Keep your belongings arranged in a way that does not obstruct cleaning activities.
+
+                                Ensure your room is accessible for proper cleaning; cluttered or blocked areas may limit cleaning quality.
+
+                                Do not leave personal items scattered on the floor, as staff are not permitted to move belongings.
+
+                                Large or heavy objects must be moved by students before requesting cleaning.
+
+                                Dispose of food waste and wrappers only in the designated dustbins outside your room.
+
+                                The dustbin inside your room must be emptied by you and is not handled by staff.
+
+                                All food items must be stored in proper containers to prevent ants, insects, or hygiene issues.
+
+                                Maintain basic cleanliness and hygiene within your room at all times.
+
+                                Ensure your room conditions do not create inconvenience for cleaning staff or other residents.
+
+                                Staff are not authorized to handle, rearrange, or move personal belongings under any circumstances.
+
+                                Treat hostel staff with respect and cooperate during cleaning and maintenance activities.
+
+                                Important Note :
+                                Cleaning quality depends on room accessibility and condition.
+                                Rooms that are cluttered or non-compliant with these guidelines may not be cleaned thoroughly.
+                                Complaints arising due to improper room conditions or negligence may be rejected.</p>
+
+                                <p>Any false accusation or complaint can lead to a penalty or fine decided of hostel administration</p>
                         </div>
 
                         <label style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.85rem', cursor: 'pointer', marginBottom: '1.5rem' }}>
