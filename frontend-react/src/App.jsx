@@ -12,17 +12,19 @@ import Register from './pages/Register';
 import StudentDashboard from './pages/StudentDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import StaffDashboard from "./pages/StaffDashboard";
+import InchargeDashboard from './pages/InchargeDashboard';
 
-const PrivateRoute = ({ children, allowedRole }) => {
+const PrivateRoute = ({ children, allowedRoles }) => {
     const { user, loading } = useContext(AuthContext);
 
     if (loading) return <div className="loader">Loading...</div>;
 
     if (!user) return <Navigate to="/" />;
 
-    if (allowedRole && user.role !== allowedRole) {
-        if (user.role === 'WARDEN') return <Navigate to="/admin-dashboard" />;
-        if (user.role === 'STAFF') return <Navigate to="/staff-dashboard" />;
+    if (allowedRoles && !allowedRoles.includes(user.role)) {
+        if (user.role === 'INCHARGE' || user.role === 'HEADWARDEN') return <Navigate to="/incharge-dashboard" />;
+        if (user.role === 'WARDEN')   return <Navigate to="/admin-dashboard" />;
+        if (user.role === 'STAFF')    return <Navigate to="/staff-dashboard" />;
         return <Navigate to="/student-dashboard" />;
     }
 
@@ -36,8 +38,9 @@ const App = () => {
 
     const getDefaultRoute = () => {
         if (!user) return '/';
-        if (user.role === 'WARDEN') return '/admin-dashboard';
-        if (user.role === 'STAFF') return '/staff-dashboard';
+        if (user.role === 'INCHARGE' || user.role === 'HEADWARDEN') return '/incharge-dashboard';
+        if (user.role === 'WARDEN')   return '/admin-dashboard';
+        if (user.role === 'STAFF')    return '/staff-dashboard';
         return '/student-dashboard';
     };
 
@@ -52,20 +55,31 @@ const App = () => {
                         <Route path="/register" element={<Register />} />
                         
                         <Route path="/student-dashboard" element={
-                            <PrivateRoute allowedRole="STUDENT">
+                            <PrivateRoute allowedRoles={['STUDENT']}>
                                 <StudentDashboard />
                             </PrivateRoute>
                         } />
                         
                         <Route path="/admin-dashboard" element={
-                            <PrivateRoute allowedRole="WARDEN">
+                            <PrivateRoute allowedRoles={['WARDEN']}>
                                 <AdminDashboard />
                             </PrivateRoute>
                         } />
 
                         <Route path="/staff-dashboard" element={
-                            <PrivateRoute allowedRole="STAFF">
+                            <PrivateRoute allowedRoles={['STAFF']}>
                                 <StaffDashboard />
+                            </PrivateRoute>
+                        } />
+
+                        <Route path="/incharge-dashboard" element={
+                            <PrivateRoute allowedRoles={['INCHARGE','HEADWARDEN']}>
+                                <InchargeDashboard />
+                            </PrivateRoute>
+                        } />
+                        <Route path="/headwarden-dashboard" element={
+                            <PrivateRoute allowedRoles={['INCHARGE','HEADWARDEN']}>
+                                <InchargeDashboard />
                             </PrivateRoute>
                         } />
                     </Routes>

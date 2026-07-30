@@ -32,12 +32,14 @@ app.use("/uploads", express.static(uploadDir));
 const authRoutes = require("./routes/authRoutes");
 const complaintRoutes = require("./routes/complaintRoutes");
 const userRoutes = require("./routes/userRoutes");
-const roomRoutes = require("./routes/roomRoutes");
+const roomRoutes     = require("./routes/roomRoutes");
+const inchargeRoutes = require("./routes/inchargeRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/complaints", complaintRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/rooms", roomRoutes);
+app.use("/api/rooms",    roomRoutes);
+app.use("/api/incharge", inchargeRoutes);
 
 // ─── Global error handler for Multer / validation errors ──────────────────────
 app.use((err, _req, res, _next) => {

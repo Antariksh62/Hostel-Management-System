@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* ── Light mode (default) ── */
 :root {
   --primary: #4f46e5;
   --primary-hover: #4338ca;
@@ -8,11 +9,81 @@
   --text-main: #111827;
   --text-muted: #6b7280;
   --border-color: #e5e7eb;
-  
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
+
+  /* ThemeToggle button */
+  --th-btn-bg: #f3f4f6;
+  --th-border: #d1d5db;
+  --th-text: #374151;
+
+  /* Incharge dashboard variables (light mode) */
+  --inc-root-bg:     #f0f4ff;
+  --inc-sidebar-bg:  linear-gradient(180deg, #1e1b4b 0%, #1f2563 100%);
+  --inc-sidebar-border: #312e81;
+  --inc-main-bg:     #f0f4ff;
+  --inc-topbar-bg:   #ffffff;
+  --inc-topbar-border: #e2e8f0;
+  --inc-card-bg:     #ffffff;
+  --inc-card-border: #e2e8f0;
+  --inc-text-primary:#0f172a;
+  --inc-text-muted:  #64748b;
+  --inc-text-dim:    #94a3b8;
+  --inc-hover-bg:    #f8fafc;
+  --inc-input-bg:    #f1f5f9;
+  --inc-input-border:#cbd5e1;
+  --inc-input-text:  #0f172a;
+  --inc-table-head:  #f8fafc;
+  --inc-table-row-hover: #f1f5f9;
+  --inc-section-title-color: #0f172a;
+  --inc-shadow:      0 1px 4px rgba(0,0,0,.08);
 }
+
+/* ── Dark mode overrides ── */
+[data-theme="dark"] {
+  --bg-color: #111827;
+  --card-bg: #1f2937;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+
+  --th-btn-bg: #374151;
+  --th-border: #4b5563;
+  --th-text: #f9fafb;
+
+  --inc-root-bg:     #0a0f1e;
+  --inc-sidebar-bg:  linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  --inc-sidebar-border: #1e293b;
+  --inc-main-bg:     #0a0f1e;
+  --inc-topbar-bg:   #0a0f1e;
+  --inc-topbar-border: #1e293b;
+  --inc-card-bg:     #0f172a;
+  --inc-card-border: #1e293b;
+  --inc-text-primary:#f1f5f9;
+  --inc-text-muted:  #64748b;
+  --inc-text-dim:    #475569;
+  --inc-hover-bg:    #1e293b;
+  --inc-input-bg:    #1e293b;
+  --inc-input-border:#334155;
+  --inc-input-text:  #cbd5e1;
+  --inc-table-head:  #0f172a;
+  --inc-table-row-hover: #1e293b;
+  --inc-section-title-color: #cbd5e1;
+  --inc-shadow:      none;
+}
+
+/* ── Smooth theme transition on all elements ── */
+*, *::before, *::after {
+  transition: background-color .25s ease, border-color .25s ease, color .15s ease;
+}
+
+/* Override: don't animate transforms/widths (causes UI jank) */
+.inc-funnel-bar, .inc-mini-bar > div, .inc-health-bar > div {
+  transition: width .4s ease;
+}
+
+
 
 * {
   box-sizing: border-box;

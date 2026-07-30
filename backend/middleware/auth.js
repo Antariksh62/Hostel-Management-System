@@ -17,8 +17,10 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
+const ELEVATED = ["WARDEN", "HEADWARDEN", "INCHARGE"];
+
 const wardenMiddleware = (req, res, next) => {
-    if (req.user && req.user.role === "WARDEN") {
+    if (req.user && ELEVATED.includes(req.user.role)) {
         next();
     } else {
         res.status(403).json({ message: "Access denied: Wardens only" });
@@ -26,10 +28,10 @@ const wardenMiddleware = (req, res, next) => {
 };
 
 const wardenOrStaffMiddleware = (req, res, next) => {
-    if (req.user && (req.user.role === "WARDEN" || req.user.role === "STAFF")) {
+    if (req.user && (ELEVATED.includes(req.user.role) || req.user.role === "STAFF")) {
         next();
     } else {
-        res.status(403).json({ message: "Access denied: Elevate rights required" });
+        res.status(403).json({ message: "Access denied: Elevated rights required" });
     }
 };
 
