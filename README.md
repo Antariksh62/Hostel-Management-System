@@ -361,17 +361,6 @@ Deployment configuration is planned but not yet completed.
 
 ---
 
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/awesome-feature`).
-3. Commit your changes with clear messages.
-4. Push to your fork and open a Pull Request.
-5. Ensure linting passes (`npm run lint`).
-6. Include tests for new functionality where possible.
-
----
-
 ## Future Scope
 
 - **Room Allocation Module** – manage room assignments and availability.
