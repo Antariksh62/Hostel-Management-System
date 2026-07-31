@@ -88,25 +88,25 @@
 ## System Architecture
 
 ```mermaid
-graph TD;
-    subgraph Frontend[Frontend (React + Vite)]
+graph TD
+
+    subgraph "Frontend (React + Vite)"
         FE[UI Components]
-        FE -->|HTTP Requests| API
-    end;
-    subgraph Backend[Backend (Node.js/Express)]
+    end
+
+    subgraph "Backend (Node.js / Express)"
         API[API Layer]
-        API --> Controllers[Controllers]
-        Controllers --> Middleware[Middleware]
-        Middleware --> DB[MongoDB (Mongoose)]
-    end;
-    FE -->|Bearer JWT| API;
-    API -->|Validate| Middleware;
-    Middleware -->|Business Logic| Controllers;
-    Controllers -->|Persist/Retrieve| DB;
+        Controllers[Controllers]
+        Middleware[Middleware]
+        DB[(MongoDB + Mongoose)]
+    end
+
+    FE -->|HTTP Requests| API
+    FE -->|Bearer JWT| API
+    API --> Controllers
+    Controllers --> Middleware
+    Middleware --> DB
 ```
-
----
-
 ## Authentication Flow
 
 ```mermaid
@@ -415,5 +415,8 @@ Deployment configuration is planned but not yet completed.
 ## Status
 🚧 Under Active Development
 
+---
+
+## License
 
 MIT License – see the [LICENSE](LICENSE) file for details.
