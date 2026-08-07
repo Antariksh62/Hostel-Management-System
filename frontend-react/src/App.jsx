@@ -77,11 +77,8 @@ const App = () => {
                                 <InchargeDashboard />
                             </PrivateRoute>
                         } />
-                        <Route path="/headwarden-dashboard" element={
-                            <PrivateRoute allowedRoles={['INCHARGE','HEADWARDEN']}>
-                                <InchargeDashboard />
-                            </PrivateRoute>
-                        } />
+                        {/* headwarden-dashboard redirects to incharge-dashboard — no separate page */}
+                        <Route path="/headwarden-dashboard" element={<Navigate to="/incharge-dashboard" replace />} />
                     </Routes>
                 </main>
             </div>

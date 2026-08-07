@@ -1,18 +1,3 @@
-/**
- * InchargeDashboard.jsx
- *
- * Route:    /incharge-dashboard  (and /headwarden-dashboard)
- * Roles:    INCHARGE, HEADWARDEN
- * Auth:     Handled by PrivateRoute in App.jsx — unchanged.
- *
- * Visual implementation replaced with the HOIDSS Lovable dashboard.
- * All mock data lives in @/components/hoidss/data — no backend calls yet.
- *
- * TODO (next phase): replace static data constants in
- *   src/components/hoidss/data.ts  with real API calls from
- *   src/services/inchargeApi.js
- */
-
 import { useState } from 'react';
 
 import { ComplaintsBand } from '@/components/hoidss/complaints';
@@ -26,13 +11,12 @@ import { OwnershipBand } from '@/components/hoidss/ownership';
 import { HostelSidebar, TopBar } from '@/components/hoidss/shell';
 import { SignalStrip } from '@/components/hoidss/signals';
 
-export default function InchargeDashboard() {
+export default function HOIDSSDashboard() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <InvestigationProvider>
-      {/* ADDED text-foreground so text color arcanely inherits the .dark variable, not the light body variable */}
-      <div className="flex min-h-screen w-full bg-canvas text-foreground dark">
+      <div className="flex min-h-screen w-full bg-canvas dark">
         <HostelSidebar collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
 
         <div className="min-w-0 flex-1">
@@ -44,12 +28,6 @@ export default function InchargeDashboard() {
               <SignalStrip />
 
               <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
-                {/*
-                 * Left column: spatial heatmap → complaint intelligence → ownership queue
-                 * Right column: mission control (sticky AI recommendations panel)
-                 * The `order-*` classes ensure mission control leads on mobile where
-                 * decisions matter more than evidence.
-                 */}
                 <div className="order-2 space-y-14 xl:order-1">
                   <HeatmapBand />
                   <ComplaintsBand />
@@ -65,7 +43,6 @@ export default function InchargeDashboard() {
           </main>
         </div>
 
-        {/* Slide-out investigation detail drawer */}
         <InvestigationDrawer />
       </div>
     </InvestigationProvider>

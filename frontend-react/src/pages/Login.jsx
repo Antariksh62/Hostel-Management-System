@@ -28,6 +28,8 @@ const Login = () => {
                 navigate("/admin-dashboard");
             } else if (user?.role === "STAFF") {
                 navigate("/staff-dashboard");
+            } else if (user?.role === "INCHARGE" || user?.role === "HEADWARDEN") {
+                navigate("/incharge-dashboard");
             } else {
                 navigate("/");
             }
