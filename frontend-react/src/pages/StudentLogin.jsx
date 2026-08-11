@@ -50,7 +50,7 @@ const StudentLogin = () => {
     useEffect(() => {
         logout();
         return () => { if (timerRef.current) clearInterval(timerRef.current); };
-    }, []);
+    }, [logout]);
 
     const startResendTimer = (seconds = 60) => {
         if (timerRef.current) clearInterval(timerRef.current);
@@ -190,12 +190,12 @@ const StudentLogin = () => {
                         <p className="otp-hint">We'll send a one-time password to your college email.</p>
                         <div className="form-group">
                             <label>College Email ID</label>
-                            <input type="email" className="form-control" value={email}
+                            <input id="student-email" type="email" className="form-control" value={email}
                                 onChange={(e) => setEmail(e.target.value)} required
                                 placeholder="f24ce307@ms.pict.edu" autoComplete="email" />
                             <p className="otp-domain-hint">Must end with <strong>@ms.pict.edu</strong></p>
                         </div>
-                        <button type="submit" className="btn otp-btn" disabled={loading}>
+                        <button id="send-otp-btn" type="submit" className="btn otp-btn" disabled={loading}>
                             {loading ? 'Sending OTP...' : <><span>Send OTP</span><ArrowRight size={18} style={{ marginLeft: 8 }} /></>}
                         </button>
                     </form>
@@ -206,11 +206,11 @@ const StudentLogin = () => {
                         <div className="otp-step-title"><KeyRound size={20} /><span>Enter OTP</span></div>
                         <p className="otp-hint">Code sent to <strong>{email.toLowerCase()}</strong></p>
                         <div className="form-group">
-                            <input type="text" maxLength={6} className="form-control otp-input-field text-center"
+                            <input id="otp-input" type="text" maxLength={6} className="form-control otp-input-field text-center"
                                 value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
                                 required placeholder="● ● ● ● ● ●" />
                         </div>
-                        <button type="submit" className="btn otp-btn" disabled={loading || otp.length !== 6}>
+                        <button id="verify-otp-btn" type="submit" className="btn otp-btn" disabled={loading || otp.length !== 6}>
                             {loading ? 'Verifying...' : <><span>Verify OTP</span><ArrowRight size={18} style={{ marginLeft: 8 }} /></>}
                         </button>
                         <div className="otp-resend mt-3 text-center">
@@ -277,7 +277,7 @@ const StudentLogin = () => {
                             </div>
                         </div>
 
-                        <div className="tc-container" style={{ maxHeight: '150px', overflowY: 'scroll', padding: '10px', border: '1px solid #e5e7eb', borderRadius: '8px', fontSize: '0.8rem', marginBottom: '1rem', background: '#f9fafb' }}>
+                        <div className="tc-container" style={{ maxHeight: '150px', overflowY: 'scroll', padding: '10px', border: '1px solid var(--border-color)', borderRadius: '8px', fontSize: '0.8rem', marginBottom: '1rem', background: 'var(--card-bg)', color: 'var(--text-main)' }}>
                             <h4 style={{ margin: '0 0 8px 0' }}>Student Responsibilities & Room Maintenance Guidelines</h4>
                             <p>Keep your room clean, organized, and accessible at all times...</p>
                             <p>Complaints should be raised only after ensuring compliance with these guidelines.</p>

@@ -47,41 +47,37 @@ const App = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <Router>
-                <div className="app-container">
-                <main>
-                    <Routes>
-                        <Route path="/" element={user ? <Navigate to={getDefaultRoute()} /> : <Login />} />
-                        <Route path="/student-login" element={user?.role === 'STUDENT' ? <Navigate to="/student-dashboard" /> : <StudentLogin />} />
-                        <Route path="/register" element={<Register />} />
-                        
-                        <Route path="/student-dashboard" element={
-                            <PrivateRoute allowedRoles={['STUDENT']}>
-                                <StudentDashboard />
-                            </PrivateRoute>
-                        } />
-                        
-                        <Route path="/admin-dashboard" element={
-                            <PrivateRoute allowedRoles={['WARDEN']}>
-                                <AdminDashboard />
-                            </PrivateRoute>
-                        } />
+                <Routes>
+                    <Route path="/" element={user ? <Navigate to={getDefaultRoute()} /> : <Login />} />
+                    <Route path="/student-login" element={user ? <Navigate to={getDefaultRoute()} /> : <StudentLogin />} />
+                    <Route path="/register" element={<Register />} />
+                    
+                    <Route path="/student-dashboard" element={
+                        <PrivateRoute allowedRoles={['STUDENT']}>
+                            <StudentDashboard />
+                        </PrivateRoute>
+                    } />
+                    
+                    <Route path="/admin-dashboard" element={
+                        <PrivateRoute allowedRoles={['WARDEN']}>
+                            <AdminDashboard />
+                        </PrivateRoute>
+                    } />
 
-                        <Route path="/staff-dashboard" element={
-                            <PrivateRoute allowedRoles={['STAFF']}>
-                                <StaffDashboard />
-                            </PrivateRoute>
-                        } />
+                    <Route path="/staff-dashboard" element={
+                        <PrivateRoute allowedRoles={['STAFF']}>
+                            <StaffDashboard />
+                        </PrivateRoute>
+                    } />
 
-                        <Route path="/incharge-dashboard" element={
-                            <PrivateRoute allowedRoles={['INCHARGE','HEADWARDEN']}>
-                                <InchargeDashboard />
-                            </PrivateRoute>
-                        } />
-                        {/* headwarden-dashboard redirects to incharge-dashboard — no separate page */}
-                        <Route path="/headwarden-dashboard" element={<Navigate to="/incharge-dashboard" replace />} />
-                    </Routes>
-                </main>
-            </div>
+                    <Route path="/incharge-dashboard" element={
+                        <PrivateRoute allowedRoles={['INCHARGE', 'HEADWARDEN']}>
+                            <InchargeDashboard />
+                        </PrivateRoute>
+                    } />
+                    {/* headwarden-dashboard redirects to incharge-dashboard — no separate page */}
+                    <Route path="/headwarden-dashboard" element={<Navigate to="/incharge-dashboard" replace />} />
+                </Routes>
             </Router>
         </QueryClientProvider>
     );

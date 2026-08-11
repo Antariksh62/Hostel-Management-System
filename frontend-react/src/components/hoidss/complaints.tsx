@@ -47,7 +47,7 @@ export function ComplaintsBand() {
       detailSummary="Severity split, repeat and reopened rates, seasonality, peak hours, resolution spread"
       detail={<ComplaintDetail />}
     >
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)_minmax(0,0.8fr)]">
+      <div className="grid gap-8 xl:gap-10 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)_minmax(0,0.8fr)]">
         <Panel title="Top categories" subtitle="Open complaints · select to investigate">
           <ul className="space-y-1">
             {CATEGORIES.map((cat) => {

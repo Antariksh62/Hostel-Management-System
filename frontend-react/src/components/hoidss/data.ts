@@ -19,18 +19,18 @@ export const OVERNIGHT_LEDGER: {
   emphasis?: Health;
   scope?: { category?: string; block?: string };
 }[] = [
-  { text: "18 complaints received overnight", scope: {} },
-  { text: "12 resolved before 06:00", emphasis: "ok" },
-  { text: "4 complaints approaching SLA breach", emphasis: "warn", scope: { category: "Electrical" } },
-  { text: "2 of 5 scheduled inspections completed", emphasis: "warn" },
-  { text: "Hostel A occupancy reached 98%", scope: { block: "Block A" } },
-  { text: "Internet outage in Block C restored at 04:12", emphasis: "ok", scope: { block: "Block C" } },
-  {
-    text: "One urgent electrical issue awaits your approval",
-    emphasis: "crit",
-    scope: { category: "Electrical", block: "Block B" },
-  },
-];
+    { text: "18 complaints received overnight", scope: {} },
+    { text: "12 resolved before 06:00", emphasis: "ok" },
+    { text: "4 complaints approaching SLA breach", emphasis: "warn", scope: { category: "Electrical" } },
+    { text: "2 of 5 scheduled inspections completed", emphasis: "warn" },
+    { text: "Hostel A occupancy reached 98%", scope: { block: "Block A" } },
+    { text: "Internet outage in Block C restored at 04:12", emphasis: "ok", scope: { block: "Block C" } },
+    {
+      text: "One urgent electrical issue awaits your approval",
+      emphasis: "crit",
+      scope: { category: "Electrical", block: "Block B" },
+    },
+  ];
 
 export const AI_BRIEF = [
   "Operations are stable on housekeeping and occupancy, but electrical load in Block B is degrading faster than maintenance can absorb.",

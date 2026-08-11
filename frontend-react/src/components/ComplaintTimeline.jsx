@@ -1,33 +1,5 @@
 import React from 'react';
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-/**
- * Formats a date to a readable string:  "19 May 2026 · 02:28 AM"
- */
-export function fmtDateTime(dateStr) {
-    if (!dateStr) return '—';
-    const d = new Date(dateStr);
-    if (isNaN(d)) return '—';
-    return d.toLocaleString('en-IN', {
-        day:    '2-digit',
-        month:  'short',
-        year:   'numeric',
-        hour:   '2-digit',
-        minute: '2-digit',
-        hour12: true,
-    });
-}
-
-/**
- * Formats only the time:  "02:28 AM"
- */
-export function fmtTime(dateStr) {
-    if (!dateStr) return '—';
-    const d = new Date(dateStr);
-    if (isNaN(d)) return '—';
-    return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
-}
+import { fmtDateTime } from '../utils/dateUtils';
 
 // ─── Per-status visual config ─────────────────────────────────────────────────
 const STATUS_CONFIG = {

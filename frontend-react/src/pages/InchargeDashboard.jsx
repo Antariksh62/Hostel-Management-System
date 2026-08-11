@@ -31,26 +31,25 @@ export default function InchargeDashboard() {
 
   return (
     <InvestigationProvider>
-      {/* ADDED text-foreground so text color arcanely inherits the .dark variable, not the light body variable */}
-      <div className="flex min-h-screen w-full bg-canvas text-foreground dark">
+      <div className="flex min-h-screen w-full bg-canvas text-foreground">
         <HostelSidebar collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
 
         <div className="min-w-0 flex-1">
           <TopBar />
 
-          <main className="mx-auto max-w-[1440px] px-5 pb-24 pt-10 sm:px-8">
-            <div className="space-y-14">
+          <main className="mx-auto max-w-[1680px] px-8 pb-44 pt-10 sm:px-12 lg:px-16">
+            <div className="space-y-24 lg:space-y-32">
               <MorningBrief />
               <SignalStrip />
 
-              <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
+              <div className="grid gap-12 xl:gap-16 xl:grid-cols-[minmax(0,1fr)_420px]">
                 {/*
                  * Left column: spatial heatmap → complaint intelligence → ownership queue
                  * Right column: mission control (sticky AI recommendations panel)
                  * The `order-*` classes ensure mission control leads on mobile where
                  * decisions matter more than evidence.
                  */}
-                <div className="order-2 space-y-14 xl:order-1">
+                <div className="order-2 space-y-24 lg:space-y-32 xl:order-1">
                   <HeatmapBand />
                   <ComplaintsBand />
                   <OwnershipBand />

@@ -67,7 +67,7 @@ export function OwnershipBand() {
         <ul className="divide-y divide-border">
           {visible.map((item) => (
             <li key={item.id} className="group">
-              <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 px-4 py-3.5 transition-colors duration-150 hover:bg-secondary/50 sm:px-5">
+              <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-5 px-5 py-4 transition-colors duration-150 hover:bg-secondary/50 sm:px-6 lg:px-7 lg:py-5">
                 <span className={cn("h-10 w-1 shrink-0 rounded-full", healthRail[item.severity])} aria-hidden />
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">

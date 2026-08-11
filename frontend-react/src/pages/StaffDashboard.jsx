@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { AuthContext } from '../context/AuthContext';
 import api from "../services/api";
 import MediaGallery from "../components/MediaGallery";
-import ComplaintTimeline, { fmtDateTime } from "../components/ComplaintTimeline";
+import ComplaintTimeline from "../components/ComplaintTimeline";
+import { fmtDateTime } from "../utils/dateUtils";
 import { LogOut, User, CheckCircle, Clock, AlertCircle, DoorOpen } from 'lucide-react';
 
 // ─── Status helpers ────────────────────────────────────────────────────────────
@@ -32,17 +33,7 @@ export default function StaffDashboard() {
     const [complaints, setComplaints] = useState([]);
     const [loading,    setLoading]    = useState(true);
 
-    useEffect(() => {
-        let isMounted = true;
-        fetchComplaints(isMounted);
-        const id = setInterval(() => fetchComplaints(isMounted), 30000); // refresh every 30s
-        return () => {
-            isMounted = false;
-            clearInterval(id);
-        };
-    }, [user]);
-
-    const fetchComplaints = async (isMounted = true) => {
+    const fetchComplaints = useCallback(async (isMounted = true) => {
         try {
             const res  = await api.get("/complaints/all");
             if (!isMounted) return;
@@ -58,7 +49,17 @@ export default function StaffDashboard() {
         } finally {
             if (isMounted) setLoading(false);
         }
-    };
+    }, [user]);
+
+    useEffect(() => {
+        let isMounted = true;
+        fetchComplaints(isMounted);
+        const id = setInterval(() => fetchComplaints(isMounted), 30000); // refresh every 30s
+        return () => {
+            isMounted = false;
+            clearInterval(id);
+        };
+    }, [fetchComplaints]);
 
     const updateStatus = async (id, status) => {
         try {
@@ -114,7 +115,7 @@ export default function StaffDashboard() {
                     ) : (
                         <div className="complaint-list">
                             {complaints.map(complaint => (
-                                <div key={complaint._id} className="complaint-item" style={{ flexDirection: 'column' }}>
+                                <div key={complaint._id} className="complaint-item" style={{ display: 'flex', flexDirection: 'column' }}>
                                     <div style={{ display: 'flex', gap: '1rem' }}>
                                         <div style={{ flex: 1 }}>
                                             <div className="complaint-header">

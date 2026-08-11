@@ -2,7 +2,8 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
 import MediaGallery from '../components/MediaGallery';
-import ComplaintTimeline, { fmtDateTime } from '../components/ComplaintTimeline';
+import ComplaintTimeline from '../components/ComplaintTimeline';
+import { fmtDateTime } from '../utils/dateUtils';
 import {
     LogOut, User, PlusCircle, CheckCircle, Clock, AlertCircle,
     DoorOpen, Hash, BookOpen, Calendar, X, ImagePlus, Video
@@ -13,30 +14,42 @@ const CATEGORIES = ['Electrical', 'Plumbing', 'Furniture', 'Cleanliness', 'Inter
 
 
 // ─── File Preview strip (before submission) ───────────────────────────────────
+const FilePreviewItem = ({ file, index, onRemove }) => {
+    const [url] = useState(() => URL.createObjectURL(file));
+
+    useEffect(() => {
+        return () => {
+            if (url) URL.revokeObjectURL(url);
+        };
+    }, [url]);
+
+    if (!url) return null;
+    const isVideo = file.type.startsWith('video/');
+    return (
+        <div style={{ position: 'relative' }}>
+            {isVideo ? (
+                <video src={url} style={{ width: 100, height: 80, objectFit: 'cover', borderRadius: 8 }} />
+            ) : (
+                <img src={url} alt={file.name} style={{ width: 100, height: 80, objectFit: 'cover', borderRadius: 8 }} />
+            )}
+            <button type="button" onClick={() => onRemove(index)} style={{
+                position: 'absolute', top: -6, right: -6, background: '#ef4444',
+                border: 'none', borderRadius: '50%', width: 20, height: 20,
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', padding: 0
+            }}>
+                <X size={12} />
+            </button>
+        </div>
+    );
+};
+
 const FilePreview = ({ files, onRemove }) => {
     if (!files.length) return null;
     return (
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
-            {files.map((f, i) => {
-                const url = URL.createObjectURL(f);
-                const isVideo = f.type.startsWith('video/');
-                return (
-                    <div key={i} style={{ position: 'relative' }}>
-                        {isVideo ? (
-                            <video src={url} style={{ width: 100, height: 80, objectFit: 'cover', borderRadius: 8 }} />
-                        ) : (
-                            <img src={url} alt={f.name} style={{ width: 100, height: 80, objectFit: 'cover', borderRadius: 8 }} />
-                        )}
-                        <button type="button" onClick={() => onRemove(i)} style={{
-                            position: 'absolute', top: -6, right: -6, background: '#ef4444',
-                            border: 'none', borderRadius: '50%', width: 20, height: 20,
-                            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', padding: 0
-                        }}>
-                            <X size={12} />
-                        </button>
-                    </div>
-                );
-            })}
+            {files.map((f, i) => (
+                <FilePreviewItem key={i} file={f} index={i} onRemove={onRemove} />
+            ))}
         </div>
     );
 };
@@ -77,12 +90,8 @@ const FeedbackForm = ({ complaintId, onSubmitted }) => {
                 setError('Please explain what went wrong.');
                 return;
             }
-            if (images.length === 0) {
-                setError('Please upload a photo as proof.');
-                return;
-            }
-            if (!video) {
-                setError('Please upload a video as proof.');
+            if (images.length === 0 && !video) {
+                setError('Please upload a photo or video as proof.');
                 return;
             }
         }
@@ -105,20 +114,20 @@ const FeedbackForm = ({ complaintId, onSubmitted }) => {
     };
 
     return (
-        <div className="feedback-box" style={{ marginTop: '1rem', padding: '1rem', border: '1px solid #e5e7eb', borderRadius: 8, backgroundColor: '#f9fafb' }}>
-            <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Was your issue resolved to your satisfaction?</p>
+        <div className="feedback-box" style={{ marginTop: '1rem', padding: '1rem', border: '1px solid var(--border-color)', borderRadius: 8, backgroundColor: 'var(--card-bg)' }}>
+            <p style={{ fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-main)' }}>Was your issue resolved to your satisfaction?</p>
             <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
                 <button type="button" className={`btn ${isSatisfied === true ? 'btn-success' : 'btn-outline'}`} 
                     onClick={() => { setIsSatisfied(true); setError(''); }} style={{ flex: 1 }}>Yes</button>
                 <button type="button" className={`btn ${isSatisfied === false ? 'btn-danger' : 'btn-outline'}`} 
-                    onClick={() => { setIsSatisfied(false); setError(''); }} style={{ flex: 1 }}>No</button>
+                    onClick={() => { setIsSatisfied(false); setError(''); }} style={{ flex: 1 }}>No, still needs work</button>
             </div>
 
             {isSatisfied === false && (
                 <div className="fade-in">
                     <div className="form-group">
                         <label>What went wrong? How is it not resolved?</label>
-                        <textarea className="form-control" value={text} onChange={e => setText(e.target.value)} rows="2" placeholder="Explain the issue..." />
+                        <textarea className="form-control" value={text} onChange={e => setText(e.target.value)} rows="2" placeholder="Why is the work still incomplete?" />
                     </div>
                     <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
                         <button type="button" className="btn btn-outline" style={{ fontSize: '0.75rem' }} onClick={() => imgRef.current?.click()}>
@@ -200,9 +209,10 @@ const StudentDashboard = () => {
         setUpdateLoading(true);
         try {
             const res = await api.patch('/auth/student/update-info', updateFields);
-            // Update context user (this should trigger re-render if your AuthContext handles it)
-            // For now we might need to refresh or if studentLogin updates state
-            window.location.reload(); // Simplest way to sync state from backend
+            if (res.data?.user) {
+                sessionStorage.setItem('user', JSON.stringify(res.data.user));
+            }
+            window.location.reload();
         } catch (err) {
             alert(err.response?.data?.message || 'Update failed');
         } finally {
@@ -301,8 +311,6 @@ const StudentDashboard = () => {
             setSubmitStatus({ error: err.response?.data?.message || 'Submission failed', success: '', loading: false });
         }
     };
-
-    const allPreviewFiles = [...imageFiles, ...(videoFile ? [videoFile] : [])];
 
     return (
         <div className="dashboard">
@@ -424,7 +432,7 @@ const StudentDashboard = () => {
                             <label>Description</label>
                             <textarea className="form-control" value={description}
                                 onChange={(e) => setDescription(e.target.value)} required rows="3"
-                                placeholder="Describe the issue in detail..." />
+                                placeholder="Provide details..." />
                         </div>
                         <div className="form-group">
                             <label>Category</label>
@@ -543,11 +551,16 @@ const StudentDashboard = () => {
 
                                     {/* Feedback section */}
                                     {complaint.status === 'Resolved' && complaint.feedback?.isSatisfied === null && (
-                                        <FeedbackForm complaintId={complaint._id} onSubmitted={fetchComplaints} />
+                                        <div style={{ marginTop: '0.75rem' }}>
+                                            <button type="button" className="btn btn-outline provide-feedback-btn" style={{ width: '100%', marginBottom: '0.5rem' }}>
+                                                Provide Feedback
+                                            </button>
+                                            <FeedbackForm complaintId={complaint._id} onSubmitted={fetchComplaints} />
+                                        </div>
                                     )}
 
                                     {complaint.feedback?.isSatisfied !== null && complaint.feedback?.isSatisfied !== undefined && (
-                                        <div style={{ marginTop: '0.75rem', padding: '0.75rem', borderRadius: 8, backgroundColor: complaint.feedback.isSatisfied ? '#ecfdf5' : '#fff1f2', border: `1px solid ${complaint.feedback.isSatisfied ? '#10b981' : '#f43f5e'}` }}>
+                                        <div className="feedback-summary" style={{ marginTop: '0.75rem', padding: '0.75rem', borderRadius: 8, backgroundColor: complaint.feedback.isSatisfied ? '#ecfdf5' : '#fff1f2', border: `1px solid ${complaint.feedback.isSatisfied ? '#10b981' : '#f43f5e'}` }}>
                                             <p style={{ fontSize: '0.85rem', fontWeight: 600, margin: 0, color: complaint.feedback.isSatisfied ? '#065f46' : '#991b1b' }}>
                                                 {complaint.feedback.isSatisfied ? '✅ You marked this as resolved' : '❌ You marked this as NOT resolved'}
                                             </p>

@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 
+const getMediaUrl = (url) => {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:')) return url;
+    return `http://localhost:5000${url.startsWith('/') ? '' : '/'}${url}`;
+};
+
 const MediaGallery = ({ media, image }) => {
     const [activeMedia, setActiveMedia] = useState(null);
 
@@ -22,14 +28,14 @@ const MediaGallery = ({ media, image }) => {
                 {items.map((m, i) =>
                     m.type === 'video' ? (
                         <div key={i} style={{ position: 'relative', width: 160, height: 100, cursor: 'pointer' }} onClick={() => openLightbox(m)}>
-                            <video src={`http://localhost:5000${m.url}`} 
+                            <video src={getMediaUrl(m.url)} 
                                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 8, pointerEvents: 'none' }} />
                             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(0,0,0,0.5)', borderRadius: '50%', width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
                                 ▶
                             </div>
                         </div>
                     ) : (
-                        <img key={i} src={`http://localhost:5000${m.url}`} alt={`attachment-${i}`}
+                        <img key={i} src={getMediaUrl(m.url)} alt={`attachment-${i}`}
                             onClick={() => openLightbox(m)}
                             style={{ width: 100, height: 80, objectFit: 'cover', borderRadius: 8, cursor: 'pointer', transition: 'transform 0.2s ease' }} 
                             onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'}
@@ -69,13 +75,13 @@ const MediaGallery = ({ media, image }) => {
                     <div onClick={e => e.stopPropagation()} style={{ maxWidth: '90%', maxHeight: '90%', position: 'relative' }}>
                         {activeMedia.type === 'video' ? (
                             <video 
-                                src={`http://localhost:5000${activeMedia.url}`} 
+                                src={getMediaUrl(activeMedia.url)} 
                                 controls autoPlay 
                                 style={{ maxWidth: '100%', maxHeight: '90vh', borderRadius: 8, boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }} 
                             />
                         ) : (
                             <img 
-                                src={`http://localhost:5000${activeMedia.url}`} 
+                                src={getMediaUrl(activeMedia.url)} 
                                 alt="Enlarged view" 
                                 style={{ maxWidth: '100%', maxHeight: '90vh', borderRadius: 8, boxShadow: '0 10px 25px rgba(0,0,0,0.5)', objectFit: 'contain' }} 
                             />

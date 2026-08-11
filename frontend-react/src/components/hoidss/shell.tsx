@@ -19,6 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
 
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -48,47 +49,47 @@ export function HostelSidebar({
   return (
     <aside
       className={cn(
-        "sticky top-0 hidden h-screen shrink-0 flex-col justify-between border-r border-sidebar-border bg-sidebar transition-[width] duration-200 lg:flex",
-        collapsed ? "w-[72px]" : "w-[248px]",
+        "sticky top-0 hidden h-screen shrink-0 flex-col justify-between border-r border-sidebar-border bg-sidebar transition-[width] duration-200 lg:flex z-40",
+        collapsed ? "w-[76px]" : "w-[260px]",
       )}
       aria-label="Hostel operations navigation"
     >
       <div>
-        <div className="flex h-[68px] items-center gap-3 px-4">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
-            <Building2 className="h-[18px] w-[18px]" aria-hidden />
+        <div className="flex h-[76px] items-center gap-3.5 px-5">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
+            <Building2 className="h-5 w-5" aria-hidden />
           </span>
           {!collapsed && (
             <span className="min-w-0">
-              <span className="block truncate text-sm font-semibold">HOIDSS</span>
-              <span className="block truncate text-[0.6875rem] text-muted-foreground">Operations Intelligence</span>
+              <span className="block truncate text-base font-bold">HOIDSS</span>
+              <span className="block truncate text-xs text-muted-foreground font-medium">Operations Intelligence</span>
             </span>
           )}
         </div>
 
         {!collapsed && (
-          <div className="mx-3 mb-4 rounded-xl border border-sidebar-border bg-sidebar-accent/60 p-3">
-            <p className="text-[0.8125rem] font-medium leading-5">{HOSTEL.name}</p>
-            <p className="mt-1 text-[0.6875rem] text-muted-foreground">{HOSTEL.shift}</p>
+          <div className="mx-4 mb-6 rounded-2xl border border-sidebar-border bg-sidebar-accent/60 p-4">
+            <p className="text-sm font-semibold leading-5">{HOSTEL.name}</p>
+            <p className="mt-1 text-xs text-muted-foreground font-medium">{HOSTEL.shift}</p>
           </div>
         )}
 
-        <nav className="px-3">
-          <p className={cn("label-eyebrow mb-2 px-2", collapsed && "sr-only")}>Operations</p>
-          <ul className="space-y-1">
+        <nav className="px-4">
+          <p className={cn("label-eyebrow mb-3 px-2 font-bold tracking-widest", collapsed && "sr-only")}>Operations</p>
+          <ul className="space-y-1.5">
             {NAV.map((item) => (
               <li key={item.label}>
                 <a
                   href={`#band-${item.target}`}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-sidebar-ring focus-visible:outline-none",
+                    "flex items-center gap-3.5 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-sidebar-ring focus-visible:outline-none",
                     item.active
-                      ? "bg-sidebar-accent font-medium text-sidebar-accent-foreground"
+                      ? "bg-sidebar-accent font-bold text-sidebar-accent-foreground shadow-soft"
                       : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground",
                   )}
                   title={collapsed ? item.label : undefined}
                 >
-                  <item.icon className="h-[18px] w-[18px] shrink-0" aria-hidden />
+                  <item.icon className="h-5 w-5 shrink-0" aria-hidden />
                   {!collapsed && <span className="truncate">{item.label}</span>}
                 </a>
               </li>
@@ -97,34 +98,34 @@ export function HostelSidebar({
         </nav>
       </div>
 
-      <div className="space-y-1 px-3 pb-5">
+      <div className="space-y-1.5 px-4 pb-6">
         <a
           href="#band-brief"
-          className="flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm text-muted-foreground transition-colors duration-150 hover:bg-sidebar-accent/60"
+          className="flex items-center gap-3.5 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:bg-sidebar-accent/60"
         >
-          <Settings className="h-[18px] w-[18px] shrink-0" aria-hidden />
+          <Settings className="h-5 w-5 shrink-0" aria-hidden />
           {!collapsed && <span>Settings</span>}
         </a>
-        <div className="flex items-center gap-3 rounded-lg px-2.5 py-2">
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-secondary text-[0.6875rem] font-semibold">
+        <div className="flex items-center gap-3.5 rounded-xl px-3 py-2.5">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-secondary text-xs font-bold">
             AD
           </span>
           {!collapsed && (
             <span className="min-w-0">
-              <span className="block truncate text-[0.8125rem] font-medium">Dr. A. Deshpande</span>
-              <span className="block truncate text-[0.6875rem] text-muted-foreground">Chief Warden</span>
+              <span className="block truncate text-sm font-semibold">Dr. A. Deshpande</span>
+              <span className="block truncate text-xs text-muted-foreground">Chief Warden</span>
             </span>
           )}
         </div>
         <button
           type="button"
           onClick={onToggle}
-          className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-sm text-muted-foreground transition-colors duration-150 hover:bg-sidebar-accent/60 focus-visible:ring-2 focus-visible:ring-sidebar-ring focus-visible:outline-none"
+          className="flex w-full items-center gap-3.5 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:bg-sidebar-accent/60 focus-visible:ring-2 focus-visible:ring-sidebar-ring focus-visible:outline-none"
         >
           {collapsed ? (
-            <ChevronsRight className="h-[18px] w-[18px] shrink-0" aria-hidden />
+            <ChevronsRight className="h-5 w-5 shrink-0" aria-hidden />
           ) : (
-            <ChevronsLeft className="h-[18px] w-[18px] shrink-0" aria-hidden />
+            <ChevronsLeft className="h-5 w-5 shrink-0" aria-hidden />
           )}
           {!collapsed && <span>Collapse</span>}
         </button>
@@ -134,43 +135,40 @@ export function HostelSidebar({
 }
 
 export function TopBar() {
-  const [dark, setDark] = useState(true);
+  const { theme, toggleTheme } = useTheme();
+  const dark = theme === "dark";
   const [notifOpen, setNotifOpen] = useState(false);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark);
-  }, [dark]);
 
   return (
     <>
-      <header className="glass-bar sticky top-0 z-30 border-b border-border">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3.5 sm:px-8">
+      <header className="glass-bar sticky top-0 z-30 border-b border-border shadow-soft">
+        <div className="mx-auto grid max-w-[1680px] grid-cols-[minmax(0,1fr)_auto] items-center gap-6 px-8 py-4 sm:px-12">
           <div className="min-w-0">
-            <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[0.6875rem] text-muted-foreground">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
               <span className="truncate">{HOSTEL.campus}</span>
               <span aria-hidden>/</span>
-              <span className="truncate text-foreground">{HOSTEL.name}</span>
+              <span className="truncate font-semibold text-foreground">{HOSTEL.name}</span>
             </nav>
-            <div className="mt-1 flex min-w-0 items-center gap-3">
-              <h1 className="truncate text-base font-semibold sm:text-[1.0625rem]">Today's Operational Status</h1>
+            <div className="mt-1.5 flex min-w-0 items-center gap-3.5">
+              <h1 className="truncate text-lg font-bold sm:text-xl">Today's Operational Status</h1>
               <StatusPill health={HOSTEL.status === "Stable" ? "ok" : HOSTEL.status === "Strained" ? "warn" : "crit"}>
                 {HOSTEL.status}
               </StatusPill>
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="flex shrink-0 items-center gap-3">
             <button
               type="button"
-              className="hidden items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-xs text-muted-foreground transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:flex"
+              className="hidden items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-2.5 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:flex"
             >
               <Search className="h-4 w-4" aria-hidden />
               <span>Search rooms, staff, complaints</span>
-              <kbd className="ml-6 rounded border border-border px-1.5 py-0.5 text-[0.625rem]">⌘K</kbd>
+              <kbd className="ml-6 rounded border border-border px-2 py-0.5 text-[0.625rem] font-mono">⌘K</kbd>
             </button>
             <button
               type="button"
-              className="hidden items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-xs text-muted-foreground transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:flex"
+              className="hidden items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-2.5 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:flex"
             >
               <Calendar className="h-4 w-4" aria-hidden />
               Last 14 days
@@ -178,20 +176,21 @@ export function TopBar() {
             <Button
               variant="ghost"
               size="icon"
+              className="h-10 w-10 rounded-xl"
               aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-              onClick={() => setDark((d) => !d)}
+              onClick={toggleTheme}
             >
-              {dark ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+              {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             <Button
               variant="ghost"
               size="icon"
               aria-label="Open notification centre, 3 unread"
-              className="relative"
+              className="relative h-10 w-10 rounded-xl"
               onClick={() => setNotifOpen(true)}
             >
-              <Bell className="h-[18px] w-[18px]" />
-              <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-crit" aria-hidden />
+              <Bell className="h-5 w-5" />
+              <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-crit" aria-hidden />
             </Button>
           </div>
         </div>
@@ -211,10 +210,10 @@ function ContextBar() {
 
   return (
     <div className="border-t border-border/70">
-      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-2 px-5 py-2.5 sm:px-8">
-        <span className="label-eyebrow">Investigating</span>
+      <div className="mx-auto flex max-w-[1680px] flex-wrap items-center gap-3 px-8 py-3 sm:px-12">
+        <span className="label-eyebrow font-bold tracking-wider">Investigating</span>
         {chips.length === 0 ? (
-          <span className="text-xs text-muted-foreground">
+          <span className="text-xs sm:text-sm font-medium text-muted-foreground">
             {scopeLabel(scope)} · {scope.dateRange} — select any metric, room or alert to narrow the investigation
           </span>
         ) : (
@@ -224,10 +223,10 @@ function ContextBar() {
                 key={chip.key}
                 type="button"
                 onClick={() => clearKey(chip.key)}
-                className="group inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-info-soft px-2.5 py-1 text-xs text-foreground transition-colors duration-150 hover:border-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                className="group inline-flex items-center gap-2 rounded-full border border-primary/40 bg-info-soft px-3 py-1 text-xs font-semibold text-foreground transition-colors duration-150 hover:border-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
               >
                 {chip.value}
-                <X className="h-3 w-3 text-muted-foreground group-hover:text-foreground" aria-hidden />
+                <X className="h-3.5 w-3.5 text-muted-foreground group-hover:text-foreground" aria-hidden />
                 <span className="sr-only">Remove {chip.value} from the investigation</span>
               </button>
             ))}
@@ -235,22 +234,22 @@ function ContextBar() {
               <button
                 type="button"
                 onClick={stepBack}
-                className="inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
               >
-                <CornerUpLeft className="h-3 w-3" aria-hidden /> Step back
+                <CornerUpLeft className="h-3.5 w-3.5" aria-hidden /> Step back
               </button>
             )}
             <button
               type="button"
               onClick={clearAll}
-              className="ml-auto rounded-full px-2 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              className="ml-auto rounded-full px-2.5 py-1 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
             >
               Clear all
             </button>
           </>
         )}
         {!isActive && (
-          <span className="ml-auto hidden text-[0.6875rem] text-muted-foreground sm:block">
+          <span className="ml-auto hidden text-xs font-medium text-muted-foreground sm:block">
             Detail stays hidden until you ask for it
           </span>
         )}

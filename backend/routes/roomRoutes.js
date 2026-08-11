@@ -27,12 +27,23 @@ router.post("/create", authMiddleware, wardenOrStaffMiddleware, async (req, res)
 
 // ================= ALLOCATE ROOM =================
 router.post("/", authMiddleware, wardenOrStaffMiddleware, roomLimiter, async (req, res) => {
-    const session = await mongoose.startSession();
-    session.startTransaction();
+    let session = null;
+    let isTransactionActive = false;
+    try {
+        session = await mongoose.startSession();
+        session.startTransaction();
+        isTransactionActive = true;
+    } catch (e) {
+        // Standalone MongoDB instance without replica set
+        session = null;
+        isTransactionActive = false;
+    }
+
     try {
         const { name, room } = req.body;
+        const opts = session ? { session } : {};
 
-        let existingRoom = await Room.findOne({ roomNumber: String(room) }).session(session);
+        let existingRoom = await Room.findOne({ roomNumber: String(room) }, null, opts);
 
         // If room doesn't exist → create it
         if (!existingRoom) {
@@ -43,35 +54,41 @@ router.post("/", authMiddleware, wardenOrStaffMiddleware, roomLimiter, async (re
         } else {
             // Check capacity
             if (existingRoom.occupants.length >= existingRoom.capacity) {
-                await session.abortTransaction();
-                session.endSession();
+                if (isTransactionActive && session) {
+                    await session.abortTransaction();
+                    session.endSession();
+                }
                 return res.status(400).json({ msg: "Room is full" });
             }
 
             existingRoom.occupants.push({ name: String(name) });
         }
 
-        await existingRoom.save({ session });
+        await existingRoom.save(opts);
 
-        // Update Student doorNumber safely within the same transaction
+        // Update Student doorNumber safely
         const student = await User.findOne({ 
             $or: [{ name: String(name) }, { fullName: String(name) }],
             role: "STUDENT"
-        }).session(session);
+        }, null, opts);
 
         if (student) {
             student.doorNumber = String(room);
-            await student.save({ session });
+            await student.save(opts);
         }
 
-        await session.commitTransaction();
-        session.endSession();
+        if (isTransactionActive && session) {
+            await session.commitTransaction();
+            session.endSession();
+        }
 
         res.json(existingRoom);
 
     } catch (err) {
-        await session.abortTransaction();
-        session.endSession();
+        if (isTransactionActive && session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
         res.status(500).json({ error: err.message });
     }
 });

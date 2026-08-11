@@ -1,62 +1,51 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import api from '../services/api';
-
-export const AuthContext = createContext();
+import { AuthContext } from './AuthContext';
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    // 🔥 LOAD USER FROM SESSIONSTORAGE
-    useEffect(() => {
+    const [user, setUser] = useState(() => {
         try {
             const token = sessionStorage.getItem("token");
             const storedUser = sessionStorage.getItem("user");
 
             if (token && storedUser) {
-                const parsedUser = JSON.parse(storedUser);
-                setUser(parsedUser);
-
-                // ✅ Attach token to axios globally
                 api.defaults.headers.Authorization = `Bearer ${token}`;
+                return JSON.parse(storedUser);
             } else {
-                // clean inconsistent state
                 sessionStorage.removeItem("token");
                 sessionStorage.removeItem("user");
             }
-
-        } catch (err) {
-            console.error("Invalid user in sessionStorage");
+        } catch {
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("user");
         }
+        return null;
+    });
 
-        setLoading(false);
-    }, []);
+    const [loading] = useState(false);
 
     // 🔥 WARDEN / STAFF LOGIN (email + password)
     const login = async (email, password) => {
         const res = await api.post('/auth/login', { email, password });
+        const { token, user: userData } = res.data;
 
-        const { token, user } = res.data;
-
-        sessionStorage.setItem('token', token);
-        sessionStorage.setItem('user', JSON.stringify(user));
-
-        api.defaults.headers.Authorization = `Bearer ${token}`;
-        setUser(user);
-
-        return res.data;
-    };
-
-    // 🔥 STUDENT OTP LOGIN — called after OTP verification + profile completion
-    const studentLogin = (token, userData) => {
         sessionStorage.setItem('token', token);
         sessionStorage.setItem('user', JSON.stringify(userData));
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
         setUser(userData);
+
+        return res.data;
     };
+
+    // 🔥 STUDENT OTP LOGIN — called after OTP verification + profile completion
+    const studentLogin = useCallback((token, userData) => {
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('user', JSON.stringify(userData));
+
+        api.defaults.headers.Authorization = `Bearer ${token}`;
+        setUser(userData);
+    }, []);
 
     // 🔥 REGISTER
     const register = async (name, email, password, role) => {
@@ -64,14 +53,14 @@ export const AuthProvider = ({ children }) => {
     };
 
     // 🔥 LOGOUT
-    const logout = () => {
+    const logout = useCallback(() => {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('user');
 
         delete api.defaults.headers.Authorization;
 
         setUser(null);
-    };
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, login, studentLogin, register, logout, loading }}>

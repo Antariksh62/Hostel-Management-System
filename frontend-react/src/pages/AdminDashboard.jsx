@@ -3,7 +3,8 @@ import { AuthContext } from '../context/AuthContext';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import api from '../services/api';
 import MediaGallery from '../components/MediaGallery';
-import ComplaintTimeline, { fmtDateTime } from '../components/ComplaintTimeline';
+import ComplaintTimeline from '../components/ComplaintTimeline';
+import { fmtDateTime } from '../utils/dateUtils';
 import {
     LogOut, User, CheckCircle, Clock, AlertCircle, Trash2,
     DoorOpen, Search, Filter, X, BarChart2, TrendingUp
@@ -260,17 +261,21 @@ const AdminDashboard = () => {
         refetchInterval: 30000
     });
 
-    const fetchStaff = async () => {
-        try {
-            const res = await api.get('/users/');
-            setStaff(res.data.filter(u => u.role === 'STAFF'));
-        } catch (err) {
-            console.error('Failed to fetch staff', err);
-        }
-    };
-    // Fetch staff once on mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => { fetchStaff(); }, []);
+    useEffect(() => {
+        let isMounted = true;
+        const loadStaff = async () => {
+            try {
+                const res = await api.get('/users/');
+                if (isMounted) {
+                    setStaff(res.data.filter(u => u.role === 'STAFF'));
+                }
+            } catch (err) {
+                console.error('Failed to fetch staff', err);
+            }
+        };
+        loadStaff();
+        return () => { isMounted = false; };
+    }, []);
 
     const handleStatusUpdate = async (id, newStatus) => {
         try {
@@ -358,7 +363,7 @@ const AdminDashboard = () => {
                     ) : (
                         <div className="complaint-list">
                             {complaints.map(complaint => (
-                                <div key={complaint._id} className="complaint-item" style={{ flexDirection: 'column' }}>
+                                <div key={complaint._id} className="complaint-item" style={{ display: 'flex', flexDirection: 'column' }}>
                                     <div style={{ display: 'flex', gap: '1rem' }}>
                                         <div style={{ flex: 1 }}>
                                             <div className="complaint-header">

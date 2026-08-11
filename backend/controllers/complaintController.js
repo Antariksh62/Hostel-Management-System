@@ -372,8 +372,8 @@ exports.submitFeedback = async (req, res) => {
             if (!text) {
                  return res.status(400).json({ message: "Explanation text is required if not satisfied" });
             }
-            if (!req.files || !req.files['images'] || !req.files['video']) {
-                 return res.status(400).json({ message: "1 image and 1 video are required if not satisfied" });
+            if (!req.files || (!req.files['images'] && !req.files['video'])) {
+                 return res.status(400).json({ message: "At least 1 image or video is required as evidence if not satisfied" });
             }
         }
 
