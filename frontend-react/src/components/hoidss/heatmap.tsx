@@ -5,8 +5,9 @@ import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from "recharts
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { cn } from "@/lib/utils";
 import { useInvestigation } from "./context";
-import { BLOCKS, PROBLEM_ROOMS, type Block } from "./data";
+import { type Block } from "./data";
 import { ActionLine, Band, Panel } from "./primitives";
+import { useHeatmap } from "./useHoidssData";
 
 function heatClass(score: number) {
   if (score >= 80) return "bg-heat-1";
@@ -24,19 +25,40 @@ function heatLabel(score: number) {
 
 export function HeatmapBand() {
   const { scope, narrow, openDrawer } = useInvestigation();
+  const { data, isLoading } = useHeatmap();
   const [level, setLevel] = useState<"blocks" | "floors" | "rooms">("blocks");
   const [activeBlock, setActiveBlock] = useState<Block | null>(null);
   const [activeFloor, setActiveFloor] = useState<string | null>(null);
 
   const scopedBlock = useMemo(
-    () => BLOCKS.find((b) => b.name === scope.block) ?? null,
-    [scope.block],
+    () => (data?.BLOCKS || []).find((b: Block) => b.name === scope.block) ?? null,
+    [scope.block, data?.BLOCKS],
   );
   const block = activeBlock ?? scopedBlock;
-  const floor = block?.floors.find((f) => f.id === activeFloor) ?? block?.floors[1] ?? null;
+  const floor = block?.floors.find((f: any) => f.id === activeFloor) ?? block?.floors[0] ?? null;
   const dimmed = (name: string) => Boolean(scope.block && scope.block !== name);
 
-  const effectiveLevel = level === "blocks" && scopedBlock ? "floors" : level;
+  const effectiveLevel =
+    level === "blocks" && scopedBlock
+      ? "floors"
+      : level === "rooms" && (!block || !floor)
+      ? "blocks"
+      : level;
+
+  if (isLoading || !data) {
+    return (
+      <section className="scroll-mt-32 animate-pulse opacity-50">
+        <div className="h-12 w-1/3 bg-card rounded-md mb-8"></div>
+        <div className="h-[500px] bg-card rounded-3xl border border-border"></div>
+      </section>
+    );
+  }
+
+  const { BLOCKS, PROBLEM_ROOMS } = data;
+
+  // Find the block/floor with lowest score to put in the verdict
+  const worstBlock = [...BLOCKS].sort((a, b) => a.score - b.score)[0];
+  const worstName = worstBlock ? worstBlock.name : "No active issues";
 
   return (
     <Band
@@ -44,8 +66,8 @@ export function HeatmapBand() {
       question="Where is it happening?"
       verdict={
         scope.block
-          ? `${scope.block} is the concentration. Floor 2 carries the worst composite health in the hostel, and every red cell has an open electrical complaint.`
-          : "Block B is the concentration: its composite health is 54 against a hostel average of 74. Drill into a block, then a floor, then a room."
+          ? `${scope.block} is the current focus area. Review the red rooms to see open complaints.`
+          : `${worstName} has the highest concentration of complaints.`
       }
       aside={
         <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-xs text-muted-foreground">
@@ -54,8 +76,8 @@ export function HeatmapBand() {
         </div>
       }
       detailLabel="Show space comparison"
-      detailSummary="Hostel, block and floor comparison plus the rooms that keep failing"
-      detail={<SpaceComparison />}
+      detailSummary="Floor comparison and rooms with recurring complaints"
+      detail={<SpaceComparison BLOCKS={BLOCKS} PROBLEM_ROOMS={PROBLEM_ROOMS} />}
     >
       <div className="rounded-2xl border border-border bg-card p-5 shadow-soft sm:p-7">
         {/* Breadcrumb drilldown */}
@@ -99,14 +121,15 @@ export function HeatmapBand() {
 
         <div className="mt-6 min-h-[380px] animate-in fade-in duration-200">
           {effectiveLevel === "blocks" && (
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {BLOCKS.map((b) => (
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+              {BLOCKS.map((b: Block) => (
                 <button
                   key={b.id}
                   type="button"
                   onClick={() => {
                     setActiveBlock(b);
-                    setLevel("floors");
+                    setLevel("rooms");
+                    setActiveFloor(b.floors[0]?.id || null);
                     narrow({ block: b.name });
                   }}
                   className={cn(
@@ -134,8 +157,8 @@ export function HeatmapBand() {
           )}
 
           {effectiveLevel === "floors" && block && (
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {block.floors.map((f) => (
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+              {block.floors.map((f: any) => (
                 <button
                   key={f.id}
                   type="button"
@@ -153,7 +176,7 @@ export function HeatmapBand() {
                   <p className="num mt-4 text-3xl font-semibold">{f.score}</p>
                   <p className="mt-1 text-xs text-muted-foreground">{heatLabel(f.score)}</p>
                   <div className="mt-4 grid grid-cols-6 gap-1.5" aria-hidden>
-                    {f.rooms.map((r) => (
+                    {f.rooms.map((r: any) => (
                       <span key={r.id} className={cn("h-3 rounded-sm", heatClass(r.score))} />
                     ))}
                   </div>
@@ -164,8 +187,8 @@ export function HeatmapBand() {
 
           {effectiveLevel === "rooms" && floor && block && (
             <div>
-              <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-6 lg:grid-cols-12">
-                {floor.rooms.map((room) => (
+              <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-6 lg:grid-cols-10">
+                {floor.rooms.map((room: any) => (
                   <HoverCard key={room.id} openDelay={80}>
                     <HoverCardTrigger asChild>
                       <button
@@ -196,7 +219,7 @@ export function HeatmapBand() {
                         aria-label={`Room ${room.id}, ${heatLabel(room.score)}, ${room.complaints} open complaints`}
                       >
                         <span className="num absolute inset-x-0 bottom-1.5 text-center text-[0.625rem] font-medium text-background/90 mix-blend-luminosity">
-                          {room.id.split("-")[1]}
+                          {String(room.id).includes("-") ? String(room.id).split("-")[1] : String(room.id)}
                         </span>
                       </button>
                     </HoverCardTrigger>
@@ -249,20 +272,20 @@ export function HeatmapBand() {
   );
 }
 
-function SpaceComparison() {
+function SpaceComparison({ BLOCKS, PROBLEM_ROOMS }: { BLOCKS: Block[], PROBLEM_ROOMS: any[] }) {
   const { narrow } = useInvestigation();
-  const blockData = BLOCKS.map((b) => ({ name: b.name, score: b.score }));
+  const blockData = BLOCKS.map((b: Block) => ({ name: b.name, score: b.score }));
 
   return (
     <div className="grid gap-5 lg:grid-cols-2">
-      <Panel title="Block comparison" subtitle="Composite operational health">
+      <Panel title="Floor comparison" subtitle="Overall health score by floor">
         <div className="h-56">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={blockData} margin={{ top: 4, right: 8, bottom: 0, left: -18 }}>
               <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} />
               <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} />
               <Bar dataKey="score" radius={[6, 6, 0, 0]} barSize={38}>
-                {blockData.map((d) => (
+                {blockData.map((d: any) => (
                   <Cell
                     key={d.name}
                     fill={d.score >= 80 ? "var(--chart-2)" : d.score >= 65 ? "var(--chart-3)" : "var(--chart-4)"}
@@ -272,12 +295,12 @@ function SpaceComparison() {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <ActionLine text="Block B sits 32 points below Block A — schedule a full electrical audit" />
+        <ActionLine text="Lower scores indicate higher complaint concentrations." />
       </Panel>
 
       <Panel title="Rooms that keep failing" subtitle="Ranked by repeat complaints">
         <ul className="divide-y divide-border">
-          {PROBLEM_ROOMS.map((room) => (
+          {PROBLEM_ROOMS.map((room: any) => (
             <li key={room.room}>
               <button
                 type="button"
@@ -288,7 +311,7 @@ function SpaceComparison() {
                 <span className="min-w-0">
                   <span className="block text-sm font-medium">Room {room.room}</span>
                   <span className="block truncate text-xs text-muted-foreground">
-                    {room.complaints} complaints · {room.category} · {room.cost} spent
+                    {room.complaints} complaints · {room.category}
                   </span>
                 </span>
                 <span className="num shrink-0 text-sm text-muted-foreground">{room.score}</span>
@@ -296,7 +319,7 @@ function SpaceComparison() {
             </li>
           ))}
         </ul>
-        <ActionLine text="Convert the top three rooms into a single preventive work order" />
+        <ActionLine text="Rooms with multiple identical issues in the last 30 days" />
       </Panel>
     </div>
   );

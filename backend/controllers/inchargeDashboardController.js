@@ -909,11 +909,18 @@ exports.getTopComplainers = async (req, res) => {
 // =============================================================================
 exports.getDrillDown = async (req, res) => {
     try {
-        const { status, category, floor, limit = 25 } = req.query;
+        const { status, category, floor, overdue, recent24h, limit = 100 } = req.query;
         const filter = {};
         if (status)   filter.status   = status;
         if (category) filter.category = category;
         if (floor)    filter.doorNumber = { $regex: `^${floor}` };
+        
+        if (overdue === 'true' || overdue === true) {
+            filter.status = { $in: ["Pending", "In Progress", "Reopened"] };
+            filter.createdAt = { $lt: new Date(Date.now() - 48 * 60 * 60 * 1000) };
+        } else if (recent24h === 'true' || recent24h === true) {
+            filter.createdAt = { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) };
+        }
 
         const complaints = await Complaint.find(filter)
             .populate("studentId",  "name rollNumber doorNumber year branch")
@@ -929,7 +936,7 @@ exports.getDrillDown = async (req, res) => {
             year:         c.studentId?.year       || "—",
             branch:       c.studentId?.branch     || "—",
             category:     c.category,
-            description:  c.description?.slice(0, 100),
+            description:  c.description || "",
             status:       c.status,
             assignedTo:   c.assignedTo?.name || "Unassigned",
             createdAt:    c.createdAt,

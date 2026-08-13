@@ -2,11 +2,27 @@ import { ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { useInvestigation } from "./context";
-import { SIGNALS } from "./data";
 import { DeltaChip, healthText, Sparkline, StatusPill } from "./primitives";
+import { useSignals } from "./useHoidssData";
 
 export function SignalStrip() {
-  const { narrow, openDrawer } = useInvestigation();
+  const { narrow, openDrawer, openDrilldownList } = useInvestigation();
+  const { data, isLoading } = useSignals();
+
+  if (isLoading || !data) {
+    return (
+      <section className="scroll-mt-32 animate-pulse opacity-50">
+        <div className="h-12 w-1/3 bg-card rounded-md mb-8"></div>
+        <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
+           <div className="h-[300px] bg-card rounded-3xl border border-border"></div>
+           <div className="h-[300px] bg-card rounded-3xl border border-border hidden sm:block"></div>
+           <div className="h-[300px] bg-card rounded-3xl border border-border hidden xl:block"></div>
+        </div>
+      </section>
+    );
+  }
+
+  const { SIGNALS } = data;
 
   return (
     <section id="band-signals" aria-labelledby="signals-title" className="scroll-mt-32">
@@ -55,7 +71,13 @@ export function SignalStrip() {
               {signal.action ? (
                 <button
                   type="button"
-                  onClick={() => narrow(signal.scope ?? {})}
+                  onClick={() => {
+                    openDrilldownList({
+                      title: `${signal.label} — ${signal.action}`,
+                      subtitle: signal.consequence,
+                      filter: signal.id === "complaint-health" ? { status: "Pending" } : signal.id === "resolution-rate" ? { status: "Resolved" } : {}
+                    });
+                  }}
                   className="inline-flex items-center gap-2 text-sm font-extrabold text-primary transition-all duration-150 hover:gap-3 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                 >
                   {signal.action}
@@ -66,19 +88,13 @@ export function SignalStrip() {
               )}
               <button
                 type="button"
-                onClick={() =>
-                  openDrawer({
-                    kind: "Signal",
-                    title: signal.label,
-                    subtitle: `${signal.value} · ${signal.delta} vs last week`,
-                    health: signal.health,
-                    facts: [
-                      { label: "Consequence", value: signal.consequence },
-                      { label: "Recommended action", value: signal.action ?? "Hold — within tolerance" },
-                      { label: "Window", value: "Last 14 days" },
-                    ],
-                  })
-                }
+                onClick={() => {
+                  openDrilldownList({
+                    title: `${signal.label} — Signal Drill Down`,
+                    subtitle: `${signal.value} · ${signal.consequence}`,
+                    filter: signal.id === "complaint-health" ? { status: "Pending" } : signal.id === "resolution-rate" ? { status: "Resolved" } : {}
+                  });
+                }}
                 className="text-xs sm:text-sm font-bold text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
               >
                 Drill down

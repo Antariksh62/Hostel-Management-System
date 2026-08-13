@@ -16,8 +16,8 @@ import {
 
 import { cn } from "@/lib/utils";
 import { useInvestigation } from "./context";
-import { AGING, CATEGORIES, COMPLAINT_TREND, PEAK_HOURS, REPEAT_STATS, RESOLUTION, SEASONAL, SEVERITY } from "./data";
 import { ActionLine, Band, DeltaChip, healthRail, Panel } from "./primitives";
+import { useComplaints } from "./useHoidssData";
 
 const axis = { fontSize: 11, fill: "var(--muted-foreground)" } as const;
 
@@ -30,33 +30,47 @@ const tooltipStyle = {
 } as const;
 
 export function ComplaintsBand() {
-  const { scope, narrow } = useInvestigation();
+  const { scope, narrow, openDrilldownList } = useInvestigation();
+  const { data, isLoading } = useComplaints();
   const focus = scope.category;
+
+  if (isLoading || !data) {
+    return (
+      <section className="scroll-mt-32 animate-pulse opacity-50">
+        <div className="h-12 w-1/3 bg-card rounded-md mb-8"></div>
+        <div className="h-[400px] bg-card rounded-3xl border border-border"></div>
+      </section>
+    );
+  }
+
+  const { CATEGORIES, COMPLAINT_TREND, AGING, REPEAT_STATS, verdict } = data;
 
   return (
     <Band
       id="complaints"
       question="What keeps breaking?"
-      verdict={
-        focus
-          ? `${focus} is the story: it is growing while every other category is flat or falling, and its median resolution time is more than twice the hostel median.`
-          : "Electrical is the story: 24 open complaints, up 62% in 14 days, while water, internet and housekeeping are flat or improving."
-      }
-      aside={<DeltaChip delta="+11 open vs last week" dir="up" />}
+      verdict={verdict}
+      aside={null}
       detailLabel="Show complaint detail"
-      detailSummary="Severity split, repeat and reopened rates, seasonality, peak hours, resolution spread"
-      detail={<ComplaintDetail />}
+      detailSummary="Repeat complaint statistics"
+      detail={<ComplaintDetail REPEAT_STATS={REPEAT_STATS} />}
     >
       <div className="grid gap-8 xl:gap-10 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)_minmax(0,0.8fr)]">
         <Panel title="Top categories" subtitle="Open complaints · select to investigate">
           <ul className="space-y-1">
-            {CATEGORIES.map((cat) => {
+            {CATEGORIES.map((cat: any) => {
               const active = focus === cat.name;
               return (
                 <li key={cat.name}>
                   <button
                     type="button"
-                    onClick={() => narrow({ category: cat.name })}
+                    onClick={() => {
+                      openDrilldownList({
+                        title: `${cat.name} Complaints`,
+                        subtitle: `${cat.count} complaints recorded in this category`,
+                        filter: { category: cat.name }
+                      });
+                    }}
                     className={cn(
                       "grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-lg px-2.5 py-2 text-left transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
                       active && "bg-info-soft",
@@ -84,7 +98,19 @@ export function ComplaintsBand() {
               );
             })}
           </ul>
-          <ActionLine text="Electrical accounts for 38% of the queue — cap new intake with a preventive sweep" />
+          <button
+            type="button"
+            onClick={() => {
+              openDrilldownList({
+                title: "All Categories Complaints",
+                subtitle: "Complaint records across all categories",
+                filter: {}
+              });
+            }}
+            className="w-full text-left"
+          >
+            <ActionLine text="Select a category to filter" />
+          </button>
         </Panel>
 
         <Panel title="Complaint frequency" subtitle="All complaints vs electrical · last 14 days">
@@ -105,12 +131,12 @@ export function ComplaintsBand() {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <ActionLine text="Electrical growth is the entire trend — the other categories need no intervention" />
+          <ActionLine text="Complaint volume trend over time" />
         </Panel>
 
         <Panel title="Complaint aging" subtitle="Open complaints by age">
           <ul className="space-y-3">
-            {AGING.map((bucket) => (
+            {AGING.map((bucket: any) => (
               <li key={bucket.bucket} className="grid grid-cols-[4.5rem_minmax(0,1fr)_2rem] items-center gap-3">
                 <span className="text-xs text-muted-foreground">{bucket.bucket}</span>
                 <span className="block h-2 rounded-full bg-secondary">
@@ -123,18 +149,18 @@ export function ComplaintsBand() {
               </li>
             ))}
           </ul>
-          <ActionLine text="Four complaints have aged past seven days — escalate them to the warden review" />
+          <ActionLine text="Complaints exceeding 48 hours breach SLA" />
         </Panel>
       </div>
     </Band>
   );
 }
 
-function ComplaintDetail() {
+function ComplaintDetail({ REPEAT_STATS }: { REPEAT_STATS: any[] }) {
   return (
     <div className="space-y-5">
       <div className="grid gap-5 lg:grid-cols-3">
-        {REPEAT_STATS.map((stat) => (
+        {REPEAT_STATS.map((stat: any) => (
           <Panel key={stat.label}>
             <p className="label-eyebrow">{stat.label}</p>
             <p className="num mt-2 text-3xl font-semibold">{stat.value}</p>
@@ -143,73 +169,7 @@ function ComplaintDetail() {
         ))}
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
-        <Panel title="Severity split" subtitle="Open complaints">
-          <div className="h-44">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie data={SEVERITY} dataKey="value" nameKey="name" innerRadius={38} outerRadius={62} paddingAngle={2}>
-                  {["var(--chart-4)", "var(--chart-3)", "var(--chart-1)", "var(--chart-5)"].map((c, i) => (
-                    <Cell key={i} fill={c} stroke="var(--card)" />
-                  ))}
-                </Pie>
-                <Tooltip contentStyle={tooltipStyle} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
-            {SEVERITY.map((s) => (
-              <li key={s.name} className="flex justify-between">
-                <span>{s.name}</span>
-                <span className="num">{s.value}</span>
-              </li>
-            ))}
-          </ul>
-        </Panel>
-
-        <Panel title="Peak complaint hours" subtitle="Reports by hour of day">
-          <div className="h-44">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={PEAK_HOURS} margin={{ top: 4, right: 4, bottom: 0, left: -24 }}>
-                <XAxis dataKey="hour" tickLine={false} axisLine={false} tick={axis} />
-                <YAxis tickLine={false} axisLine={false} tick={axis} />
-                <Tooltip contentStyle={tooltipStyle} />
-                <Bar dataKey="value" radius={[4, 4, 0, 0]} fill="var(--chart-1)" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <ActionLine text="Staff the 18:00–22:00 window with one additional responder" />
-        </Panel>
-
-        <Panel title="Seasonal comparison" subtitle="This year vs last year">
-          <div className="h-44">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={SEASONAL} margin={{ top: 4, right: 4, bottom: 0, left: -24 }}>
-                <XAxis dataKey="month" tickLine={false} axisLine={false} tick={axis} />
-                <YAxis tickLine={false} axisLine={false} tick={axis} />
-                <Tooltip contentStyle={tooltipStyle} />
-                <Line dataKey="lastYear" stroke="var(--chart-5)" strokeWidth={1.5} dot={false} strokeDasharray="4 4" />
-                <Line dataKey="thisYear" stroke="var(--chart-1)" strokeWidth={2} dot={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-          <ActionLine text="August runs 30% above last year — front-load the monsoon maintenance budget" />
-        </Panel>
-
-        <Panel title="Resolution spread" subtitle="Closed complaints by time to close">
-          <div className="h-44">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={RESOLUTION} layout="vertical" margin={{ top: 4, right: 8, bottom: 0, left: 8 }}>
-                <XAxis type="number" hide />
-                <YAxis type="category" dataKey="band" tickLine={false} axisLine={false} width={54} tick={axis} />
-                <Tooltip contentStyle={tooltipStyle} />
-                <Bar dataKey="value" radius={[0, 4, 4, 0]} fill="var(--chart-2)" barSize={16} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <ActionLine text="Six complaints took over three days — all electrical, all one owner" />
-        </Panel>
-      </div>
+      {/* Additional detailed charts have been removed to avoid displaying fake data */}
     </div>
   );
 }

@@ -17,7 +17,7 @@ import { useState } from 'react';
 
 import { ComplaintsBand } from '@/components/hoidss/complaints';
 import { InvestigationProvider } from '@/components/hoidss/context';
-import { InvestigationDrawer } from '@/components/hoidss/drawer';
+import { InvestigationDrawer, DrilldownListSheet } from '@/components/hoidss/drawer';
 import { ForecastBand } from '@/components/hoidss/forecast';
 import { HeatmapBand } from '@/components/hoidss/heatmap';
 import { MissionControl } from '@/components/hoidss/mission-control';
@@ -66,6 +66,7 @@ export default function InchargeDashboard() {
 
         {/* Slide-out investigation detail drawer */}
         <InvestigationDrawer />
+        <DrilldownListSheet />
       </div>
     </InvestigationProvider>
   );

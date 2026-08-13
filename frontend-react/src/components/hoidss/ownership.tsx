@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import { useInvestigation } from "./context";
-import { QUEUE, STAFF, type QueueItem } from "./data";
+import { type QueueItem } from "./data";
 import { ActionLine, Band, healthRail, healthSoft, Panel, StatusPill } from "./primitives";
+import { useOwnership } from "./useHoidssData";
 
 const KINDS: QueueItem["kind"][] = [
   "Emergency",
@@ -20,12 +21,13 @@ const KINDS: QueueItem["kind"][] = [
 export function OwnershipBand() {
   const { scope, narrow, openDrawer } = useInvestigation();
   const [kind, setKind] = useState<QueueItem["kind"] | null>(null);
+  const { data, isLoading } = useOwnership();
   const [showAll, setShowAll] = useState(false);
 
   const filtered = useMemo(
     () =>
-      QUEUE.filter(
-        (item) =>
+      (data?.QUEUE || []).filter(
+        (item: QueueItem) =>
           (!kind || item.kind === kind) &&
           (!scope.block || item.block === scope.block) &&
           (!scope.category || item.category === scope.category),
@@ -36,11 +38,22 @@ export function OwnershipBand() {
   const visible = showAll ? filtered : filtered.slice(0, 5);
   const hidden = filtered.length - visible.length;
 
+  if (isLoading || !data) {
+    return (
+      <section className="scroll-mt-32 animate-pulse opacity-50">
+        <div className="h-12 w-1/3 bg-card rounded-md mb-8"></div>
+        <div className="h-[400px] bg-card rounded-3xl border border-border"></div>
+      </section>
+    );
+  }
+
+  const { QUEUE, STAFF, verdict } = data;
+
   return (
     <Band
       id="ownership"
       question="Who owns the problem?"
-      verdict="Three items are unowned right now, including one live safety risk. Every red row below is either unassigned or sitting with an electrician already at 141% load."
+      verdict={verdict}
       aside={
         <div className="flex flex-wrap gap-1.5">
           {KINDS.map((k) => (
@@ -61,7 +74,7 @@ export function OwnershipBand() {
       }
       detailLabel="Show who has capacity"
       detailSummary="Workload, availability, response and resolution times, leaderboard"
-      detail={<StaffDetail />}
+      detail={<StaffDetail STAFF={STAFF} />}
     >
       <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
         <ul className="divide-y divide-border">
@@ -149,44 +162,18 @@ export function OwnershipBand() {
         </div>
       </div>
 
-      <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <Panel className="border-crit/30">
-          <div className="flex items-start gap-3">
-            <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-crit-foreground" aria-hidden />
-            <div className="min-w-0">
-              <p className="text-sm font-medium">One live safety risk is unowned</p>
-              <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                Exposed wiring in Block B floor 2 has been unassigned for 41 minutes.
-              </p>
-            </div>
-          </div>
-          <ActionLine text="Assign A. Jadhav — idle for 3 hours and on the same floor" />
-        </Panel>
-        <Panel className="border-warn/30">
-          <div className="flex items-start gap-3">
-            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-warn-foreground" aria-hidden />
-            <div className="min-w-0">
-              <p className="text-sm font-medium">Load is unevenly distributed</p>
-              <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                One electrician holds 17 open jobs while another holds 4.
-              </p>
-            </div>
-          </div>
-          <ActionLine text="Rebalance two electrical jobs to bring both under 100% load" />
-        </Panel>
-      </div>
     </Band>
   );
 }
 
-function StaffDetail() {
+function StaffDetail({ STAFF }: { STAFF: any[] }) {
   const { narrow, openDrawer } = useInvestigation();
 
   return (
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
       <Panel title="Workload" subtitle="Percentage of a normal day">
         <ul className="space-y-3.5">
-          {STAFF.map((s) => (
+          {STAFF.map((s: any) => (
             <li key={s.name} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
               <div className="min-w-0">
                 <div className="flex items-center justify-between gap-2">
@@ -204,7 +191,7 @@ function StaffDetail() {
             </li>
           ))}
         </ul>
-        <ActionLine text="Move two electrical jobs from R. Kulkarni to A. Jadhav" />
+        <ActionLine text="Workload is calculated relative to the team's busiest member" />
       </Panel>
 
       <Panel title="Staff leaderboard" subtitle="Response, resolution and SLA compliance">
@@ -220,7 +207,7 @@ function StaffDetail() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {STAFF.map((s) => (
+              {STAFF.map((s: any) => (
                 <TableRow
                   key={s.name}
                   className="cursor-pointer"
@@ -263,7 +250,7 @@ function StaffDetail() {
             </TableBody>
           </Table>
         </div>
-        <ActionLine text="Rebalance the queue so no responder is above 100% before evening rounds" />
+        <ActionLine text="Maintain SLA compliance above 80%" />
       </Panel>
     </div>
   );

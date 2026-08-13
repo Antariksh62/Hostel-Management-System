@@ -18,6 +18,19 @@ export type DrawerEntity = {
   facts: { label: string; value: string }[];
 };
 
+export type DrilldownListConfig = {
+  title: string;
+  subtitle?: string;
+  filter: {
+    status?: string;
+    category?: string;
+    overdue?: boolean;
+    recent24h?: boolean;
+    floor?: string;
+    room?: string;
+  };
+} | null;
+
 type InvestigationValue = {
   scope: Scope;
   history: Scope[];
@@ -29,6 +42,9 @@ type InvestigationValue = {
   drawer: DrawerEntity | null;
   openDrawer: (entity: DrawerEntity) => void;
   closeDrawer: () => void;
+  drilldownList: DrilldownListConfig;
+  openDrilldownList: (config: DrilldownListConfig) => void;
+  closeDrilldownList: () => void;
   evidenceTarget: string | null;
   jumpToEvidence: (target: string, patch?: Partial<Scope>) => void;
   decided: string[];
@@ -43,6 +59,7 @@ export function InvestigationProvider({ children }: { children: ReactNode }) {
   const [scope, setScope] = useState<Scope>(DEFAULT_SCOPE);
   const [history, setHistory] = useState<Scope[]>([]);
   const [drawer, setDrawer] = useState<DrawerEntity | null>(null);
+  const [drilldownList, setDrilldownList] = useState<DrilldownListConfig>(null);
   const [evidenceTarget, setEvidenceTarget] = useState<string | null>(null);
   const [decided, setDecided] = useState<string[]>([]);
 
@@ -106,12 +123,15 @@ export function InvestigationProvider({ children }: { children: ReactNode }) {
       drawer,
       openDrawer: setDrawer,
       closeDrawer: () => setDrawer(null),
+      drilldownList,
+      openDrilldownList: setDrilldownList,
+      closeDrilldownList: () => setDrilldownList(null),
       evidenceTarget,
       jumpToEvidence,
       decided,
       decide,
     }),
-    [scope, history, narrow, clearKey, clearAll, stepBack, drawer, evidenceTarget, jumpToEvidence, decided, decide],
+    [scope, history, narrow, clearKey, clearAll, stepBack, drawer, drilldownList, evidenceTarget, jumpToEvidence, decided, decide],
   );
 
   return <InvestigationContext.Provider value={value}>{children}</InvestigationContext.Provider>;

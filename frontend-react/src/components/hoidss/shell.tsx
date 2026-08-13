@@ -35,7 +35,6 @@ const NAV = [
   { label: "Spaces", icon: LayoutGrid, target: "heatmap" },
   { label: "People", icon: Users, target: "ownership" },
   { label: "Assets", icon: Wrench, target: "forecast" },
-  { label: "Money", icon: CircleDollarSign, target: "forecast" },
   { label: "Forecast", icon: TrendingUp, target: "forecast" },
 ];
 
@@ -99,13 +98,6 @@ export function HostelSidebar({
       </div>
 
       <div className="space-y-1.5 px-4 pb-6">
-        <a
-          href="#band-brief"
-          className="flex items-center gap-3.5 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:bg-sidebar-accent/60"
-        >
-          <Settings className="h-5 w-5 shrink-0" aria-hidden />
-          {!collapsed && <span>Settings</span>}
-        </a>
         <div className="flex items-center gap-3.5 rounded-xl px-3 py-2.5">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-secondary text-xs font-bold">
             AD
@@ -138,6 +130,35 @@ export function TopBar() {
   const { theme, toggleTheme } = useTheme();
   const dark = theme === "dark";
   const [notifOpen, setNotifOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [dateOpen, setDateOpen] = useState(false);
+  const { scope, narrow, openDrawer } = useInvestigation();
+
+  const DATE_OPTIONS = ["Last 7 days", "Last 14 days", "Last 30 days", "Last 90 days"];
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    const q = searchQuery.trim();
+    // If user enters a 3-digit room number (e.g. 101, 204)
+    if (/^[1-5]\d\d$/.test(q)) {
+      narrow({ room: q });
+      openDrawer({
+        kind: "Room",
+        title: `Room ${q}`,
+        subtitle: `Direct Search · Floor ${q.charAt(0)}`,
+        health: "ok",
+        facts: [
+          { label: "Search Match", value: `Room ${q}` },
+          { label: "Floor", value: `Floor ${q.charAt(0)}` }
+        ]
+      });
+    } else {
+      narrow({ category: q });
+    }
+    setSearchOpen(false);
+  };
 
   return (
     <>
@@ -158,21 +179,92 @@ export function TopBar() {
           </div>
 
           <div className="flex shrink-0 items-center gap-3">
-            <button
-              type="button"
-              className="hidden items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-2.5 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:flex"
-            >
-              <Search className="h-4 w-4" aria-hidden />
-              <span>Search rooms, staff, complaints</span>
-              <kbd className="ml-6 rounded border border-border px-2 py-0.5 text-[0.625rem] font-mono">⌘K</kbd>
-            </button>
-            <button
-              type="button"
-              className="hidden items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-2.5 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:flex"
-            >
-              <Calendar className="h-4 w-4" aria-hidden />
-              Last 14 days
-            </button>
+            {/* Functional Search Bar */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setSearchOpen((v) => !v)}
+                className="hidden items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-2.5 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:flex"
+              >
+                <Search className="h-4 w-4" aria-hidden />
+                <span>{searchQuery ? `Searching: ${searchQuery}` : "Search rooms, staff, complaints"}</span>
+                <kbd className="ml-6 rounded border border-border px-2 py-0.5 text-[0.625rem] font-mono">⌘K</kbd>
+              </button>
+
+              {searchOpen && (
+                <div className="absolute right-0 top-12 z-50 w-80 rounded-2xl border border-border bg-popover p-4 shadow-lift">
+                  <form onSubmit={handleSearchSubmit} className="space-y-3">
+                    <div className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2">
+                      <Search className="h-4 w-4 text-muted-foreground" />
+                      <input
+                        type="text"
+                        autoFocus
+                        placeholder="Search room (e.g. 101), category..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full bg-transparent text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
+                      />
+                      {searchQuery && (
+                        <button type="button" onClick={() => setSearchQuery("")}>
+                          <X className="h-3.5 w-3.5 text-muted-foreground" />
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex items-center justify-between text-[0.6875rem] text-muted-foreground">
+                      <span>Press Enter to search</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchQuery("");
+                          setSearchOpen(false);
+                        }}
+                        className="hover:underline"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
+            </div>
+
+            {/* Functional Date Range Selector */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setDateOpen((v) => !v)}
+                className="hidden items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-2.5 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:flex"
+              >
+                <Calendar className="h-4 w-4" aria-hidden />
+                <span>{scope.dateRange || "Last 14 days"}</span>
+              </button>
+
+              {dateOpen && (
+                <div className="absolute right-0 top-12 z-50 w-48 rounded-2xl border border-border bg-popover p-2 shadow-lift">
+                  <div className="px-3 py-2 text-xs font-bold text-muted-foreground">Select Time Window</div>
+                  <ul className="space-y-1">
+                    {DATE_OPTIONS.map((opt) => (
+                      <li key={opt}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            narrow({ dateRange: opt });
+                            setDateOpen(false);
+                          }}
+                          className={cn(
+                            "w-full rounded-xl px-3 py-2 text-left text-xs transition-colors hover:bg-secondary",
+                            scope.dateRange === opt && "bg-info-soft font-bold text-foreground"
+                          )}
+                        >
+                          {opt}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
             <Button
               variant="ghost"
               size="icon"

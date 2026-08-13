@@ -3,15 +3,26 @@ import { CheckCircle2, Gauge, Search, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useInvestigation } from "./context";
-import { RECOMMENDATIONS } from "./data";
 import { healthSoft } from "./primitives";
+import { useMissionControl } from "./useHoidssData";
 
 const urgencyHealth = { Critical: "crit", High: "warn", Medium: "ok" } as const;
 
 export function MissionControl() {
+  const { data, isLoading } = useMissionControl();
   const { jumpToEvidence, decided, decide } = useInvestigation();
-  const open = RECOMMENDATIONS.filter((r) => !decided.includes(r.id));
-  const closed = RECOMMENDATIONS.filter((r) => decided.includes(r.id));
+  
+  if (isLoading || !data) {
+    return (
+      <aside className="scroll-mt-36 animate-pulse opacity-50">
+        <div className="h-[500px] rounded-3xl border border-border bg-surface-raised p-7 shadow-lift"></div>
+      </aside>
+    );
+  }
+
+  const { RECOMMENDATIONS } = data;
+  const open = RECOMMENDATIONS.filter((r: any) => !decided.includes(r.id));
+  const closed = RECOMMENDATIONS.filter((r: any) => decided.includes(r.id));
 
   return (
     <aside
@@ -34,11 +45,11 @@ export function MissionControl() {
       </div>
 
       <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-        What should I do next? Each recommendation carries its reason, its evidence and the cost of doing nothing.
+        Rule-based management recommendations generated from current operational data.
       </p>
 
       <ul className="mt-8 space-y-6">
-        {open.slice(0, 3).map((rec) => (
+        {open.slice(0, 3).map((rec: any) => (
           <li
             key={rec.id}
             className="rounded-2xl border border-border bg-card p-6 shadow-soft transition-colors duration-150 hover:border-border-strong lg:p-7"
@@ -59,7 +70,7 @@ export function MissionControl() {
 
             <p className="label-eyebrow mt-5 font-bold tracking-widest">Evidence</p>
             <ul className="mt-2.5 space-y-2">
-              {rec.evidence.map((e) => (
+              {rec.evidence.map((e: string) => (
                 <li key={e} className="flex gap-2.5 text-xs sm:text-sm leading-relaxed text-foreground/90 font-medium">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
                   {e}
@@ -68,25 +79,17 @@ export function MissionControl() {
             </ul>
 
             <dl className="mt-5 space-y-3 border-t border-border/80 pt-5 text-xs sm:text-sm">
-              <div className="flex items-center gap-2">
-                <dt className="flex items-center gap-2 text-muted-foreground font-semibold">
-                  <Gauge className="h-4 w-4" aria-hidden /> Confidence
-                </dt>
-                <dd className="num ml-auto flex items-center gap-2 font-bold">
-                  <span className="block h-2 w-20 rounded-full bg-secondary">
-                    <span className="block h-2 rounded-full bg-primary" style={{ width: `${rec.confidence}%` }} />
-                  </span>
-                  {rec.confidence}%
-                </dd>
-              </div>
+              {/* Confidence scores explicitly removed per requirements */}
               <div className="grid grid-cols-[7rem_minmax(0,1fr)] gap-2">
                 <dt className="text-muted-foreground font-medium">Impact</dt>
                 <dd className="font-semibold">{rec.impact}</dd>
               </div>
-              <div className="grid grid-cols-[7rem_minmax(0,1fr)] gap-2">
-                <dt className="text-muted-foreground font-medium">If ignored</dt>
-                <dd className="num font-extrabold text-crit-foreground">{rec.money}</dd>
-              </div>
+              {rec.money !== "—" && (
+                <div className="grid grid-cols-[7rem_minmax(0,1fr)] gap-2">
+                  <dt className="text-muted-foreground font-medium">If ignored</dt>
+                  <dd className="num font-extrabold text-crit-foreground">{rec.money}</dd>
+                </div>
+              )}
             </dl>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -116,7 +119,7 @@ export function MissionControl() {
         <div className="mt-8 border-t border-border/80 pt-6">
           <p className="label-eyebrow font-bold tracking-widest">Decided today</p>
           <ul className="mt-4 space-y-3">
-            {closed.map((rec) => (
+            {closed.map((rec: any) => (
               <li
                 key={rec.id}
                 className="flex items-start gap-3 rounded-xl bg-ok-soft px-4 py-3 text-xs sm:text-sm animate-in fade-in slide-in-from-bottom-1 duration-200"
