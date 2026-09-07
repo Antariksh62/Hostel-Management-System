@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useSocket } from '../context/SocketContext';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import api from '../services/api';
 import MediaGallery from '../components/MediaGallery';
@@ -214,6 +215,7 @@ const FilterBar = ({ filters, setFilters, searchInput, setSearchInput }) => {
 // =============================================================================
 const AdminDashboard = () => {
     const { user, logout } = useContext(AuthContext);
+    const { socket }       = useSocket();
 
     const queryClient = useQueryClient();
 
@@ -260,6 +262,28 @@ const AdminDashboard = () => {
         },
         refetchInterval: 30000
     });
+
+    // Real-time socket listeners for Warden Dashboard
+    useEffect(() => {
+        if (!socket) return;
+
+        const refreshAll = () => {
+            queryClient.invalidateQueries({ queryKey: ['complaints'] });
+            queryClient.invalidateQueries({ queryKey: ['analytics'] });
+        };
+
+        socket.on('complaint:created', refreshAll);
+        socket.on('complaint:status-updated', refreshAll);
+        socket.on('complaint:assigned', refreshAll);
+        socket.on('complaint:deleted', refreshAll);
+
+        return () => {
+            socket.off('complaint:created', refreshAll);
+            socket.off('complaint:status-updated', refreshAll);
+            socket.off('complaint:assigned', refreshAll);
+            socket.off('complaint:deleted', refreshAll);
+        };
+    }, [socket, queryClient]);
 
     useEffect(() => {
         let isMounted = true;

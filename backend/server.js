@@ -56,6 +56,12 @@ app.use((err, _req, res, _next) => {
     res.status(500).json({ message: "Internal server error" });
 });
 
+const http = require("http");
+const { initSocket } = require("./socket");
+
+const server = http.createServer(app);
+initSocket(server);
+
 // ─── MongoDB ──────────────────────────────────────────────────────────────────
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/hostelDB";
 mongoose.connect(MONGO_URI)
@@ -64,4 +70,4 @@ mongoose.connect(MONGO_URI)
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => logger.info(`🚀 Server running on port ${PORT}`));
+server.listen(PORT, () => logger.info(`🚀 Server & Socket.IO running on port ${PORT}`));

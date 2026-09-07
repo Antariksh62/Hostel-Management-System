@@ -79,6 +79,20 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* HMS Student/Staff/Warden status tokens */
+  --color-success: var(--hms-success);
+  --color-success-foreground: var(--hms-success-foreground);
+  --color-success-soft: var(--hms-success-soft);
+  --color-warning: var(--hms-warning);
+  --color-warning-foreground: var(--hms-warning-foreground);
+  --color-warning-soft: var(--hms-warning-soft);
+  --color-critical: var(--hms-critical);
+  --color-critical-foreground: var(--hms-critical-foreground);
+  --color-critical-soft: var(--hms-critical-soft);
+  --color-info: var(--hms-info);
+  --color-info-foreground: var(--hms-info-foreground);
+  --color-info-soft: var(--hms-info-soft);
+
   --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.28), 0 8px 24px -12px oklch(0 0 0 / 0.4);
   --shadow-lift: 0 2px 4px oklch(0 0 0 / 0.3), 0 18px 44px -20px oklch(0 0 0 / 0.55);
 }
@@ -143,6 +157,20 @@
   --sidebar-accent-foreground: oklch(0.24 0.014 262);
   --sidebar-border: oklch(0.9 0.005 260);
   --sidebar-ring: oklch(0.53 0.15 254);
+
+  --hms-surface: oklch(0.975 0.003 247);
+  --hms-success: oklch(0.48 0.12 155);
+  --hms-success-foreground: oklch(0.33 0.09 155);
+  --hms-success-soft: oklch(0.95 0.035 155);
+  --hms-warning: oklch(0.62 0.13 75);
+  --hms-warning-foreground: oklch(0.42 0.1 65);
+  --hms-warning-soft: oklch(0.96 0.05 85);
+  --hms-critical: oklch(0.55 0.2 25);
+  --hms-critical-foreground: oklch(0.44 0.17 25);
+  --hms-critical-soft: oklch(0.96 0.03 25);
+  --hms-info: oklch(0.55 0.17 256);
+  --hms-info-foreground: oklch(0.42 0.15 258);
+  --hms-info-soft: oklch(0.955 0.025 256);
 }
 
 .dark, [data-theme="dark"] {
@@ -202,6 +230,20 @@
   --sidebar-accent-foreground: oklch(0.96 0.004 260);
   --sidebar-border: oklch(1 0 0 / 8%);
   --sidebar-ring: oklch(0.68 0.14 250);
+
+  --hms-surface: oklch(0.235 0.014 260);
+  --hms-success: oklch(0.72 0.14 158);
+  --hms-success-foreground: oklch(0.84 0.12 158);
+  --hms-success-soft: oklch(0.32 0.06 158);
+  --hms-warning: oklch(0.8 0.13 80);
+  --hms-warning-foreground: oklch(0.88 0.11 85);
+  --hms-warning-soft: oklch(0.33 0.06 70);
+  --hms-critical: oklch(0.7 0.16 25);
+  --hms-critical-foreground: oklch(0.84 0.11 25);
+  --hms-critical-soft: oklch(0.32 0.07 25);
+  --hms-info: oklch(0.72 0.13 256);
+  --hms-info-foreground: oklch(0.84 0.09 256);
+  --hms-info-soft: oklch(0.31 0.06 258);
 }
 
 @layer base {

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useSocket } from '../context/SocketContext';
 import api from '../services/api';
 import MediaGallery from '../components/MediaGallery';
 import ComplaintTimeline from '../components/ComplaintTimeline';
@@ -156,6 +157,7 @@ const FeedbackForm = ({ complaintId, onSubmitted }) => {
 // =============================================================================
 const StudentDashboard = () => {
     const { user, logout } = useContext(AuthContext);
+    const { socket }       = useSocket();
     const [complaints,   setComplaints]   = useState([]);
     const [loading,      setLoading]      = useState(true);
 
@@ -195,6 +197,61 @@ const StudentDashboard = () => {
         }
         return () => { isMounted = false; };
     }, [user]);
+
+    // Real-time socket event listeners
+    useEffect(() => {
+        if (!socket) return;
+
+        const handleCreated = (payload) => {
+            const c = payload.complaint;
+            if (!c) return;
+            const studentIdStr = c.studentId?._id || c.studentId;
+            const myId = user?.id || user?._id;
+            if (String(studentIdStr) === String(myId)) {
+                setComplaints(prev => {
+                    if (prev.some(item => String(item._id) === String(c._id))) return prev;
+                    return [c, ...prev];
+                });
+            }
+        };
+
+        const handleStatusUpdated = (payload) => {
+            const { complaintId, complaint, status } = payload;
+            setComplaints(prev => prev.map(c => {
+                if (String(c._id) === String(complaintId)) {
+                    return complaint ? { ...c, ...complaint } : { ...c, status: status || c.status };
+                }
+                return c;
+            }));
+        };
+
+        const handleAssigned = (payload) => {
+            const { complaintId, complaint } = payload;
+            setComplaints(prev => prev.map(c => {
+                if (String(c._id) === String(complaintId)) {
+                    return complaint ? { ...c, ...complaint } : c;
+                }
+                return c;
+            }));
+        };
+
+        const handleDeleted = (payload) => {
+            const { complaintId } = payload;
+            setComplaints(prev => prev.filter(c => String(c._id) !== String(complaintId)));
+        };
+
+        socket.on('complaint:created', handleCreated);
+        socket.on('complaint:status-updated', handleStatusUpdated);
+        socket.on('complaint:assigned', handleAssigned);
+        socket.on('complaint:deleted', handleDeleted);
+
+        return () => {
+            socket.off('complaint:created', handleCreated);
+            socket.off('complaint:status-updated', handleStatusUpdated);
+            socket.off('complaint:assigned', handleAssigned);
+            socket.off('complaint:deleted', handleDeleted);
+        };
+    }, [socket, user]);
 
     const handleUpdateProfile = async (e) => {
         e.preventDefault();

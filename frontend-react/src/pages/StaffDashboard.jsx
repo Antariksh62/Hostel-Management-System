@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
 import { AuthContext } from '../context/AuthContext';
+import { useSocket } from '../context/SocketContext';
 import api from "../services/api";
 import MediaGallery from "../components/MediaGallery";
 import ComplaintTimeline from "../components/ComplaintTimeline";
@@ -30,6 +31,7 @@ const StatusIcon = ({ status }) => {
 // =============================================================================
 export default function StaffDashboard() {
     const { user, logout } = useContext(AuthContext);
+    const { socket }       = useSocket();
     const [complaints, setComplaints] = useState([]);
     const [loading,    setLoading]    = useState(true);
 
@@ -60,6 +62,52 @@ export default function StaffDashboard() {
             clearInterval(id);
         };
     }, [fetchComplaints]);
+
+    // Real-time socket listener
+    useEffect(() => {
+        if (!socket) return;
+        const myId = user?.id || user?._id;
+
+        const handleAssigned = (payload) => {
+            const { complaint } = payload;
+            if (!complaint || !complaint.assignedTo) return;
+            const assignedId = complaint.assignedTo._id || complaint.assignedTo;
+            if (String(assignedId) === String(myId)) {
+                setComplaints(prev => {
+                    const exists = prev.some(c => String(c._id) === String(complaint._id));
+                    if (exists) {
+                        return prev.map(c => String(c._id) === String(complaint._id) ? complaint : c);
+                    }
+                    return [complaint, ...prev];
+                });
+            }
+        };
+
+        const handleStatusUpdated = (payload) => {
+            const { complaintId, complaint, status } = payload;
+            setComplaints(prev => prev.map(c => {
+                if (String(c._id) === String(complaintId)) {
+                    return complaint ? { ...c, ...complaint } : { ...c, status: status || c.status };
+                }
+                return c;
+            }));
+        };
+
+        const handleDeleted = (payload) => {
+            const { complaintId } = payload;
+            setComplaints(prev => prev.filter(c => String(c._id) !== String(complaintId)));
+        };
+
+        socket.on('complaint:assigned', handleAssigned);
+        socket.on('complaint:status-updated', handleStatusUpdated);
+        socket.on('complaint:deleted', handleDeleted);
+
+        return () => {
+            socket.off('complaint:assigned', handleAssigned);
+            socket.off('complaint:status-updated', handleStatusUpdated);
+            socket.off('complaint:deleted', handleDeleted);
+        };
+    }, [socket, user]);
 
     const updateStatus = async (id, status) => {
         try {

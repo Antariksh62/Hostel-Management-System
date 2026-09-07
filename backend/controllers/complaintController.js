@@ -1,7 +1,13 @@
 const Complaint = require("../models/Complaint");
-const { User }  = require("../models/User");
+const { User, Student }  = require("../models/User");
 const fs        = require("fs");
 const path      = require("path");
+const {
+    emitComplaintCreated,
+    emitComplaintStatusUpdated,
+    emitComplaintAssigned,
+    emitComplaintDeleted
+} = require("../socket");
 
 const deleteComplaintFiles = (complaint) => {
     // Helper to safely delete a file given its URL
@@ -36,8 +42,8 @@ exports.createComplaint = async (req, res) => {
         const { title, description, category } = req.body;
 
         // Auto-fetch door number from student profile
-        const student    = await User.findById(req.user.id).select("doorNumber");
-        const doorNumber = student?.doorNumber || "N/A";
+        const student    = (await Student.findById(req.user.id).select("doorNumber")) || (await User.findById(req.user.id));
+        const doorNumber = student?.doorNumber || req.body?.doorNumber || "N/A";
 
         // Build media array from uploaded files
         const media = [];
@@ -66,6 +72,12 @@ exports.createComplaint = async (req, res) => {
         });
 
         await newComplaint.save();
+
+        const populatedComplaint = await Complaint.findById(newComplaint._id)
+            .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
+            .populate("assignedTo", "name email");
+
+        emitComplaintCreated(populatedComplaint || newComplaint);
 
         res.status(201).json({
             message: "Complaint created successfully",
@@ -275,6 +287,12 @@ exports.updateComplaintStatus = async (req, res) => {
         const complaint = await Complaint.findByIdAndUpdate(id, update, { returnDocument: "after" });
         if (!complaint) return res.status(404).json({ message: "Complaint not found" });
 
+        const populatedComplaint = await Complaint.findById(id)
+            .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
+            .populate("assignedTo", "name email");
+
+        emitComplaintStatusUpdated(populatedComplaint || complaint);
+
         res.json({ message: "Status updated successfully", complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
@@ -318,6 +336,12 @@ exports.assignComplaint = async (req, res) => {
 
         if (!complaint) return res.status(404).json({ message: "Complaint not found" });
 
+        const populatedComplaint = await Complaint.findById(id)
+            .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
+            .populate("assignedTo", "name email");
+
+        emitComplaintAssigned(populatedComplaint || complaint);
+
         res.json({ message: "Complaint assigned successfully", complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
@@ -337,7 +361,10 @@ exports.deleteComplaint = async (req, res) => {
 
         deleteComplaintFiles(complaint);
 
+        const studentIdStr = complaint.studentId?.toString();
         await Complaint.findByIdAndDelete(id);
+        emitComplaintDeleted(id, studentIdStr);
+
         res.json({ message: "Complaint deleted successfully" });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
@@ -423,6 +450,12 @@ exports.submitFeedback = async (req, res) => {
         }
 
         await complaint.save();
+
+        const populatedComplaint = await Complaint.findById(id)
+            .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
+            .populate("assignedTo", "name email");
+
+        emitComplaintStatusUpdated(populatedComplaint || complaint);
 
         res.json({ message: "Feedback submitted successfully", complaint });
     } catch (err) {
