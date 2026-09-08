@@ -62,10 +62,17 @@ const { initSocket } = require("./socket");
 const server = http.createServer(app);
 initSocket(server);
 
-// ─── MongoDB ──────────────────────────────────────────────────────────────────
+// ─── MongoDB & Retention Service ──────────────────────────────────────────────
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/hostelDB";
+const { cleanupOldComplaints } = require("./controllers/complaintController");
+
 mongoose.connect(MONGO_URI)
-    .then(() => logger.info("✅ MongoDB Connected: " + MONGO_URI))
+    .then(() => {
+        logger.info("✅ MongoDB Connected: " + MONGO_URI);
+        // Run 6-month complaint retention cleanup on startup and every 24 hours
+        cleanupOldComplaints();
+        setInterval(cleanupOldComplaints, 24 * 60 * 60 * 1000);
+    })
     .catch((err) => logger.error("❌ DB Error:", err));
 
 // ─── Start ────────────────────────────────────────────────────────────────────

@@ -87,7 +87,12 @@ export default function Login() {
       setBusy(true);
       try {
         const res = await api.post("/auth/student/send-otp", { email: cleanEmail });
-        setNotice("A 6-digit verification code was sent to your college email.");
+        if (res.data?.devOtp) {
+          setOtp(res.data.devOtp);
+          setNotice(`Verification code sent. Dev OTP: ${res.data.devOtp}`);
+        } else {
+          setNotice("A 6-digit verification code was sent to your college email.");
+        }
         setStep("otp");
         startResendCountdown(res.data?.resendAfter || 60);
       } catch (err) {

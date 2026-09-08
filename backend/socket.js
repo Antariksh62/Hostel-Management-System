@@ -69,61 +69,74 @@ const getIO = () => {
     return io;
 };
 
+const getEntityId = (entity) => {
+    if (!entity) return null;
+    if (typeof entity === "string") return entity;
+    if (entity._id) return String(entity._id);
+    if (entity.id) return String(entity.id);
+    return String(entity);
+};
+
 // Helper event emitters with strict authorization scope
 const emitComplaintCreated = (complaint) => {
     if (!io) return;
-    const payload = { complaint };
-    const studentIdStr = complaint.studentId?._id || complaint.studentId;
+    const cid = getEntityId(complaint._id || complaint.id);
+    const payload = {
+        complaintId: cid,
+        complaint: complaint.toObject ? complaint.toObject() : complaint
+    };
+    const studentIdStr = getEntityId(complaint.studentId);
     
-    // Broadcast ONLY to management (wardens) and the student who created it
-    let roomEmitter = io.to("wardens");
-    if (studentIdStr) roomEmitter = roomEmitter.to(`user:${studentIdStr}`);
-    roomEmitter.emit("complaint:created", payload);
+    const rooms = ["wardens"];
+    if (studentIdStr) rooms.push(`user:${studentIdStr}`);
+    io.to(rooms).emit("complaint:created", payload);
 };
 
 const emitComplaintStatusUpdated = (complaint) => {
     if (!io) return;
+    const cid = getEntityId(complaint._id || complaint.id);
     const payload = {
-        complaintId: complaint._id,
+        complaintId: cid,
         status: complaint.status,
-        complaint
+        complaint: complaint.toObject ? complaint.toObject() : complaint
     };
-    const studentIdStr = complaint.studentId?._id || complaint.studentId;
-    const assignedStaffId = complaint.assignedTo?._id || complaint.assignedTo;
+    const studentIdStr = getEntityId(complaint.studentId);
+    const assignedStaffId = getEntityId(complaint.assignedTo);
 
-    // Broadcast to wardens, student owner, and assigned staff member
-    let roomEmitter = io.to("wardens");
-    if (studentIdStr) roomEmitter = roomEmitter.to(`user:${studentIdStr}`);
-    if (assignedStaffId) roomEmitter = roomEmitter.to(`user:${assignedStaffId}`);
+    const rooms = ["wardens"];
+    if (studentIdStr) rooms.push(`user:${studentIdStr}`);
+    if (assignedStaffId) rooms.push(`user:${assignedStaffId}`);
 
-    roomEmitter.emit("complaint:status-updated", payload);
+    io.to(rooms).emit("complaint:status-updated", payload);
 };
 
 const emitComplaintAssigned = (complaint) => {
     if (!io) return;
+    const cid = getEntityId(complaint._id || complaint.id);
     const payload = {
-        complaintId: complaint._id,
+        complaintId: cid,
         assignedTo: complaint.assignedTo,
         status: complaint.status,
-        complaint
+        complaint: complaint.toObject ? complaint.toObject() : complaint
     };
-    const studentIdStr = complaint.studentId?._id || complaint.studentId;
-    const assignedStaffId = complaint.assignedTo?._id || complaint.assignedTo;
+    const studentIdStr = getEntityId(complaint.studentId);
+    const assignedStaffId = getEntityId(complaint.assignedTo);
 
-    // Broadcast to wardens, student owner, and the specific assigned staff member
-    let roomEmitter = io.to("wardens");
-    if (studentIdStr) roomEmitter = roomEmitter.to(`user:${studentIdStr}`);
-    if (assignedStaffId) roomEmitter = roomEmitter.to(`user:${assignedStaffId}`);
+    const rooms = ["wardens"];
+    if (studentIdStr) rooms.push(`user:${studentIdStr}`);
+    if (assignedStaffId) rooms.push(`user:${assignedStaffId}`);
 
-    roomEmitter.emit("complaint:assigned", payload);
+    io.to(rooms).emit("complaint:assigned", payload);
 };
 
 const emitComplaintDeleted = (complaintId, studentId = null) => {
     if (!io) return;
-    const payload = { complaintId };
-    let roomEmitter = io.to("wardens");
-    if (studentId) roomEmitter = roomEmitter.to(`user:${studentId}`);
-    roomEmitter.emit("complaint:deleted", payload);
+    const cid = getEntityId(complaintId);
+    const payload = { complaintId: cid };
+    const rooms = ["wardens"];
+    const studentIdStr = getEntityId(studentId);
+    if (studentIdStr) rooms.push(`user:${studentIdStr}`);
+    io.to(rooms).emit("complaint:deleted", payload);
 };
 
 module.exports = {

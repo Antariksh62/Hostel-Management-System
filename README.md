@@ -1,10 +1,12 @@
 # Hostel Management System
 
 [![](https://img.shields.io/badge/React-19.2.4-61DAFB?logo=react)](https://reactjs.org/)
-[![](https://img.shields.io/badge/Vite-8.0.1-646CFF?logo=vite)](https://vitejs.dev/)
-[![](https://img.shields.io/badge/Node-20-339933?logo=node.js)](https://nodejs.org/)
+[![](https://img.shields.io/badge/Vite-8.0.3-646CFF?logo=vite)](https://vitejs.dev/)
+[![](https://img.shields.io/badge/Node-20%2B-339933?logo=node.js)](https://nodejs.org/)
 [![](https://img.shields.io/badge/Express-5.2.1-000000?logo=express)](https://expressjs.com/)
+[![](https://img.shields.io/badge/Socket.IO-4.8.3-010101?logo=socketdotio)](https://socket.io/)
 [![](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb)](https://www.mongodb.com/atlas)
+[![](https://img.shields.io/badge/TailwindCSS-4.3.3-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
 [![](https://img.shields.io/github/license/Antariksh62/Hostel-Management-System?color=blue)](https://github.com/Antariksh62/Hostel-Management-System/blob/main/LICENSE)
 [![](https://img.shields.io/github/last-commit/Antariksh62/Hostel-Management-System)](https://github.com/Antariksh62/Hostel-Management-System/commits/main)
 [![](https://img.shields.io/github/stars/Antariksh62/Hostel-Management-System?style=social)](https://github.com/Antariksh62/Hostel-Management-System/stargazers)
@@ -14,74 +16,63 @@
 
 ## Table of Contents
 - [Project Overview](#project-overview)
-- [Highlights](#highlights)
-- [Current Project Status](#current-project-status)
+- [Key Highlights](#key-highlights)
+- [Current Implementation Status](#current-implementation-status)
 - [System Architecture](#system-architecture)
-- [Authentication Flow](#authentication-flow)
-- [Complaint Workflow](#complaint-workflow)
+- [Authentication & Access Control Flow](#authentication--access-control-flow)
+- [Complaint Lifecycle & Feedback Workflow](#complaint-lifecycle--feedback-workflow)
+- [Real-Time Socket.IO Architecture](#real-time-socketio-architecture)
 - [Tech Stack](#tech-stack)
-- [Features](#features)
+- [Core Features by Role](#core-features-by-role)
 - [Folder Structure](#folder-structure)
 - [Installation & Running Locally](#installation--running-locally)
 - [Environment Variables](#environment-variables)
-- [API Documentation](#api-documentation)
-- [Security](#security)
-- [Screenshots](#screenshots)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [Future Scope](#future-scope)
+- [API Reference](#api-reference)
+- [Security & Compliance](#security--compliance)
 - [Roadmap](#roadmap)
-- [Version](#version)
 - [License](#license)
 
 ---
 
 ## Project Overview
 
-**Hostel Management System** is a full‑stack MERN application designed to streamline complaint handling for the PICT hostel. It provides a unified platform for **students**, **staff**, **wardens**, and senior **incharge** personnel to create, track, and resolve accommodation‑related issues.
+**Hostel Management System (HMS)** is a modern full-stack MERN + Socket.IO web application designed to digitize and automate the complaint lifecycle, maintenance operations, and infrastructure analytics for collegiate hostels (e.g., PICT Hostel).
 
-- **Problem it solves**: Reduces manual paperwork, improves communication between residents and hostel administration, and offers real‑time visibility into complaint status.
-- **Target audience**: Students living in the hostel, support staff responsible for maintenance, wardens overseeing operations, and senior administrators who need analytics.
-- **Major goals**: Secure authentication, role‑based access, complete complaint lifecycle tracking, media‑rich reporting, and actionable analytics.
-- **Current development status**: This project is currently in the development phase.
-
----
-
-## Highlights
-
-| ✅ | Feature |
-|---|---------|
-| ✅ | **OTP Authentication** – secure one‑time‑password flow for students |
-| ✅ | **Role‑Based Access Control** – granular middleware for Staff, Warden, Incharge |
-| ✅ | **JWT Authentication** with short‑lived access tokens and HTTP‑only refresh cookies |
-| ✅ | **Complaint Lifecycle Tracking** – from creation to resolution, including feedback loop |
-| ✅ | **Analytics Dashboard** – status breakdown, category trends, average resolution time |
-| ✅ | **Image & Video Upload** – up to 5 images + 1 video per complaint (Multer & file‑type validation) |
-| ✅ | **Timeline View** – chronological visualisation of complaint history |
-| ✅ | **Responsive UI** – built with React 19 & Vite, works on desktop & mobile browsers |
-| ✅ | **Theme Support** – dark/light mode toggle |
-| ✅ | **Dashboard Statistics** – reusable stats cards & charts (Recharts) |
-| ✅ | **Secure APIs** – Helmet, rate limiting, Joi validation, bcrypt password hashing |
+- **Problem it Solves**: Eliminates manual paper registers and fragmented complaint reporting. Provides students with transparent real-time tracking, empowers maintenance staff with structured task queues, grants wardens full operational triage, and provides senior management (HOIDSS / Incharge) with executive analytics and heatmaps.
+- **Target Audience**: 
+  - **Students**: Raise issues, attach evidence photos/videos, track live status, review resolution, and submit feedback.
+  - **Maintenance Staff**: Trade-specific work queues (Electrician, Plumber, Carpenter, etc.), progress logging, and resolution submission.
+  - **Wardens**: Direct triage, smart filtering (date, room, category, status), automated staff assignment, and maintenance oversight.
+  - **Hostel Incharge / Senior Admin (HOIDSS)**: Institutional oversight, repeat issue detection, space heatmaps, staff SLA benchmarks, and predictive maintenance.
 
 ---
 
-## Current Project Status
+## Key Highlights
 
-**Implemented Modules**
-- ✅ Authentication (OTP, JWT, Refresh)
-- ✅ Complaint Management (CRUD, status workflow, feedback)
-- ✅ Media Upload (images & video, validation)
-- ✅ Analytics (dashboard, API aggregation)
-- ✅ Role‑Based Dashboards (Student, Staff, Warden, Incharge)
-- ✅ Notification via email (OTP delivery)
-- ✅ Secure middleware (Helmet, rate limiting, Joi)
+| Status | Feature | Description |
+|:---:|---|---|
+| ⚡ | **Real-Time Complaint Lifecycle** | Bi-directional Socket.IO updates across Student, Staff, Warden, and Incharge dashboards with zero page reloads. |
+| 🛡️ | **Dual-Stream Authentication** | Passwordless institutional email OTP for Students (`@ms.pict.edu`) and secure JWT/bcrypt authentication for Staff, Wardens, and Admins. |
+| 🔄 | **Feedback & Reopening Loop** | Students review resolved issues with a mandatory photographic/video proof requirement when marking work as unsatisfied. |
+| 📸 | **Rich Media & Lightbox Viewer** | Up to 5 photos + 1 video per ticket with an interactive full-screen viewer supporting zoom (50%–350%), drag/pan, and playback. |
+| 🧑‍🔧 | **Trade-Specific Assignment** | Direct staff directory organized by specialized maintenance trades (`Electrical`, `Plumbing`, `Carpentry`, etc.). |
+| 📊 | **HOIDSS Executive Analytics** | Space heatmaps, repeat offender analysis, SLA breach monitors, and staff performance metrics. |
+| 🗄️ | **Automated 6-Month Retention** | Immutable audit logs with automated background cleanup for resolved complaints older than 180 days. |
+| 🌓 | **Modern Responsive UI** | Clean dark/light mode, compact collapsible navigation, and optimized layouts built with React 19, Tailwind CSS v4, and Radix UI. |
 
-**Planned / In‑Progress Modules**
-- 🚧 Room Management (allocation & tracking)
-- 🚧 Real‑time Notifications (WebSocket / Push)
-- 🚧 AI‑powered Prioritisation & Chatbot
-- 🚧 Automated Testing & CI/CD pipeline
-- 🚧 Mobile‑friendly PWA wrapper
+---
+
+## Current Implementation Status
+
+### Implemented Modules (100% Operational)
+- [x] **Authentication & Authorization**: Student institutional OTP verification, Warden/Staff JWT authentication, token refresh cookies, role-based route protection.
+- [x] **Real-Time Socket.IO Engine**: Live events for complaint creation, assignment, status transition, resolution, feedback reopening, and deletion broadcasts.
+- [x] **Comprehensive Student Dashboard**: Ticket filing, room identification, PRN binding, live timeline view, and resolution feedback.
+- [x] **Staff Workspace**: Active tasks, work progression, resolution note logging, and historical completion archive.
+- [x] **Warden Command Center**: Multi-tier date filtering (Today, Yesterday, Last 7 days, Monthly, Custom range), category filtering, search, and staff assignment.
+- [x] **Executive HOIDSS Dashboard**: Room heatmaps, maintenance breakdown, SLA tracking, Kanban board, and broadcast announcements.
+- [x] **Evidence & Media Subsystem**: Multi-part uploads, MIME magic-byte validation, full-screen lightbox viewer with interactive zoom/pan controls.
+- [x] **Automated Data Retention**: Scheduled daily cleanup removing resolved records older than 180 days while blocking manual complaint deletion for audit integrity.
 
 ---
 
@@ -89,135 +80,169 @@
 
 ```mermaid
 graph TD
-
-    subgraph "Frontend (React + Vite)"
-        FE[UI Components]
+    subgraph "Client Layer (React 19 + Vite + Tailwind)"
+        StudentUI["Student Portal (/student-dashboard)"]
+        StaffUI["Staff Portal (/staff-dashboard)"]
+        WardenUI["Warden Portal (/admin-dashboard)"]
+        InchargeUI["HOIDSS Portal (/incharge-dashboard)"]
+        SocketClient["Socket.IO Client Provider"]
     end
 
-    subgraph "Backend (Node.js / Express)"
-        API[API Layer]
-        Controllers[Controllers]
-        Middleware[Middleware]
-        DB[(MongoDB + Mongoose)]
+    subgraph "API & Real-time Layer (Node.js / Express 5)"
+        AuthMiddleware["JWT & Role Middleware"]
+        RateLimiter["Rate Limiters (OTP, Login, API)"]
+        UploadHandler["Multer + Magic Byte Validator"]
+        SocketServer["Socket.IO Server (Room-based Dispatch)"]
+        Controllers["Controllers (Auth, Complaint, User, HOIDSS)"]
     end
 
-    FE -->|HTTP Requests| API
-    FE -->|Bearer JWT| API
-    API --> Controllers
-    Controllers --> Middleware
-    Middleware --> DB
-```
-## Authentication Flow
+    subgraph "Persistence Layer"
+        MongoDB[("MongoDB Database")]
+        StaticStorage["/uploads (Static Media)"]
+        RetentionWorker["Retention Scheduler (6-Month Policy)"]
+    end
 
-```mermaid
-sequenceDiagram
-    participant Student
-    participant Frontend
-    participant Backend
-    participant EmailService
-    Student->>Frontend: Request OTP (email)
-    Frontend->>Backend: POST /api/auth/student/send-otp
-    Backend->>EmailService: Send OTP email
-    EmailService-->>Student: OTP code
-    Student->>Frontend: Submit OTP
-    Frontend->>Backend: POST /api/auth/student/verify-otp
-    Backend->>Backend: Verify & generate short‑lived token
-    Backend-->>Frontend: JWT access token (in response) & refresh cookie
-    activate Frontend
-    Frontend->>Backend: GET /api/auth/student/complete-profile (auth header)
-    Backend->>Backend: authMiddleware validates JWT
-    Backend-->>Frontend: Profile completion form
-    deactivate Frontend
-    Note over Student,Backend: Returning student uses /login (email/password) with JWT flow
-    Frontend->>Backend: POST /api/auth/login (Staff/Warden) → JWT & refresh cookie
-    Frontend->>Backend: POST /api/auth/refresh → new access token
+    StudentUI & StaffUI & WardenUI & InchargeUI -->|REST API / Bearer JWT| AuthMiddleware
+    AuthMiddleware --> RateLimiter --> Controllers
+    Controllers --> UploadHandler --> StaticStorage
+    Controllers --> MongoDB
+    RetentionWorker -->|Daily Auto-Prune| MongoDB
+    
+    StudentUI & StaffUI & WardenUI & InchargeUI <-->|WebSocket Events| SocketClient
+    SocketClient <-->|Bi-directional Sync| SocketServer
+    Controllers -->|Emit Lifecycle Events| SocketServer
 ```
 
 ---
 
-## Complaint Workflow
+## Authentication & Access Control Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Student
+    actor WardenStaff as Warden / Staff
+    participant Frontend
+    participant Backend
+    participant Gmail as Nodemailer SMTP
+    participant DB as MongoDB
+
+    alt Student OTP Login
+        Student->>Frontend: Enter Institutional Email (@ms.pict.edu)
+        Frontend->>Backend: POST /api/auth/student/send-otp
+        Backend->>Gmail: Generate 6-digit OTP & deliver email
+        Gmail-->>Student: Receive OTP
+        Student->>Frontend: Submit OTP
+        Frontend->>Backend: POST /api/auth/student/verify-otp
+        Backend->>DB: Validate OTP & fetch/create student record
+        Backend-->>Frontend: Set Refresh Cookie & Return JWT Access Token
+    else Staff / Warden Password Login
+        WardenStaff->>Frontend: Submit Email & Password
+        Frontend->>Backend: POST /api/auth/login
+        Backend->>DB: Query user & verify bcrypt password hash
+        Backend-->>Frontend: Set Refresh Cookie & Return JWT Access Token + Role
+    end
+
+    Frontend->>Backend: Connect Socket.IO (token handshake with userId & role)
+    Backend-->>Frontend: Join Role-Specific Rooms (e.g., student:id, staff:id, wardens)
+```
+
+---
+
+## Complaint Lifecycle & Feedback Workflow
 
 ```mermaid
 flowchart TD
-    A[Student creates complaint] --> B[Status: Pending]
-    B --> C{Assigned?}
-    C -->|Yes| D[Status: In Progress]
-    C -->|No| B
-    D --> E[Status: Resolved]
-    E --> F[Student submits feedback]
-    F -->|Satisfied| G[Closed]
-    F -->|Unsatisfied| H[Status: Reopened]
-    H --> D
+    A([Student Raises Complaint]) -->|Includes Category, Room, PRN & Media| B[Status: Pending]
+    B -->|Warden Assigns Trade Staff| C[Status: Assigned]
+    C -->|Staff Acknowledges & Starts Work| D[Status: In Progress]
+    D -->|Staff Fixes Issue & Adds Note| E[Status: Resolved]
+    
+    E --> F{Student Verification}
+    F -->|Satisfied| G([Issue Closed & Verified])
+    F -->|Unsatisfied| H[Reopen Request]
+    
+    H -->|Requires Mandatory Photo/Video Evidence| I[Status: Assigned / Pending]
+    I --> D
+
+    G --> J[(Retained for 180 Days)]
+    J -->|Automated Nightly Prune| K([Archived / Removed])
 ```
+
+---
+
+## Real-Time Socket.IO Architecture
+
+The system maintains real-time state synchronization across all connected dashboards via dedicated Socket.IO event channels:
+
+| Event Name | Trigger Source | Payload | Target Recipients |
+|---|---|---|---|
+| `complaint:created` | Student raises a new ticket | Full complaint document + student PRN & room | All Wardens, Senior Management, Raising Student |
+| `complaint:assigned` | Warden assigns complaint to staff | Updated ticket with assigned staff details | Assigned Staff, Raising Student, Wardens |
+| `complaint:status-updated` | Staff starts work (`In Progress`) or resolves (`Resolved`) | Updated status, resolution note, timestamp | Raising Student, Wardens, Incharge |
+| `complaint:reopened` | Student rejects resolution with unsatisfied feedback | Reopened complaint with student notes & evidence | Assigned Staff, Wardens, Incharge |
+| `complaint:deleted` | Retention cleanup service | `complaintId` | All active dashboards |
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology | Version |
-|-------|------------|---------|
-| **Frontend** | React | 19.2.4 |
-| | Vite | 8.0.1 |
-| | React Router | 7.14.0 |
-| | TanStack Query | 5.100.10 |
-| | Recharts | 3.8.1 |
-| **Backend** | Node.js | 20 |
-| | Express | 5.2.1 |
-| **Database** | MongoDB | Latest |
-| **ODM** | Mongoose | 9.4.1 |
-| **Authentication** | JSON Web Token | 9.0.3 |
-| **Validation** | Joi | 18.1.2 |
-| **File Uploads** | Multer | 2.1.1 |
-| **Email** | Nodemailer | 8.0.5 |
-| **Security** | Helmet | 8.1.0 |
-| | express-rate-limit | 8.3.2 |
-| | bcryptjs | 3.0.3 |
+### Frontend
+- **Framework**: React 19 (`react` 19.2.4, `react-dom` 19.2.4)
+- **Build Tool**: Vite 8.0.3 (`@tailwindcss/vite`)
+- **Routing**: React Router 7.14.0
+- **Styling**: Tailwind CSS v4.3.3 + Custom HMS Design Tokens
+- **UI Primitives**: Radix UI (Dialog, Dropdown, Tabs, Popover, Select, Accordion, Tooltip)
+- **State & Data Fetching**: TanStack React Query 5.100.10, Axios 1.14.0
+- **Real-Time Client**: Socket.IO Client 4.8.3
+- **Data Visualizations**: Recharts 2.15.4
+- **Icons & Notifications**: Lucide React 1.8.0, Sonner 2.0.7
+
+### Backend
+- **Runtime & Framework**: Node.js 20+ (LTS) & Express 5.2.1
+- **Real-Time Server**: Socket.IO 4.8.3 with JWT-authenticated socket handshake
+- **Database & ODM**: MongoDB Atlas / Local with Mongoose 9.4.1
+- **Security & Headers**: Helmet 8.1.0, CORS 2.8.6, Express Rate Limit 8.3.2
+- **Authentication**: JSON Web Tokens (`jsonwebtoken` 9.0.3), `bcryptjs` 3.0.3, `cookie-parser` 1.4.7
+- **Validation**: Joi 18.1.2 Schema Validator
+- **File Upload & Verification**: Multer 2.1.1 + `file-type` 16.5.4 (magic-byte validation)
+- **Email Delivery**: Nodemailer 8.0.5 (Gmail SMTP integration)
+- **Logging**: Winston 3.19.0 logger
 
 ---
 
-## Features
+## Core Features by Role
 
-### Authentication
-- OTP generation & verification for students (`otpController.js`)
-- Email/password login for staff & wardens (`authController.js`)
-- JWT access tokens (15 min) & HTTP‑only refresh token cookies
-- Automatic token refresh endpoint (`/refresh`)
-- Role‑based middleware (`auth.js`, `authMiddleware.js`)
+### 👨‍🎓 Student Portal (`/student-dashboard`)
+- **Passwordless Institutional Login**: OTP sent directly to student's `@ms.pict.edu` email.
+- **Complaint Submission**: Report problems categorized by trade (`Electrical`, `Plumbing`, `Furniture`, `Cleanliness`, `Internet`, `Other`).
+- **Media Upload**: Attach up to 5 photos and 1 video detailing the maintenance issue.
+- **Real-Time Status Tracker**: Interactive step-by-step progress timeline (Submitted → Assigned → In Progress → Resolved).
+- **Resolution Verification & Feedback**:
+  - Accept fix to close the complaint.
+  - Reject fix with **mandatory photo/video evidence** to automatically reopen the ticket for further work.
+- **My Room**: View assigned room number, hostel wing, and room maintenance history.
 
-### Complaint Management
-- Create, view, update, assign, delete complaints (`complaintController.js`)
-- Status workflow: Pending → In Progress → Resolved → Reopened
-- Feedback submission with optional media for unsatisfied students
-- Timeline/history tracking for every state change
+### 🧑‍🔧 Maintenance Staff Portal (`/staff-dashboard`)
+- **Assigned Tasks Queue**: Real-time listing of active tickets assigned to the logged-in technician.
+- **Status Lifecycle Control**: Mark tickets as `In Progress` when starting work and `Resolved` upon completion.
+- **Resolution Documentation**: Record mandatory resolution notes explaining actions taken.
+- **Interactive Lightbox**: Inspect student evidence photos/videos with zoom, pan, and full video playback.
+- **Work History**: Complete historical record of all completed maintenance jobs.
 
-### Media Handling
-- Multer configuration for multi‑field uploads (`images`, `video`)
-- File‑type validation using `file-type`
-- Secure deletion of media on complaint removal
+### 🛡️ Warden Management Portal (`/admin-dashboard`)
+- **Comprehensive Complaint Registry**: Live overview of all hostel complaints with live counters for Pending, In Progress, and Resolved.
+- **Smart Multi-Tier Filters**: Filter complaints by date (`Today`, `Yesterday`, `Last 7 Days`, `This Month`, `Last Month`, `Custom Range`), trade category, and status.
+- **Staff Directory & Dispatch**: Assign complaints directly to registered staff members based on trade expertise.
+- **Student Identification**: Every card and modal displays student Name, PRN Number (`f24ce307`), and Room Number.
+- **Analytics & Trends**: Category breakdown charts, average resolution speed, and recurring problem indicators.
 
-### Dashboards & UI
-- Role‑specific dashboards (Student, Staff, Warden, Incharge)
-- Analytics visualisation (status summary, trends, KPI cards)
-- Timeline component (`ComplaintTimeline.jsx`) showing chronological events
-- Media gallery (`MediaGallery.jsx`) with lightbox preview
-- Theme toggle (dark/light) (`ThemeToggle.jsx`)
-- Reusable stats cards (`StatsCard.jsx`) and charts (`Chart.jsx`)
-
-### Analytics
-- Aggregated statistics endpoint (`getAnalytics`)
-- Daily trend, category breakdown, average resolution time
-- Incharge‑level KPI endpoints (heatmaps, predictive insights, kanban board)
-
-### User Management
-- Profile retrieval (`userController.js`)
-- List all students/users for admin purposes
-
-### Security
-- Helmet HTTP headers
-- Express rate limiting on auth & OTP routes
-- Input validation via Joi schemas (`validate.js`)
-- Password hashing with bcryptjs
-- Secure OTP expiry handling in `otpController.js`
+### 🏛️ Hostel Incharge / HOIDSS Executive Portal (`/incharge-dashboard`)
+- **Space Heatmaps**: Visual floor-by-floor breakdown of complaint distribution.
+- **SLA & Escalation Monitoring**: Track overdue complaints exceeding standard resolution windows.
+- **Staff Performance Benchmarks**: Average turnaround time and resolution volume per staff member.
+- **Broadcast Announcements**: Issue campus-wide or hostel-specific notices to residents.
+- **Interactive Kanban**: Drag-and-drop workflow tracking across all active hostel operations.
 
 ---
 
@@ -225,187 +250,216 @@ flowchart TD
 
 ```
 Hostel-Management-System/
-├─ backend/                # Express server
-│  ├─ config/              # DB connection (db.js)
-│  ├─ controllers/         # auth, complaint, otp, user, inchargeDashboard
-│  ├─ middleware/          # auth, rateLimiter, upload, validate
-│  ├─ models/              # User, Complaint, OTP, Announcement, Room
-│  ├─ routes/              # authRoutes.js, complaintRoutes.js, userRoutes.js, inchargeRoutes.js
-│  ├─ utils/               # generateTokens.js, logger.js
-│  └─ server.js
-├─ frontend-react/         # Vite + React SPA
-│  ├─ src/
-│  │  ├─ assets/           # images, icons
-│  │  ├─ components/       # UI components (Sidebar, ThemeToggle, Chart, StatsCard, MediaGallery, ComplaintTimeline, ProtectedRoute, incharge/*)
-│  │  ├─ context/          # React context providers
-│  │  ├─ hooks/            # custom hooks (useInchargeDashboard.js, etc.)
-│  │  ├─ pages/            # Dashboard pages per role
-│  │  ├─ services/         # API wrappers (axios instances)
-│  │  ├─ utils/            # helper utilities (exportUtils.js)
-│  │  └─ App.jsx, main.jsx, index.css
-│  ├─ public/              # static files
-│  ├─ vite.config.js
-│  └─ package.json
-├─ .env.example            # template for environment variables
-├─ README.md
-└─ graphify-out/           # knowledge‑graph artifacts
+├── backend/
+│   ├── config/
+│   │   └── db.js                        # MongoDB Mongoose connection
+│   ├── controllers/
+│   │   ├── authController.js            # Staff/Warden login & registration
+│   │   ├── complaintController.js       # Complaint CRUD, lifecycle, feedback, analytics
+│   │   ├── inchargeDashboardController.js # HOIDSS executive metrics & heatmaps
+│   │   ├── otpController.js             # Student OTP generation & verification
+│   │   └── userController.js            # Profile, student & staff directory endpoints
+│   ├── middleware/
+│   │   ├── auth.js                      # JWT verification & role-based guards
+│   │   ├── rateLimiter.js               # Express rate limiters for auth, OTP, API
+│   │   ├── upload.js                    # Multer configuration & magic-byte validation
+│   │   └── validate.js                  # Joi request schema validation
+│   ├── models/
+│   │   ├── Announcement.js              # Broadcast announcements schema
+│   │   ├── Complaint.js                 # Complaint, statusHistory, feedback & media schema
+│   │   ├── OTP.js                       # 6-digit OTP verification schema
+│   │   ├── Room.js                      # Hostel room mapping schema
+│   │   └── User.js                      # Student, Staff, Warden, Incharge user schema
+│   ├── routes/
+│   │   ├── authRoutes.js                # /api/auth routes
+│   │   ├── complaintRoutes.js           # /api/complaints routes
+│   │   ├── inchargeRoutes.js            # /api/incharge routes
+│   │   └── userRoutes.js                # /api/users routes
+│   ├── uploads/                         # Stored complaint evidence images & videos
+│   ├── utils/
+│   │   ├── generateTokens.js            # Access token & refresh cookie generation
+│   │   └── logger.js                    # Winston logging utility
+│   └── server.js                        # Express app, Socket.IO server & retention cron
+│
+├── frontend-react/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── hms/                     # Unified HMS design system components
+│   │   │   │   ├── app-shell.tsx        # Responsive desktop sidebar & mobile bottom bar
+│   │   │   │   ├── complaint-card.tsx   # Complaint card with PRN, room & live status
+│   │   │   │   ├── complaint-detail.tsx # Header, metadata, and resolution breakdown
+│   │   │   │   ├── complaint-timeline.tsx # Real-time chronological lifecycle tracker
+│   │   │   │   ├── media-gallery.tsx    # Lightbox viewer with zoom, pan & video player
+│   │   │   │   ├── media-uploader.tsx   # Multi-file drag-and-drop evidence uploader
+│   │   │   │   └── status.tsx           # Status badge indicators and date formatters
+│   │   │   ├── hoidss/                  # Executive dashboard components & space heatmaps
+│   │   │   ├── incharge/                # Kanban board, charts, KPI cards
+│   │   │   └── ui/                      # Radix UI primitives styled with Tailwind CSS
+│   │   ├── context/
+│   │   │   ├── AuthContext.jsx          # User authentication state & session management
+│   │   │   ├── SocketContext.jsx        # Socket.IO connection & event dispatch provider
+│   │   │   └── ThemeContext.jsx         # Dark / Light theme provider
+│   │   ├── hooks/
+│   │   │   ├── use-mobile.tsx           # Responsive viewport hook
+│   │   │   └── useInchargeDashboard.js  # HOIDSS data aggregation hook
+│   │   ├── lib/
+│   │   │   ├── media.ts                 # Media format validation and URL resolvers
+│   │   │   ├── status-config.ts         # Status mappings and color tokens
+│   │   │   └── utils.ts                 # ClassName merger (clsx + tailwind-merge)
+│   │   ├── pages/
+│   │   │   ├── student/                 # Student Complaints, Home, Room, Profile
+│   │   │   ├── staff/                   # Staff Work, History, Profile
+│   │   │   ├── warden/                  # Warden Overview, Complaints, Rooms, Staff
+│   │   │   ├── InchargeDashboard.jsx    # Executive HOIDSS command center
+│   │   │   ├── Login.jsx                # Universal staff/warden login
+│   │   │   ├── Register.jsx             # Staff/warden account registration
+│   │   │   └── StudentLogin.jsx         # Student email OTP login
+│   │   ├── services/
+│   │   │   ├── api.js                   # Axios client with auto-refresh interceptors
+│   │   │   └── inchargeService.js       # Incharge analytics API client
+│   │   ├── App.jsx                      # Route definitions and role-based route guards
+│   │   ├── main.jsx                     # Application bootstrap
+│   │   └── index.css                    # Tailwind CSS v4 directives & theme variables
+│   ├── package.json
+│   └── vite.config.js
+│
+├── .env.example                         # Environment configuration template
+└── README.md
 ```
 
 ---
 
 ## Installation & Running Locally
 
-1. **Prerequisites**: Node ≥20, npm, MongoDB (local or Atlas).
-2. **Clone the repo**
-   ```bash
-   git clone https://github.com/Antariksh62/Hostel-Management-System.git
-   cd Hostel-Management-System
-   ```
-3. **Backend setup**
-   ```bash
-   cd backend
-   cp .env.example .env   # edit with your values
-   npm install
-   npm run dev   # starts on PORT (default 5000)
-   ```
-4. **Frontend setup**
-   ```bash
-   cd ../frontend-react
-   npm install
-   npm run dev   # Vite dev server → http://localhost:5173
-   ```
+### 1. Prerequisites
+- **Node.js**: `v20.0.0` or higher
+- **npm**: `v10.0.0` or higher
+- **MongoDB**: Running MongoDB instance (Local on `mongodb://127.0.0.1:27017/hostelDB` or MongoDB Atlas URI)
+
+### 2. Clone the Repository
+```bash
+git clone https://github.com/Antariksh62/Hostel-Management-System.git
+cd Hostel-Management-System
+```
+
+### 3. Backend Setup
+```bash
+cd backend
+npm install
+
+# Create environment configuration
+cp .env.example .env
+# Edit .env with your MongoDB URI, JWT Secrets, and Gmail SMTP credentials
+```
+
+Start the backend server:
+```bash
+npm run dev
+# Starts backend server & Socket.IO on http://localhost:5000
+```
+
+### 4. Frontend Setup
+Open a new terminal:
+```bash
+cd frontend-react
+npm install
+npm run dev
+# Starts Vite development server on http://localhost:5173
+```
 
 ---
 
-## Environment Variables (`backend/.env`)
+## Environment Variables
 
-| Variable | Description |
-|----------|-------------|
-| `MONGO_URI` | MongoDB connection string |
-| `JWT_SECRET` | Secret for signing access tokens |
-| `JWT_REFRESH_SECRET` | Secret for signing refresh tokens |
-| `PORT` | Port for the Express server (default 5000) |
-| `EMAIL_USER` | Gmail address used to send OTP emails |
-| `EMAIL_PASS` | App‑specific password for the Gmail account |
+### Backend Configuration (`backend/.env`)
 
----
+```env
+# Server Port
+PORT=5000
 
-## API Documentation
+# MongoDB Connection String
+MONGO_URI=mongodb://127.0.0.1:27017/hostelDB
 
-### Authentication
-- `POST /api/auth/register` – staff/warden registration (email & password)
-- `POST /api/auth/login` – staff/warden login, returns access token & refresh cookie
-- `POST /api/auth/refresh` – refresh access token using HTTP‑only cookie
-- `POST /api/auth/student/send-otp` – request OTP for student email
-- `POST /api/auth/student/verify-otp` – verify OTP, receive temp token
-- `POST /api/auth/student/complete-profile` – set name, password, role after OTP verification
+# JWT Secrets & Expiry
+JWT_SECRET=your_super_secret_jwt_access_key
+JWT_REFRESH_SECRET=your_super_secret_jwt_refresh_key
 
-### Student
-- `PATCH /api/auth/student/update-info` – update student details (protected)
+# Nodemailer Gmail SMTP Credentials (for Student OTP delivery)
+EMAIL_USER=your_institutional_email@gmail.com
+EMAIL_PASS=your_gmail_app_specific_password
 
-### Complaints
-- `POST /api/complaints/` – create complaint (media upload) – Student only
-- `GET /api/complaints/my-complaints` – list own complaints – Student only
-- `GET /api/complaints/all` – list all complaints – Warden/Staff
-- `PUT /api/complaints/:id/status` – update status – Staff/Warden
-- `PUT /api/complaints/assign/:id` – assign staff – Warden only
-- `DELETE /api/complaints/:id` – delete complaint – Warden only
-- `POST /api/complaints/:id/feedback` – submit feedback with optional media – Student only
-- `GET /api/complaints/analytics?days=7` – aggregated analytics for dashboards
-
-### User Management
-- `GET /api/user/profile` – retrieve own profile
-- `GET /api/user/all-students` – list all student users (admin)
-- `GET /api/user/all` – list all users (admin)
-
-### Incharge (Senior Management)
-- Various analytics endpoints (`/overview`, `/complaint-analytics`, `/staff-performance`, etc.)
-- Announcement management (`GET /announcements`, `POST /announcements`, `DELETE /announcements/:id`)
-
-All protected routes require the `Authorization: Bearer <token>` header and appropriate role middleware.
+# Client URL (for CORS & Socket.IO handshake)
+CLIENT_URL=http://localhost:5173
+```
 
 ---
 
-## Security
+## API Reference
 
-- **JWT Authentication** – short‑lived access tokens (15 min) + refresh tokens stored in HTTP‑only cookies.
-- **Role‑Based Authorization** – `authMiddleware`, `wardenMiddleware`, `wardenOrStaffMiddleware`, and senior‑only checks for Incharge routes.
-- **Helmet** – sets secure HTTP headers.
-- **Rate Limiting** – limits on auth and OTP endpoints to mitigate brute‑force attacks.
-- **Joi Validation** – request payload validation for all endpoints.
-- **Password Hashing** – bcryptjs with salts.
-- **OTP Expiry & Attempt Limits** – OTPs expire after a configurable period; verification attempts are rate‑limited.
-- **Secure File Upload Validation** – MIME type checking using `file-type` before persisting uploads.
+### Authentication (`/api/auth`)
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `POST` | `/api/auth/register` | Public | Register Staff / Warden with email & password |
+| `POST` | `/api/auth/login` | Public | Staff / Warden login (returns JWT + refresh cookie) |
+| `POST` | `/api/auth/refresh` | Public | Issues new access token via HTTP-only refresh cookie |
+| `POST` | `/api/auth/student/send-otp` | Public | Generates and sends 6-digit OTP to student email |
+| `POST` | `/api/auth/student/verify-otp` | Public | Verifies OTP and returns authenticated session token |
+| `POST` | `/api/auth/student/complete-profile` | Student | Updates student name, PRN, and room after first login |
+| `PATCH`| `/api/auth/student/update-info` | Student | Updates student profile details |
+
+### Complaints (`/api/complaints`)
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `POST` | `/api/complaints` | Student | Raise complaint (supports up to 5 images + 1 video) |
+| `GET`  | `/api/complaints/my-complaints` | Student | Retrieve complaints raised by current student |
+| `GET`  | `/api/complaints/all` | Staff / Warden | Retrieve all complaints (supports filtering) |
+| `PUT`  | `/api/complaints/:id/status` | Staff / Warden | Update status (`In Progress`, `Resolved`) with note |
+| `PUT`  | `/api/complaints/assign/:id` | Warden | Assign complaint to a maintenance staff member |
+| `POST` | `/api/complaints/:id/feedback` | Student | Submit satisfaction feedback (evidence mandatory if unsatisfied) |
+| `GET`  | `/api/complaints/analytics` | Warden | Aggregated complaint volume and category analytics |
+
+### Users & Staff Directory (`/api/users`)
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `GET`  | `/api/users/profile` | Authenticated | Retrieve authenticated user profile |
+| `GET`  | `/api/users/staff` | Warden | List registered maintenance staff filtered by trade |
+| `GET`  | `/api/users/students` | Warden | List registered hostel students |
+| `GET`  | `/api/users` | Warden | List all registered users |
+
+### HOIDSS / Incharge Analytics (`/api/incharge`)
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `GET`  | `/api/incharge/overview` | HOIDSS / Incharge | Executive summary & critical indicators |
+| `GET`  | `/api/incharge/complaint-analytics` | HOIDSS / Incharge | Category breakdown & resolution velocity |
+| `GET`  | `/api/incharge/staff-performance` | HOIDSS / Incharge | Staff workload, completion rates, and turnaround |
+| `GET`  | `/api/incharge/heatmap` | HOIDSS / Incharge | Room & wing complaint frequency heatmap |
+| `GET`  | `/api/incharge/sla-breaches` | HOIDSS / Incharge | List complaints exceeding resolution SLA thresholds |
+| `GET`  | `/api/incharge/kanban` | HOIDSS / Incharge | Real-time Kanban board of all operational complaints |
+| `GET`  | `/api/incharge/announcements` | HOIDSS / Incharge | Fetch active institutional announcements |
+| `POST` | `/api/incharge/announcements` | HOIDSS / Incharge | Publish a new institutional broadcast |
 
 ---
 
-## Screenshots
+## Security & Compliance
 
-🚧 Screenshots will be added soon.
-
-
-
-## Deployment
-
-### Recommended Deployment
-
-Frontend: Vercel
-
-Backend: Render
-
-Database: MongoDB Atlas
-
-Deployment configuration is planned but not yet completed.
-- **Environment Variables** – all secrets (`JWT_SECRET`, `EMAIL_USER`, etc.) must be set in the hosting environment.
-- **Current state** – No CI/CD pipeline is configured yet; deployment scripts will be added in future iterations.
-
----
-
-## Future Scope
-
-- **Room Allocation Module** – manage room assignments and availability.
-- **Real‑time Notifications** – WebSocket / Push notifications for status updates.
-- **AI Complaint Prioritization** – machine‑learning model to rank urgent issues.
-- **AI Chatbot** – assist students with common queries.
-- **Comprehensive Reporting** – PDF/CSV export of analytics.
-- **Mobile Application** – React Native or Flutter client.
-- **CI/CD Automation** – GitHub Actions for lint, test, build, and deploy.
-- **Automated Testing** – Jest/Supertest unit and integration tests.
+- **HTTP-Only Cookies & Short-Lived JWTs**: Access tokens expire in 15 minutes; refresh tokens are securely isolated in HTTP-Only cookies with `SameSite=Strict`.
+- **Granular Role-Based Access Control**: Route-level middleware enforces strict separation of privileges (`STUDENT`, `STAFF`, `WARDEN`, `INCHARGE`, `HEADWARDEN`).
+- **Magic-Byte File Validation**: Uploaded media is validated at the binary header level using `file-type` to prevent disguised executable uploads.
+- **Brute-Force & Abuse Mitigation**: `express-rate-limit` enforces rate limits on OTP generation, OTP verification, and login endpoints.
+- **SQL / NoSQL Injection & Payload Sanitization**: Joi schema validation validates all inputs before controllers are invoked.
+- **6-Month Data Retention Policy**: Hard-deletion of complaint records is blocked (`403 Forbidden`) during active life; an automated background worker prunes resolved complaints older than 180 days to maintain an immutable audit trail.
 
 ---
 
 ## Roadmap
 
-### Planned Features
-- Unit & integration tests (Jest, Supertest).
-- Docker Compose for local development.
-- Enhanced role management for Incharge.
-- Push notifications for complaint updates.
-- Exportable reports (CSV/PDF).
-
-### AI Features
-- Natural‑language summarisation of complaint details.
-- Automated image classification for triage.
-
-### Quality Improvements
-- Refactor isolated utilities into shared services.
-- TypeScript migration for stronger typing.
-- Swagger/OpenAPI documentation.
-
-### Deployment Improvements
-- GitHub Actions CI workflow.
-- Deploy frontend to Vercel, backend to Render.
-- HTTPS and environment‑specific configuration.
-
----
-
-
-
-## Status
-🚧 Under Active Development
+- [ ] **Push Notifications**: Web Push API for real-time mobile push alerts when tickets change state.
+- [ ] **AI-Powered Automated Triage**: Automatic category classification and priority scoring from student problem descriptions.
+- [ ] **Room Asset Barcode Scanning**: QR/Barcode scanning for room assets during maintenance inspection.
+- [ ] **Automated CI/CD Workflows**: GitHub Actions pipeline for automated linting, test execution, and deployment to cloud hosts.
 
 ---
 
 ## License
 
-MIT License – see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.

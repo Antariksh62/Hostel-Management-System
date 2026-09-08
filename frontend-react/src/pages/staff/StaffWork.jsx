@@ -61,17 +61,17 @@ export default function StaffWork() {
   // Real-time socket updates (ONLY tasks assigned to this staff member)
   useEffect(() => {
     if (!socket) return;
-    const myId = String(user?.id || user?._id);
+    const myId = String(user?.id || user?._id || "");
 
     const handleAssigned = (payload) => {
-      const { complaint } = payload;
+      const complaint = payload?.complaint || payload;
       if (!complaint || !complaint.assignedTo) return;
-      const assignedId = String(complaint.assignedTo._id || complaint.assignedTo);
+      const assignedId = String(complaint.assignedTo._id || complaint.assignedTo || "");
       if (assignedId === myId) {
         setComplaints((prev) => {
-          const exists = prev.some((c) => String(c._id) === String(complaint._id));
+          const exists = prev.some((c) => String(c._id || c.id) === String(complaint._id || complaint.id));
           if (exists) {
-            return prev.map((c) => (String(c._id) === String(complaint._id) ? complaint : c));
+            return prev.map((c) => (String(c._id || c.id) === String(complaint._id || complaint.id) ? complaint : c));
           }
           return [complaint, ...prev];
         });
@@ -80,24 +80,31 @@ export default function StaffWork() {
     };
 
     const handleStatusUpdated = (payload) => {
-      const { complaintId, complaint, status } = payload;
+      const targetId = String(payload?.complaintId || payload?.complaint?._id || payload?.complaint?.id || "");
+      const updatedComplaint = payload?.complaint;
+
       setComplaints((prev) =>
         prev.map((c) => {
-          if (String(c._id) === String(complaintId)) {
-            const updated = complaint ? { ...c, ...complaint } : { ...c, status: status || c.status };
-            if (detailComplaint && String(detailComplaint._id) === String(complaintId)) {
-              setDetailComplaint(updated);
-            }
-            return updated;
+          const currentId = String(c._id || c.id || "");
+          if (currentId === targetId) {
+            return updatedComplaint ? { ...c, ...updatedComplaint } : { ...c, status: payload.status || c.status };
           }
           return c;
         })
       );
+
+      setDetailComplaint((prev) => {
+        if (prev && String(prev._id || prev.id) === targetId) {
+          return updatedComplaint ? { ...prev, ...updatedComplaint } : { ...prev, status: payload.status || prev.status };
+        }
+        return prev;
+      });
     };
 
     const handleDeleted = (payload) => {
-      const { complaintId } = payload;
-      setComplaints((prev) => prev.filter((c) => String(c._id) !== String(complaintId)));
+      const targetId = String(payload?.complaintId || "");
+      setComplaints((prev) => prev.filter((c) => String(c._id || c.id) !== targetId));
+      setDetailComplaint((prev) => (prev && String(prev._id || prev.id) === targetId ? null : prev));
     };
 
     socket.on("complaint:assigned", handleAssigned);
@@ -109,7 +116,7 @@ export default function StaffWork() {
       socket.off("complaint:status-updated", handleStatusUpdated);
       socket.off("complaint:deleted", handleDeleted);
     };
-  }, [socket, user, detailComplaint]);
+  }, [socket, user]);
 
   // Update status (e.g. Start Work)
   async function handleUpdateStatus(id, newStatus) {
@@ -196,14 +203,20 @@ export default function StaffWork() {
       ) : (
         <div className="space-y-3">
           {active.map((c) => {
-            const studentName = c.studentId?.name || c.studentId?.fullName || c.studentName || "Student";
+            const studentObj = typeof c.studentId === "object" ? c.studentId : null;
+            const studentName = studentObj?.fullName || studentObj?.name || c.studentName || "Student";
+            const prn = studentObj?.prn || studentObj?.rollNumber || c.prn || c.rollNumber || "—";
             const isInProg = c.status === "In Progress" || c.status === "in_progress";
 
             return (
               <ComplaintCard
                 key={c._id || c.id}
                 complaint={c}
-                meta={<span>Reported by {studentName}</span>}
+                meta={
+                  <span>
+                    Reported by <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
+                  </span>
+                }
                 footer={
                   <div className="flex flex-wrap items-center gap-2">
                     <Button
@@ -255,12 +268,24 @@ export default function StaffWork() {
 
               <ComplaintMeta
                 items={[
-                  { label: "Room", value: `Room ${detailComplaint.doorNumber || detailComplaint.room || "—"}` },
+                  { label: "Room", value: `Room ${detailComplaint.doorNumber || detailComplaint.room || detailComplaint.studentId?.doorNumber || "—"}` },
                   { label: "Category", value: detailComplaint.category },
                   { label: "Reported", value: formatDateTime(detailComplaint.createdAt) },
                   {
-                    label: "Student",
-                    value: detailComplaint.studentId?.name || detailComplaint.studentId?.fullName || "Resident",
+                    label: "Student Name",
+                    value: detailComplaint.studentId?.fullName || detailComplaint.studentId?.name || "Resident",
+                  },
+                  {
+                    label: "Student PRN",
+                    value: (
+                      <span className="font-mono font-medium">
+                        {detailComplaint.studentId?.prn || detailComplaint.studentId?.rollNumber || "—"}
+                      </span>
+                    ),
+                  },
+                  {
+                    label: "Student Email",
+                    value: detailComplaint.studentId?.email || "—",
                   },
                 ]}
               />

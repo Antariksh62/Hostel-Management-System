@@ -20,6 +20,15 @@ exports.getAllStudents = async (req, res) => {
     }
 };
 
+exports.getAllStaff = async (req, res) => {
+    try {
+        const staff = await User.find({ role: "STAFF" }).select("-password");
+        res.json(staff);
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await User.find().select("-password");

@@ -193,11 +193,11 @@ export function DrilldownListSheet() {
                     openDrawer({
                       kind: "Complaint",
                       title: `Complaint #${String(c.id).slice(-6)} · ${c.category}`,
-                      subtitle: `${c.studentName} (${c.rollNumber}) · Room ${c.room}`,
+                      subtitle: `${c.studentName} (PRN: ${c.prn || c.rollNumber}) · Room ${c.room}`,
                       health: c.hoursElapsed > 48 ? "crit" : c.status === "Resolved" ? "ok" : "warn",
                       facts: [
                         { label: "Student Name", value: c.studentName },
-                        { label: "PRN / Roll Number", value: c.rollNumber },
+                        { label: "Student PRN", value: c.prn || c.rollNumber },
                         { label: "Room Number", value: `Room ${c.room}` },
                         { label: "Branch & Year", value: `${c.branch} · ${c.year}` },
                         { label: "Category", value: c.category },
@@ -220,7 +220,7 @@ export function DrilldownListSheet() {
                   </div>
                   <p className="mt-2 text-sm font-bold text-foreground line-clamp-2">{c.description || "No description provided."}</p>
                   <div className="mt-3 flex flex-wrap items-center justify-between text-xs text-muted-foreground border-t border-border/60 pt-2.5">
-                    <span>Student: <strong className="text-foreground">{c.studentName}</strong> ({c.rollNumber})</span>
+                    <span>Student: <strong className="text-foreground">{c.studentName}</strong> (PRN: <span className="font-mono">{c.prn || c.rollNumber}</span>)</span>
                     <span>Assigned: <strong className="text-foreground">{c.assignedTo}</strong></span>
                   </div>
                 </button>

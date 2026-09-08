@@ -783,7 +783,7 @@ exports.getSLABreaches = async (req, res) => {
             status: { $in: ["Pending", "In Progress", "Reopened"] },
             createdAt: { $lte: threshold }
         })
-        .populate("studentId", "name rollNumber doorNumber year branch")
+        .populate("studentId", "name fullName email prn rollNumber doorNumber year branch")
         .populate("assignedTo", "name")
         .sort({ createdAt: 1 })
         .limit(50);
@@ -792,8 +792,9 @@ exports.getSLABreaches = async (req, res) => {
             const hoursElapsed = Math.round((Date.now() - new Date(c.createdAt)) / (1000 * 60 * 60));
             return {
                 id:           c._id,
-                studentName:  c.studentId?.name        || "Unknown",
-                rollNumber:   c.studentId?.rollNumber  || "—",
+                studentName:  c.studentId?.fullName    || c.studentId?.name || "Unknown",
+                rollNumber:   c.studentId?.prn         || c.studentId?.rollNumber || "—",
+                prn:          c.studentId?.prn         || c.studentId?.rollNumber || "—",
                 room:         c.doorNumber || c.studentId?.doorNumber || "—",
                 year:         c.studentId?.year        || "—",
                 branch:       c.studentId?.branch      || "—",
@@ -923,15 +924,16 @@ exports.getDrillDown = async (req, res) => {
         }
 
         const complaints = await Complaint.find(filter)
-            .populate("studentId",  "name rollNumber doorNumber year branch")
+            .populate("studentId",  "name fullName email prn rollNumber doorNumber year branch")
             .populate("assignedTo", "name")
             .sort({ createdAt: -1 })
             .limit(parseInt(limit));
 
         res.json(complaints.map(c => ({
             id:           c._id,
-            studentName:  c.studentId?.name       || "Unknown",
-            rollNumber:   c.studentId?.rollNumber || "—",
+            studentName:  c.studentId?.fullName   || c.studentId?.name || "Unknown",
+            rollNumber:   c.studentId?.prn        || c.studentId?.rollNumber || "—",
+            prn:          c.studentId?.prn        || c.studentId?.rollNumber || "—",
             room:         c.doorNumber || c.studentId?.doorNumber || "—",
             year:         c.studentId?.year       || "—",
             branch:       c.studentId?.branch     || "—",

@@ -69,19 +69,23 @@ export function AppShell({
   const location = useLocation();
   const pathname = location.pathname;
 
-  const isActive = (to: string) =>
-    to === pathname || (to !== "/" && pathname.startsWith(`${to}/`));
+  // Best match: find the most specific navigation item matching the current pathname
+  const activeNavItem = nav
+    .filter((item) => item.to === pathname || (item.to !== "/" && pathname.startsWith(`${item.to}/`)))
+    .sort((a, b) => b.to.length - a.to.length)[0];
+
+  const isActive = (to: string) => activeNavItem?.to === to;
 
   return (
     <div className="hms-root min-h-screen bg-background text-foreground">
       <div className="lg:flex">
         {/* Desktop sidebar */}
-        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border bg-sidebar lg:flex">
-          <div className="px-5 py-6">
+        <aside className="sticky top-0 hidden h-screen w-52 shrink-0 flex-col border-r border-border bg-sidebar lg:flex">
+          <div className="px-4 py-4">
             <p className="text-sm font-semibold tracking-tight">{product}</p>
             <p className="mt-0.5 text-xs text-muted-foreground">{roleLabel}</p>
           </div>
-          <nav className="flex-1 space-y-1 px-3" aria-label="Main">
+          <nav className="flex-1 space-y-1 px-2.5" aria-label="Main">
             {nav.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.to);
@@ -91,7 +95,7 @@ export function AppShell({
                   to={item.to}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                    "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors",
                     active
                       ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
                       : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-foreground"
@@ -103,15 +107,15 @@ export function AppShell({
               );
             })}
           </nav>
-          <div className="flex items-center gap-3 border-t border-border px-4 py-4">
-            <Avatar className="size-9">
+          <div className="flex items-center gap-2 border-t border-border px-3 py-3">
+            <Avatar className="size-8 shrink-0">
               <AvatarFallback className="text-xs">{initials(userName)}</AvatarFallback>
             </Avatar>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">{userName}</p>
-              <p className="truncate text-xs text-muted-foreground">{userSubtitle}</p>
+              <p className="truncate text-xs font-medium text-foreground">{userName}</p>
+              <p className="truncate text-[11px] text-muted-foreground">{userSubtitle}</p>
             </div>
-            <ThemeButton />
+            <ThemeButton className="size-8 shrink-0" />
           </div>
         </aside>
 

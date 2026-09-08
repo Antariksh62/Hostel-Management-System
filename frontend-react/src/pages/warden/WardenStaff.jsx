@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, Users } from "lucide-react";
+import { Loader2, Users, Wrench } from "lucide-react";
 
 import { EmptyState, PageHeader } from "@/components/hms/app-shell";
 import api from "@/services/api";
@@ -13,7 +13,7 @@ export default function WardenStaff() {
 
   const { data: complaints = [], isLoading: cLoading } = useQuery({
     queryKey: ["warden-complaints"],
-    queryFn: () => api.get("/complaints").then((r) => r.data || []),
+    queryFn: () => api.get("/complaints/all").then((r) => r.data || []),
   });
 
   const loading = sLoading || cLoading;
@@ -53,9 +53,14 @@ export default function WardenStaff() {
                 key={sid}
                 className="flex items-center justify-between gap-4 px-4 py-3.5 sm:px-6 transition-colors hover:bg-muted/30"
               >
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-foreground">{s.name}</p>
-                  <p className="truncate text-xs text-muted-foreground">{s.email}</p>
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Wrench className="size-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-foreground">{s.name}</p>
+                    <p className="truncate text-xs text-muted-foreground">{s.email}</p>
+                  </div>
                 </div>
                 <div className="shrink-0 text-right">
                   <p className="text-sm font-semibold tabular-nums text-foreground">
@@ -71,3 +76,4 @@ export default function WardenStaff() {
     </>
   );
 }
+

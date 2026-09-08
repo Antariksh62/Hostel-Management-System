@@ -4,9 +4,10 @@ const mongoose = require("mongoose");
 // Tracks every stage change with a precise timestamp so students, staff, and
 // wardens can all see the full lifecycle of a complaint.
 const StatusEventSchema = new mongoose.Schema({
-    status:    { type: String, required: true },   // e.g. "Pending", "In Progress", "Resolved"
+    status:    { type: String, required: true },   // e.g. "Pending", "Assigned", "In Progress", "Resolved", "Reopened", "Feedback"
     timestamp: { type: Date,   default: Date.now }, // exact moment of transition
-    note:      { type: String, default: "" }        // e.g. "Assigned to Ravi Kumar"
+    note:      { type: String, default: "" },       // e.g. "Assigned to Ravi Kumar"
+    actor:     { type: String, default: "" }        // Role or name of actor
 }, { _id: false });
 
 const ComplaintSchema = new mongoose.Schema({
@@ -51,8 +52,9 @@ const ComplaintSchema = new mongoose.Schema({
     assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
     assignedAt: { type: Date, default: null },  // Exact time the complaint was assigned to staff
 
-    // Set when status transitions to "Resolved" — used for avg resolution time analytics
-    resolvedAt: { type: Date, default: null }
+    // Set when status transitions to "Resolved"
+    resolvedAt:     { type: Date, default: null },
+    resolutionNote: { type: String, default: "" }
 
 }, { timestamps: true });
 

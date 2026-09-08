@@ -1,9 +1,9 @@
 const rateLimit = require("express-rate-limit");
 
-// ─── OTP Send: 5 requests per 15 minutes per IP ───────────────────────────────
+// ─── OTP Send: 50 requests per 15 minutes per IP ───────────────────────────────
 const otpSendLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 5,
+    max: process.env.NODE_ENV === "production" ? 10 : 50,
     standardHeaders: true,
     legacyHeaders: false,
     message: {
@@ -11,10 +11,10 @@ const otpSendLimiter = rateLimit({
     }
 });
 
-// ─── OTP Verify: 10 attempts per 15 minutes per IP ────────────────────────────
+// ─── OTP Verify: 50 attempts per 15 minutes per IP ────────────────────────────
 const otpVerifyLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 10,
+    max: process.env.NODE_ENV === "production" ? 15 : 50,
     standardHeaders: true,
     legacyHeaders: false,
     message: {

@@ -23,36 +23,42 @@ const getTransporter = async () => {
     const pass = process.env.EMAIL_PASS;
 
     if (user && pass) {
-        const gmailTransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false,   // STARTTLS on port 587
-            auth: { user, pass },
-            tls: { rejectUnauthorized: false }
-        });
         try {
+            const gmailTransport = nodemailer.createTransport({
+                host: "smtp.gmail.com",
+                port: 587,
+                secure: false,   // STARTTLS on port 587
+                auth: { user, pass },
+                tls: { rejectUnauthorized: false },
+                connectionTimeout: 4000,
+                greetingTimeout: 4000
+            });
             await gmailTransport.verify();
             logger.info("✅ Gmail SMTP verified — real emails will be delivered to students");
             _transporter = gmailTransport;
             _usingEthereal = false;
             return _transporter;
         } catch (err) {
-            logger.error("❌ Gmail SMTP FAILED — OTP emails will NOT be delivered");
+            logger.warn("⚠️  Gmail SMTP verification failed (will fallback to dev test account): " + err.message);
         }
-    } else {
-        logger.warn("⚠️  EMAIL_USER / EMAIL_PASS not set in .env — using Ethereal fallback");
     }
 
-    const testAccount = await nodemailer.createTestAccount();
-    _transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
-        auth: { user: testAccount.user, pass: testAccount.pass }
-    });
-    _usingEthereal = true;
-    logger.info("📧 Ethereal test SMTP active: " + testAccount.user);
-    return _transporter;
+    try {
+        const testAccount = await nodemailer.createTestAccount();
+        _transporter = nodemailer.createTransport({
+            host: "smtp.ethereal.email",
+            port: 587,
+            secure: false,
+            auth: { user: testAccount.user, pass: testAccount.pass },
+            connectionTimeout: 4000
+        });
+        _usingEthereal = true;
+        logger.info("📧 Ethereal test SMTP active: " + testAccount.user);
+        return _transporter;
+    } catch (testErr) {
+        logger.warn("⚠️  Ethereal SMTP fallback failed: " + testErr.message + " (OTP will still be generated and printed to console)");
+        return null;
+    }
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -122,14 +128,16 @@ exports.sendOTP = async (req, res) => {
         let etherealPreview = null;
         try {
             const transport = await getTransporter();
-            const info = await transport.sendMail({
-                from: `"PICT Hostel Management" <${process.env.EMAIL_USER || "hostel@pict.edu"}>`,
-                to: email,
-                subject: "Your OTP for PICT Hostel Login",
-                html: `<h2>Your OTP is: ${rawOTP}</h2>`
-            });
-            emailDelivered = true;
-            etherealPreview = nodemailer.getTestMessageUrl(info);
+            if (transport) {
+                const info = await transport.sendMail({
+                    from: `"PICT Hostel Management" <${process.env.EMAIL_USER || "hostel@pict.edu"}>`,
+                    to: email,
+                    subject: "Your OTP for PICT Hostel Login",
+                    html: `<h2>Your OTP is: ${rawOTP}</h2>`
+                });
+                emailDelivered = true;
+                etherealPreview = nodemailer.getTestMessageUrl(info);
+            }
         } catch (mailErr) {
             logger.warn(`⚠️  Email delivery failed (OTP still valid): ${mailErr.message}`);
         }
@@ -142,8 +150,9 @@ exports.sendOTP = async (req, res) => {
             isRegistered
         };
 
-        if (isDev && etherealPreview) {
-            response.etherealPreview = etherealPreview;
+        if (isDev) {
+            response.devOtp = rawOTP;
+            if (etherealPreview) response.etherealPreview = etherealPreview;
         }
 
         res.json(response);

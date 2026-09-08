@@ -68,40 +68,88 @@ export default function StudentComplaints() {
   // Real-time socket updates
   useEffect(() => {
     if (!socket) return;
+    const myId = String(user?.id || user?._id || "");
 
-    const handleCreated = (newComplaint) => {
-      const isMine =
-        newComplaint.studentId === (user?.id || user?._id) ||
-        newComplaint.studentId?._id === (user?.id || user?._id);
-      if (isMine) {
+    const handleCreated = (payload) => {
+      const newComplaint = payload?.complaint || payload;
+      if (!newComplaint) return;
+      const sId = String(newComplaint.studentId?._id || newComplaint.studentId || "");
+      if (sId === myId) {
         setComplaints((prev) => {
-          const exists = prev.some((c) => c._id === newComplaint._id);
+          const exists = prev.some((c) => String(c._id || c.id) === String(newComplaint._id || newComplaint.id));
           return exists ? prev : [newComplaint, ...prev];
         });
       }
     };
 
-    const handleStatusUpdated = ({ complaintId, complaint, status }) => {
+    const handleStatusUpdated = (payload) => {
+      const targetId = String(payload?.complaintId || payload?.complaint?._id || payload?.complaint?.id || "");
+      const updatedComplaint = payload?.complaint;
+
       setComplaints((prev) =>
         prev.map((c) => {
-          if (c._id === complaintId) {
-            const updated = complaint ? { ...c, ...complaint } : { ...c, status: status || c.status };
-            if (selected && selected._id === complaintId) setSelected(updated);
+          const currentId = String(c._id || c.id || "");
+          if (currentId === targetId) {
+            const updated = updatedComplaint ? { ...c, ...updatedComplaint } : { ...c, status: payload.status || c.status };
             return updated;
           }
           return c;
         })
       );
+
+      setSelected((prev) => {
+        if (prev && String(prev._id || prev.id) === targetId) {
+          return updatedComplaint ? { ...prev, ...updatedComplaint } : { ...prev, status: payload.status || prev.status };
+        }
+        return prev;
+      });
+    };
+
+    const handleAssigned = (payload) => {
+      const targetId = String(payload?.complaintId || payload?.complaint?._id || payload?.complaint?.id || "");
+      const updatedComplaint = payload?.complaint;
+
+      setComplaints((prev) =>
+        prev.map((c) => {
+          const currentId = String(c._id || c.id || "");
+          if (currentId === targetId) {
+            const updated = updatedComplaint
+              ? { ...c, ...updatedComplaint }
+              : { ...c, status: payload.status || "In Progress", assignedTo: payload.assignedTo || c.assignedTo };
+            return updated;
+          }
+          return c;
+        })
+      );
+
+      setSelected((prev) => {
+        if (prev && String(prev._id || prev.id) === targetId) {
+          return updatedComplaint
+            ? { ...prev, ...updatedComplaint }
+            : { ...prev, status: payload.status || "In Progress", assignedTo: payload.assignedTo || prev.assignedTo };
+        }
+        return prev;
+      });
+    };
+
+    const handleDeleted = (payload) => {
+      const targetId = String(payload?.complaintId || "");
+      setComplaints((prev) => prev.filter((c) => String(c._id || c.id) !== targetId));
+      setSelected((prev) => (prev && String(prev._id || prev.id) === targetId ? null : prev));
     };
 
     socket.on("complaint:created", handleCreated);
     socket.on("complaint:status-updated", handleStatusUpdated);
+    socket.on("complaint:assigned", handleAssigned);
+    socket.on("complaint:deleted", handleDeleted);
 
     return () => {
       socket.off("complaint:created", handleCreated);
       socket.off("complaint:status-updated", handleStatusUpdated);
+      socket.off("complaint:assigned", handleAssigned);
+      socket.off("complaint:deleted", handleDeleted);
     };
-  }, [socket, user, selected]);
+  }, [socket, user]);
 
   // Submit New Complaint
   async function handleSubmitComplaint(e) {
@@ -163,26 +211,37 @@ export default function StudentComplaints() {
     e.preventDefault();
     if (!selected) return;
 
-    if (feedbackSatisfied === false && !feedbackText.trim()) {
-      toast.error("Please provide an explanation of why it was not resolved.");
-      return;
+    if (feedbackSatisfied === false) {
+      if (!feedbackText.trim()) {
+        toast.error("Please provide an explanation of why the issue is not resolved.");
+        return;
+      }
+      if (!feedbackFiles || feedbackFiles.length === 0) {
+        toast.error("At least 1 image or video is required as evidence if not satisfied.");
+        return;
+      }
     }
 
     setFeedbackSubmitting(true);
     try {
       const fd = new FormData();
       fd.append("isSatisfied", feedbackSatisfied);
-      fd.append("text", feedbackText.trim());
+      if (feedbackText.trim()) {
+        fd.append("text", feedbackText.trim());
+      }
 
-      feedbackFiles.forEach((file) => {
-        if (file.type.startsWith("video/")) {
-          fd.append("video", file);
-        } else {
-          fd.append("images", file);
+      feedbackFiles.forEach((att) => {
+        const rawFile = att.file || att;
+        if (rawFile instanceof File || rawFile instanceof Blob) {
+          if (att.type === "video" || (rawFile.type && rawFile.type.startsWith("video/"))) {
+            fd.append("video", rawFile);
+          } else {
+            fd.append("images", rawFile);
+          }
         }
       });
 
-      await api.post(`/complaints/${selected._id}/feedback`, fd);
+      await api.post(`/complaints/${selected._id || selected.id}/feedback`, fd);
 
       toast.success(
         feedbackSatisfied
@@ -373,6 +432,11 @@ export default function StudentComplaints() {
                       {selected.feedback.text && (
                         <p className="mt-1.5 text-xs text-muted-foreground">{selected.feedback.text}</p>
                       )}
+                      {selected.feedback.media?.length > 0 && (
+                        <div className="mt-3">
+                          <MediaGallery media={selected.feedback.media} />
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <form onSubmit={handleSubmitFeedback} className="space-y-3 rounded-lg border border-border bg-card p-4">
@@ -397,18 +461,30 @@ export default function StudentComplaints() {
                       </div>
 
                       {feedbackSatisfied === false && (
-                        <div className="space-y-2 pt-2">
-                          <Label htmlFor="fb-reason" className="text-xs">
-                            What went wrong?
-                          </Label>
-                          <Textarea
-                            id="fb-reason"
-                            rows={2}
-                            required
-                            placeholder="Explain why the work is incomplete or what remains broken..."
-                            value={feedbackText}
-                            onChange={(e) => setFeedbackText(e.target.value)}
-                          />
+                        <div className="space-y-3 pt-2">
+                          <div className="space-y-1.5">
+                            <Label htmlFor="fb-reason" className="text-xs font-semibold">
+                              What went wrong? <span className="text-destructive">*</span>
+                            </Label>
+                            <Textarea
+                              id="fb-reason"
+                              rows={2}
+                              required
+                              placeholder="Explain why the work is incomplete or what remains broken..."
+                              value={feedbackText}
+                              onChange={(e) => setFeedbackText(e.target.value)}
+                            />
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <Label className="text-xs font-semibold">
+                              Evidence photo / video <span className="text-destructive">*</span>
+                            </Label>
+                            <p className="text-xs text-muted-foreground">
+                              Attach at least 1 image or video showing the unresolved issue (compulsory).
+                            </p>
+                            <MediaUploader attachments={feedbackFiles} onChange={setFeedbackFiles} />
+                          </div>
                         </div>
                       )}
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Loader2, Trash2, UserPlus } from "lucide-react";
+import { Loader2, UserPlus } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
@@ -13,30 +13,40 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
 } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { useSocket } from "@/context/SocketContext";
 import api from "@/services/api";
 
-const FILTERS = [
-  { value: "all", label: "All complaints" },
+const STATUS_FILTERS = [
+  { value: "all", label: "All status" },
   { value: "Pending", label: "Pending" },
   { value: "In Progress", label: "In Progress" },
   { value: "Resolved", label: "Resolved" },
   { value: "Reopened", label: "Reopened" },
 ];
 
+const TIME_FILTERS = [
+  { value: "all", label: "All time" },
+  { value: "today", label: "Today" },
+  { value: "yesterday", label: "Yesterday" },
+  { value: "week", label: "Last 7 days" },
+  { value: "this_month", label: "This month" },
+  { value: "last_month", label: "Last month" },
+  { value: "custom", label: "Specific month..." },
+];
+
 export default function WardenComplaints() {
   const queryClient = useQueryClient();
   const { socket } = useSocket();
 
-  const [filter, setFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [timeFilter, setTimeFilter] = useState("all");
+  const [customMonth, setCustomMonth] = useState("");
   const [selected, setSelected] = useState(null);
-  const [deleteConfirm, setDeleteConfirm] = useState(null);
 
   // Query all complaints
   const { data: complaints = [], isLoading: cLoading } = useQuery({
@@ -84,28 +94,64 @@ export default function WardenComplaints() {
     }
   }
 
-  // Delete complaint handler
-  async function handleDelete(complaintId) {
-    try {
-      await api.delete(`/complaints/${complaintId}`);
-      toast.success("Complaint removed.");
-      setDeleteConfirm(null);
-      if (selected && (selected._id === complaintId || selected.id === complaintId)) {
-        setSelected(null);
-      }
-      queryClient.invalidateQueries({ queryKey: ["warden-complaints"] });
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to delete complaint.");
-    }
-  }
-
   const filtered = complaints.filter((c) => {
-    if (filter === "all") return true;
-    const s = (c.status || "").toLowerCase();
-    const f = filter.toLowerCase();
-    if (f === "in progress") return s === "in progress" || s === "in_progress" || s === "assigned";
-    if (f === "pending") return s === "pending" || s === "submitted";
-    return s === f;
+    // 1. Status Filter
+    if (statusFilter !== "all") {
+      const s = (c.status || "").toLowerCase();
+      const f = statusFilter.toLowerCase();
+      if (f === "in progress") {
+        if (s !== "in progress" && s !== "in_progress" && s !== "assigned") return false;
+      } else if (f === "pending") {
+        if (s !== "pending" && s !== "submitted") return false;
+      } else if (s !== f) {
+        return false;
+      }
+    }
+
+    // 2. Time / Date Filter
+    if (timeFilter !== "all") {
+      const dateStr = c.createdAt;
+      if (!dateStr) return false;
+      const d = new Date(dateStr);
+      const now = new Date();
+
+      if (timeFilter === "today") {
+        const isToday =
+          d.getFullYear() === now.getFullYear() &&
+          d.getMonth() === now.getMonth() &&
+          d.getDate() === now.getDate();
+        if (!isToday) return false;
+      } else if (timeFilter === "yesterday") {
+        const yesterday = new Date(now);
+        yesterday.setDate(now.getDate() - 1);
+        const isYesterday =
+          d.getFullYear() === yesterday.getFullYear() &&
+          d.getMonth() === yesterday.getMonth() &&
+          d.getDate() === yesterday.getDate();
+        if (!isYesterday) return false;
+      } else if (timeFilter === "week") {
+        const sevenDaysAgo = new Date(now);
+        sevenDaysAgo.setDate(now.getDate() - 7);
+        sevenDaysAgo.setHours(0, 0, 0, 0);
+        if (d < sevenDaysAgo || d > now) return false;
+      } else if (timeFilter === "this_month") {
+        const isThisMonth =
+          d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+        if (!isThisMonth) return false;
+      } else if (timeFilter === "last_month") {
+        const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        const isLastMonth =
+          d.getFullYear() === lastMonth.getFullYear() &&
+          d.getMonth() === lastMonth.getMonth();
+        if (!isLastMonth) return false;
+      } else if (timeFilter === "custom" && customMonth) {
+        const [year, month] = customMonth.split("-").map(Number);
+        const isCustom = d.getFullYear() === year && d.getMonth() === month - 1;
+        if (!isCustom) return false;
+      }
+    }
+
+    return true;
   });
 
   return (
@@ -114,18 +160,42 @@ export default function WardenComplaints() {
         title="Complaints Management"
         description={`${filtered.length} of ${complaints.length} complaints shown`}
         action={
-          <Select value={filter} onValueChange={setFilter}>
-            <SelectTrigger className="h-11 w-48">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {FILTERS.map((f) => (
-                <SelectItem key={f.value} value={f.value}>
-                  {f.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="flex flex-wrap items-center gap-2">
+            <Select value={timeFilter} onValueChange={setTimeFilter}>
+              <SelectTrigger className="h-10 w-36 sm:w-40 text-xs">
+                <SelectValue placeholder="All time" />
+              </SelectTrigger>
+              <SelectContent>
+                {TIME_FILTERS.map((tf) => (
+                  <SelectItem key={tf.value} value={tf.value}>
+                    {tf.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {timeFilter === "custom" && (
+              <Input
+                type="month"
+                value={customMonth}
+                onChange={(e) => setCustomMonth(e.target.value)}
+                className="h-10 w-36 text-xs"
+              />
+            )}
+
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="h-10 w-36 sm:w-40 text-xs">
+                <SelectValue placeholder="All status" />
+              </SelectTrigger>
+              <SelectContent>
+                {STATUS_FILTERS.map((f) => (
+                  <SelectItem key={f.value} value={f.value}>
+                    {f.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         }
       />
 
@@ -137,12 +207,14 @@ export default function WardenComplaints() {
         <EmptyState
           icon={UserPlus}
           title="No complaints matching filter"
-          description="Try changing the status filter above."
+          description="Try changing the status or time filters above."
         />
       ) : (
         <div className="space-y-3">
           {filtered.map((c) => {
-            const studentName = c.studentId?.name || c.studentId?.fullName || "Student";
+            const studentObj = typeof c.studentId === "object" ? c.studentId : null;
+            const studentName = studentObj?.fullName || studentObj?.name || "Student";
+            const prn = studentObj?.prn || studentObj?.rollNumber || "—";
             const assignedName = c.assignedTo?.name || "Unassigned";
             const isResolved = c.status === "Resolved" || c.status === "resolved";
 
@@ -151,9 +223,14 @@ export default function WardenComplaints() {
                 key={c._id || c.id}
                 complaint={c}
                 meta={
-                  <span>
-                    {studentName} · <strong className="text-foreground">{assignedName}</strong>
-                  </span>
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <span>
+                      Student: <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
+                    </span>
+                    <span>
+                      Assigned: <strong className="text-foreground">{assignedName}</strong>
+                    </span>
+                  </div>
                 }
                 footer={
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -166,18 +243,10 @@ export default function WardenComplaints() {
                       >
                         View details
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className="min-h-10 text-xs text-destructive hover:bg-destructive/10"
-                        onClick={() => setDeleteConfirm(c)}
-                      >
-                        <Trash2 className="size-3.5" />
-                      </Button>
                     </div>
 
                     {!isResolved && (
-                      <div className="w-full sm:w-64">
+                      <div className="w-full sm:w-56">
                         <Select
                           value={c.assignedTo?._id || c.assignedTo || ""}
                           onValueChange={(staffId) => handleAssign(c._id, staffId)}
@@ -214,12 +283,20 @@ export default function WardenComplaints() {
 
               <ComplaintMeta
                 items={[
-                  { label: "Room", value: `Room ${selected.doorNumber || selected.room || "—"}` },
+                  { label: "Room", value: `Room ${selected.doorNumber || selected.room || selected.studentId?.doorNumber || "—"}` },
                   { label: "Category", value: selected.category },
                   { label: "Reported", value: formatDateTime(selected.createdAt) },
                   {
-                    label: "Student",
-                    value: selected.studentId?.name || selected.studentId?.fullName || "Resident",
+                    label: "Student Name",
+                    value: selected.studentId?.fullName || selected.studentId?.name || "Resident",
+                  },
+                  {
+                    label: "Student PRN",
+                    value: (
+                      <span className="font-mono font-medium">
+                        {selected.studentId?.prn || selected.studentId?.rollNumber || "—"}
+                      </span>
+                    ),
                   },
                   { label: "Assigned Staff", value: selected.assignedTo?.name || "Unassigned" },
                   {
@@ -256,29 +333,6 @@ export default function WardenComplaints() {
               </DialogFooter>
             </div>
           )}
-        </DialogContent>
-      </Dialog>
-
-      {/* Delete Confirmation Dialog */}
-      <Dialog open={Boolean(deleteConfirm)} onOpenChange={(open) => !open && setDeleteConfirm(null)}>
-        <DialogContent className="sm:max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Delete complaint?</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to permanently delete this complaint? This cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="gap-2 sm:gap-0 pt-2">
-            <Button variant="outline" onClick={() => setDeleteConfirm(null)}>
-              Cancel
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() => deleteConfirm && handleDelete(deleteConfirm._id)}
-            >
-              Delete
-            </Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>

@@ -35,38 +35,66 @@ export default function StudentHome() {
   // Real-time socket updates
   useEffect(() => {
     if (!socket) return;
+    const myId = String(user?.id || user?._id || "");
 
-    const handleCreated = (newComplaint) => {
-      const isMine =
-        newComplaint.studentId === (user?.id || user?._id) ||
-        newComplaint.studentId?._id === (user?.id || user?._id);
-      if (isMine) {
-        setComplaints((prev) => [newComplaint, ...prev]);
+    const handleCreated = (payload) => {
+      const newComplaint = payload?.complaint || payload;
+      if (!newComplaint) return;
+      const sId = String(newComplaint.studentId?._id || newComplaint.studentId || "");
+      if (sId === myId) {
+        setComplaints((prev) => {
+          const exists = prev.some((c) => String(c._id || c.id) === String(newComplaint._id || newComplaint.id));
+          return exists ? prev : [newComplaint, ...prev];
+        });
       }
     };
 
-    const handleStatusUpdated = ({ complaintId, complaint, status }) => {
+    const handleStatusUpdated = (payload) => {
+      const targetId = String(payload?.complaintId || payload?.complaint?._id || payload?.complaint?.id || "");
+      const updatedComplaint = payload?.complaint;
+
       setComplaints((prev) =>
         prev.map((c) => {
-          if (c._id === complaintId) {
-            return complaint ? { ...c, ...complaint } : { ...c, status: status || c.status };
+          const currentId = String(c._id || c.id || "");
+          if (currentId === targetId) {
+            return updatedComplaint ? { ...c, ...updatedComplaint } : { ...c, status: payload.status || c.status };
           }
           return c;
         })
       );
     };
 
-    const handleDeleted = ({ complaintId }) => {
-      setComplaints((prev) => prev.filter((c) => c._id !== complaintId));
+    const handleAssigned = (payload) => {
+      const targetId = String(payload?.complaintId || payload?.complaint?._id || payload?.complaint?.id || "");
+      const updatedComplaint = payload?.complaint;
+
+      setComplaints((prev) =>
+        prev.map((c) => {
+          const currentId = String(c._id || c.id || "");
+          if (currentId === targetId) {
+            return updatedComplaint
+              ? { ...c, ...updatedComplaint }
+              : { ...c, status: payload.status || "In Progress", assignedTo: payload.assignedTo || c.assignedTo };
+          }
+          return c;
+        })
+      );
+    };
+
+    const handleDeleted = (payload) => {
+      const targetId = String(payload?.complaintId || "");
+      setComplaints((prev) => prev.filter((c) => String(c._id || c.id) !== targetId));
     };
 
     socket.on("complaint:created", handleCreated);
     socket.on("complaint:status-updated", handleStatusUpdated);
+    socket.on("complaint:assigned", handleAssigned);
     socket.on("complaint:deleted", handleDeleted);
 
     return () => {
       socket.off("complaint:created", handleCreated);
       socket.off("complaint:status-updated", handleStatusUpdated);
+      socket.off("complaint:assigned", handleAssigned);
       socket.off("complaint:deleted", handleDeleted);
     };
   }, [socket, user]);

@@ -45,11 +45,14 @@ router.post(
 );
 
 // ─── Shared Warden / Staff routes ─────────────────────────────────────────────
+router.get("/",          authMiddleware, wardenOrStaffMiddleware, getAllComplaints);
 router.get("/all",       authMiddleware, wardenOrStaffMiddleware, getAllComplaints);
 router.put("/:id/status", authMiddleware, wardenOrStaffMiddleware, updateComplaintStatus);
 
 // ─── Warden-only routes ───────────────────────────────────────────────────────
 router.delete("/:id",       authMiddleware, wardenMiddleware, deleteComplaint);
 router.put("/assign/:id",   authMiddleware, wardenMiddleware, assignComplaint);
+router.patch("/:id/assign", authMiddleware, wardenMiddleware, assignComplaint);
+router.put("/:id/assign",   authMiddleware, wardenMiddleware, assignComplaint);
 
 module.exports = router;

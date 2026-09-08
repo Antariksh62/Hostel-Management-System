@@ -95,6 +95,7 @@ exports.createComplaint = async (req, res) => {
 exports.getStudentComplaints = async (req, res) => {
     try {
         const complaints = await Complaint.find({ studentId: req.user.id })
+            .populate("studentId", "name fullName email prn rollNumber classDiv year branch doorNumber")
             .populate("assignedTo", "name email")
             .sort({ createdAt: -1 });
         res.json(complaints);
@@ -259,7 +260,7 @@ exports.getAnalytics = async (req, res) => {
 exports.updateComplaintStatus = async (req, res) => {
     try {
         const { id }     = req.params;
-        const { status } = req.body;
+        const { status, resolutionNote } = req.body;
 
         const allowedStatuses = ["Pending", "In Progress", "Resolved", "Reopened"];
         if (!status || !allowedStatuses.includes(status)) {
@@ -269,19 +270,20 @@ exports.updateComplaintStatus = async (req, res) => {
         }
 
         const now  = new Date();
-        const note = {
+        const defaultNote = {
             "Pending":     "Status set back to Pending",
-            "In Progress": "Work started by staff",
-            "Resolved":    "Marked as resolved",
-            "Reopened":    "Complaint reopened"
+            "In Progress": resolutionNote || "Work started by maintenance staff",
+            "Resolved":    resolutionNote || "Issue resolved and checked by staff",
+            "Reopened":    resolutionNote || "Complaint reopened for inspection"
         }[status] || "";
 
         const update = {
             status,
-            $push: { statusHistory: { status, timestamp: now, note } }
+            $push: { statusHistory: { status, timestamp: now, note: defaultNote } }
         };
         if (status === "Resolved") {
-            update.resolvedAt = now; // Capture resolution timestamp for analytics
+            update.resolvedAt = now;
+            if (resolutionNote) update.resolutionNote = resolutionNote;
         }
 
         const complaint = await Complaint.findByIdAndUpdate(id, update, { returnDocument: "after" });
@@ -293,7 +295,7 @@ exports.updateComplaintStatus = async (req, res) => {
 
         emitComplaintStatusUpdated(populatedComplaint || complaint);
 
-        res.json({ message: "Status updated successfully", complaint });
+        res.json({ message: "Status updated successfully", complaint: populatedComplaint || complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }
@@ -329,7 +331,7 @@ exports.assignComplaint = async (req, res) => {
                 assignedTo: staffId,
                 assignedAt: now,
                 status:     "In Progress",
-                $push: { statusHistory: { status: "In Progress", timestamp: now, note } }
+                $push: { statusHistory: { status: "Assigned", timestamp: now, note } }
             },
             { returnDocument: "after" }
         );
@@ -342,7 +344,7 @@ exports.assignComplaint = async (req, res) => {
 
         emitComplaintAssigned(populatedComplaint || complaint);
 
-        res.json({ message: "Complaint assigned successfully", complaint });
+        res.json({ message: "Complaint assigned successfully", complaint: populatedComplaint || complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }
@@ -350,24 +352,36 @@ exports.assignComplaint = async (req, res) => {
 
 // =============================================================================
 // DELETE /api/complaints/:id
-// Warden: delete complaint and associated files
+// Disabled for transparency: No manual complaint deletion is permitted
 // =============================================================================
 exports.deleteComplaint = async (req, res) => {
+    return res.status(403).json({
+        message: "Manual complaint deletion is disabled across the system for transparency and audit compliance. Complaints are automatically retained for 6 months."
+    });
+};
+
+// =============================================================================
+// Automatic 6-Month Complaint Retention Policy
+// Removes complaints older than 180 days (6 months) along with their media files
+// =============================================================================
+exports.cleanupOldComplaints = async () => {
     try {
-        const { id } = req.params;
-        const complaint = await Complaint.findById(id);
+        const sixMonthsAgo = new Date(Date.now() - 180 * 24 * 60 * 60 * 1000);
+        const expiredComplaints = await Complaint.find({ createdAt: { $lt: sixMonthsAgo } });
 
-        if (!complaint) return res.status(404).json({ message: "Complaint not found" });
+        if (!expiredComplaints || expiredComplaints.length === 0) {
+            return 0;
+        }
 
-        deleteComplaintFiles(complaint);
+        for (const complaint of expiredComplaints) {
+            deleteComplaintFiles(complaint);
+            await Complaint.findByIdAndDelete(complaint._id);
+        }
 
-        const studentIdStr = complaint.studentId?.toString();
-        await Complaint.findByIdAndDelete(id);
-        emitComplaintDeleted(id, studentIdStr);
-
-        res.json({ message: "Complaint deleted successfully" });
+        console.log(`[Retention Policy] Automatically purged ${expiredComplaints.length} complaints older than 6 months.`);
+        return expiredComplaints.length;
     } catch (err) {
-        res.status(500).json({ message: "Server error", error: err.message });
+        console.error("[Retention Policy] Error during automatic 6-month complaint cleanup:", err);
     }
 };
 
@@ -438,14 +452,14 @@ exports.submitFeedback = async (req, res) => {
             complaint.statusHistory.push({
                 status:    "Reopened",
                 timestamp: now,
-                note:      "Student marked complaint as NOT resolved"
+                note:      text ? `Student reopened issue: ${text}` : "Student reported issue was not resolved"
             });
         } else {
-            // Student confirmed satisfied — record that in the timeline too
+            // Student confirmed satisfied — record that in the timeline
             complaint.statusHistory.push({
-                status:    "Resolved",
+                status:    "Feedback",
                 timestamp: now,
-                note:      "Student confirmed issue resolved"
+                note:      text ? `Student feedback: ${text}` : "Student confirmed issue resolved to satisfaction"
             });
         }
 
@@ -457,7 +471,7 @@ exports.submitFeedback = async (req, res) => {
 
         emitComplaintStatusUpdated(populatedComplaint || complaint);
 
-        res.json({ message: "Feedback submitted successfully", complaint });
+        res.json({ message: "Feedback submitted successfully", complaint: populatedComplaint || complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }

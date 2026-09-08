@@ -145,15 +145,22 @@ export default function WardenOverview() {
             <div className="space-y-3">
               {prioritized.map((c) => {
                 const staffName = c.assignedTo?.name || "Unassigned";
-                const studentName = c.studentId?.name || c.studentId?.fullName || "Student";
+                const studentObj = typeof c.studentId === "object" ? c.studentId : null;
+                const studentName = studentObj?.fullName || studentObj?.name || "Student";
+                const prn = studentObj?.prn || studentObj?.rollNumber || "—";
                 return (
                   <ComplaintCard
                     key={c._id || c.id}
                     complaint={c}
                     meta={
-                      <span>
-                        {staffName} · {studentName}
-                      </span>
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <span>
+                          Student: <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
+                        </span>
+                        <span>
+                          Assigned: <strong className="text-foreground">{staffName}</strong>
+                        </span>
+                      </div>
                     }
                   />
                 );
