@@ -135,17 +135,6 @@ export function useSignals() {
 
     const SIGNALS: Signal[] = [
         {
-            id: "occupancy",
-            label: "Occupancy",
-            value: `${room.occupancyRate}%`,
-            delta: "—",
-            deltaDir: "flat",
-            health: "ok",
-            consequence: "Hostel occupancy rate.",
-            action: null,
-            series: [room.occupancyRate, room.occupancyRate], // Flat sparkline for occupancy
-        },
-        {
             id: "complaints",
             label: "Complaint Health",
             value: `${kpis.unresolvedCount} open`,
@@ -231,13 +220,13 @@ export function useHeatmap() {
         });
     }
 
-    // Define fixed 5 floors and 90 rooms
+    // Define fixed 5 floors and authoritative 77 rooms
     const floorConfigs = [
-        { floor: 1, label: "1st Floor", range: [101, 120] },
-        { floor: 2, label: "2nd Floor", range: [201, 220] },
-        { floor: 3, label: "3rd Floor", range: [301, 320] },
-        { floor: 4, label: "4th Floor", range: [401, 420] },
-        { floor: 5, label: "5th Floor", range: [501, 510] }
+        { floor: 1, label: "1st Floor", range: [101, 117] },
+        { floor: 2, label: "2nd Floor", range: [201, 217] },
+        { floor: 3, label: "3rd Floor", range: [301, 317] },
+        { floor: 4, label: "4th Floor", range: [401, 417] },
+        { floor: 5, label: "5th Floor", range: [501, 509] }
     ];
 
     const BLOCKS: Block[] = floorConfigs.map((cfg) => {

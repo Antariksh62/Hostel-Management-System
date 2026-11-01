@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ClipboardCheck, DoorOpen, Inbox, Loader2, TriangleAlert } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 import { EmptyState, PageHeader } from "@/components/hms/app-shell";
 import { ComplaintCard } from "@/components/hms/complaint-card";
@@ -11,6 +12,7 @@ import { useSocket } from "@/context/SocketContext";
 import api from "@/services/api";
 
 export default function WardenOverview() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { socket } = useSocket();
 
@@ -55,7 +57,7 @@ export default function WardenOverview() {
 
   // Occupancy estimate from door numbers
   const occupiedRooms = new Set(complaints.map((c) => c.doorNumber || c.room).filter(Boolean));
-  const totalRooms = 90;
+  const totalRooms = 77;
 
   // Prioritized: overdue + unassigned
   const prioritized = [...new Map([...overdue, ...unassigned].map((c) => [c._id || c.id, c])).values()].slice(0, 8);
@@ -65,12 +67,12 @@ export default function WardenOverview() {
   return (
     <>
       <PageHeader
-        title="Overview"
-        description="A focused view of what needs attention across the hostel."
+        title={t("dashboard.overview_title", "Overview")}
+        description={t("dashboard.overview_subtitle", "A focused view of what needs attention across the hostel.")}
         action={
           <Button asChild variant="outline" className="min-h-11 shrink-0">
             <Link to="/admin-dashboard/complaints">
-              Open complaints <ArrowRight className="ml-1 size-4" aria-hidden />
+              {t("dashboard.open_complaints", "Open complaints")} <ArrowRight className="ml-1 size-4" aria-hidden />
             </Link>
           </Button>
         }
@@ -84,69 +86,69 @@ export default function WardenOverview() {
         <>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <StatCard
-              label="Open complaints"
+              label={t("dashboard.open_complaints", "Open complaints")}
               value={open.length}
               tone={open.length > 0 ? "warning" : "neutral"}
-              hint="Across all floors"
+              hint={t("dashboard.open_complaints_sub", "Across all floors")}
               icon={Inbox}
             />
             <StatCard
-              label="Unassigned"
+              label={t("dashboard.unassigned", "Unassigned")}
               value={unassigned.length}
               tone={unassigned.length > 0 ? "info" : "neutral"}
-              hint="Waiting for ownership"
+              hint={t("dashboard.unassigned_sub", "Waiting for ownership")}
               icon={ClipboardCheck}
             />
             <StatCard
-              label="Overdue"
+              label={t("dashboard.needs_attention", "Overdue")}
               value={overdue.length}
               tone={overdue.length > 0 ? "critical" : "neutral"}
-              hint="Requires priority"
+              hint={t("dashboard.needs_attention_sub", "Requires priority")}
               icon={TriangleAlert}
             />
             <StatCard
-              label="Resolved"
+              label={t("dashboard.resolved", "Resolved")}
               value={resolvedCount}
               tone="success"
-              hint="Completed issues"
+              hint={t("dashboard.resolved_sub", "Completed issues")}
             />
             <StatCard
-              label="Active Rooms"
+              label={t("dashboard.active_rooms", "Active Rooms")}
               value={`${occupiedRooms.size} / ${totalRooms}`}
-              hint="Rooms with requests"
+              hint={t("dashboard.active_rooms_sub", "Rooms with requests")}
               icon={DoorOpen}
             />
             <StatCard
-              label="Avg Resolution"
+              label={t("dashboard.avg_resolution", "Avg Resolution")}
               value={analytics?.avgResolutionHours ? `${analytics.avgResolutionHours}h` : "—"}
-              hint="Resolution turnaround"
+              hint={t("dashboard.avg_resolution_sub", "Resolution turnaround")}
             />
           </div>
 
           <div className="mt-9 mb-3 flex items-end justify-between gap-3">
             <div>
-              <h2 className="text-base font-semibold">Needs attention</h2>
+              <h2 className="text-base font-semibold">{t("dashboard.needs_attention", "Needs attention")}</h2>
               <p className="mt-0.5 text-sm text-muted-foreground">
-                Prioritized by urgency and assignment status.
+                {t("dashboard.needs_attention_sub", "Prioritized by urgency and assignment status.")}
               </p>
             </div>
             <span className="shrink-0 text-xs text-muted-foreground">
-              {prioritized.length} shown
+              {prioritized.length} {t("common.showing", "shown")}
             </span>
           </div>
 
           {prioritized.length === 0 ? (
             <EmptyState
               icon={ClipboardCheck}
-              title="Nothing needs immediate attention"
-              description="All open complaints are assigned to maintenance and within their response time."
+              title={t("complaints.no_complaints", "Nothing needs immediate attention")}
+              description={t("complaints.no_complaints_desc", "All open complaints are assigned to maintenance and within their response time.")}
             />
           ) : (
             <div className="space-y-3">
               {prioritized.map((c) => {
-                const staffName = c.assignedTo?.name || "Unassigned";
+                const staffName = c.assignedTo?.name || t("complaints.unassigned", "Unassigned");
                 const studentObj = typeof c.studentId === "object" ? c.studentId : null;
-                const studentName = studentObj?.fullName || studentObj?.name || "Student";
+                const studentName = studentObj?.fullName || studentObj?.name || t("auth.student_tab", "Student");
                 const prn = studentObj?.prn || studentObj?.rollNumber || "—";
                 return (
                   <ComplaintCard
@@ -155,10 +157,10 @@ export default function WardenOverview() {
                     meta={
                       <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                         <span>
-                          Student: <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
+                          {t("auth.student_tab", "Student")}: <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
                         </span>
                         <span>
-                          Assigned: <strong className="text-foreground">{staffName}</strong>
+                          {t("complaints.assigned_to", "Assigned")}: <strong className="text-foreground">{staffName}</strong>
                         </span>
                       </div>
                     }

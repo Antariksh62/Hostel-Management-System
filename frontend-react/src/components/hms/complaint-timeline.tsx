@@ -1,5 +1,6 @@
 import React from "react";
 import { Check, AlertCircle, Wrench, CheckCircle2, UserCheck, FileText, MessageSquare, ArrowRightCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { formatDateTime, relativeTime } from "@/components/hms/status";
 import { cn } from "@/lib/utils";
 
@@ -132,24 +133,32 @@ export function ComplaintTimeline({
   const isReopened = normStatus === "reopened";
   const isInProgress = normStatus === "in progress" || normStatus === "in_progress";
   const isAssigned = Boolean(complaint.assignedTo || complaint.assignedAt || events.some((e) => e.status?.toLowerCase() === "assigned"));
+  const { t } = useTranslation();
   const assignedStaffName = typeof complaint.assignedTo === "object" ? complaint.assignedTo?.name : null;
+
+  const STAGES = [
+    { key: "Pending", label: t("dashboard.submitted", "Submitted"), icon: FileText, hint: t("dashboard.awaiting_review", "Awaiting review") },
+    { key: "Assigned", label: t("dashboard.assigned", "Assigned"), icon: UserCheck, hint: t("dashboard.staff_assigned", "Staff assigned") },
+    { key: "In Progress", label: t("dashboard.in_progress", "In Progress"), icon: Wrench, hint: t("dashboard.work_ongoing", "Work ongoing") },
+    { key: "Resolved", label: t("dashboard.resolved", "Resolved"), icon: CheckCircle2, hint: t("dashboard.issue_fixed", "Issue fixed") },
+  ];
 
   // ─── COMPACT INLINE TRACKER (Rendered below complaint cards) ────────────────
   if (compact) {
     return (
       <div className={cn("w-full space-y-2", className)}>
         <div className="flex items-center justify-between text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
-          <span>Live Lifecycle</span>
+          <span>{t("dashboard.live_lifecycle", "LIVE LIFECYCLE")}</span>
           <span className="font-normal normal-case text-xs text-foreground/80">
             {isReopened
-              ? "Reopened by student"
+              ? t("dashboard.complaint_reopened", "Reopened")
               : isResolved
-              ? "Resolved"
+              ? t("dashboard.resolved", "Resolved")
               : isInProgress
-              ? "In Progress"
+              ? t("dashboard.in_progress", "In Progress")
               : isAssigned
-              ? `Assigned${assignedStaffName ? ` to ${assignedStaffName}` : ""}`
-              : "Awaiting review"}
+              ? `${t("dashboard.assigned", "Assigned")}${assignedStaffName ? ` (${assignedStaffName})` : ""}`
+              : t("dashboard.awaiting_review", "Awaiting review")}
           </span>
         </div>
 
@@ -216,7 +225,7 @@ export function ComplaintTimeline({
         {isReopened && (
           <div className="mt-2 flex items-center gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-2.5 py-1.5 text-xs text-amber-700 dark:text-amber-300">
             <AlertCircle className="size-3.5 shrink-0" />
-            <span>Complaint was reopened by the student for re-inspection.</span>
+            <span>{t("dashboard.reopened_notice", "Complaint was reopened by the student for re-inspection.")}</span>
           </div>
         )}
       </div>

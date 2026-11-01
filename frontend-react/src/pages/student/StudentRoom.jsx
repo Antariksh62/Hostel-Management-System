@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { DoorOpen, Loader2 } from "lucide-react";
 
 import { PageHeader, EmptyState } from "@/components/hms/app-shell";
@@ -7,6 +8,7 @@ import { AuthContext } from "@/context/AuthContext";
 import api from "@/services/api";
 
 export default function StudentRoom() {
+  const { t } = useTranslation();
   const { user } = useContext(AuthContext);
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,15 +34,15 @@ export default function StudentRoom() {
   return (
     <>
       <PageHeader
-        title={`Room ${room}`}
-        description={`Floor ${floor} · Hostel Accommodation`}
+        title={`${t("common.room", "Room")} ${room}`}
+        description={`${t("common.floor", "Floor")} ${floor} · ${t("common.pict_hostel", "Hostel Accommodation")}`}
       />
 
       <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {[
-          ["Room number", room],
-          ["Floor", `Floor ${floor}`],
-          ["Occupancy status", "Allotted & Occupied"],
+          [t("auth.room_number", "Room number"), room],
+          [t("common.floor", "Floor"), `${t("common.floor", "Floor")} ${floor}`],
+          [t("common.status", "Occupancy status"), t("status.Active", "Allotted & Occupied")],
         ].map(([label, value]) => (
           <div key={label} className="rounded-xl border border-border bg-card p-4 shadow-xs">
             <dt className="text-xs text-muted-foreground">{label}</dt>
@@ -49,7 +51,7 @@ export default function StudentRoom() {
         ))}
       </dl>
 
-      <h2 className="mt-8 mb-3 text-sm font-semibold">Maintenance history for this room</h2>
+      <h2 className="mt-8 mb-3 text-sm font-semibold">{t("nav.history", "Maintenance history for this room")}</h2>
 
       {loading ? (
         <div className="flex justify-center py-10 text-muted-foreground">

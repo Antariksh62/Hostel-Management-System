@@ -1,4 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Building2, Loader2, Mail } from "lucide-react";
 
@@ -16,6 +18,7 @@ const STUDENT_EMAIL_DOMAIN = "@ms.pict.edu";
 export default function Login() {
   const { login, studentLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [role, setRole] = useState("student");
   const [step, setStep] = useState("identity"); // "identity" | "otp" | "register" | "password"
@@ -175,11 +178,17 @@ export default function Login() {
     e.preventDefault();
     setError(null);
 
-    const missing = ["fullName", "rollNumber", "doorNumber"].some(
+    const missing = ["fullName", "rollNumber", "doorNumber", "mobileNumber"].some(
       (k) => !form[k] || !String(form[k]).trim()
     );
     if (missing) {
-      setError("Please fill in all required profile fields.");
+      setError("Please fill in all required profile fields including mobile number.");
+      return;
+    }
+
+    const mobileRegex = /^[6-9]\d{9}$/;
+    if (!mobileRegex.test(String(form.mobileNumber || "").trim())) {
+      setError("Please enter a valid 10-digit Indian mobile number (begins with 6-9).");
       return;
     }
 
@@ -195,6 +204,7 @@ export default function Login() {
           classDiv: form.classDiv || "1",
           year: form.year || "FY",
           doorNumber: form.doorNumber.trim(),
+          mobileNumber: form.mobileNumber.trim(),
           acceptedTC: true,
         },
         {
@@ -224,12 +234,18 @@ export default function Login() {
       const res = await login(email.trim(), password);
       const loggedUser = res?.user || JSON.parse(sessionStorage.getItem("user"));
 
-      if (loggedUser?.role === "WARDEN") {
+      if (loggedUser?.role === "MAIN_ADMIN") {
+        navigate("/main-admin-dashboard");
+      } else if (loggedUser?.role === "HEADWARDEN") {
+        navigate("/headwarden-dashboard");
+      } else if (loggedUser?.role === "WARDEN") {
         navigate("/admin-dashboard");
       } else if (loggedUser?.role === "STAFF") {
         navigate("/staff-dashboard");
-      } else if (loggedUser?.role === "INCHARGE" || loggedUser?.role === "HEADWARDEN") {
+      } else if (loggedUser?.role === "INCHARGE") {
         navigate("/incharge-dashboard");
+      } else if (loggedUser?.role === "WIFI_INCHARGE") {
+        navigate("/wifi-dashboard");
       } else {
         navigate("/student-dashboard");
       }
@@ -247,22 +263,49 @@ export default function Login() {
           <Building2 className="size-5 text-primary" aria-hidden />
           <span className="text-sm font-semibold tracking-tight">Hostel Management System</span>
         </div>
-        <ThemeButton />
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <ThemeButton />
+        </div>
       </header>
 
       <main className="flex flex-1 items-center justify-center px-4 pb-16 sm:px-6">
         <div className="w-full max-w-md">
-          <h1 className="text-2xl font-bold tracking-tight">Sign in</h1>
+          <h1 className="text-2xl font-bold tracking-tight">{t("common.sign_in", "Sign in")}</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Choose your role to access your hostel services.
+            {t("auth.student_otp_note", "Choose your role to access your hostel services.")}
           </p>
 
           <Tabs value={role} onValueChange={switchRole} className="mt-6">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="student">Student</TabsTrigger>
-              <TabsTrigger value="staff">Staff</TabsTrigger>
-              <TabsTrigger value="warden">Warden</TabsTrigger>
-              <TabsTrigger value="incharge">Incharge</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 h-11 p-1 bg-muted/70 rounded-xl gap-1.5 border border-border/40">
+              <TabsTrigger
+                value="student"
+                onClick={() => switchRole("student")}
+                className="rounded-lg text-xs font-semibold px-2 py-1.5 transition-all truncate data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-xs"
+              >
+                {t("auth.student_tab", "Student")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="staff"
+                onClick={() => switchRole("staff")}
+                className="rounded-lg text-xs font-semibold px-2 py-1.5 transition-all truncate data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-xs"
+              >
+                {t("auth.staff_tab", "Staff")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="warden"
+                onClick={() => switchRole("warden")}
+                className="rounded-lg text-xs font-semibold px-2 py-1.5 transition-all truncate data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-xs"
+              >
+                {t("auth.warden_tab", "Warden")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="incharge"
+                onClick={() => switchRole("incharge")}
+                className="rounded-lg text-xs font-semibold px-2 py-1.5 transition-all truncate data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-xs"
+              >
+                {t("auth.incharge_tab", "Incharge")}
+              </TabsTrigger>
             </TabsList>
           </Tabs>
 
@@ -270,7 +313,7 @@ export default function Login() {
             {step === "identity" ? (
               <form onSubmit={handleIdentity} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">{role === "student" ? "College email" : "Work email"}</Label>
+                  <Label htmlFor="email">{role === "student" ? t("auth.email_label", "College email") : t("auth.admin_email_label", "Work email")}</Label>
                   <Input
                     id="email"
                     type="email"
@@ -302,7 +345,7 @@ export default function Login() {
 
                 <Button type="submit" className="h-11 w-full" disabled={busy}>
                   {busy ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
-                  {role === "student" ? "Send verification code" : "Continue"}
+                  {role === "student" ? t("auth.send_otp_btn", "Send OTP") : t("common.proceed", "Continue")}
                 </Button>
               </form>
             ) : null}
@@ -311,7 +354,7 @@ export default function Login() {
               <form onSubmit={handleOtp} className="space-y-4">
                 <BackLink onClick={() => setStep("identity")} />
                 <div className="space-y-2">
-                  <Label htmlFor="otp">Enter the 6-digit code</Label>
+                  <Label htmlFor="otp">{t("auth.otp_label", "Enter 6-Digit OTP")}</Label>
                   <InputOTP id="otp" maxLength={6} value={otp} onChange={setOtp} containerClassName="justify-between">
                     <InputOTPGroup className="gap-2">
                       {[0, 1, 2, 3, 4, 5].map((i) => (
@@ -326,7 +369,7 @@ export default function Login() {
 
                 <Button type="submit" className="h-11 w-full" disabled={busy || otp.length !== 6}>
                   {busy ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
-                  Verify & Sign in
+                  {t("auth.verify_otp_btn", "Verify OTP & Continue")}
                 </Button>
 
                 <Button
@@ -383,8 +426,13 @@ export default function Login() {
                     label="Room number"
                     value={form.doorNumber}
                     onChange={(v) => setForm({ ...form, doorNumber: v })}
-                    className="sm:col-span-2"
                     placeholder="e.g. 101"
+                  />
+                  <Field
+                    label="Mobile number"
+                    value={form.mobileNumber || ""}
+                    onChange={(v) => setForm({ ...form, mobileNumber: v })}
+                    placeholder="10-digit mobile (e.g. 9876543210)"
                   />
                 </div>
 
@@ -401,7 +449,7 @@ export default function Login() {
               <form onSubmit={handlePassword} className="space-y-4">
                 <BackLink onClick={() => setStep("identity")} />
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t("auth.password_label", "Password")}</Label>
                   <Input
                     id="password"
                     type="password"
@@ -418,7 +466,7 @@ export default function Login() {
 
                 <Button type="submit" className="h-11 w-full" disabled={busy}>
                   {busy ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
-                  Sign in
+                  {t("common.sign_in", "Sign in")}
                 </Button>
               </form>
             ) : null}
@@ -430,6 +478,7 @@ export default function Login() {
 }
 
 function BackLink({ onClick }) {
+  const { t } = useTranslation();
   return (
     <button
       type="button"
@@ -437,7 +486,7 @@ function BackLink({ onClick }) {
       className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground cursor-pointer"
     >
       <ArrowLeft className="size-4" aria-hidden />
-      Back
+      {t("common.back", "Back")}
     </button>
   );
 }

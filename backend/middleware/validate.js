@@ -45,10 +45,11 @@ const schemas = {
 
     createComplaint: Joi.object({
         title: Joi.string().trim().min(3).max(100).required(),
-        description: Joi.string().trim().min(10).required(),
-        category: Joi.string()
-            .valid("Electrical", "Plumbing", "Furniture", "Cleanliness", "Internet", "Other")
-            .default("Other")
+        description: Joi.string().trim().allow("", null).default(""),
+        category: Joi.string().trim().max(100).default("Other"),
+        quickCategory: Joi.string().valid("NO_WATER_SUPPLY", "NO_ELECTRICITY", "WIFI_NOT_WORKING").allow(null).optional(),
+        doorNumber: Joi.string().trim().allow("", null).optional(),
+        parentComplaintId: Joi.string().trim().allow(null, "").optional()
     }),
 
     completeProfile: Joi.object({
@@ -57,7 +58,13 @@ const schemas = {
         classDiv: Joi.string().trim().required(),
         year: Joi.string().valid("FY", "SY", "TY").required(),
         branch: Joi.string().valid("CE", "ENTC", "IT", "AIDS", "ECE").required(),
-        doorNumber: Joi.string().trim().min(1).max(20).required()
+        doorNumber: Joi.string().trim().min(1).max(20).required(),
+        mobileNumber: Joi.string().trim().pattern(/^[6-9]\d{9}$/).required()
+            .messages({
+                "any.required": "Valid 10-digit mobile number is required",
+                "string.empty": "Valid 10-digit mobile number is required",
+                "string.pattern.base": "Please provide a valid 10-digit mobile number"
+            })
     })
 };
 

@@ -2,7 +2,10 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { User, Student } = require("../models/User");
+const { isValidRoom, MAX_STUDENTS_PER_ROOM } = require("../utils/hostelRooms");
+const { checkRoomCapacity, assignStudentRoomAtomic, atomicConvertRosterToRegistered } = require("../services/roomOccupancyService");
 const OTP = require("../models/OTP");
+const StudentRoster = require("../models/StudentRoster");
 const logger = require("../utils/logger");
 const generateTokens = require("../utils/generateTokens");
 
@@ -93,6 +96,63 @@ exports.sendOTP = async (req, res) => {
             return res.status(400).json({
                 message: "Only PICT student emails (@ms.pict.edu) are allowed"
             });
+        }
+
+        // Verify existing user account integrity
+        if (existingUser) {
+            if (existingUser.role !== "STUDENT") {
+                return res.status(403).json({
+                    message: `Account is registered with role ${existingUser.role}. Student OTP authentication is not permitted for administrative accounts.`
+                });
+            }
+            // Prevent silently linking an existing email account to a different roster PRN
+            const roster = await StudentRoster.findOne({ email });
+            if (roster && existingUser.prn && roster.prn && existingUser.prn.toUpperCase() !== roster.prn.toUpperCase()) {
+                return res.status(400).json({
+                    message: `Email is already registered to PRN ${existingUser.prn}, cannot link to roster PRN ${roster.prn}.`
+                });
+            }
+        }
+
+        // Student Admission & Eligibility Gate:
+        // EVERY student (new or previously registered) MUST have an active APPROVED roster record.
+        // If a student is removed from the roster list, or their admission is REVOKED/REJECTED/PENDING,
+        // they are strictly blocked from receiving an OTP or logging into the hostel system.
+        const roster = await StudentRoster.findOne({ email });
+        if (!roster) {
+            return res.status(403).json({
+                message: "Access restricted: Your email is not present on the active hostel admission roster. Please contact the Head Warden or Hostel In-Charge."
+            });
+        }
+
+        if (roster.admissionStatus === "PENDING_APPROVAL") {
+            return res.status(403).json({
+                message: "Your hostel admission is pending approval by the Head Warden or Hostel In-Charge."
+            });
+        }
+
+        if (roster.admissionStatus === "REJECTED") {
+            return res.status(403).json({
+                message: `Your hostel admission was not approved. Reason: ${roster.rejectionReason || "Not specified"}.`
+            });
+        }
+
+        if (roster.admissionStatus === "REVOKED") {
+            return res.status(403).json({
+                message: `Your hostel registration eligibility has been revoked. Reason: ${roster.rejectionReason || "Not specified"}.`
+            });
+        }
+
+        if (roster.admissionStatus !== "APPROVED") {
+            return res.status(403).json({
+                message: "You do not have an approved hostel admission record."
+            });
+        }
+
+        // Mark registration progress for first-time registrants
+        if (!isRegistered && roster.registrationStatus === "NOT_REGISTERED") {
+            roster.registrationStatus = "REGISTRATION_STARTED";
+            await roster.save();
         }
 
         const existing = await OTP.findOne({ email });
@@ -200,23 +260,80 @@ exports.verifyOTP = async (req, res) => {
         const prn = extractPRN(email);
         let user = await Student.findOne({ email });
 
+        // Check if matching roster record exists and is active/approved
+        const roster = await StudentRoster.findOne({ email });
+        if (!roster || roster.admissionStatus !== "APPROVED") {
+            return res.status(403).json({
+                message: "Login denied: Student admission eligibility is not approved, has been revoked, or record was removed from the active roster."
+            });
+        }
+
         if (!user) {
-            const { branch, joiningYear } = parsePRN(prn);
+
+            // Concurrency protection: verify no user account was concurrently created
+            const concurrentUser = await User.findOne({
+                $or: [{ email }, { prn: (roster?.prn || prn).toUpperCase() }]
+            });
+            if (concurrentUser) {
+                if (concurrentUser.role !== "STUDENT") {
+                    return res.status(403).json({ message: "An administrative account exists with this credential." });
+                }
+                user = concurrentUser;
+            }
+        }
+
+        if (!user) {
+            const { branch: parsedBranch, joiningYear } = parsePRN(prn);
+            const branch = roster?.branch || parsedBranch;
+            const doorNumber = roster?.doorNumber || null;
+            const fullName = roster?.name || prn;
+            const rollNumber = roster?.rollNumber || null;
+            const mobileNumber = roster?.studentMobile || null;
+            const guardianPhone = roster?.parentMobile || "";
+            const year = roster?.year || "FY";
+            const classDiv = roster?.division || "";
+
             user = new Student({
                 email,
-                prn,
+                prn: roster?.prn || prn,
                 branch,
                 joiningYear,
                 role: "STUDENT",
                 isVerified: true,
                 profileComplete: false,
-                name: prn
+                name: fullName,
+                fullName,
+                rollNumber,
+                doorNumber,
+                mobileNumber,
+                guardianPhone,
+                year,
+                classDiv
             });
             await user.save();
+
+            if (doorNumber && isValidRoom(doorNumber)) {
+                try {
+                    // Atomically convert the pre-registration roster reservation to a registered student occupant
+                    await atomicConvertRosterToRegistered({
+                        roomNumber: doorNumber,
+                        rosterId: roster?._id,
+                        studentId: user._id
+                    });
+                } catch (roomErr) {
+                    logger.warn("Initial room allocation atomic check warning: " + roomErr.message);
+                }
+            }
         } else {
             user.isVerified = true;
             await user.save();
             user = await Student.findById(user._id); // Refetch to ensure latest state
+        }
+
+        if (roster) {
+            roster.userId = user._id;
+            roster.registrationStatus = user.profileComplete ? "REGISTERED" : "REGISTRATION_STARTED";
+            await roster.save();
         }
 
         const accessToken = generateTokens(res, user);
@@ -237,7 +354,9 @@ exports.verifyOTP = async (req, res) => {
                 classDiv: user.classDiv || null,
                 year: user.year || null,
                 doorNumber: user.doorNumber || null,
-                profileComplete: user.profileComplete // Drives the frontend redirect
+                mobileNumber: user.mobileNumber || null,
+                profileComplete: user.profileComplete,
+                preferredLanguage: user.preferredLanguage || "en"
             }
         });
     } catch (err) {
@@ -251,10 +370,16 @@ exports.verifyOTP = async (req, res) => {
 // =============================================================================
 exports.completeProfile = async (req, res) => {
     try {
-        const { fullName, rollNumber, classDiv, year, doorNumber, branch } = req.body;
+        const { fullName, rollNumber, classDiv, year, doorNumber, branch, mobileNumber } = req.body;
 
         if (req.user.role !== "STUDENT") {
             return res.status(403).json({ message: "Only students can complete this profile" });
+        }
+
+        const mobileRegex = /^[6-9]\d{9}$/;
+        const trimmedMobile = mobileNumber ? String(mobileNumber).trim() : "";
+        if (!trimmedMobile || !mobileRegex.test(trimmedMobile)) {
+            return res.status(400).json({ message: "Please provide a valid 10-digit mobile number" });
         }
 
         const existingUser = await Student.findById(req.user.id);
@@ -278,12 +403,23 @@ exports.completeProfile = async (req, res) => {
                 year,
                 doorNumber,
                 branch,
+                mobileNumber: trimmedMobile,
                 profileComplete: true
             },
             { new: true, runValidators: true }
         );
 
         updatedUser = await Student.findById(updatedUser._id);
+
+        // Update linked roster registration status if present
+        try {
+            await StudentRoster.findOneAndUpdate(
+                { $or: [{ userId: updatedUser._id }, { email: updatedUser.email }, { prn: updatedUser.prn }] },
+                { $set: { registrationStatus: "REGISTERED", userId: updatedUser._id } }
+            );
+        } catch (rosterErr) {
+            logger.warn("Roster status update warning on profile completion: " + rosterErr.message);
+        }
 
         logger.info("PROFILE COMPLETED SUCCESSFULLY FOR: " + updatedUser.email);
 
@@ -302,6 +438,7 @@ exports.completeProfile = async (req, res) => {
                 classDiv: updatedUser.classDiv,
                 year: updatedUser.year,
                 doorNumber: updatedUser.doorNumber,
+                mobileNumber: updatedUser.mobileNumber || null,
                 profileComplete: updatedUser.profileComplete
             }
         });
@@ -320,19 +457,53 @@ exports.updateInfo = async (req, res) => {
             return res.status(403).json({ message: "Only students can update info" });
         }
 
-        const { rollNumber, classDiv, year, doorNumber, branch } = req.body;
+        const existing = await Student.findById(req.user.id);
+        if (!existing) {
+            return res.status(404).json({ message: "Student not found" });
+        }
+
+        const { rollNumber, classDiv, year, doorNumber, branch, mobileNumber } = req.body;
         const update = {};
         if (rollNumber !== undefined) update.rollNumber = rollNumber;
         if (classDiv !== undefined) update.classDiv = classDiv;
         if (year !== undefined) update.year = year;
-        if (doorNumber !== undefined) update.doorNumber = doorNumber;
+        if (doorNumber !== undefined) {
+            const cleanDoor = String(doorNumber).trim();
+            if (cleanDoor) {
+                if (!isValidRoom(cleanDoor)) {
+                    return res.status(400).json({ message: `Room ${cleanDoor} is not a valid room in the 77-room inventory (101–509)` });
+                }
+                if (existing.doorNumber !== cleanDoor) {
+                    const capCheck = await checkRoomCapacity(cleanDoor, req.user.id);
+                    if (!capCheck.allowed) {
+                        return res.status(400).json({ message: capCheck.message });
+                    }
+                    await assignStudentRoomAtomic({
+                        studentId: req.user.id,
+                        newRoom: cleanDoor,
+                        previousRoom: existing.doorNumber,
+                        adminName: "Student Self-Update",
+                        reason: "Student room update"
+                    });
+                }
+            } else {
+                update.doorNumber = null;
+            }
+        }
         if (branch !== undefined) update.branch = branch;
+        if (mobileNumber !== undefined) {
+            const mobileRegex = /^[6-9]\d{9}$/;
+            if (!mobileRegex.test(mobileNumber)) {
+                return res.status(400).json({ message: "Please provide a valid 10-digit mobile number" });
+            }
+            update.mobileNumber = mobileNumber;
+        }
 
         if (Object.keys(update).length === 0) {
             return res.status(400).json({ message: "No fields provided to update" });
         }
 
-        const user = await User.findByIdAndUpdate(
+        const user = await Student.findByIdAndUpdate(
             req.user.id,
             update,
             { new: true, runValidators: true }
@@ -355,6 +526,7 @@ exports.updateInfo = async (req, res) => {
                 classDiv: user.classDiv,
                 year: user.year,
                 doorNumber: user.doorNumber,
+                mobileNumber: user.mobileNumber || null,
                 profileComplete: user.profileComplete
             }
         });

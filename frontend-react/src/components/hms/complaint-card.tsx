@@ -1,7 +1,9 @@
 import { ArrowUpRight, MapPin, Paperclip, User } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { OverdueBadge, StatusBadge, relativeTime } from "@/components/hms/status";
 import { ComplaintTimeline } from "@/components/hms/complaint-timeline";
+import { translateComplaintText } from "@/utils/complaintTranslator";
 import { cn } from "@/lib/utils";
 
 export interface ComplaintCardData {
@@ -45,6 +47,8 @@ export function ComplaintCard({
   className?: string;
   showTimeline?: boolean;
 }) {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language || "en";
   const student = typeof complaint.studentId === "object" && complaint.studentId !== null ? complaint.studentId : null;
   const studentName = complaint.studentName || student?.fullName || student?.name;
   const studentPRN = complaint.studentPRN || complaint.prn || complaint.rollNumber || student?.prn || student?.rollNumber;
@@ -53,23 +57,26 @@ export function ComplaintCard({
   const attachmentCount = (complaint.attachments?.length || 0) + (complaint.media?.length || 0);
 
   const isResolved = complaint.status === "Resolved" || complaint.status === "resolved";
+  const localizedCategory = t(`categories.${complaint.category}`, complaint.category);
+  const localizedTitle = translateComplaintText(complaint.title, currentLang);
+  const localizedDescription = translateComplaintText(complaint.description, currentLang);
 
   const body = (
     <>
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[15px] font-medium leading-5">{complaint.title}</p>
+          <p className="truncate text-[15px] font-medium leading-5">{localizedTitle}</p>
           <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
             <span className="inline-flex items-center gap-1 font-medium text-foreground">
               <MapPin className="size-3 text-muted-foreground" aria-hidden />
-              Room {room}
+              {t("common.room", "Room")} {room}
             </span>
             {studentName || studentPRN ? (
               <>
                 <span aria-hidden>·</span>
                 <span className="inline-flex items-center gap-1">
                   <User className="size-3 text-muted-foreground" aria-hidden />
-                  <span className="font-medium text-foreground">{studentName || "Student"}</span>
+                  <span className="font-medium text-foreground">{studentName || t("auth.student_tab", "Student")}</span>
                   {studentPRN ? (
                     <span className="rounded bg-muted/80 px-1 py-0.5 text-[10.5px] font-mono font-medium text-muted-foreground">
                       PRN: {studentPRN}
@@ -79,7 +86,7 @@ export function ComplaintCard({
               </>
             ) : null}
             <span aria-hidden>·</span>
-            <span>{complaint.category}</span>
+            <span>{localizedCategory}</span>
             <span aria-hidden>·</span>
             <span>{relativeTime(updatedTime)}</span>
             {attachmentCount > 0 ? (
@@ -87,12 +94,12 @@ export function ComplaintCard({
                 <span aria-hidden>·</span>
                 <span className="inline-flex items-center gap-1">
                   <Paperclip className="size-3" aria-hidden />
-                  {attachmentCount} attachment{attachmentCount > 1 ? "s" : ""}
+                  {attachmentCount}
                 </span>
               </>
             ) : null}
           </p>
-          <p className="mt-2 line-clamp-2 text-sm leading-5 text-muted-foreground">{complaint.description}</p>
+          <p className="mt-2 line-clamp-2 text-sm leading-5 text-muted-foreground">{localizedDescription}</p>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1.5">
           <StatusBadge status={complaint.status} withIcon />
@@ -112,25 +119,35 @@ export function ComplaintCard({
       {onClick ? (
         <div className="mt-3 flex items-center justify-end">
           <span className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline">
-            View full details <ArrowUpRight className="size-3.5" aria-hidden />
+            {t("common.view", "View details")} <ArrowUpRight className="size-3.5" aria-hidden />
           </span>
         </div>
       ) : null}
     </>
   );
 
-  const base = cn(
-    "rounded-xl border border-border bg-card p-4 text-left shadow-xs transition-colors sm:p-5",
-    onClick && "hover:bg-accent/40 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none cursor-pointer",
+  const containerClasses = cn(
+    "relative rounded-xl border border-border bg-card p-4 transition-all duration-150 shadow-xs",
+    onClick && "cursor-pointer hover:border-border/80 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20",
     className
   );
 
-  if (onClick) {
-    return (
-      <div role="button" tabIndex={0} onClick={onClick} onKeyDown={(e) => e.key === "Enter" && onClick()} className={cn(base, "w-full")}>
-        {body}
-      </div>
-    );
-  }
-  return <div className={base}>{body}</div>;
+  return onClick ? (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+      className={containerClasses}
+    >
+      {body}
+    </div>
+  ) : (
+    <div className={containerClasses}>{body}</div>
+  );
 }

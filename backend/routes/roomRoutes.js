@@ -1,24 +1,37 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const Room = require("../models/Room");
-const { User } = require("../models/User");
+const { Student } = require("../models/User");
 const { authMiddleware, wardenMiddleware, wardenOrStaffMiddleware } = require("../middleware/auth");
 const { roomLimiter } = require("../middleware/rateLimiter");
+const { isValidRoom, MAX_STUDENTS_PER_ROOM } = require("../utils/hostelRooms");
+const { checkRoomCapacity, assignStudentRoomAtomic } = require("../services/roomOccupancyService");
 
 // ================= CREATE ROOM =================
-router.post("/create", authMiddleware, wardenOrStaffMiddleware, async (req, res) => {
+router.post("/create", authMiddleware, wardenMiddleware, async (req, res) => {
     try {
         const { roomNumber, capacity } = req.body;
+        const cleanRoom = String(roomNumber || "").trim();
+
+        if (!cleanRoom || !isValidRoom(cleanRoom)) {
+            return res.status(400).json({ message: `Room ${cleanRoom} is not a valid room in the 77-room inventory (101–509)` });
+        }
+
+        const existing = await Room.findOne({ roomNumber: cleanRoom });
+        if (existing) {
+            return res.status(400).json({ message: `Room ${cleanRoom} already exists in registry` });
+        }
+
+        const enforcedCapacity = Math.min(Number(capacity) || MAX_STUDENTS_PER_ROOM, MAX_STUDENTS_PER_ROOM);
 
         const room = new Room({
-            roomNumber: String(roomNumber),
-            capacity
+            roomNumber: cleanRoom,
+            capacity: enforcedCapacity,
+            occupants: []
         });
 
         await room.save();
-
-        res.json(room);
+        res.status(201).json(room);
 
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -26,70 +39,83 @@ router.post("/create", authMiddleware, wardenOrStaffMiddleware, async (req, res)
 });
 
 // ================= ALLOCATE ROOM =================
-router.post("/", authMiddleware, wardenOrStaffMiddleware, roomLimiter, async (req, res) => {
-    let session = null;
-    let isTransactionActive = false;
-    try {
-        session = await mongoose.startSession();
-        session.startTransaction();
-        isTransactionActive = true;
-    } catch (e) {
-        // Standalone MongoDB instance without replica set
-        session = null;
-        isTransactionActive = false;
-    }
-
+router.post("/", authMiddleware, wardenMiddleware, roomLimiter, async (req, res) => {
     try {
         const { name, room } = req.body;
-        const opts = session ? { session } : {};
+        if (!name || !room) {
+            return res.status(400).json({ message: "Student name/identifier and target room are required" });
+        }
 
-        let existingRoom = await Room.findOne({ roomNumber: String(room) }, null, opts);
+        const cleanRoom = String(room).trim();
+        if (!isValidRoom(cleanRoom)) {
+            return res.status(400).json({ message: `Room ${cleanRoom} is not a valid room in the 77-room inventory (101–509)` });
+        }
 
-        // If room doesn't exist → create it
-        if (!existingRoom) {
-            existingRoom = new Room({
-                roomNumber: String(room),
-                occupants: [{ name: String(name) }]
+        // Locate student
+        const student = await Student.findOne({
+            $or: [
+                { name: String(name).trim() },
+                { fullName: String(name).trim() },
+                { prn: String(name).trim() }
+            ],
+            role: "STUDENT"
+        });
+
+        if (!student) {
+            return res.status(404).json({ message: `Student '${name}' not found` });
+        }
+
+        // Strictly enforce MAX_STUDENTS_PER_ROOM = 2 via authoritative service
+        const capacityCheck = await checkRoomCapacity(cleanRoom, student._id);
+        if (!capacityCheck.allowed) {
+            return res.status(400).json({
+                message: capacityCheck.message,
+                currentCount: capacityCheck.currentCount,
+                maxCapacity: MAX_STUDENTS_PER_ROOM
+            });
+        }
+
+        const adminName = req.user?.name || req.user?.email || "Administrator";
+
+        // Concurrency-safe atomic assignment enforcing MAX_STUDENTS_PER_ROOM = 2
+        await assignStudentRoomAtomic({
+            studentId: student._id,
+            newRoom: cleanRoom,
+            previousRoom: student.doorNumber || null,
+            adminName,
+            reason: "Room assignment via /api/rooms"
+        });
+
+        // Sync legacy Room tracking document
+        const currentOccupants = await Student.find({ doorNumber: cleanRoom, role: "STUDENT" }, "fullName name prn");
+        const occupantsList = currentOccupants.map(s => ({ name: s.fullName || s.name || s.prn }));
+
+        let legacyRoom = await Room.findOne({ roomNumber: cleanRoom });
+        if (!legacyRoom) {
+            legacyRoom = new Room({
+                roomNumber: cleanRoom,
+                capacity: MAX_STUDENTS_PER_ROOM,
+                occupants: occupantsList
             });
         } else {
-            // Check capacity
-            if (existingRoom.occupants.length >= existingRoom.capacity) {
-                if (isTransactionActive && session) {
-                    await session.abortTransaction();
-                    session.endSession();
-                }
-                return res.status(400).json({ msg: "Room is full" });
-            }
-
-            existingRoom.occupants.push({ name: String(name) });
+            legacyRoom.capacity = MAX_STUDENTS_PER_ROOM;
+            legacyRoom.occupants = occupantsList;
         }
 
-        await existingRoom.save(opts);
-
-        // Update Student doorNumber safely
-        const student = await User.findOne({ 
-            $or: [{ name: String(name) }, { fullName: String(name) }],
-            role: "STUDENT"
-        }, null, opts);
-
-        if (student) {
-            student.doorNumber = String(room);
-            await student.save(opts);
-        }
-
-        if (isTransactionActive && session) {
-            await session.commitTransaction();
-            session.endSession();
-        }
-
-        res.json(existingRoom);
+        await legacyRoom.save();
+        res.json(legacyRoom);
 
     } catch (err) {
-        if (isTransactionActive && session) {
-            await session.abortTransaction();
-            session.endSession();
-        }
-        res.status(500).json({ error: err.message });
+        const isClientError = err.message && (
+            err.message.includes("capacity") ||
+            err.message.includes("valid room") ||
+            err.message.includes("required") ||
+            err.message.includes("not found")
+        );
+        res.status(isClientError ? 400 : 500).json({
+            message: err.message || "Failed to allocate room",
+            error: err.message
+        });
     }
 });
 
@@ -107,7 +133,7 @@ router.get("/", authMiddleware, async (req, res) => {
 router.delete("/:id", authMiddleware, wardenMiddleware, async (req, res) => {
     try {
         await Room.findByIdAndDelete(req.params.id);
-        res.json({ msg: "Room deleted" });
+        res.json({ message: "Room deleted from legacy registry" });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

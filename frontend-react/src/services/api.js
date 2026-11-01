@@ -25,14 +25,25 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.response && error.response.status === 401) {
-            console.error("Unauthorized - logging out");
+        if (error.response) {
+            const isUnauthorized = error.response.status === 401;
+            const isRevoked = error.response.status === 403 && error.response.data?.code === 'ELIGIBILITY_REVOKED';
 
-            // clear sessionStorage (must match AuthContext)
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("user");
+            if (isUnauthorized || isRevoked) {
+                console.error(isRevoked ? "Eligibility Revoked - logging out" : "Unauthorized - logging out");
 
-            window.location.href = "/";
+                // clear sessionStorage and localStorage (must match AuthContext)
+                sessionStorage.removeItem("token");
+                sessionStorage.removeItem("user");
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+
+                if (isRevoked) {
+                    sessionStorage.setItem("revocation_notice", error.response.data?.message || "Your hostel admission eligibility has been revoked.");
+                }
+
+                window.location.href = "/";
+            }
         }
 
         return Promise.reject(error);

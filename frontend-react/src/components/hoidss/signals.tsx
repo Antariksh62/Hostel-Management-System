@@ -30,7 +30,7 @@ export function SignalStrip() {
         What is happening today?
       </h2>
       <p className="mt-2 max-w-3xl text-[0.9375rem] leading-6 text-muted-foreground">
-        Six signals, each read as a consequence rather than a number. Anything within tolerance stays quiet.
+        Key operational signals, each read as a consequence rather than a number. Anything within tolerance stays quiet.
       </p>
 
       <div className="mt-10 grid gap-8 sm:grid-cols-2 xl:grid-cols-3 lg:gap-10">

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ArrowRight, ClipboardList, Plus, Loader2 } from "lucide-react";
 
@@ -6,11 +7,13 @@ import { PageHeader, EmptyState } from "@/components/hms/app-shell";
 import { ComplaintCard } from "@/components/hms/complaint-card";
 import { StatCard } from "@/components/hms/stat-card";
 import { Button } from "@/components/ui/button";
+import QuickServiceReporter from "@/components/hms/QuickServiceReporter";
 import { AuthContext } from "@/context/AuthContext";
 import { useSocket } from "@/context/SocketContext";
 import api from "@/services/api";
 
 export default function StudentHome() {
+  const { t } = useTranslation();
   const { user } = useContext(AuthContext);
   const { socket } = useSocket();
 
@@ -125,27 +128,37 @@ export default function StudentHome() {
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <StatCard
-          label="Open requests"
+          label={t("dashboard.open_complaints", "Open requests")}
           value={open.length}
           tone={open.length > 0 ? "warning" : "neutral"}
           hint="Need attention"
         />
         <StatCard
-          label="Resolved"
+          label={t("dashboard.resolved", "Resolved")}
           value={resolved.length}
           tone="success"
           hint="Completed"
         />
         <StatCard
-          label="Your room"
+          label={t("nav.my_room", "Your room")}
           value={user?.doorNumber || "—"}
           hint="Current allotment"
         />
       </div>
 
-      <div className="mt-9 mb-3 flex items-center justify-between gap-3">
+      <div className="mt-6">
+        <QuickServiceReporter
+          onComplaintSubmitted={(created) => {
+            if (created) {
+              setComplaints((prev) => [created, ...prev.filter((c) => String(c._id || c.id) !== String(created._id || created.id))]);
+            }
+          }}
+        />
+      </div>
+
+      <div className="mt-8 mb-3 flex items-center justify-between gap-3">
         <div>
-          <h2 className="text-base font-semibold">Active requests</h2>
+          <h2 className="text-base font-semibold">{t("dashboard.needs_attention", "Active requests")}</h2>
           <p className="mt-0.5 text-sm text-muted-foreground">
             The latest status of problems you reported.
           </p>
@@ -154,7 +167,7 @@ export default function StudentHome() {
           to="/student-dashboard/complaints"
           className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-primary hover:underline"
         >
-          View all <ArrowRight className="size-4" aria-hidden />
+          {t("common.view", "View all")} <ArrowRight className="size-4" aria-hidden />
         </Link>
       </div>
 

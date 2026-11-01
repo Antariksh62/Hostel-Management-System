@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { OverdueBadge, StatusBadge, formatDateTime } from "@/components/hms/status";
+import { translateComplaintText } from "@/utils/complaintTranslator";
 import { cn } from "@/lib/utils";
 
 /** Title block shared by every role's complaint detail view. */
@@ -16,7 +18,9 @@ export function ComplaintHeader({
   };
   heading?: ReactNode;
 }) {
+  const { i18n } = useTranslation();
   const displayId = complaint.id || (complaint._id ? `CMP-${complaint._id.slice(-6).toUpperCase()}` : "");
+  const localizedTitle = translateComplaintText(complaint.title, i18n.language || "en");
 
   return (
     <div className="space-y-2.5">
@@ -27,7 +31,7 @@ export function ComplaintHeader({
         ) : null}
         {displayId && <span className="text-xs text-muted-foreground tabular-nums">{displayId}</span>}
       </div>
-      {heading ?? <h2 className="text-lg leading-6 font-semibold tracking-tight text-balance">{complaint.title}</h2>}
+      {heading ?? <h2 className="text-lg leading-6 font-semibold tracking-tight text-balance">{localizedTitle}</h2>}
     </div>
   );
 }
@@ -87,6 +91,7 @@ export function ResolutionSummary({
     statusHistory?: { status: string; timestamp?: string | Date; note?: string }[];
   };
 }) {
+  const { t } = useTranslation();
   if (!complaint || (complaint.status !== "Resolved" && complaint.status !== "resolved")) return null;
 
   const resolvedEvent = complaint.statusHistory
@@ -98,13 +103,13 @@ export function ResolutionSummary({
   const note = complaint.resolutionNote || resolvedEvent?.note;
 
   return (
-    <DetailSection title="Resolution">
+    <DetailSection title={t("complaints.mark_resolved", "Resolution")}>
       <p className="text-sm">
-        {note || "Marked resolved. No resolution note was recorded."}
+        {note || t("complaints.no_resolution_note", "Marked resolved. No resolution note was recorded.")}
       </p>
       {resolvedAt ? (
         <p className="mt-1 text-xs text-muted-foreground tabular-nums">
-          Resolved {formatDateTime(resolvedAt)}
+          {t("dashboard.resolved", "Resolved")} {formatDateTime(resolvedAt)}
         </p>
       ) : null}
     </DetailSection>

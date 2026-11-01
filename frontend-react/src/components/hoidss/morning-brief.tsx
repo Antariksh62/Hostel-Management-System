@@ -1,8 +1,8 @@
-import { ArrowUpRight, ChevronRight, Sparkles } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useInvestigation } from "./context";
 import { healthText, Panel, StatusPill } from "./primitives";
 import { useMorningBrief } from "./useHoidssData";
 
@@ -49,19 +49,40 @@ function HealthGauge({ score, delta }: { score: number; delta: number }) {
   );
 }
 
-export function MorningBrief() {
-  const { narrow, openDrawer, openDrilldownList } = useInvestigation();
+export function MorningBrief({ onSelectActivity }: { onSelectActivity?: (filter: any) => void }) {
+  const navigate = useNavigate();
   const { data, isLoading } = useMorningBrief();
 
   if (isLoading || !data) {
     return (
       <section className="scroll-mt-36 animate-pulse opacity-50">
-        <div className="h-96 rounded-2xl bg-card border border-border"></div>
+        <div className="h-48 rounded-2xl bg-card border border-border"></div>
       </section>
     );
   }
 
-  const { HOSTEL, RECENT_LEDGER, AI_BRIEF, TODAY_PRIORITY } = data;
+  const { HOSTEL, RECENT_LEDGER, AI_BRIEF } = data;
+
+  const handleActivityClick = (line: any) => {
+    if (onSelectActivity) {
+      onSelectActivity(line.filter || line.scope || {});
+      return;
+    }
+    const filter = line.filter || {};
+    if (filter.recent24h) {
+      navigate('/incharge-dashboard?tab=complaints&time=today');
+    } else if (filter.status === 'Resolved' || filter.thisMonth) {
+      navigate('/incharge-dashboard?tab=complaints&status=Resolved&time=this_month');
+    } else if (filter.overdue) {
+      navigate('/incharge-dashboard?tab=complaints&overdue=true');
+    } else if (filter.category) {
+      navigate(`/incharge-dashboard?tab=complaints&category=${filter.category}`);
+    } else if (filter.status) {
+      navigate(`/incharge-dashboard?tab=complaints&status=${filter.status}`);
+    } else {
+      navigate('/incharge-dashboard?tab=complaints');
+    }
+  };
 
   return (
     <section id="band-brief" aria-labelledby="brief-title" className="scroll-mt-36">
@@ -71,29 +92,19 @@ export function MorningBrief() {
           Executive Brief · {HOSTEL.shift}
         </p>
       </div>
-      <h2 id="brief-title" className="mt-2 mb-10 max-w-5xl text-3xl font-extrabold leading-[1.3] tracking-tight sm:text-4xl lg:text-[2.5rem] text-foreground">
+      <h2 id="brief-title" className="mt-2 mb-8 max-w-5xl text-3xl font-extrabold leading-[1.3] tracking-tight sm:text-4xl lg:text-[2.5rem] text-foreground">
         {AI_BRIEF[0]}
       </h2>
 
-      <div className="mt-10 grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-        <Panel title="Recent activity" subtitle="Summary of recent operational events">
+      <div className="mt-8 grid gap-8 lg:gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] items-start">
+        <Panel title="Recent activity" subtitle="Summary of recent operational events — select to filter complaints">
           <ul className="mt-4 flex-1 flex flex-col justify-between space-y-3.5">
             {RECENT_LEDGER.map((line: any) => (
               <li key={line.text} className="flex-1">
                 <button
                   type="button"
-                  onClick={() => {
-                    if (line.filter) {
-                      openDrilldownList({
-                        title: line.title || "Complaints List",
-                        subtitle: line.text,
-                        filter: line.filter
-                      });
-                    } else if (line.scope) {
-                      narrow(line.scope);
-                    }
-                  }}
-                  className="group flex w-full items-center justify-between gap-4 rounded-2xl border border-border/70 bg-surface/50 p-4.5 text-left transition-all duration-200 hover:border-primary/50 hover:bg-surface hover:shadow-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                  onClick={() => handleActivityClick(line)}
+                  className="group flex w-full items-center justify-between gap-4 rounded-2xl border border-border/70 bg-surface/50 p-4 text-left transition-all duration-200 hover:border-primary/50 hover:bg-surface hover:shadow-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none cursor-pointer"
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
                     <span
@@ -118,6 +129,7 @@ export function MorningBrief() {
                       {line.text}
                     </span>
                   </div>
+
                   <div className="flex items-center gap-2 shrink-0">
                     {line.emphasis === "crit" ? (
                       <span className="rounded-lg bg-crit-soft px-2.5 py-1 text-xs font-extrabold text-crit-foreground">
@@ -143,76 +155,14 @@ export function MorningBrief() {
           </ul>
         </Panel>
 
-        <div className="space-y-8 lg:space-y-10">
+        <div className="space-y-6">
           <Panel className="p-7 sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-6">
               <HealthGauge score={HOSTEL.healthScore} delta={HOSTEL.healthDelta} />
-              <StatusPill health={HOSTEL.status === "Critical" ? "crit" : HOSTEL.status === "Strained" ? "warn" : "ok"}>{HOSTEL.status}</StatusPill>
+              <StatusPill health={HOSTEL.status === "Critical" ? "crit" : HOSTEL.status === "Strained" ? "warn" : "ok"}>
+                {HOSTEL.status}
+              </StatusPill>
             </div>
-          </Panel>
-
-          <Panel className="relative overflow-hidden border-primary/50 bg-gradient-to-br from-primary/10 via-card to-card p-8 lg:p-10 shadow-lift">
-            <div className="flex items-center justify-between gap-4 mb-2">
-              <p className="label-eyebrow font-extrabold tracking-widest text-primary">Today's priority</p>
-              <span className="rounded-full bg-primary/15 px-3 py-1 text-xs font-extrabold text-primary">
-                High SLA Risk
-              </span>
-            </div>
-            <h3 className="mt-3 text-2xl font-extrabold leading-snug text-foreground">{TODAY_PRIORITY.title}</h3>
-            <p className="mt-3 text-base leading-relaxed text-muted-foreground">{TODAY_PRIORITY.detail}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-5">
-              <Button
-                size="lg"
-                className="gap-2.5 px-7 py-3.5 text-sm font-extrabold shadow-lg shadow-primary/20 transition-all duration-200 hover:scale-[1.02]"
-                onClick={() => {
-                  const r = TODAY_PRIORITY.raw || {};
-                  openDrawer({
-                    kind: "Complaint",
-                    title: TODAY_PRIORITY.title,
-                    subtitle: `Room ${r.room || 'N/A'} · ${r.category || 'Maintenance'}`,
-                    health: "crit",
-                    facts: [
-                      { label: "Student Name", value: r.studentName || "Rahul Sharma" },
-                      { label: "PRN / Roll Number", value: r.rollNumber || "2201045" },
-                      { label: "Room Number", value: `Room ${r.room || '101'}` },
-                      { label: "Branch & Year", value: `${r.branch || 'Comp'} · ${r.year || '3rd Year'}` },
-                      { label: "Category", value: r.category || "Plumbing" },
-                      { label: "Status", value: r.status || "Pending Review" },
-                      { label: "Hours Elapsed", value: `${r.hoursElapsed || 96} hours (SLA Breached)` },
-                      { label: "Assigned Staff", value: TODAY_PRIORITY.owner },
-                      { label: "Created At", value: r.createdAt ? new Date(r.createdAt).toLocaleString() : "10 Aug 2026, 14:30" },
-                      { label: "Full Description", value: r.description || TODAY_PRIORITY.detail }
-                    ],
-                  });
-                }}
-              >
-                Investigate
-              </Button>
-              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                Owner · {TODAY_PRIORITY.owner}
-              </span>
-            </div>
-          </Panel>
-
-          <Panel className="p-8 lg:p-10">
-            <div className="flex items-center gap-3">
-              <Sparkles className="h-5 w-5 text-primary" aria-hidden />
-              <p className="label-eyebrow font-extrabold tracking-wider text-primary">Executive summary</p>
-            </div>
-            <ul className="mt-6 space-y-4">
-              {AI_BRIEF.map((line) => (
-                <li key={line} className="flex gap-3 text-base leading-relaxed text-foreground/90 font-normal">
-                  <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-            <a
-              href="#band-mission"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-extrabold text-primary hover:underline"
-            >
-              Open mission control <ArrowUpRight className="h-4.5 w-4.5" aria-hidden />
-            </a>
           </Panel>
         </div>
       </div>

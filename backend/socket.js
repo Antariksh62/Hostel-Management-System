@@ -87,8 +87,17 @@ const emitComplaintCreated = (complaint) => {
     };
     const studentIdStr = getEntityId(complaint.studentId);
     
-    const rooms = ["wardens"];
+    const cat = complaint.quickCategory || complaint.category;
+    const isWifi = cat === "WIFI_NOT_WORKING" || cat === "Internet";
+
+    const rooms = [];
+    if (isWifi) {
+        rooms.push("role:WIFI_INCHARGE");
+    } else {
+        rooms.push("wardens");
+    }
     if (studentIdStr) rooms.push(`user:${studentIdStr}`);
+
     io.to(rooms).emit("complaint:created", payload);
 };
 
@@ -103,7 +112,15 @@ const emitComplaintStatusUpdated = (complaint) => {
     const studentIdStr = getEntityId(complaint.studentId);
     const assignedStaffId = getEntityId(complaint.assignedTo);
 
-    const rooms = ["wardens"];
+    const cat = complaint.quickCategory || complaint.category;
+    const isWifi = cat === "WIFI_NOT_WORKING" || cat === "Internet";
+
+    const rooms = [];
+    if (isWifi) {
+        rooms.push("role:WIFI_INCHARGE");
+    } else {
+        rooms.push("wardens");
+    }
     if (studentIdStr) rooms.push(`user:${studentIdStr}`);
     if (assignedStaffId) rooms.push(`user:${assignedStaffId}`);
 
@@ -122,7 +139,15 @@ const emitComplaintAssigned = (complaint) => {
     const studentIdStr = getEntityId(complaint.studentId);
     const assignedStaffId = getEntityId(complaint.assignedTo);
 
-    const rooms = ["wardens"];
+    const cat = complaint.quickCategory || complaint.category;
+    const isWifi = cat === "WIFI_NOT_WORKING" || cat === "Internet";
+
+    const rooms = [];
+    if (isWifi) {
+        rooms.push("role:WIFI_INCHARGE");
+    } else {
+        rooms.push("wardens");
+    }
     if (studentIdStr) rooms.push(`user:${studentIdStr}`);
     if (assignedStaffId) rooms.push(`user:${assignedStaffId}`);
 
@@ -133,10 +158,40 @@ const emitComplaintDeleted = (complaintId, studentId = null) => {
     if (!io) return;
     const cid = getEntityId(complaintId);
     const payload = { complaintId: cid };
-    const rooms = ["wardens"];
+    const rooms = ["wardens", "role:WIFI_INCHARGE"];
     const studentIdStr = getEntityId(studentId);
     if (studentIdStr) rooms.push(`user:${studentIdStr}`);
     io.to(rooms).emit("complaint:deleted", payload);
+};
+
+// ─── Shared Incident Emitters ────────────────────────────────────────────────
+const emitIncidentCreated = (incident) => {
+    if (!io) return;
+    const payload = {
+        incidentId: getEntityId(incident._id || incident.id),
+        incident: incident.toObject ? incident.toObject() : incident
+    };
+    io.to("wardens").emit("incident:created", payload);
+};
+
+const emitIncidentUpdated = (incident) => {
+    if (!io) return;
+    const payload = {
+        incidentId: getEntityId(incident._id || incident.id),
+        incident: incident.toObject ? incident.toObject() : incident
+    };
+    io.to("wardens").emit("incident:updated", payload);
+};
+
+const emitServiceHeatmapUpdate = (delta) => {
+    if (!io) return;
+    const cat = delta?.quickCategory || delta?.category;
+    const isWifi = cat === "WIFI_NOT_WORKING" || cat === "Internet";
+    if (isWifi) {
+        io.to("role:WIFI_INCHARGE").emit("service:heatmap-update", delta);
+    } else {
+        io.to("wardens").emit("service:heatmap-update", delta);
+    }
 };
 
 module.exports = {
@@ -145,5 +200,8 @@ module.exports = {
     emitComplaintCreated,
     emitComplaintStatusUpdated,
     emitComplaintAssigned,
-    emitComplaintDeleted
+    emitComplaintDeleted,
+    emitIncidentCreated,
+    emitIncidentUpdated,
+    emitServiceHeatmapUpdate
 };

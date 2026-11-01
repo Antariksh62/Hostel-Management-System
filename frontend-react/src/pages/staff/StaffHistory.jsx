@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { History, Loader2 } from "lucide-react";
 
 import { EmptyState, PageHeader } from "@/components/hms/app-shell";
@@ -16,9 +17,12 @@ import {
 } from "@/components/ui/dialog";
 import { AuthContext } from "@/context/AuthContext";
 import { useSocket } from "@/context/SocketContext";
+import { translateComplaintText } from "@/utils/complaintTranslator";
 import api from "@/services/api";
 
 export default function StaffHistory() {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language || "en";
   const { user } = useContext(AuthContext);
   const { socket } = useSocket();
   const [complaints, setComplaints] = useState([]);
@@ -102,8 +106,8 @@ export default function StaffHistory() {
   return (
     <>
       <PageHeader
-        title="Work History"
-        description={`${complaints.length} completed ${complaints.length === 1 ? "job" : "jobs"}.`}
+        title={t("staff.work_history", "Work History")}
+        description={t("staff.completed_jobs", { count: complaints.length, defaultValue: `${complaints.length} completed jobs.` })}
       />
 
       {loading ? (
@@ -113,14 +117,14 @@ export default function StaffHistory() {
       ) : complaints.length === 0 ? (
         <EmptyState
           icon={History}
-          title="Nothing completed yet"
-          description="Resolved maintenance jobs with notes will be listed here."
+          title={t("staff.nothing_completed_yet", "Nothing completed yet")}
+          description={t("staff.resolved_jobs_hint", "Resolved maintenance jobs with notes will be listed here.")}
         />
       ) : (
         <div className="space-y-3">
           {complaints.map((c) => {
             const studentObj = typeof c.studentId === "object" ? c.studentId : null;
-            const studentName = studentObj?.fullName || studentObj?.name || c.studentName || "Student";
+            const studentName = studentObj?.fullName || studentObj?.name || c.studentName || t("auth.student_tab", "Student");
             const prn = studentObj?.prn || studentObj?.rollNumber || c.prn || c.rollNumber || "—";
 
             return (
@@ -131,11 +135,11 @@ export default function StaffHistory() {
                 meta={
                   <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                     <span>
-                      Reported by <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
+                      {t("complaints.reported_by", "Reported by")} <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
                     </span>
                     {c.resolutionNote ? (
                       <span className="text-foreground/80">
-                        <strong>Note:</strong> {c.resolutionNote}
+                        <strong>{t("staff.note", "Note")}:</strong> {c.resolutionNote}
                       </span>
                     ) : null}
                   </div>
@@ -158,17 +162,17 @@ export default function StaffHistory() {
               <ComplaintMeta
                 items={[
                   {
-                    label: "Location",
-                    value: `Room ${detailComplaint.doorNumber || detailComplaint.room || detailComplaint.studentId?.doorNumber || "—"}`,
+                    label: t("common.room", "Room"),
+                    value: `${t("common.room", "Room")} ${detailComplaint.doorNumber || detailComplaint.room || detailComplaint.studentId?.doorNumber || "—"}`,
                   },
-                  { label: "Category", value: detailComplaint.category },
-                  { label: "Reported", value: formatDateTime(detailComplaint.createdAt) },
+                  { label: t("complaints.category", "Category"), value: t(`categories.${detailComplaint.category}`, detailComplaint.category) },
+                  { label: t("complaints.reported_on", "Reported"), value: formatDateTime(detailComplaint.createdAt) },
                   {
-                    label: "Student Name",
-                    value: detailComplaint.studentId?.fullName || detailComplaint.studentId?.name || "Resident",
+                    label: t("auth.student_tab", "Student"),
+                    value: detailComplaint.studentId?.fullName || detailComplaint.studentId?.name || t("auth.student_tab", "Student"),
                   },
                   {
-                    label: "Student PRN",
+                    label: "PRN",
                     value: (
                       <span className="font-mono font-medium">
                         {detailComplaint.studentId?.prn || detailComplaint.studentId?.rollNumber || "—"}
@@ -176,18 +180,20 @@ export default function StaffHistory() {
                     ),
                   },
                   {
-                    label: "Student Email",
+                    label: t("staff.email_address", "Email"),
                     value: detailComplaint.studentId?.email || "—",
                   },
                 ]}
               />
 
-              <DetailSection title="Description">
-                <p className="text-sm leading-relaxed text-foreground">{detailComplaint.description}</p>
+              <DetailSection title={t("complaints.description", "Description")}>
+                <p className="text-sm leading-relaxed text-foreground">
+                  {translateComplaintText(detailComplaint.description, currentLang)}
+                </p>
               </DetailSection>
 
               {(detailComplaint.media?.length > 0 || detailComplaint.attachments?.length > 0 || detailComplaint.image) && (
-                <DetailSection title="Evidence Photos / Video">
+                <DetailSection title={t("complaints.upload_media", "Evidence Photos / Video")}>
                   <MediaGallery
                     media={detailComplaint.media}
                     image={detailComplaint.image}
@@ -196,7 +202,7 @@ export default function StaffHistory() {
                 </DetailSection>
               )}
 
-              <DetailSection title="Timeline">
+              <DetailSection title={t("dashboard.live_lifecycle", "Timeline")}>
                 <ComplaintTimeline complaint={detailComplaint} />
               </DetailSection>
 
@@ -204,7 +210,7 @@ export default function StaffHistory() {
 
               <DialogFooter className="gap-2 sm:gap-0">
                 <Button variant="outline" onClick={() => setDetailComplaint(null)}>
-                  Close
+                  {t("common.close", "Close")}
                 </Button>
               </DialogFooter>
             </div>

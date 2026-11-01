@@ -8,15 +8,31 @@ const {
     getAnalytics,
     updateComplaintStatus,
     deleteComplaint,
-    assignComplaint
+    assignComplaint,
+    reassignComplaint,
+    checkDuplicate,
+    getStudentContact,
+    getWifiQueue,
+    updateWifiComplaintStatus
 } = require("../controllers/complaintController");
 
-const { authMiddleware, wardenMiddleware, wardenOrStaffMiddleware } = require("../middleware/auth");
+const {
+    authMiddleware,
+    wardenMiddleware,
+    wardenOrStaffMiddleware,
+    wifiInchargeOrWardenMiddleware,
+    wifiInchargeOnlyMiddleware
+} = require("../middleware/auth");
 const { upload, validateFileMagicBytes }                            = require("../middleware/upload");
 const { validate, schemas }                                          = require("../middleware/validate");
 
 // ─── Analytics (warden only) — must come before /:id routes ──────────────────
 router.get("/analytics", authMiddleware, wardenMiddleware, getAnalytics);
+
+// ─── Duplicate Check & Wi-Fi Specialist Queue ────────────────────────────────
+router.get("/check-duplicate", authMiddleware, checkDuplicate);
+router.get("/wifi/queue",      authMiddleware, wifiInchargeOnlyMiddleware, getWifiQueue);
+router.put("/wifi/:id/status", authMiddleware, wifiInchargeOnlyMiddleware, updateWifiComplaintStatus);
 
 // ─── Student routes ───────────────────────────────────────────────────────────
 router.post(
@@ -32,6 +48,9 @@ router.post(
 );
 
 router.get("/my-complaints", authMiddleware, getStudentComplaints);
+
+// ─── Contact info on-demand (permission protected) ───────────────────────────
+router.get("/:id/student-contact", authMiddleware, getStudentContact);
 
 router.post(
     "/:id/feedback",
@@ -54,5 +73,6 @@ router.delete("/:id",       authMiddleware, wardenMiddleware, deleteComplaint);
 router.put("/assign/:id",   authMiddleware, wardenMiddleware, assignComplaint);
 router.patch("/:id/assign", authMiddleware, wardenMiddleware, assignComplaint);
 router.put("/:id/assign",   authMiddleware, wardenMiddleware, assignComplaint);
+router.post("/:id/reassign", authMiddleware, wardenMiddleware, reassignComplaint);
 
 module.exports = router;

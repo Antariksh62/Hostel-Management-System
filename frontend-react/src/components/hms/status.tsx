@@ -1,4 +1,5 @@
 import { CheckCircle2, CircleDot, Clock, RefreshCw, UserRoundCheck, Wrench } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
 export type ComplaintStatus =
@@ -51,6 +52,7 @@ export function StatusBadge({
   withIcon?: boolean;
   className?: string;
 }) {
+  const { t } = useTranslation();
   const norm = normalizeStatus(status);
   const Icon =
     norm === "Pending"
@@ -61,6 +63,8 @@ export function StatusBadge({
           ? CheckCircle2
           : RefreshCw;
 
+  const translatedLabel = t(`status.${norm}`, STATUS_LABEL[status] || norm);
+
   return (
     <span
       className={cn(
@@ -69,13 +73,14 @@ export function StatusBadge({
         className
       )}
     >
-      {withIcon ? <Icon className="mr-1.5 size-3.5" aria-hidden /> : null}
-      {STATUS_LABEL[status] || norm}
+      {withIcon ? <Icon className="mr-1 size-3 shrink-0" aria-hidden /> : null}
+      {translatedLabel}
     </span>
   );
 }
 
 export function OverdueBadge({ className }: { className?: string }) {
+  const { t } = useTranslation();
   return (
     <span
       className={cn(
@@ -83,29 +88,32 @@ export function OverdueBadge({ className }: { className?: string }) {
         className
       )}
     >
-      Overdue
+      {t("dashboard.needs_attention", "Overdue")}
     </span>
   );
 }
+
+import i18n from "@/i18n";
 
 export function relativeTime(iso: string | Date | undefined) {
   if (!iso) return "—";
   const diff = Date.now() - new Date(iso).getTime();
   if (isNaN(diff)) return "—";
   const mins = Math.round(diff / 60000);
-  if (mins < 1) return "just now";
-  if (mins < 60) return `${mins} min ago`;
+  if (mins < 1) return i18n.t("common.just_now", "just now");
+  if (mins < 60) return i18n.t("common.minutes_ago", { count: mins, defaultValue: `${mins} min ago` });
   const hours = Math.round(mins / 60);
-  if (hours < 24) return `${hours} hr ago`;
+  if (hours < 24) return i18n.t("common.hours_ago", { count: hours, defaultValue: `${hours} hr ago` });
   const days = Math.round(hours / 24);
-  return days === 1 ? "yesterday" : `${days} days ago`;
+  if (days === 1) return i18n.t("common.yesterday", "yesterday");
+  return i18n.t("common.days_ago", { count: days, defaultValue: `${days} days ago` });
 }
 
-export function formatDateTime(iso: string | Date | undefined) {
+export function formatDateTime(iso: string | Date | undefined, locale = "en-IN") {
   if (!iso) return "—";
   const d = new Date(iso);
   if (isNaN(d.getTime())) return "—";
-  return d.toLocaleString("en-IN", {
+  return d.toLocaleString(locale, {
     day: "numeric",
     month: "short",
     year: "numeric",

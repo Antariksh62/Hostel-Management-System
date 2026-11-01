@@ -98,8 +98,8 @@ export function ComplaintsBand() {
               );
             })}
           </ul>
-          <button
-            type="button"
+          <ActionLine
+            text="Select a category to filter"
             onClick={() => {
               openDrilldownList({
                 title: "All Categories Complaints",
@@ -107,10 +107,7 @@ export function ComplaintsBand() {
                 filter: {}
               });
             }}
-            className="w-full text-left"
-          >
-            <ActionLine text="Select a category to filter" />
-          </button>
+          />
         </Panel>
 
         <Panel title="Complaint frequency" subtitle="All complaints vs electrical · last 14 days">

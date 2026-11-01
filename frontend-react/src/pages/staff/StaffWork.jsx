@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { AlertTriangle, CheckCircle2, Loader2, Wrench } from "lucide-react";
 import { toast } from "sonner";
 
@@ -22,9 +23,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { AuthContext } from "@/context/AuthContext";
 import { useSocket } from "@/context/SocketContext";
+import { translateComplaintText } from "@/utils/complaintTranslator";
 import api from "@/services/api";
 
 export default function StaffWork() {
+  const { t } = useTranslation();
   const { user } = useContext(AuthContext);
   const { socket } = useSocket();
 
@@ -159,35 +162,35 @@ export default function StaffWork() {
   return (
     <>
       <PageHeader
-        title="My work"
-        description="Your assigned maintenance tasks, sorted by priority."
+        title={t("nav.my_work", "My work")}
+        description={t("staff.my_work_subtitle", "Your assigned maintenance tasks, sorted by priority.")}
       />
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <StatCard
-          label="Open jobs"
+          label={t("dashboard.open_complaints", "Open jobs")}
           value={active.length}
           tone={active.length > 0 ? "warning" : "neutral"}
-          hint="Assigned to you"
+          hint={t("staff.assigned_to_you", "Assigned to you")}
         />
         <StatCard
-          label="In progress"
+          label={t("status.In Progress", "In progress")}
           value={inProgress.length}
           tone="info"
-          hint="Currently active"
+          hint={t("staff.currently_active", "Currently active")}
         />
         <StatCard
-          label="Overdue"
+          label={t("dashboard.needs_attention", "Overdue")}
           value={overdue.length}
           tone={overdue.length > 0 ? "critical" : "neutral"}
-          hint="Needs immediate action"
+          hint={t("staff.needs_action", "Needs immediate action")}
           icon={AlertTriangle}
         />
       </div>
 
       <div className="mt-9 mb-3">
-        <h2 className="text-base font-semibold">Assigned tasks</h2>
-        <p className="mt-0.5 text-sm text-muted-foreground">Jobs that require attention.</p>
+        <h2 className="text-base font-semibold">{t("staff.assigned_tasks", "Assigned tasks")}</h2>
+        <p className="mt-0.5 text-sm text-muted-foreground">{t("staff.assigned_tasks_sub", "Jobs that require attention.")}</p>
       </div>
 
       {loading ? (
@@ -197,8 +200,8 @@ export default function StaffWork() {
       ) : active.length === 0 ? (
         <EmptyState
           icon={CheckCircle2}
-          title="All clear"
-          description="You have no open maintenance tasks assigned to you right now."
+          title={t("staff.all_clear", "All clear")}
+          description={t("staff.no_tasks_desc", "You have no open maintenance tasks assigned to you right now.")}
         />
       ) : (
         <div className="space-y-3">
@@ -214,7 +217,7 @@ export default function StaffWork() {
                 complaint={c}
                 meta={
                   <span>
-                    Reported by <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
+                    {t("complaints.reported_by", "Reported by")} <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
                   </span>
                 }
                 footer={
@@ -225,7 +228,7 @@ export default function StaffWork() {
                       className="min-h-10 text-xs"
                       onClick={() => setDetailComplaint(c)}
                     >
-                      View details
+                      {t("common.view", "View details")}
                     </Button>
 
                     {!isInProg && (
@@ -235,7 +238,7 @@ export default function StaffWork() {
                         className="min-h-10 text-xs"
                         onClick={() => handleUpdateStatus(c._id, "In Progress")}
                       >
-                        Start work
+                        {t("complaints.mark_in_progress", "Start work")}
                       </Button>
                     )}
 
@@ -247,7 +250,7 @@ export default function StaffWork() {
                         setResolutionNote("");
                       }}
                     >
-                      Mark resolved
+                      {t("complaints.mark_resolved", "Mark resolved")}
                     </Button>
                   </div>
                 }
@@ -268,15 +271,15 @@ export default function StaffWork() {
 
               <ComplaintMeta
                 items={[
-                  { label: "Room", value: `Room ${detailComplaint.doorNumber || detailComplaint.room || detailComplaint.studentId?.doorNumber || "—"}` },
-                  { label: "Category", value: detailComplaint.category },
-                  { label: "Reported", value: formatDateTime(detailComplaint.createdAt) },
+                  { label: t("common.room", "Room"), value: `${t("common.room", "Room")} ${detailComplaint.doorNumber || detailComplaint.room || detailComplaint.studentId?.doorNumber || "—"}` },
+                  { label: t("complaints.category", "Category"), value: t(`categories.${detailComplaint.category}`, detailComplaint.category) },
+                  { label: t("complaints.reported_on", "Reported"), value: formatDateTime(detailComplaint.createdAt) },
                   {
-                    label: "Student Name",
-                    value: detailComplaint.studentId?.fullName || detailComplaint.studentId?.name || "Resident",
+                    label: t("auth.student_tab", "Student"),
+                    value: detailComplaint.studentId?.fullName || detailComplaint.studentId?.name || t("auth.student_tab", "Student"),
                   },
                   {
-                    label: "Student PRN",
+                    label: "PRN",
                     value: (
                       <span className="font-mono font-medium">
                         {detailComplaint.studentId?.prn || detailComplaint.studentId?.rollNumber || "—"}
@@ -284,18 +287,24 @@ export default function StaffWork() {
                     ),
                   },
                   {
-                    label: "Student Email",
+                    label: t("staff.email_address", "Email"),
                     value: detailComplaint.studentId?.email || "—",
+                  },
+                  {
+                    label: t("common.phone", "Mobile / Contact"),
+                    value: detailComplaint.studentId?.mobileNumber || detailComplaint.studentMobile || detailComplaint.mobileNumber || "—",
                   },
                 ]}
               />
 
-              <DetailSection title="Description">
-                <p className="text-sm leading-relaxed text-foreground">{detailComplaint.description}</p>
+              <DetailSection title={t("complaints.description", "Description")}>
+                <p className="text-sm leading-relaxed text-foreground">
+                  {translateComplaintText(detailComplaint.description, (t.language || undefined))}
+                </p>
               </DetailSection>
 
               {(detailComplaint.media?.length > 0 || detailComplaint.attachments?.length > 0 || detailComplaint.image) && (
-                <DetailSection title="Evidence Photos / Video">
+                <DetailSection title={t("complaints.upload_media", "Evidence Photos / Video")}>
                   <MediaGallery
                     media={detailComplaint.media}
                     image={detailComplaint.image}
@@ -304,14 +313,31 @@ export default function StaffWork() {
                 </DetailSection>
               )}
 
-              <DetailSection title="Timeline">
+              <DetailSection title={t("dashboard.live_lifecycle", "Timeline")}>
                 <ComplaintTimeline complaint={detailComplaint} variant="staff" />
               </DetailSection>
 
               <DialogFooter className="gap-2 sm:gap-0">
                 <Button variant="outline" onClick={() => setDetailComplaint(null)}>
-                  Close
+                  {t("common.close", "Close")}
                 </Button>
+                {(!detailComplaint.acceptedAt && (detailComplaint.status === "Pending" || detailComplaint.lifecycleState === "ASSIGNED")) && (
+                  <Button
+                    variant="secondary"
+                    onClick={async () => {
+                      try {
+                        await api.post(`/staff/complaint/${detailComplaint._id}/accept`);
+                        toast.success("Job accepted");
+                        fetchAssignedComplaints();
+                        setDetailComplaint(null);
+                      } catch (err) {
+                        toast.error(err.response?.data?.message || "Failed to accept job");
+                      }
+                    }}
+                  >
+                    Accept Job
+                  </Button>
+                )}
                 {detailComplaint.status !== "In Progress" && detailComplaint.status !== "in_progress" && (
                   <Button
                     variant="outline"
@@ -320,7 +346,7 @@ export default function StaffWork() {
                       setDetailComplaint(null);
                     }}
                   >
-                    Start work
+                    {t("complaints.mark_in_progress", "Start work")}
                   </Button>
                 )}
                 <Button
@@ -331,7 +357,7 @@ export default function StaffWork() {
                     setResolutionNote("");
                   }}
                 >
-                  Mark resolved
+                  {t("complaints.mark_resolved", "Mark resolved")}
                 </Button>
               </DialogFooter>
             </div>
@@ -343,16 +369,16 @@ export default function StaffWork() {
       <Dialog open={Boolean(resolvingComplaint)} onOpenChange={(open) => !open && setResolvingComplaint(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Complete maintenance</DialogTitle>
+            <DialogTitle>{t("staff.complete_repair", "Complete maintenance")}</DialogTitle>
             <DialogDescription>
-              Record how you fixed this issue in room{" "}
+              {t("staff.add_resolution_note", "Record how you fixed this issue in room")}{" "}
               {resolvingComplaint?.doorNumber || resolvingComplaint?.room || "—"}.
             </DialogDescription>
           </DialogHeader>
 
           <form onSubmit={handleResolveSubmit} className="space-y-4">
             <div className="space-y-1.5">
-              <Label htmlFor="res-note">Resolution Note</Label>
+              <Label htmlFor="res-note">{t("complaints.resolution_notes", "Resolution Note")}</Label>
               <Textarea
                 id="res-note"
                 rows={3}
@@ -366,11 +392,11 @@ export default function StaffWork() {
 
             <DialogFooter className="gap-2 sm:gap-0 pt-2">
               <Button type="button" variant="outline" onClick={() => setResolvingComplaint(null)}>
-                Cancel
+                {t("common.cancel", "Cancel")}
               </Button>
               <Button type="submit" disabled={resolvingBusy}>
                 {resolvingBusy ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
-                Confirm resolved
+                {t("common.confirm", "Confirm resolved")}
               </Button>
             </DialogFooter>
           </form>

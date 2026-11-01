@@ -42,20 +42,37 @@ dist-ssr/
 build/
 
 # Environment variables
-*.env
+*.env*
 .env
+.env.*
 
 # Uploads
 uploads/
 backend/uploads/
 
+# Local database & test data
+test_data/
+backend/test_data/
+*.wt
+*.lock
+diagnostic.data/
+
+# Test outputs & audits
+audit-*.json
+backend/audit-*.json
+*.audit.json
+
 # OS files
 .DS_Store
+*.tmp
+*.temp
+*.bak
 
 # IDE files
 .vscode/*
 !.vscode/extensions.json
 .idea/
+.eslintcache
 
 # Misc
 *.local
@@ -65,6 +82,19 @@ backend/uploads/
 *.sln
 *.sw?
 
-# Generated media
+# Generated media and documents
 img*.jpg
 VID_*.mp4
+*.mp4
+*.mov
+*.avi
+*.webm
+*.mkv
+*.pdf
+*.jpg
+*.jpeg
+*.txt
+**/*.pdf
+**/*.jpg
+**/*.jpeg
+**/*.txt

@@ -47,7 +47,7 @@ const registerLimiter = rateLimit({
 // ─── Room Booking/Allocation: 10 attempts per 15 minutes per IP ─────────────
 const roomLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 10,
+    max: process.env.NODE_ENV === "production" ? 10 : 100,
     standardHeaders: true,
     legacyHeaders: false,
     message: {

@@ -10,6 +10,7 @@ import { ComplaintHeader, ComplaintMeta, DetailSection, ResolutionSummary } from
 import { ComplaintTimeline } from "@/components/hms/complaint-timeline";
 import { formatDateTime } from "@/components/hms/status";
 import { Button } from "@/components/ui/button";
+import QuickServiceReporter from "@/components/hms/QuickServiceReporter";
 import {
   Dialog,
   DialogContent,
@@ -26,7 +27,16 @@ import { AuthContext } from "@/context/AuthContext";
 import { useSocket } from "@/context/SocketContext";
 import api from "@/services/api";
 
-const CATEGORIES = ["Electrical", "Plumbing", "Furniture", "Cleanliness", "Internet", "Other"];
+const CATEGORIES = [
+  { label: "Plumbing (Water, Taps, Leakages)", value: "Plumbing" },
+  { label: "Electrical (Lights, Fans, Sockets)", value: "Electrical" },
+  { label: "Workshop (Furniture, Door, Locks, Beds)", value: "Furniture" },
+  { label: "Cleaning (Housekeeping, Corridors, Washrooms)", value: "Cleanliness" },
+  { label: "Wi-Fi & Internet", value: "Internet" },
+  { label: "Campus Security & Safety", value: "Security" },
+  { label: "Anti-Ragging (Strictly Confidential)", value: "Anti-Ragging" },
+  { label: "Other Services", value: "Other" },
+];
 
 export default function StudentComplaints() {
   const { user } = useContext(AuthContext);
@@ -274,6 +284,16 @@ export default function StudentComplaints() {
         }
       />
 
+      <div className="mb-6">
+        <QuickServiceReporter
+          onComplaintSubmitted={(created) => {
+            if (created) {
+              setComplaints((prev) => [created, ...prev.filter((c) => String(c._id || c.id) !== String(created._id || created.id))]);
+            }
+          }}
+        />
+      </div>
+
       {loading ? (
         <div className="flex justify-center py-16 text-muted-foreground">
           <Loader2 className="size-6 animate-spin" />
@@ -321,12 +341,15 @@ export default function StudentComplaints() {
                 </SelectTrigger>
                 <SelectContent>
                   {CATEGORIES.map((c) => (
-                    <SelectItem key={c} value={c}>
-                      {c}
+                    <SelectItem key={c.value} value={c.value}>
+                      {c.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+              <p className="text-[11px] text-muted-foreground italic">
+                * The selected category determines the department where your complaint will be automatically routed.
+              </p>
             </div>
 
             <div className="space-y-1.5">
@@ -414,7 +437,17 @@ export default function StudentComplaints() {
               {/* Feedback Section if Resolved */}
               {(selected.status === "Resolved" || selected.status === "resolved") && (
                 <DetailSection title="Resolution Feedback">
-                  {selected.feedback?.isSatisfied !== undefined && selected.feedback?.isSatisfied !== null ? (
+                  {selected.roommateConfirmation?.message ? (
+                    <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-3.5 text-sm">
+                      <div className="flex items-center gap-2 font-medium text-emerald-600 dark:text-emerald-400">
+                        <CheckCircle2 className="size-4" />
+                        <span>Room Confirmed Working</span>
+                      </div>
+                      <p className="mt-1.5 text-xs text-muted-foreground">
+                        {selected.roommateConfirmation.message}
+                      </p>
+                    </div>
+                  ) : selected.feedback?.isSatisfied !== undefined && selected.feedback?.isSatisfied !== null ? (
                     <div className="rounded-lg border border-border bg-muted/40 p-3 text-sm">
                       <div className="flex items-center gap-2 font-medium">
                         {selected.feedback.isSatisfied ? (

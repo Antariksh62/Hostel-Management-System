@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { MAX_STUDENTS_PER_ROOM } = require("../utils/hostelRooms");
 
 const roomSchema = new mongoose.Schema({
     roomNumber: {
@@ -8,7 +9,8 @@ const roomSchema = new mongoose.Schema({
     },
     capacity: {
         type: Number,
-        default: 3
+        default: MAX_STUDENTS_PER_ROOM,
+        max: [MAX_STUDENTS_PER_ROOM, `Maximum allowed capacity is ${MAX_STUDENTS_PER_ROOM}`]
     },
     occupants: [
         {
