@@ -1,0 +1,123 @@
+[
+  {
+    "_id": "6ae6fdb559b04e4fca116c69",
+    "templateId": "PLUMBER",
+    "__v": 0,
+    "createdAt": "2026-11-01T08:52:05.719Z",
+    "defaultModules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map"
+    ],
+    "description": "Operational view for assigned plumbing jobs, before/after photos, and materials used.",
+    "name": "Plumbing Technician Dashboard",
+    "roleCode": "STAFF",
+    "updatedAt": "2026-11-07T06:09:29.638Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c6c",
+    "templateId": "ELECTRICIAN",
+    "__v": 0,
+    "createdAt": "2026-11-01T08:52:05.848Z",
+    "defaultModules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map"
+    ],
+    "description": "Operational view for assigned electrical complaints, power safety, and work progress.",
+    "name": "Electrician Dashboard",
+    "roleCode": "STAFF",
+    "updatedAt": "2026-11-07T06:09:29.830Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c6f",
+    "templateId": "WORKSHOP",
+    "__v": 0,
+    "createdAt": "2026-11-01T08:52:05.851Z",
+    "defaultModules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map"
+    ],
+    "description": "Operational view for furniture, carpentry, and metal repairs.",
+    "name": "Workshop Specialist Dashboard",
+    "roleCode": "STAFF",
+    "updatedAt": "2026-11-07T06:09:30.023Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c72",
+    "templateId": "CLEANING",
+    "__v": 0,
+    "createdAt": "2026-11-01T08:52:05.854Z",
+    "defaultModules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map"
+    ],
+    "description": "Operational view for assigned cleaning routines and inspections.",
+    "name": "Cleaning Staff Dashboard",
+    "roleCode": "STAFF",
+    "updatedAt": "2026-11-07T06:09:30.097Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c74",
+    "templateId": "WIFI",
+    "__v": 0,
+    "createdAt": "2026-11-01T08:52:05.857Z",
+    "defaultModules": [
+      "assigned_work",
+      "network_monitor",
+      "router_map",
+      "work_history"
+    ],
+    "description": "Operational view for Wi-Fi complaint queue, router map, and network diagnostics.",
+    "name": "Wi-Fi Specialist Dashboard",
+    "roleCode": "WIFI_INCHARGE",
+    "updatedAt": "2026-11-07T06:09:30.113Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c76",
+    "templateId": "SECURITY",
+    "__v": 0,
+    "createdAt": "2026-11-01T08:52:05.861Z",
+    "defaultModules": [
+      "incident_reporting",
+      "assigned_incidents",
+      "incident_history"
+    ],
+    "description": "Operational view for assigned security incidents, location logging, and status tracking.",
+    "name": "Security Personnel Dashboard",
+    "roleCode": "STAFF",
+    "updatedAt": "2026-11-07T06:09:30.124Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c78",
+    "templateId": "ANTI_RAGGING",
+    "__v": 0,
+    "createdAt": "2026-11-01T08:52:05.863Z",
+    "defaultModules": [
+      "confidential_cases",
+      "investigation_workflow",
+      "case_notes",
+      "actions_taken"
+    ],
+    "description": "Strictly confidential portal for Anti-Ragging squad members with full case management.",
+    "name": "Anti-Ragging Confidential Portal",
+    "roleCode": "STAFF",
+    "updatedAt": "2026-11-07T06:09:30.134Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c7a",
+    "templateId": "GENERAL_STAFF",
+    "__v": 0,
+    "createdAt": "2026-11-01T08:52:05.865Z",
+    "defaultModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "description": "Standard operational view for assigned maintenance tasks.",
+    "name": "General Staff Dashboard",
+    "roleCode": "STAFF",
+    "updatedAt": "2026-11-07T06:09:30.142Z"
+  }
+]

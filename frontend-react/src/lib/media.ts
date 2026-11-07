@@ -99,5 +99,9 @@ export function getMediaUrl(url: string | undefined): string {
   if (url.startsWith("blob:") || url.startsWith("http://") || url.startsWith("https://")) {
     return url;
   }
-  return `http://localhost:5000${url.startsWith("/") ? "" : "/"}${url}`;
+  const backendBase =
+    import.meta.env.VITE_BACKEND_URL ||
+    (import.meta.env.VITE_API_BASE_URL ? import.meta.env.VITE_API_BASE_URL.replace(/\/api\/?$/, "") : null) ||
+    "http://localhost:5000";
+  return `${backendBase}${url.startsWith("/") ? "" : "/"}${url}`;
 }

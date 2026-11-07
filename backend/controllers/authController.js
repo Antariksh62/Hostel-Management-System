@@ -60,6 +60,14 @@ exports.login = async (req, res) => {
             return res.status(403).json({ message: "Students must login via the OTP portal. Use the Student Login option." });
         }
 
+        // Block deactivated accounts from logging in
+        if (user.isActive === false) {
+            return res.status(403).json({
+                message: "Your account has been deactivated. Please contact Administration.",
+                code: "ACCOUNT_DEACTIVATED"
+            });
+        }
+
         // Guard: staff/warden must have a password set
         if (!user.password) {
             return res.status(400).json({ message: "Invalid email or password" });
@@ -69,12 +77,72 @@ exports.login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
 
+        // Populate department details if assigned
+        const populatedUser = await User.findById(user._id).populate("departmentId", "name code template").lean();
+
         // Create tokens
         const accessToken = generateTokens(res, user);
 
         res.json({
             token: accessToken,
-            user: { id: user._id, name: user.name, email: user.email, role: user.role, preferredLanguage: user.preferredLanguage || "en" }
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                departmentId: populatedUser?.departmentId?._id || user.departmentId || null,
+                department: populatedUser?.departmentId?.name || null,
+                departmentName: populatedUser?.departmentId?.name || null,
+                departmentCode: populatedUser?.departmentId?.code || null,
+                authorizedDepartments: user.authorizedDepartments || [],
+                staffRole: user.staffRole || user.designation || "Technician",
+                designation: user.designation || user.staffRole || "Technician",
+                employeeId: user.employeeId || "",
+                phoneNumber: user.phoneNumber || "",
+                isSupervisor: Boolean(user.isSupervisor),
+                dashboardPermissions: user.dashboardPermissions || [],
+                preferredLanguage: user.preferredLanguage || "en",
+                isActive: user.isActive !== false
+            }
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
+exports.getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).populate("departmentId", "name code template").lean();
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        if (user.isActive === false) {
+            return res.status(403).json({
+                message: "Your account has been deactivated. Please contact Administration.",
+                code: "ACCOUNT_DEACTIVATED"
+            });
+        }
+
+        res.json({
+            success: true,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                departmentId: user.departmentId?._id || null,
+                department: user.departmentId?.name || null,
+                departmentName: user.departmentId?.name || null,
+                departmentCode: user.departmentId?.code || null,
+                authorizedDepartments: user.authorizedDepartments || [],
+                staffRole: user.staffRole || user.designation || "Technician",
+                designation: user.designation || user.staffRole || "Technician",
+                employeeId: user.employeeId || "",
+                phoneNumber: user.phoneNumber || "",
+                isSupervisor: Boolean(user.isSupervisor),
+                dashboardPermissions: user.dashboardPermissions || [],
+                preferredLanguage: user.preferredLanguage || "en",
+                isActive: user.isActive !== false
+            }
         });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });

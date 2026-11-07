@@ -34,6 +34,10 @@ const UserSchema = new mongoose.Schema({
         ref: "Department",
         default: null
     },
+    authorizedDepartments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Department"
+    }],
     dashboardPermissions: [{
         type: String,
         uppercase: true,
@@ -125,8 +129,11 @@ const WifiIncharge = User.discriminator("WIFI_INCHARGE", new mongoose.Schema({
 }));
 
 const Staff = User.discriminator("STAFF", new mongoose.Schema({
-    staffRole: { type: String },
-    phoneNumber: { type: String }
+    staffRole: { type: String, default: "Technician" },
+    designation: { type: String, default: "Technician" },
+    employeeId: { type: String, default: "" },
+    phoneNumber: { type: String, default: "" },
+    isSupervisor: { type: Boolean, default: false }
 }));
 
 // 6. Main Administrator Extension (Supreme Authority)

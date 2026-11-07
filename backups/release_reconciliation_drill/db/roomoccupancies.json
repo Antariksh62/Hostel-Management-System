@@ -1,0 +1,790 @@
+[
+  {
+    "_id": "6ae5cf3e59b04e4fca113181",
+    "roomNumber": "101",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 2,
+    "occupants": [
+      "6a9141146bc5f921b15c2979",
+      "6aee358d4af48359a5226bed"
+    ],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113182",
+    "roomNumber": "102",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 2,
+    "occupants": [
+      "6ae63a6d8c05010096d6ca3b",
+      "6ae63a6e8c05010096d6ca3f"
+    ],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113184",
+    "roomNumber": "103",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113185",
+    "roomNumber": "104",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113186",
+    "roomNumber": "105",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113187",
+    "roomNumber": "106",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113188",
+    "roomNumber": "107",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 1,
+    "occupants": [],
+    "rosterReservations": [
+      "6ae8e08383f085ffa8890a59"
+    ],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113189",
+    "roomNumber": "108",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11318a",
+    "roomNumber": "109",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11318b",
+    "roomNumber": "110",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11318d",
+    "roomNumber": "111",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11318e",
+    "roomNumber": "112",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11318f",
+    "roomNumber": "113",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113190",
+    "roomNumber": "114",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113192",
+    "roomNumber": "115",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113193",
+    "roomNumber": "116",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113194",
+    "roomNumber": "117",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113195",
+    "roomNumber": "201",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 1,
+    "occupants": [
+      "6ae8e053a28feacfb82b1c82"
+    ],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113196",
+    "roomNumber": "202",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113197",
+    "roomNumber": "203",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113198",
+    "roomNumber": "204",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 1,
+    "occupants": [
+      "6a97dde88b3a8d1e37d443e9"
+    ],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca113199",
+    "roomNumber": "205",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11319b",
+    "roomNumber": "206",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11319c",
+    "roomNumber": "207",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11319d",
+    "roomNumber": "208",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca11319e",
+    "roomNumber": "209",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a0",
+    "roomNumber": "210",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a1",
+    "roomNumber": "211",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a2",
+    "roomNumber": "212",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a3",
+    "roomNumber": "213",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a4",
+    "roomNumber": "214",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a5",
+    "roomNumber": "215",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a6",
+    "roomNumber": "216",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a7",
+    "roomNumber": "217",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a8",
+    "roomNumber": "301",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131a9",
+    "roomNumber": "302",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131aa",
+    "roomNumber": "303",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131ab",
+    "roomNumber": "304",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131ac",
+    "roomNumber": "305",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 1,
+    "occupants": [
+      "6ae7061822000f8c2766943e"
+    ],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131ad",
+    "roomNumber": "306",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131ae",
+    "roomNumber": "307",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131af",
+    "roomNumber": "308",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131b0",
+    "roomNumber": "309",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131b1",
+    "roomNumber": "310",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131b2",
+    "roomNumber": "311",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131b3",
+    "roomNumber": "312",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131b5",
+    "roomNumber": "313",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131b6",
+    "roomNumber": "314",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131b7",
+    "roomNumber": "315",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131b9",
+    "roomNumber": "316",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 1,
+    "occupants": [
+      "6ae7061822000f8c2766943d"
+    ],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131ba",
+    "roomNumber": "317",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131bb",
+    "roomNumber": "401",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131bc",
+    "roomNumber": "402",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131bd",
+    "roomNumber": "403",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 1,
+    "occupants": [
+      "6ae63a758c05010096d6ca46"
+    ],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131be",
+    "roomNumber": "404",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131bf",
+    "roomNumber": "405",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c0",
+    "roomNumber": "406",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c1",
+    "roomNumber": "407",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c2",
+    "roomNumber": "408",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c3",
+    "roomNumber": "409",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c4",
+    "roomNumber": "410",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c5",
+    "roomNumber": "411",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c6",
+    "roomNumber": "412",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c7",
+    "roomNumber": "413",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c8",
+    "roomNumber": "414",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131c9",
+    "roomNumber": "415",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131ca",
+    "roomNumber": "416",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131cb",
+    "roomNumber": "417",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131cc",
+    "roomNumber": "501",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131cd",
+    "roomNumber": "502",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131ce",
+    "roomNumber": "503",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131cf",
+    "roomNumber": "504",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131d0",
+    "roomNumber": "505",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131d1",
+    "roomNumber": "506",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131d2",
+    "roomNumber": "507",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131d3",
+    "roomNumber": "508",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  },
+  {
+    "_id": "6ae5cf3e59b04e4fca1131d4",
+    "roomNumber": "509",
+    "__v": 0,
+    "isOverCapacity": false,
+    "occupantCount": 0,
+    "occupants": [],
+    "rosterReservations": [],
+    "updatedAt": "2026-11-07T06:09:29.757Z"
+  }
+]

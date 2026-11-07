@@ -3,6 +3,7 @@ const router = express.Router();
 const {
     authMiddleware,
     mainAdminOnlyMiddleware,
+    managementOnlyMiddleware,
     staffManagementMiddleware
 } = require("../middleware/auth");
 const controller = require("../controllers/mainAdminController");
@@ -11,6 +12,9 @@ const controller = require("../controllers/mainAdminController");
 router.get("/departments", authMiddleware, controller.getAllDepartments);
 router.post("/departments", authMiddleware, mainAdminOnlyMiddleware, controller.createDepartment);
 router.patch("/departments/:id", authMiddleware, mainAdminOnlyMiddleware, controller.updateDepartment);
+router.post("/departments/:id/assign-staff", authMiddleware, mainAdminOnlyMiddleware, controller.assignStaffToDepartment);
+router.post("/departments/:id/remove-staff", authMiddleware, mainAdminOnlyMiddleware, controller.removeStaffFromDepartment);
+router.post("/departments/:id/supervisor", authMiddleware, mainAdminOnlyMiddleware, controller.setDepartmentSupervisor);
 
 // ─── TEMPLATES & INSTANCES ───────────────────────────────────────────────────
 router.get("/templates", authMiddleware, controller.getAllTemplates);
@@ -20,6 +24,8 @@ router.post("/instances", authMiddleware, mainAdminOnlyMiddleware, controller.cr
 // ─── STAFF MANAGEMENT ────────────────────────────────────────────────────────
 router.get("/staff", authMiddleware, staffManagementMiddleware, controller.getAllStaff);
 router.post("/staff", authMiddleware, staffManagementMiddleware, controller.createStaff);
+router.patch("/staff/:id", authMiddleware, staffManagementMiddleware, controller.updateStaff);
+router.post("/staff/:id/reset-password", authMiddleware, mainAdminOnlyMiddleware, controller.resetStaffPassword);
 router.patch("/staff/:id/availability", authMiddleware, staffManagementMiddleware, controller.updateStaffAvailability);
 router.post("/staff/:id/deactivate", authMiddleware, staffManagementMiddleware, controller.deactivateStaff);
 router.post("/staff/:id/restore", authMiddleware, staffManagementMiddleware, controller.restoreStaff);
@@ -32,12 +38,13 @@ router.get("/categories", authMiddleware, controller.getAllCategories);
 router.post("/categories", authMiddleware, mainAdminOnlyMiddleware, controller.createCategory);
 router.patch("/categories/:id", authMiddleware, mainAdminOnlyMiddleware, controller.updateCategory);
 
-// ─── GLOBAL MONITORING FEED ──────────────────────────────────────────────────
+// ─── GLOBAL MONITORING FEED & OVERVIEW ───────────────────────────────────────
 router.get("/monitoring/feed", authMiddleware, controller.getGlobalMonitoringFeed);
+router.get("/overview/stats", authMiddleware, controller.getSystemOverview);
 
 // ─── ESCALATIONS & AUDIT LOGS ────────────────────────────────────────────────
 router.post("/escalations/trigger", authMiddleware, controller.triggerEscalationCheck);
-router.get("/audit-logs", authMiddleware, mainAdminOnlyMiddleware, controller.getAuditLogs);
+router.get("/audit-logs", authMiddleware, managementOnlyMiddleware, controller.getAuditLogs);
 
 module.exports = router;
 

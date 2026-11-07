@@ -13,20 +13,46 @@ const { evaluateEscalations } = require("../services/escalationService");
 
 exports.getAllDepartments = async (req, res) => {
     try {
-        const departments = await Department.find().sort({ isSystem: -1, name: 1 }).lean();
+        const departments = await Department.find()
+            .populate("supervisor", "name email staffRole designation phoneNumber")
+            .sort({ isSystem: -1, name: 1 })
+            .lean();
 
-        // Attach operational counts
+        // Attach operational counts and assigned staff members
         const enriched = await Promise.all(departments.map(async (d) => {
-            const employeeCount = await User.countDocuments({
-                $or: [{ departmentId: d._id }, { dashboardPermissions: d.code }],
+            const staffInDept = await User.find({
+                role: { $in: ["STAFF", "WIFI_INCHARGE"] },
+                $or: [
+                    { departmentId: d._id },
+                    { authorizedDepartments: d._id },
+                    { dashboardPermissions: d.code }
+                ],
                 isActive: true
-            });
+            }, "name email staffRole designation employeeId phoneNumber isSupervisor isAvailable activeWorkload").lean();
+
+            const employeeCount = staffInDept.length;
+
             const openJobsCount = await Complaint.countDocuments({
                 departmentId: d._id,
                 status: { $in: ["Pending", "In Progress", "Reopened"] },
                 lifecycleState: { $nin: ["RESOLVED", "AWAITING_STUDENT_CONFIRMATION", "CONFIRMED", "CLOSED"] }
             });
-            return { ...d, employeeCount, openJobsCount };
+
+            return {
+                ...d,
+                employeeCount,
+                openJobsCount,
+                staffMembers: staffInDept.map(s => ({
+                    id: s._id,
+                    name: s.name,
+                    email: s.email,
+                    designation: s.designation || s.staffRole || "Staff",
+                    employeeId: s.employeeId || "",
+                    phoneNumber: s.phoneNumber || "",
+                    isSupervisor: Boolean(s.isSupervisor),
+                    isAvailable: s.isAvailable !== false
+                }))
+            };
         }));
 
         res.json({ success: true, departments: enriched });
@@ -37,7 +63,7 @@ exports.getAllDepartments = async (req, res) => {
 
 exports.createDepartment = async (req, res) => {
     try {
-        const { name, code, description, template, modules, complaintCategories, workloadPolicy, escalationPolicy } = req.body;
+        const { name, code, description, template, modules, complaintCategories, supervisor, workloadPolicy, escalationPolicy, isActive } = req.body;
         if (!name || !code) {
             return res.status(400).json({ message: "Department name and uppercase code are required." });
         }
@@ -54,22 +80,32 @@ exports.createDepartment = async (req, res) => {
             description: description || "",
             template: template || "GENERAL_STAFF",
             modules: modules || ["assigned_work", "work_history"],
-            complaintCategories: complaintCategories || [name.trim()],
+            complaintCategories: Array.isArray(complaintCategories) ? complaintCategories : [name.trim()],
+            supervisor: supervisor || null,
             workloadPolicy: workloadPolicy || {},
             escalationPolicy: escalationPolicy || {},
+            isActive: isActive !== undefined ? Boolean(isActive) : true,
             createdBy: req.user.id
         });
 
-        // Create default instance for this department
+        if (supervisor) {
+            await User.findByIdAndUpdate(supervisor, { isSupervisor: true, departmentId: department._id });
+        }
+
+        // Create default instance for this department (upsert to handle recreation gracefully)
         const instanceId = `${cleanCode}_INSTANCE_1`;
-        await DashboardInstance.create({
-            instanceId,
-            name: `${name.trim()} Workspace`,
-            departmentId: department._id,
-            templateId: department.template,
-            activeModules: department.modules,
-            createdBy: req.user.id
-        });
+        await DashboardInstance.findOneAndUpdate(
+            { instanceId },
+            {
+                instanceId,
+                name: `${name.trim()} Workspace`,
+                departmentId: department._id,
+                templateId: department.template,
+                activeModules: department.modules,
+                createdBy: req.user.id
+            },
+            { upsert: true, new: true }
+        );
 
         // Create complaint categories
         if (Array.isArray(complaintCategories)) {
@@ -99,17 +135,39 @@ exports.createDepartment = async (req, res) => {
 exports.updateDepartment = async (req, res) => {
     try {
         const { id } = req.params;
-        const { description, modules, complaintCategories, workloadPolicy, escalationPolicy, isActive } = req.body;
+        const { name, description, supervisor, modules, complaintCategories, workloadPolicy, escalationPolicy, isActive } = req.body;
 
         const dept = await Department.findById(id);
         if (!dept) return res.status(404).json({ message: "Department not found" });
 
+        if (name && name.trim()) dept.name = name.trim();
         if (description !== undefined) dept.description = description;
+        if (supervisor !== undefined) {
+            dept.supervisor = supervisor || null;
+            if (supervisor) {
+                await User.findByIdAndUpdate(supervisor, { isSupervisor: true, departmentId: dept._id });
+            }
+        }
         if (modules !== undefined) dept.modules = modules;
-        if (complaintCategories !== undefined) dept.complaintCategories = complaintCategories;
+        if (complaintCategories !== undefined) {
+            dept.complaintCategories = complaintCategories;
+            // Also sync/create ComplaintCategory documents if provided
+            if (Array.isArray(complaintCategories)) {
+                for (const cat of complaintCategories) {
+                    const catCode = cat.toUpperCase().replace(/\s+/g, "_").replace(/[^A-Z0-9_]/g, "");
+                    await ComplaintCategory.findOneAndUpdate(
+                        { code: catCode },
+                        { name: cat, code: catCode, departmentId: dept._id, description: `${cat} category`, isActive: true },
+                        { upsert: true }
+                    );
+                }
+            }
+        }
         if (workloadPolicy !== undefined) dept.workloadPolicy = workloadPolicy;
         if (escalationPolicy !== undefined) dept.escalationPolicy = escalationPolicy;
-        if (isActive !== undefined && !dept.isSystem) dept.isActive = isActive;
+        if (isActive !== undefined) {
+            dept.isActive = Boolean(isActive);
+        }
 
         await dept.save();
 
@@ -122,6 +180,119 @@ exports.updateDepartment = async (req, res) => {
         res.json({ success: true, department: dept });
     } catch (err) {
         res.status(500).json({ message: "Failed to update department", error: err.message });
+    }
+};
+
+exports.assignStaffToDepartment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { staffId, staffIds } = req.body;
+        const targetIds = staffIds || (staffId ? [staffId] : []);
+
+        const dept = await Department.findById(id);
+        if (!dept) return res.status(404).json({ message: "Department not found" });
+
+        const updated = await User.updateMany(
+            { _id: { $in: targetIds }, role: { $in: ["STAFF", "WIFI_INCHARGE"] } },
+            { $set: { departmentId: dept._id }, $addToSet: { authorizedDepartments: dept._id } }
+        );
+
+        await AuditLog.create({
+            action: "STAFF_ASSIGNED_TO_DEPARTMENT",
+            performedBy: { id: req.user.id, name: req.user.name, role: req.user.role, email: req.user.email },
+            target: { id: dept._id, model: "Department", identifier: dept.name },
+            details: { assignedCount: updated.modifiedCount, staffIds: targetIds }
+        });
+
+        res.json({ success: true, message: `Assigned ${updated.modifiedCount} staff members to ${dept.name}` });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to assign staff to department", error: err.message });
+    }
+};
+
+exports.removeStaffFromDepartment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { staffId } = req.body;
+
+        const dept = await Department.findById(id);
+        if (!dept) return res.status(404).json({ message: "Department not found" });
+
+        const staff = await User.findById(staffId);
+        if (!staff) return res.status(404).json({ message: "Staff member not found" });
+
+        if (String(staff.departmentId) === String(dept._id)) {
+            staff.departmentId = null;
+        }
+        staff.authorizedDepartments = (staff.authorizedDepartments || []).filter(dId => String(dId) !== String(dept._id));
+        if (String(dept.supervisor) === String(staff._id)) {
+            dept.supervisor = null;
+            staff.isSupervisor = false;
+            await dept.save();
+        }
+        await staff.save();
+
+        await AuditLog.create({
+            action: "STAFF_REMOVED_FROM_DEPARTMENT",
+            performedBy: { id: req.user.id, name: req.user.name, role: req.user.role, email: req.user.email },
+            target: { id: dept._id, model: "Department", identifier: dept.name },
+            details: { staffId: staff._id, staffName: staff.name }
+        });
+
+        res.json({ success: true, message: `Removed ${staff.name} from ${dept.name}` });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to remove staff from department", error: err.message });
+    }
+};
+
+exports.setDepartmentSupervisor = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { supervisorId } = req.body;
+
+        const dept = await Department.findById(id);
+        if (!dept) return res.status(404).json({ message: "Department not found" });
+
+        // If removing supervisor
+        if (!supervisorId) {
+            if (dept.supervisor) {
+                await User.findByIdAndUpdate(dept.supervisor, { isSupervisor: false });
+            }
+            dept.supervisor = null;
+            await dept.save();
+            return res.json({ success: true, message: "Department supervisor cleared" });
+        }
+
+        const supervisor = await User.findById(supervisorId);
+        if (!supervisor) return res.status(404).json({ message: "Supervisor staff member not found" });
+
+        // Remove old supervisor's supervisor flag if changed
+        if (dept.supervisor && String(dept.supervisor) !== String(supervisorId)) {
+            await User.findByIdAndUpdate(dept.supervisor, { isSupervisor: false });
+        }
+
+        dept.supervisor = supervisor._id;
+        supervisor.isSupervisor = true;
+        if (!supervisor.departmentId) {
+            supervisor.departmentId = dept._id;
+        }
+        if (!supervisor.authorizedDepartments?.includes(dept._id)) {
+            supervisor.authorizedDepartments = [...(supervisor.authorizedDepartments || []), dept._id];
+        }
+
+        await dept.save();
+        await supervisor.save();
+
+        await AuditLog.create({
+            action: "DEPARTMENT_SUPERVISOR_CHANGED",
+            performedBy: { id: req.user.id, name: req.user.name, role: req.user.role, email: req.user.email },
+            target: { id: dept._id, model: "Department", identifier: dept.name },
+            details: { supervisorId: supervisor._id, supervisorName: supervisor.name }
+        });
+
+        res.json({ success: true, message: `Set ${supervisor.name} as supervisor of ${dept.name}`, supervisor: { id: supervisor._id, name: supervisor.name } });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to set supervisor", error: err.message });
     }
 };
 
@@ -183,7 +354,11 @@ exports.getAllStaff = async (req, res) => {
             }
         }
 
-        const staffList = await User.find(query).populate("departmentId", "name code template").sort({ createdAt: -1 }).lean();
+        const staffList = await User.find(query)
+            .populate("departmentId", "name code template")
+            .populate("authorizedDepartments", "name code")
+            .sort({ createdAt: -1 })
+            .lean();
 
         // Enrich with real-time active load
         const enriched = await Promise.all(staffList.map(async (s) => {
@@ -193,9 +368,15 @@ exports.getAllStaff = async (req, res) => {
                 name: s.name,
                 email: s.email,
                 role: s.role,
-                staffRole: s.staffRole || "Technician",
+                employeeId: s.employeeId || "",
+                phoneNumber: s.phoneNumber || "",
+                designation: s.designation || s.staffRole || "Technician",
+                staffRole: s.staffRole || s.designation || "Technician",
+                departmentId: s.departmentId ? s.departmentId._id : null,
                 department: s.departmentId ? s.departmentId.name : "General Maintenance",
                 departmentCode: s.departmentId ? s.departmentId.code : "GENERAL",
+                authorizedDepartments: s.authorizedDepartments || [],
+                isSupervisor: Boolean(s.isSupervisor),
                 dashboardPermissions: s.dashboardPermissions || [],
                 isActive: s.isActive !== false,
                 isAvailable: s.isAvailable !== false,
@@ -203,7 +384,8 @@ exports.getAllStaff = async (req, res) => {
                 exportPermissions: Boolean(s.exportPermissions),
                 activeWorkload: stats.activeCount,
                 workloadScore: stats.totalScore,
-                overdueWorkload: stats.overdueCount
+                overdueWorkload: stats.overdueCount,
+                createdAt: s.createdAt
             };
         }));
 
@@ -228,6 +410,41 @@ exports.createStaff = async (req, res) => {
         });
 
         res.status(201).json({ success: true, staff: result });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+exports.updateStaff = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const actor = { id: req.user.id, name: req.user.name || "Administrator", role: req.user.role, email: req.user.email };
+
+        const result = await staffLifecycleService.updateStaffAccount({
+            staffId: id,
+            ...req.body,
+            actor
+        });
+
+        res.json({ success: true, staff: result });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+exports.resetStaffPassword = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { newPassword } = req.body;
+        const actor = { id: req.user.id, name: req.user.name || "Administrator", role: req.user.role, email: req.user.email };
+
+        const result = await staffLifecycleService.resetStaffPassword({
+            staffId: id,
+            newPassword,
+            actor
+        });
+
+        res.json({ success: true, ...result });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -543,5 +760,129 @@ exports.getAuditLogs = async (req, res) => {
         res.json({ success: true, count: logs.length, logs });
     } catch (err) {
         res.status(500).json({ message: "Failed to fetch audit logs", error: err.message });
+    }
+};
+
+// ─── SYSTEM OVERVIEW & WORKLOADS (Section 7) ─────────────────────────────────
+
+exports.getSystemOverview = async (req, res) => {
+    try {
+        const now = new Date();
+        const departments = await Department.find().sort({ name: 1 }).lean();
+
+        // 1. Complaint counts
+        const allComplaints = await Complaint.find().select("departmentId status createdAt escalationLevel assignedTo lifecycleState").lean();
+        const totalComplaints = allComplaints.length;
+        let pendingComplaints = 0;
+        let inProgressComplaints = 0;
+        let resolvedComplaints = 0;
+        let overdueComplaints = 0;
+
+        const deptMap = {};
+        for (const d of departments) {
+            deptMap[String(d._id)] = {
+                departmentId: d._id,
+                name: d.name,
+                code: d.code,
+                isActive: d.isActive,
+                total: 0,
+                pending: 0,
+                inProgress: 0,
+                resolved: 0,
+                overdue: 0,
+                activeWorkloadScore: 0
+            };
+        }
+        deptMap["unassigned"] = {
+            departmentId: null,
+            name: "Management Review / Unassigned",
+            code: "UNASSIGNED",
+            isActive: true,
+            total: 0,
+            pending: 0,
+            inProgress: 0,
+            resolved: 0,
+            overdue: 0,
+            activeWorkloadScore: 0
+        };
+
+        for (const c of allComplaints) {
+            const isResolved = c.status === "Resolved" || ["RESOLVED", "CONFIRMED", "CLOSED"].includes(c.lifecycleState);
+            const isInProg = c.status === "In Progress" || c.lifecycleState === "IN_PROGRESS";
+            const isPending = !isResolved && !isInProg;
+
+            if (isResolved) resolvedComplaints++;
+            else if (isInProg) inProgressComplaints++;
+            else pendingComplaints++;
+
+            // Overdue check (> 48h or escalated)
+            const ageHours = (now - new Date(c.createdAt)) / (1000 * 60 * 60);
+            const isOverdue = !isResolved && (ageHours > 48 || (c.escalationLevel || 0) > 0);
+            if (isOverdue) overdueComplaints++;
+
+            const dKey = c.departmentId ? String(c.departmentId) : "unassigned";
+            if (deptMap[dKey]) {
+                deptMap[dKey].total++;
+                if (isResolved) deptMap[dKey].resolved++;
+                else if (isInProg) deptMap[dKey].inProgress++;
+                else deptMap[dKey].pending++;
+                if (isOverdue) deptMap[dKey].overdue++;
+            }
+        }
+
+        // 2. Staff workloads
+        const staffList = await User.find({ role: { $in: ["STAFF", "WIFI_INCHARGE"] }, isActive: true })
+            .populate("departmentId", "name code")
+            .lean();
+
+        const staffWorkloads = await Promise.all(staffList.map(async (s) => {
+            const stats = await calculateEmployeeWorkload(s._id);
+            return {
+                id: s._id,
+                name: s.name,
+                email: s.email,
+                designation: s.designation || s.staffRole || "Staff",
+                department: s.departmentId?.name || "General",
+                departmentCode: s.departmentId?.code || "GENERAL",
+                activeCount: stats.activeCount,
+                pendingCount: stats.pendingCount,
+                overdueCount: stats.overdueCount,
+                workloadScore: stats.totalScore,
+                isAvailable: s.isAvailable !== false
+            };
+        }));
+
+        const summary = {
+            totalComplaints,
+            pendingComplaints,
+            inProgressComplaints,
+            resolvedComplaints,
+            overdueComplaints
+        };
+        const departmentBreakdown = Object.values(deptMap);
+
+        res.json({
+            success: true,
+            summary,
+            departmentBreakdown,
+            staffWorkloads: staffWorkloads.sort((a, b) => b.workloadScore - a.workloadScore),
+            overview: {
+                totalComplaints,
+                pendingComplaints,
+                inProgressComplaints,
+                resolvedComplaints,
+                overdueComplaints,
+                complaintsByDepartment: departmentBreakdown,
+                departmentWorkloads: departmentBreakdown.map(d => ({
+                    name: d.name,
+                    code: d.code,
+                    activeJobs: d.pending + d.inProgress,
+                    overdueJobs: d.overdue
+                })),
+                staffWorkloads: staffWorkloads.sort((a, b) => b.workloadScore - a.workloadScore)
+            }
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to fetch system overview", error: err.message });
     }
 };

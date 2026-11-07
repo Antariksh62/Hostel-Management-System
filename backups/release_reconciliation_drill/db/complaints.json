@@ -1,0 +1,4777 @@
+[
+  {
+    "_id": "6a9141146bc5f921b15c2980",
+    "title": "Broken Fan in Room 204",
+    "description": "The ceiling fan is making weird noises and constantly slowing down.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:00:36.339Z",
+    "resolvedAt": "2026-09-07T14:20:42.043Z",
+    "statusHistory": [
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:00:36.339Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T14:20:42.043Z",
+        "note": "Marked as resolved"
+      }
+    ],
+    "media": [],
+    "__v": 1,
+    "createdAt": "2026-08-28T08:04:36.833Z",
+    "updatedAt": "2026-11-01T08:52:50.838Z",
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9141146bc5f921b15c2982",
+    "title": "No Internet Connection",
+    "description": "The router on the 2nd floor is completely dead.",
+    "category": "Internet",
+    "status": "Pending",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c297b",
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "statusHistory": [],
+    "media": [],
+    "__v": 4,
+    "createdAt": "2026-08-28T08:04:36.834Z",
+    "updatedAt": "2026-11-07T04:50:51.870Z",
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116cb6",
+    "escalationLevel": 10,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": [],
+    "lastEscalatedAt": "2026-11-07T04:50:51.847Z"
+  },
+  {
+    "_id": "6a9141146bc5f921b15c2983",
+    "title": "Broken Window Latch",
+    "description": "The window on the left side of the room won't lock properly.",
+    "category": "Furniture",
+    "status": "Pending",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "statusHistory": [],
+    "media": [],
+    "__v": 1,
+    "createdAt": "2026-08-28T08:04:36.834Z",
+    "updatedAt": "2026-11-06T19:45:11.605Z",
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c9b",
+    "escalationLevel": 4,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": [],
+    "lastEscalatedAt": "2026-11-06T19:45:11.294Z"
+  },
+  {
+    "_id": "6a9141146bc5f921b15c2984",
+    "title": "Blocked Sink",
+    "description": "Water isn't draining from the main washbasin in the corridor.",
+    "category": "Plumbing",
+    "status": "Resolved",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c297a",
+    "assignedTo": "6a9141146bc5f921b15c297e",
+    "assignedAt": null,
+    "resolvedAt": null,
+    "statusHistory": [],
+    "media": [],
+    "__v": 1,
+    "createdAt": "2026-08-28T08:04:36.834Z",
+    "updatedAt": "2026-11-01T08:52:50.840Z",
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9141146bc5f921b15c2985",
+    "title": "Dim Tube Light",
+    "description": "The main fluorescent light in the room is constantly flickering.",
+    "category": "Electrical",
+    "status": "In Progress",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c297b",
+    "assignedTo": "6a9141146bc5f921b15c297f",
+    "assignedAt": null,
+    "resolvedAt": null,
+    "statusHistory": [],
+    "media": [],
+    "__v": 2,
+    "createdAt": "2026-08-28T08:04:36.834Z",
+    "updatedAt": "2026-11-07T01:45:51.736Z",
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 6,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": [],
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z"
+  },
+  {
+    "_id": "6a9141146bc5f921b15c2986",
+    "title": "AC Not Cooling",
+    "description": "The air conditioner turns on but blows out warm air.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": null,
+    "resolvedAt": null,
+    "statusHistory": [],
+    "media": [],
+    "__v": 1,
+    "createdAt": "2026-08-28T08:04:36.834Z",
+    "updatedAt": "2026-11-01T08:52:50.843Z",
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a97e2f98b3a8d1e37d443fb",
+    "title": "ugfuehfub",
+    "description": "dhidhfihfi",
+    "category": "Other",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-02T08:48:57.588Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-02T08:49:15.250Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-02T08:49:31.748Z",
+        "note": "Marked as resolved"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "N/A",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-02T08:49:15.250Z",
+    "resolvedAt": "2026-09-02T08:49:31.748Z",
+    "createdAt": "2026-09-02T08:48:57.597Z",
+    "updatedAt": "2026-11-01T08:52:50.846Z",
+    "__v": 1,
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9e8342323c7d6978f44c0b",
+    "title": "Flickering Tube Light in Room 204",
+    "description": "The main tube light in room 204 is constantly flickering and needs replacement.",
+    "category": "Electrical",
+    "status": "In Progress",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-07T09:26:26.879Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:00:34.773Z",
+        "note": "Assigned to Mike Manager"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "N/A",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:00:34.773Z",
+    "resolvedAt": null,
+    "createdAt": "2026-09-07T09:26:26.892Z",
+    "updatedAt": "2026-11-07T01:45:51.745Z",
+    "__v": 2,
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 6,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": [],
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z"
+  },
+  {
+    "_id": "6a9e83a8323c7d6978f44c0c",
+    "title": "Flickering Tube Light in Room 204",
+    "description": "The main tube light in room 204 is constantly flickering and needs replacement.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-07T09:28:08.316Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:00:34.464Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-08T18:50:53.918Z",
+        "note": "done",
+        "actor": ""
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "N/A",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:00:34.464Z",
+    "resolvedAt": "2026-09-08T18:50:53.918Z",
+    "createdAt": "2026-09-07T09:28:08.323Z",
+    "updatedAt": "2026-11-01T08:52:50.849Z",
+    "__v": 1,
+    "resolutionNote": "done",
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9e841f323c7d6978f44c0d",
+    "title": "Flickering Tube Light in Room 204",
+    "description": "The main tube light in room 204 is constantly flickering and needs replacement.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-07T09:30:07.829Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:00:34.233Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-08T18:42:23.037Z",
+        "note": "done",
+        "actor": ""
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "N/A",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:00:34.233Z",
+    "resolvedAt": "2026-09-08T18:42:23.037Z",
+    "createdAt": "2026-09-07T09:30:07.832Z",
+    "updatedAt": "2026-11-01T08:52:50.851Z",
+    "__v": 1,
+    "resolutionNote": "done",
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9e8481323c7d6978f44c0e",
+    "title": "Flickering Tube Light in Room 204",
+    "description": "The main tube light in room 204 is constantly flickering and needs replacement.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-07T09:31:45.028Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:00:33.227Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T14:20:05.028Z",
+        "note": "Marked as resolved"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "N/A",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:00:33.227Z",
+    "resolvedAt": "2026-09-07T14:20:05.028Z",
+    "createdAt": "2026-09-07T09:31:45.031Z",
+    "updatedAt": "2026-11-01T08:52:50.852Z",
+    "__v": 1,
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9eb1e72b8449c49684f675",
+    "title": "Flickering Tube Light in Room 204",
+    "description": "The main tube light in room 204 is constantly flickering and needs replacement.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-07T12:45:27.347Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:00:25.238Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:00:25.844Z",
+        "note": "Work started by staff"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:00:33.018Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T14:19:43.074Z",
+        "note": "Marked as resolved"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:00:33.018Z",
+    "resolvedAt": "2026-09-07T14:19:43.074Z",
+    "createdAt": "2026-09-07T12:45:27.448Z",
+    "updatedAt": "2026-11-01T08:52:50.854Z",
+    "__v": 1,
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9eba4b2b8449c49684f687",
+    "title": "Flickering Tube Light in Room 204",
+    "description": "The main tube light in room 204 is constantly flickering and needs replacement.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-07T13:21:15.119Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:21:15.217Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:21:15.844Z",
+        "note": "Work started by staff"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T13:21:16.486Z",
+        "note": "Marked as resolved"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T13:21:17.188Z",
+        "note": "Student confirmed issue resolved"
+      }
+    ],
+    "media": [
+      {
+        "url": "/uploads/f130119b-017c-4c3c-a029-f640bb7dc992.png",
+        "type": "image",
+        "_id": "6a9eba4b2b8449c49684f688"
+      },
+      {
+        "url": "/uploads/bacc2feb-041f-41e2-987c-c2481b74393f.mp4",
+        "type": "video",
+        "_id": "6a9eba4b2b8449c49684f689"
+      }
+    ],
+    "feedback": {
+      "isSatisfied": true,
+      "text": "",
+      "submittedAt": "2026-09-07T13:21:17.188Z",
+      "media": []
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:21:15.217Z",
+    "resolvedAt": "2026-09-07T13:21:16.486Z",
+    "createdAt": "2026-09-07T13:21:15.129Z",
+    "updatedAt": "2026-11-01T08:52:50.857Z",
+    "__v": 2,
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9eba702b8449c49684f6a1",
+    "title": "Flickering Tube Light in Room 204",
+    "description": "The main tube light in room 204 is constantly flickering and needs replacement.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-07T13:21:52.426Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:21:52.542Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:21:53.190Z",
+        "note": "Work started by staff"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T13:21:53.819Z",
+        "note": "Marked as resolved"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T13:21:54.468Z",
+        "note": "Student confirmed issue resolved"
+      }
+    ],
+    "media": [
+      {
+        "url": "/uploads/60e5b8b0-c06a-4115-88ef-905324708eeb.png",
+        "type": "image",
+        "_id": "6a9eba702b8449c49684f6a2"
+      },
+      {
+        "url": "/uploads/8f37d0dd-ee37-4ebd-beb6-ee34b59ca7e8.mp4",
+        "type": "video",
+        "_id": "6a9eba702b8449c49684f6a3"
+      }
+    ],
+    "feedback": {
+      "isSatisfied": true,
+      "text": "",
+      "submittedAt": "2026-09-07T13:21:54.468Z",
+      "media": []
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:21:52.542Z",
+    "resolvedAt": "2026-09-07T13:21:53.819Z",
+    "createdAt": "2026-09-07T13:21:52.430Z",
+    "updatedAt": "2026-11-01T08:52:50.860Z",
+    "__v": 2,
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6a9ebc482b8449c49684f6c1",
+    "title": "Flickering Tube Light in Room 204",
+    "description": "The main tube light in room 204 is constantly flickering and needs replacement.",
+    "category": "Electrical",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-07T13:29:44.274Z",
+        "note": "Complaint raised by student"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:29:44.321Z",
+        "note": "Assigned to Mike Manager"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-09-07T13:29:44.945Z",
+        "note": "Work started by staff"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T13:29:45.569Z",
+        "note": "Marked as resolved"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-07T13:29:46.194Z",
+        "note": "Student confirmed issue resolved"
+      }
+    ],
+    "media": [
+      {
+        "url": "/uploads/ba987a79-6c8e-4908-a352-6b4e9691a1f1.png",
+        "type": "image",
+        "_id": "6a9ebc482b8449c49684f6c2"
+      },
+      {
+        "url": "/uploads/55ca7907-8ee0-4dfc-94ee-5c8ccfb4b2a9.mp4",
+        "type": "video",
+        "_id": "6a9ebc482b8449c49684f6c3"
+      }
+    ],
+    "feedback": {
+      "isSatisfied": true,
+      "text": "",
+      "submittedAt": "2026-09-07T13:29:46.194Z",
+      "media": []
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-07T13:29:44.321Z",
+    "resolvedAt": "2026-09-07T13:29:45.569Z",
+    "createdAt": "2026-09-07T13:29:44.276Z",
+    "updatedAt": "2026-11-01T08:52:50.863Z",
+    "__v": 2,
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "resolutionNote": "",
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6aa05052f6d07d01b28fea6f",
+    "title": "room is not cleaned",
+    "description": "room's door backside is uncleaned",
+    "category": "Cleanliness",
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-09-08T18:13:38.886Z",
+        "note": "Complaint raised by student",
+        "actor": ""
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-09-08T18:24:09.545Z",
+        "note": "Assigned to Ravi Kumar (Electrician)",
+        "actor": ""
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-08T18:38:20.571Z",
+        "note": "done",
+        "actor": ""
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-09-08T18:51:47.025Z",
+        "note": "Student reopened issue: does not work",
+        "actor": ""
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-09-08T18:52:17.897Z",
+        "note": "done",
+        "actor": ""
+      }
+    ],
+    "media": [
+      {
+        "url": "/uploads/37762a4d-5284-4321-bf26-b2a80cee0a11.png",
+        "type": "image",
+        "_id": "6aa05052f6d07d01b28fea70"
+      }
+    ],
+    "feedback": {
+      "isSatisfied": false,
+      "text": "does not work",
+      "submittedAt": "2026-09-08T18:51:47.025Z",
+      "media": [
+        {
+          "url": "/uploads/51bc2870-bf38-4682-b6ae-4b18c2f741e3.mp4",
+          "type": "video",
+          "_id": "6aa05943cd081d069f4b066f"
+        }
+      ]
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-09-08T18:24:09.545Z",
+    "resolvedAt": "2026-09-08T18:52:17.897Z",
+    "resolutionNote": "done",
+    "createdAt": "2026-09-08T18:13:38.895Z",
+    "updatedAt": "2026-11-01T08:52:50.867Z",
+    "__v": 2,
+    "afterPhotos": [],
+    "associatedComplaints": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116caa",
+    "escalationLevel": 0,
+    "followUpRequired": false,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "roomConfirmedWorking": false,
+    "workNotes": []
+  },
+  {
+    "_id": "6ae670f37935b3cbe1584034",
+    "title": "dbfjsdbfbdfj",
+    "description": "sfdbjbfdjbfdj",
+    "category": "Electrical",
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-10-31T22:51:31.231Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-01T06:14:28.063Z",
+        "note": "Assigned to Mike Manager (Electrician)",
+        "actor": "Warden",
+        "actorId": null,
+        "staffId": "6a9141146bc5f921b15c297d"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-01T06:15:06.775Z",
+        "note": "resolved",
+        "actor": "STAFF",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-11-01T06:14:28.063Z",
+    "resolvedAt": "2026-11-01T06:15:06.775Z",
+    "resolutionNote": "resolved",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "createdAt": "2026-10-31T22:51:31.237Z",
+    "updatedAt": "2026-11-01T08:52:50.869Z",
+    "__v": 1,
+    "afterPhotos": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 0,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "workNotes": []
+  },
+  {
+    "_id": "6ae6d8a6d68ed02348e01ea6",
+    "title": "My roomate is making a lot of noise, attached proof",
+    "description": "My roomate is making a lot of noise, attached proof",
+    "category": "Other",
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-01T06:13:58.399Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-01T06:15:22.691Z",
+        "note": "Assigned to Mike Manager (Electrician)",
+        "actor": "Warden",
+        "actorId": null,
+        "staffId": "6a9141146bc5f921b15c297d"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-11-01T06:15:22.691Z",
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "createdAt": "2026-11-01T06:13:58.405Z",
+    "updatedAt": "2026-11-07T01:45:51.752Z",
+    "__v": 2,
+    "afterPhotos": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "escalationLevel": 6,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z"
+  },
+  {
+    "_id": "6ae6db10d68ed02348e01eb2",
+    "title": "swutch not gfudgfu",
+    "description": "sfygasufbuwgfiuwbfiowb",
+    "category": "Electrical",
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-01T06:24:16.661Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-01T06:27:15.100Z",
+        "note": "Assigned to Mike Manager (Electrician)",
+        "actor": "Warden",
+        "actorId": null,
+        "staffId": "6a9141146bc5f921b15c297d"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": "6a9141146bc5f921b15c297d",
+    "assignedAt": "2026-11-01T06:27:15.100Z",
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "createdAt": "2026-11-01T06:24:16.663Z",
+    "updatedAt": "2026-11-07T01:45:51.758Z",
+    "__v": 2,
+    "afterPhotos": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "escalationLevel": 6,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z"
+  },
+  {
+    "_id": "6ae6dbe7d68ed02348e01eba",
+    "title": "Wi-Fi connection problem in room",
+    "description": "Predefined quick report for Wi-Fi Not Working in room 204.",
+    "category": "Internet",
+    "quickCategory": "WIFI_NOT_WORKING",
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-01T06:27:51.062Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "204",
+    "studentId": "6a97dde88b3a8d1e37d443e9",
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "createdAt": "2026-11-01T06:27:51.065Z",
+    "updatedAt": "2026-11-07T04:50:51.878Z",
+    "__v": 4,
+    "afterPhotos": [],
+    "beforePhotos": [],
+    "departmentId": "6ae6fdb559b04e4fca116cb6",
+    "escalationLevel": 10,
+    "isAntiRagging": false,
+    "isConfidential": false,
+    "isSecurity": false,
+    "lifecycleState": "SUBMITTED",
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "lastEscalatedAt": "2026-11-07T04:50:51.847Z"
+  },
+  {
+    "_id": "6ae7061922000f8c27669441",
+    "title": "Test Res Wi-Fi Down",
+    "description": "Wi-Fi not reachable",
+    "category": "Internet",
+    "departmentId": "6ae6fdb559b04e4fca116cb6",
+    "lifecycleState": "SUBMITTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": "WIFI_NOT_WORKING",
+    "incidentId": null,
+    "status": "Pending",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "305",
+    "studentId": "6ae7061822000f8c2766943d",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 10,
+    "lastEscalatedAt": "2026-11-07T04:50:51.847Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [],
+    "media": [],
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-01T09:27:53.046Z",
+    "updatedAt": "2026-11-07T04:50:51.886Z",
+    "__v": 3
+  },
+  {
+    "_id": "6ae7128c59d4960462a78388",
+    "title": "P4 Switch Sparking",
+    "description": "Socket sparking in room 102",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "102",
+    "studentId": "6ae7128c59d4960462a78382",
+    "assignedTo": "6ae7128c59d4960462a78385",
+    "assignedAt": "2026-11-01T10:21:00.193Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [],
+    "media": [],
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-01T10:21:00.194Z",
+    "updatedAt": "2026-11-07T01:45:51.780Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae712b0391109525efc032c",
+    "title": "P4 Switch Sparking",
+    "description": "Socket sparking in room 102",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "102",
+    "studentId": "6ae712b0391109525efc0326",
+    "assignedTo": "6ae712b0391109525efc0329",
+    "assignedAt": "2026-11-01T10:21:36.911Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [],
+    "media": [],
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-01T10:21:36.912Z",
+    "updatedAt": "2026-11-07T01:45:51.786Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae712c135b7241af0dba175",
+    "title": "P4 Switch Sparking",
+    "description": "Socket sparking in room 102",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "102",
+    "studentId": "6ae712c135b7241af0dba16f",
+    "assignedTo": "6ae712c135b7241af0dba172",
+    "assignedAt": "2026-11-01T10:21:53.667Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [],
+    "media": [],
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-01T10:21:53.668Z",
+    "updatedAt": "2026-11-07T01:45:51.792Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa1fd",
+    "title": "Shower Valve Jammed in Room 201",
+    "description": "Water won't turn off from main shower tap.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.120Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.148Z",
+        "note": "Automatically assigned to Plumber Alpha (Plumbing)",
+        "actor": "Workload Router",
+        "actorId": null,
+        "staffId": "6ae8e053a28feacfb82b1c80"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "201",
+    "studentId": "6ae8e053a28feacfb82b1c82",
+    "assignedTo": "6ae8e053a28feacfb82b1c80",
+    "assignedAt": "2026-11-02T19:11:16.148Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:16.122Z",
+    "updatedAt": "2026-11-07T01:45:51.799Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa205",
+    "title": "Basin Pipe Leaking in Room 201",
+    "description": "Continuous dripping under the washbasin.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.191Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.207Z",
+        "note": "Automatically assigned to Plumber Beta (Plumbing)",
+        "actor": "Workload Router",
+        "actorId": null,
+        "staffId": "6ae8e053a28feacfb82b1c81"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "201",
+    "studentId": "6ae8e053a28feacfb82b1c82",
+    "assignedTo": "6ae8e053a28feacfb82b1c81",
+    "assignedAt": "2026-11-02T19:11:16.207Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:16.192Z",
+    "updatedAt": "2026-11-07T01:45:51.806Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa20d",
+    "title": "Concurrent Plumbing Issue #1 Room 201",
+    "description": "Stress testing automated router concurrency #1",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.248Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.282Z",
+        "note": "Automatically assigned to Plumber Alpha (Plumbing)",
+        "actor": "Workload Router",
+        "actorId": null,
+        "staffId": "6ae8e053a28feacfb82b1c80"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "201",
+    "studentId": "6ae8e053a28feacfb82b1c82",
+    "assignedTo": "6ae8e053a28feacfb82b1c80",
+    "assignedAt": "2026-11-02T19:11:16.282Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:16.250Z",
+    "updatedAt": "2026-11-07T01:45:51.813Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa20e",
+    "title": "Concurrent Plumbing Issue #2 Room 201",
+    "description": "Stress testing automated router concurrency #2",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.252Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.317Z",
+        "note": "Automatically assigned to Plumber Beta (Plumbing)",
+        "actor": "Workload Router",
+        "actorId": null,
+        "staffId": "6ae8e053a28feacfb82b1c81"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "201",
+    "studentId": "6ae8e053a28feacfb82b1c82",
+    "assignedTo": "6ae8e053a28feacfb82b1c81",
+    "assignedAt": "2026-11-02T19:11:16.317Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:16.253Z",
+    "updatedAt": "2026-11-07T01:45:51.820Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa211",
+    "title": "Concurrent Plumbing Issue #4 Room 201",
+    "description": "Stress testing automated router concurrency #4",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.260Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.357Z",
+        "note": "Automatically assigned to Plumber Alpha (Plumbing)",
+        "actor": "Workload Router",
+        "actorId": null,
+        "staffId": "6ae8e053a28feacfb82b1c80"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "201",
+    "studentId": "6ae8e053a28feacfb82b1c82",
+    "assignedTo": "6ae8e053a28feacfb82b1c80",
+    "assignedAt": "2026-11-02T19:11:16.357Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:16.261Z",
+    "updatedAt": "2026-11-07T01:45:51.827Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa212",
+    "title": "Concurrent Plumbing Issue #3 Room 201",
+    "description": "Stress testing automated router concurrency #3",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.263Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.387Z",
+        "note": "Automatically assigned to Plumber Beta (Plumbing)",
+        "actor": "Workload Router",
+        "actorId": null,
+        "staffId": "6ae8e053a28feacfb82b1c81"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "201",
+    "studentId": "6ae8e053a28feacfb82b1c82",
+    "assignedTo": "6ae8e053a28feacfb82b1c81",
+    "assignedAt": "2026-11-02T19:11:16.387Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:16.264Z",
+    "updatedAt": "2026-11-07T01:45:51.834Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa22d",
+    "title": "Flush Tank Stuck in Room 201",
+    "description": "Bypass test for unavailable technician",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.422Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.437Z",
+        "note": "Automatically assigned to Plumber Alpha (Plumbing)",
+        "actor": "Workload Router",
+        "actorId": null,
+        "staffId": "6ae8e053a28feacfb82b1c80"
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:16.473Z",
+        "note": "Reassigned from Plumber Alpha to Plumber Beta. Reason: Reassigned for urgent specialized repair.",
+        "actor": "Super Admin",
+        "actorId": "6ae8e053a28feacfb82b1c7c",
+        "staffId": "6ae8e053a28feacfb82b1c81"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "201",
+    "studentId": "6ae8e053a28feacfb82b1c82",
+    "assignedTo": "6ae8e053a28feacfb82b1c81",
+    "assignedAt": "2026-11-02T19:11:16.473Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae8e053a28feacfb82b1c80",
+        "newStaff": "6ae8e053a28feacfb82b1c81",
+        "reason": "Reassigned for urgent specialized repair.",
+        "reassignedBy": "6ae8e053a28feacfb82b1c7c",
+        "reassignedByRole": "MAIN_ADMIN",
+        "timestamp": "2026-11-02T19:11:16.473Z",
+        "_id": "6ae8e054d0a85d8abe1fa235"
+      }
+    ],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:16.423Z",
+    "updatedAt": "2026-11-07T01:45:51.841Z",
+    "__v": 3
+  },
+  {
+    "_id": "6ae8e06edfb34922c06de4dc",
+    "title": "E2E Test Job 1",
+    "description": "Sink drip",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "IN_PROGRESS",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6ae702edefa562fe7c919408",
+    "assignedAt": "2026-11-02T19:11:43.085Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-02T19:11:43.085Z",
+        "note": "Work transferred from Plumber One to Plumber Two. Reason: Automatic reallocation due to staff deactivation: On medical leave",
+        "actor": "Administrator",
+        "actorId": "6ae6fde23b3b2d876a2144bd",
+        "staffId": "6ae702edefa562fe7c919408"
+      }
+    ],
+    "media": [],
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae702edefa562fe7c919407",
+        "newStaff": "6ae702edefa562fe7c919408",
+        "reason": "Batch transfer from Plumber One to Plumber Two: Automatic reallocation due to staff deactivation: On medical leave",
+        "reassignedBy": "6ae6fde23b3b2d876a2144bd",
+        "reassignedByRole": "MAIN_ADMIN",
+        "timestamp": "2026-11-02T19:11:43.085Z",
+        "_id": "6ae8e06fd0a85d8abe1fa25e"
+      }
+    ],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:42.840Z",
+    "updatedAt": "2026-11-07T01:45:51.766Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae8e06edfb34922c06de4dd",
+    "title": "E2E Test Job 2",
+    "description": "Pipe leak",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6ae702edefa562fe7c919408",
+    "assignedAt": "2026-11-02T19:11:43.085Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:43.085Z",
+        "note": "Work transferred from Plumber One to Plumber Two. Reason: Automatic reallocation due to staff deactivation: On medical leave",
+        "actor": "Administrator",
+        "actorId": "6ae6fde23b3b2d876a2144bd",
+        "staffId": "6ae702edefa562fe7c919408"
+      }
+    ],
+    "media": [],
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae702edefa562fe7c919407",
+        "newStaff": "6ae702edefa562fe7c919408",
+        "reason": "Batch transfer from Plumber One to Plumber Two: Automatic reallocation due to staff deactivation: On medical leave",
+        "reassignedBy": "6ae6fde23b3b2d876a2144bd",
+        "reassignedByRole": "MAIN_ADMIN",
+        "timestamp": "2026-11-02T19:11:43.085Z",
+        "_id": "6ae8e06fd0a85d8abe1fa262"
+      }
+    ],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:42.843Z",
+    "updatedAt": "2026-11-07T01:45:51.847Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae8e06ed0a85d8abe1fa247",
+    "title": "E2E Test New Plumbing Leak",
+    "description": "Washbasin pipe leaking water",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "AWAITING_STUDENT_CONFIRMATION",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Resolved",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:42.893Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:42.908Z",
+        "note": "Automatically assigned to Plumber Two (Plumbing)",
+        "actor": "Workload Router",
+        "actorId": null,
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-02T19:11:42.950Z",
+        "note": "Assignment accepted by Staff",
+        "actor": "Staff",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-02T19:11:42.964Z",
+        "note": "Work commenced by Staff",
+        "actor": "Staff",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-02T19:11:42.988Z",
+        "note": "Work completed by Staff. Note: Tap repaired and leak stopped completely.",
+        "actor": "Staff",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6ae702edefa562fe7c919408",
+    "assignedAt": "2026-11-02T19:11:42.908Z",
+    "acceptedAt": "2026-11-02T19:11:42.950Z",
+    "workStartedAt": "2026-11-02T19:11:42.964Z",
+    "escalationLevel": 0,
+    "lastEscalatedAt": null,
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": "2026-11-02T19:11:42.988Z",
+    "resolutionNote": "Tap repaired and leak stopped completely.",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [
+      {
+        "note": "Replaced faulty rubber washer on tap inlet.",
+        "addedBy": "6ae702edefa562fe7c919408",
+        "addedByName": "Staff",
+        "addedAt": "2026-11-02T19:11:42.975Z",
+        "attachments": [],
+        "_id": "6ae8e06ed0a85d8abe1fa252"
+      }
+    ],
+    "createdAt": "2026-11-02T19:11:42.894Z",
+    "updatedAt": "2026-11-02T19:11:42.989Z",
+    "__v": 5
+  },
+  {
+    "_id": "6ae8e06fdfb34922c06de4de",
+    "title": "E2E Unfinished Job for Reallocation",
+    "description": "Main line leak",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "IN_PROGRESS",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6ae702edefa562fe7c919408",
+    "assignedAt": "2026-11-02T19:11:43.085Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 5,
+    "lastEscalatedAt": "2026-11-07T01:45:51.711Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-02T19:11:43.085Z",
+        "note": "Work transferred from Plumber One to Plumber Two. Reason: Automatic reallocation due to staff deactivation: On medical leave",
+        "actor": "Administrator",
+        "actorId": "6ae6fde23b3b2d876a2144bd",
+        "staffId": "6ae702edefa562fe7c919408"
+      }
+    ],
+    "media": [],
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae702edefa562fe7c919407",
+        "newStaff": "6ae702edefa562fe7c919408",
+        "reason": "Batch transfer from Plumber One to Plumber Two: Automatic reallocation due to staff deactivation: On medical leave",
+        "reassignedBy": "6ae6fde23b3b2d876a2144bd",
+        "reassignedByRole": "MAIN_ADMIN",
+        "timestamp": "2026-11-02T19:11:43.085Z",
+        "_id": "6ae8e06fd0a85d8abe1fa260"
+      }
+    ],
+    "workNotes": [],
+    "createdAt": "2026-11-02T19:11:43.065Z",
+    "updatedAt": "2026-11-07T01:45:51.773Z",
+    "__v": 2
+  },
+  {
+    "_id": "6aee2ebb6915c2d7efd5f9c7",
+    "title": "Solar panel inverter alarm on hostel roof",
+    "description": "High pitched screeching sound coming from solar battery room.",
+    "category": "Solar Inverter Glitch Unknown",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "SUBMITTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:47:07.305Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:47:07.311Z",
+        "note": "No active department mapping configured for category 'Solar Inverter Glitch Unknown'. Routed to Management Review Queue.",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T03:55:51.761Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T19:47:07.306Z",
+    "updatedAt": "2026-11-07T03:55:51.782Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee2eef255ede91358351b1",
+    "title": "Solar panel inverter alarm on hostel roof",
+    "description": "High pitched screeching sound coming from solar battery room.",
+    "category": "Solar Inverter Glitch Unknown",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "SUBMITTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:47:59.490Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:47:59.496Z",
+        "note": "No active department mapping configured for category 'Solar Inverter Glitch Unknown'. Routed to Management Review Queue.",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T03:55:51.761Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T19:47:59.491Z",
+    "updatedAt": "2026-11-07T03:55:51.790Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee2f4d505142004bc829c8",
+    "title": "Solar panel inverter alarm on hostel roof",
+    "description": "High pitched screeching sound coming from solar battery room.",
+    "category": "Solar Inverter Glitch Unknown",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "SUBMITTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:49:33.768Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:49:33.777Z",
+        "note": "No active department mapping configured for category 'Solar Inverter Glitch Unknown'. Routed to Management Review Queue.",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T03:55:51.761Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T19:49:33.769Z",
+    "updatedAt": "2026-11-07T03:55:51.799Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee2f5c505142004bc829e6",
+    "title": "Solar panel inverter alarm on hostel roof",
+    "description": "High pitched screeching sound coming from solar battery room.",
+    "category": "Solar Inverter Glitch Unknown",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "SUBMITTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:49:48.996Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:49:49.005Z",
+        "note": "No active department mapping configured for category 'Solar Inverter Glitch Unknown'. Routed to Management Review Queue.",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T03:55:51.761Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T19:49:48.997Z",
+    "updatedAt": "2026-11-07T03:55:51.806Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991bc",
+    "title": "Solar panel inverter alarm on hostel roof",
+    "description": "High pitched screeching sound coming from solar battery room.",
+    "category": "Solar Inverter Glitch Unknown",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "SUBMITTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:50:19.784Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:50:19.791Z",
+        "note": "No active department mapping configured for category 'Solar Inverter Glitch Unknown'. Routed to Management Review Queue.",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T03:55:51.761Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T19:50:19.784Z",
+    "updatedAt": "2026-11-07T03:55:51.814Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee30d1dc8bd3ae4e7d0d5a",
+    "title": "Solar panel inverter alarm on hostel roof",
+    "description": "High pitched screeching sound coming from solar battery room.",
+    "category": "Solar Inverter Glitch Unknown",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "SUBMITTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:56:01.662Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:56:01.673Z",
+        "note": "No active department mapping configured for category 'Solar Inverter Glitch Unknown'. Routed to Management Review Queue.",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:05:51.776Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T19:56:01.664Z",
+    "updatedAt": "2026-11-07T04:05:51.802Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee31a6dc8bd3ae4e7d0d78",
+    "title": "Browser QA Tap Leakage Synthetic",
+    "description": "Persistent water leaking in washroom tap during live browser QA audit",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:59:34.681Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T19:59:34.694Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee316632220474cbfe9503",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:05:51.776Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T19:59:34.683Z",
+    "updatedAt": "2026-11-07T04:05:51.814Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee3348dc8bd3ae4e7d0d98",
+    "title": "Emergency Pipe Burst Room 101 (1793995592365)",
+    "description": "Water spraying from washroom pipe under sink",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:06:32.378Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:06:32.395Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:06:35.180Z",
+        "note": "Assigned to Plumber Two. Reason: Management operational intervention",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919408"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee32fc9e82747fd2017ff0",
+    "assignedTo": "6ae702edefa562fe7c919408",
+    "assignedAt": "2026-11-06T20:06:35.180Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:15:51.787Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:06:32.380Z",
+    "updatedAt": "2026-11-07T04:15:51.806Z",
+    "__v": 4
+  },
+  {
+    "_id": "6aee3554ecc2067d9387b33f",
+    "title": "Emergency Pipe Burst Room 101 (1793996116724)",
+    "description": "Water spraying from washroom pipe under sink",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "IN_PROGRESS",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Reopened",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:15:16.740Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:15:16.764Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:15:19.913Z",
+        "note": "Assigned to Plumber Two. Reason: Management operational intervention",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-06T20:15:22.717Z",
+        "note": "Work commenced by Plumber Two",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:15:29.498Z",
+        "note": "Complaint reopened: Slight seepage still visible after high water pressure.",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:15:29.608Z",
+        "note": "Reassigned from Plumber Two to Plumbing Supervisor. Reason: Complex valve issue requiring senior supervisor intervention.",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6aee32fc9e82747fd2017ff1"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee350a75ac5b1698a5d328",
+    "assignedTo": "6aee32fc9e82747fd2017ff1",
+    "assignedAt": "2026-11-06T20:15:29.608Z",
+    "acceptedAt": null,
+    "workStartedAt": "2026-11-06T20:15:22.717Z",
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:20:51.793Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": true,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae702edefa562fe7c919408",
+        "newStaff": "6aee32fc9e82747fd2017ff1",
+        "reason": "Complex valve issue requiring senior supervisor intervention.",
+        "reassignedBy": "6ae64193c24fceb9b209b0d3",
+        "reassignedByRole": "WARDEN",
+        "timestamp": "2026-11-06T20:15:29.608Z",
+        "_id": "6aee3561ecc2067d9387b36b"
+      }
+    ],
+    "workNotes": [
+      {
+        "note": "Replaced ruptured flex hose under bathroom sink.",
+        "addedBy": "6ae702edefa562fe7c919408",
+        "addedByName": "Plumber Two",
+        "addedAt": "2026-11-06T20:15:25.525Z",
+        "attachments": [],
+        "_id": "6aee355decc2067d9387b364"
+      }
+    ],
+    "createdAt": "2026-11-06T20:15:16.745Z",
+    "updatedAt": "2026-11-07T04:20:51.817Z",
+    "__v": 8
+  },
+  {
+    "_id": "6aee35d7fa8ef36d704544ac",
+    "title": "Emergency Pipe Burst Room 101 (1793996247946)",
+    "description": "Water spraying from washroom pipe under sink",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "AWAITING_STUDENT_CONFIRMATION",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Reopened",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:17:27.963Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:17:27.989Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:17:30.799Z",
+        "note": "Assigned to Plumber Two. Reason: Management operational intervention",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-06T20:17:33.685Z",
+        "note": "Work commenced by Plumber Two",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-06T20:17:36.463Z",
+        "note": "Work completed by Plumber Two. Note: Replaced flexible pipe and pressure-tested line.",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Feedback",
+        "timestamp": "2026-11-06T20:17:41.421Z",
+        "note": "Student feedback: Prompt response and clean workmanship! Pipe leak completely solved.",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:17:41.569Z",
+        "note": "Complaint reopened: Slight seepage still visible after high water pressure.",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:17:41.881Z",
+        "note": "Reassigned from Plumber Two to Plumbing Supervisor. Reason: Complex valve issue requiring senior supervisor intervention.",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6aee32fc9e82747fd2017ff1"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": true,
+      "text": "Prompt response and clean workmanship! Pipe leak completely solved.",
+      "submittedAt": "2026-11-06T20:17:41.421Z",
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": "6aee32fc9e82747fd2017ff1",
+    "assignedAt": "2026-11-06T20:17:41.881Z",
+    "acceptedAt": null,
+    "workStartedAt": "2026-11-06T20:17:33.685Z",
+    "escalationLevel": 0,
+    "lastEscalatedAt": null,
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": "2026-11-06T20:17:36.463Z",
+    "resolutionNote": "Replaced flexible pipe and pressure-tested line.",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": true,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae702edefa562fe7c919408",
+        "newStaff": "6aee32fc9e82747fd2017ff1",
+        "reason": "Complex valve issue requiring senior supervisor intervention.",
+        "reassignedBy": "6ae64193c24fceb9b209b0d3",
+        "reassignedByRole": "WARDEN",
+        "timestamp": "2026-11-06T20:17:41.881Z",
+        "_id": "6aee35e5fa8ef36d704544e7"
+      }
+    ],
+    "workNotes": [
+      {
+        "note": "Replaced ruptured flex hose under bathroom sink.",
+        "addedBy": "6ae702edefa562fe7c919408",
+        "addedByName": "Plumber Two",
+        "addedAt": "2026-11-06T20:17:36.430Z",
+        "attachments": [],
+        "_id": "6aee35e0fa8ef36d704544d3"
+      }
+    ],
+    "createdAt": "2026-11-06T20:17:27.968Z",
+    "updatedAt": "2026-11-06T20:17:41.888Z",
+    "__v": 8
+  },
+  {
+    "_id": "6aee38393e11924212751f58",
+    "title": "State Transition Integrity Drill",
+    "description": "Verifying strict state machine transition restrictions.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Reopened",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:37.811Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:37.839Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-06T20:27:37.906Z",
+        "note": "Technician on-site",
+        "actor": "Hostel Warden",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-06T20:27:37.931Z",
+        "note": "Washer replaced",
+        "actor": "Hostel Warden",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:27:37.977Z",
+        "note": "Complaint reopened: Water still dripping under pipe junction",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": "2026-11-06T20:27:37.931Z",
+    "resolutionNote": "Washer replaced",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": true,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:27:37.818Z",
+    "updatedAt": "2026-11-07T04:35:51.964Z",
+    "__v": 4
+  },
+  {
+    "_id": "6aee383b3e11924212751f62",
+    "title": "Idempotency Stutter Drill 1793996859542",
+    "description": "Testing duplicate retry filtering on rapid student submission.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:39.570Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:39.606Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:27:39.577Z",
+    "updatedAt": "2026-11-07T04:35:51.879Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee383b3e11924212751f63",
+    "title": "Idempotency Stutter Drill 1793996859542",
+    "description": "Testing duplicate retry filtering on rapid student submission.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:39.573Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:39.637Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:27:39.582Z",
+    "updatedAt": "2026-11-07T04:35:51.886Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee383b66612aba561d93d6",
+    "title": "Concurrent Assignment Race Drill",
+    "description": "Two wardens assign concurrently.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "B-204",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6ae702edefa562fe7c919407",
+    "assignedAt": "2026-11-06T20:27:39.902Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:27:39.902Z",
+        "note": "Assigned to Plumber One. Reason: Warden A assignment",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919407"
+      }
+    ],
+    "media": [],
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:27:39.821Z",
+    "updatedAt": "2026-11-07T04:35:51.847Z",
+    "__v": 4
+  },
+  {
+    "_id": "6aee383c3e11924212751f77",
+    "title": "Parallel Drill Alpha 1793996859999",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:40.081Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:40.133Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:27:40.091Z",
+    "updatedAt": "2026-11-07T04:35:51.892Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee383c3e11924212751f78",
+    "title": "Parallel Drill Beta 1793996859999",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:40.084Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:40.169Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:27:40.098Z",
+    "updatedAt": "2026-11-07T04:35:51.900Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee383c3e11924212751f79",
+    "title": "Parallel Drill Gamma 1793996859999",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:40.087Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:40.240Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:27:40.102Z",
+    "updatedAt": "2026-11-07T04:35:51.906Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee383c3e11924212751f8d",
+    "title": "Concurrent Mapping Drill 1793996860313",
+    "description": "Testing during update",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:40.347Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:27:40.381Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:27:40.355Z",
+    "updatedAt": "2026-11-07T04:35:51.915Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee38b29bd00b51fe79a526",
+    "title": "State Transition Integrity Drill",
+    "description": "Verifying strict state machine transition restrictions.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:38.456Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:38.485Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-06T20:29:38.554Z",
+        "note": "Technician on-site",
+        "actor": "Hostel Warden",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-06T20:29:38.583Z",
+        "note": "Washer replaced",
+        "actor": "Hostel Warden",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:29:38.639Z",
+        "note": "Complaint reopened: Water still dripping under pipe junction",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:29:38.739Z",
+        "note": "Assigned to Plumber Two. Reason: Audit coverage verification",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919408"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": "6ae702edefa562fe7c919408",
+    "assignedAt": "2026-11-06T20:29:38.739Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": "2026-11-06T20:29:38.583Z",
+    "resolutionNote": "Washer replaced",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": true,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:29:38.462Z",
+    "updatedAt": "2026-11-07T04:35:51.860Z",
+    "__v": 5
+  },
+  {
+    "_id": "6aee38b49bd00b51fe79a53c",
+    "title": "Idempotency Stutter Drill 1793996979984",
+    "description": "Testing duplicate retry filtering on rapid student submission.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.011Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.051Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:29:40.019Z",
+    "updatedAt": "2026-11-07T04:35:51.921Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee38b49bd00b51fe79a53d",
+    "title": "Idempotency Stutter Drill 1793996979984",
+    "description": "Testing duplicate retry filtering on rapid student submission.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.014Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.093Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:29:40.024Z",
+    "updatedAt": "2026-11-07T04:35:51.930Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee38b497d2c9201f7ab3d9",
+    "title": "Concurrent Assignment Race Drill",
+    "description": "Two wardens assign concurrently.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "B-204",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6ae702edefa562fe7c919407",
+    "assignedAt": "2026-11-06T20:29:40.248Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:29:40.248Z",
+        "note": "Assigned to Plumber One. Reason: Warden A assignment",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919407"
+      }
+    ],
+    "media": [],
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:29:40.210Z",
+    "updatedAt": "2026-11-07T04:35:51.872Z",
+    "__v": 4
+  },
+  {
+    "_id": "6aee38b49bd00b51fe79a551",
+    "title": "Parallel Drill Alpha 1793996980284",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.322Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.367Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:29:40.329Z",
+    "updatedAt": "2026-11-07T04:35:51.937Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee38b49bd00b51fe79a552",
+    "title": "Parallel Drill Beta 1793996980284",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.324Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.424Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:29:40.334Z",
+    "updatedAt": "2026-11-07T04:35:51.943Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee38b49bd00b51fe79a553",
+    "title": "Parallel Drill Gamma 1793996980284",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.326Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.499Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:29:40.338Z",
+    "updatedAt": "2026-11-07T04:35:51.950Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee38b49bd00b51fe79a567",
+    "title": "Concurrent Mapping Drill 1793996980569",
+    "description": "Testing during update",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.626Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:29:40.669Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:35:51.824Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:29:40.637Z",
+    "updatedAt": "2026-11-07T04:35:51.957Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee39038ae5ae94b619ba57",
+    "title": "State Transition Integrity Drill",
+    "description": "Verifying strict state machine transition restrictions.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:30:59.503Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:30:59.532Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-06T20:30:59.612Z",
+        "note": "Technician on-site",
+        "actor": "Hostel Warden",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-06T20:30:59.639Z",
+        "note": "Washer replaced",
+        "actor": "Hostel Warden",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:30:59.690Z",
+        "note": "Complaint reopened: Water still dripping under pipe junction",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:30:59.785Z",
+        "note": "Assigned to Plumber Two. Reason: Audit coverage verification",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919408"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": "6ae702edefa562fe7c919408",
+    "assignedAt": "2026-11-06T20:30:59.785Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:40:51.832Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": "2026-11-06T20:30:59.639Z",
+    "resolutionNote": "Washer replaced",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": true,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:30:59.511Z",
+    "updatedAt": "2026-11-07T04:40:51.860Z",
+    "__v": 5
+  },
+  {
+    "_id": "6aee39058ae5ae94b619ba6d",
+    "title": "Idempotency Stutter Drill 1793997061048",
+    "description": "Testing duplicate retry filtering on rapid student submission.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.075Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.107Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:45:51.840Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:31:01.080Z",
+    "updatedAt": "2026-11-07T04:45:51.860Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee3905de2e4e7818cf4618",
+    "title": "Concurrent Assignment Race Drill",
+    "description": "Two wardens assign concurrently.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ASSIGNED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "In Progress",
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "B-204",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": "6ae702edefa562fe7c919407",
+    "assignedAt": "2026-11-06T20:31:01.241Z",
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:40:51.832Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "statusHistory": [
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:31:01.241Z",
+        "note": "Assigned to Plumber One. Reason: Warden A assignment",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919407"
+      }
+    ],
+    "media": [],
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:31:01.204Z",
+    "updatedAt": "2026-11-07T06:09:30.351Z",
+    "__v": 4
+  },
+  {
+    "_id": "6aee39058ae5ae94b619ba7b",
+    "title": "Parallel Drill Alpha 1793997061280",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.322Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.360Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:45:51.840Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:31:01.331Z",
+    "updatedAt": "2026-11-07T04:45:51.867Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee39058ae5ae94b619ba7c",
+    "title": "Parallel Drill Beta 1793997061280",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.325Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.388Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:45:51.840Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:31:01.335Z",
+    "updatedAt": "2026-11-07T04:45:51.874Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee39058ae5ae94b619ba7d",
+    "title": "Parallel Drill Gamma 1793997061280",
+    "description": "Concurrent submission test",
+    "category": "Electrical",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.327Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.432Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:45:51.840Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:31:01.338Z",
+    "updatedAt": "2026-11-07T04:45:51.880Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee39058ae5ae94b619ba91",
+    "title": "Concurrent Mapping Drill 1793997061489",
+    "description": "Testing during update",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.536Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:31:01.568Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 2,
+    "lastEscalatedAt": "2026-11-07T04:45:51.840Z",
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-06T20:31:01.544Z",
+    "updatedAt": "2026-11-07T04:45:51.887Z",
+    "__v": 3
+  },
+  {
+    "_id": "6aee39a98ae5ae94b619ba98",
+    "title": "Comprehensive QA Lifecycle 1793997225452",
+    "description": "Testing full lifecycle across all 10 portals.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "AWAITING_STUDENT_CONFIRMATION",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Reopened",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:33:45.483Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:33:45.533Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:33:51.642Z",
+        "note": "Assigned to Plumber Two. Reason: QA Workflow Assignment",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-06T20:33:51.679Z",
+        "note": "Work commenced by Plumber Two",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-06T20:33:51.723Z",
+        "note": "Work completed by Plumber Two. Note: Replaced cracked fitting and verified pressure.",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:34:26.608Z",
+        "note": "Complaint reopened: Regression test: Water still dripping slightly.",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:34:26.634Z",
+        "note": "Reassigned from Plumber Two to Plumbing Supervisor. Reason: Reopened job escalated to supervisor",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6aee32fc9e82747fd2017ff1"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": "6aee32fc9e82747fd2017ff1",
+    "assignedAt": "2026-11-06T20:34:26.634Z",
+    "acceptedAt": null,
+    "workStartedAt": "2026-11-06T20:33:51.679Z",
+    "escalationLevel": 0,
+    "lastEscalatedAt": null,
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": "2026-11-06T20:33:51.723Z",
+    "resolutionNote": "Replaced cracked fitting and verified pressure.",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": true,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae702edefa562fe7c919408",
+        "newStaff": "6aee32fc9e82747fd2017ff1",
+        "reason": "Reopened job escalated to supervisor",
+        "reassignedBy": "6ae64193c24fceb9b209b0d3",
+        "reassignedByRole": "WARDEN",
+        "timestamp": "2026-11-06T20:34:26.634Z",
+        "_id": "6aee39d28ae5ae94b619bac0"
+      }
+    ],
+    "workNotes": [
+      {
+        "note": "Inspected pipeline and prepared replacement fittings.",
+        "addedBy": "6ae702edefa562fe7c919408",
+        "addedByName": "Plumber Two",
+        "addedAt": "2026-11-06T20:33:51.705Z",
+        "attachments": [],
+        "_id": "6aee39af8ae5ae94b619baa6"
+      }
+    ],
+    "createdAt": "2026-11-06T20:33:45.496Z",
+    "updatedAt": "2026-11-06T20:34:26.636Z",
+    "__v": 7
+  },
+  {
+    "_id": "6aee3a188ae5ae94b619bac4",
+    "title": "Comprehensive QA Lifecycle 1793997336076",
+    "description": "Testing full lifecycle across all 10 portals.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "AWAITING_STUDENT_CONFIRMATION",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Reopened",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:35:36.169Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:35:36.215Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:35:42.467Z",
+        "note": "Assigned to Plumber Two. Reason: QA Workflow Assignment",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-06T20:35:42.509Z",
+        "note": "Work commenced by Plumber Two",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-06T20:35:42.559Z",
+        "note": "Work completed by Plumber Two. Note: Replaced cracked fitting and verified pressure.",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:36:17.498Z",
+        "note": "Complaint reopened: Regression test: Water still dripping slightly.",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:36:17.522Z",
+        "note": "Reassigned from Plumber Two to Plumbing Supervisor. Reason: Reopened job escalated to supervisor",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6aee32fc9e82747fd2017ff1"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": "6aee32fc9e82747fd2017ff1",
+    "assignedAt": "2026-11-06T20:36:17.522Z",
+    "acceptedAt": null,
+    "workStartedAt": "2026-11-06T20:35:42.509Z",
+    "escalationLevel": 0,
+    "lastEscalatedAt": null,
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": "2026-11-06T20:35:42.559Z",
+    "resolutionNote": "Replaced cracked fitting and verified pressure.",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": true,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae702edefa562fe7c919408",
+        "newStaff": "6aee32fc9e82747fd2017ff1",
+        "reason": "Reopened job escalated to supervisor",
+        "reassignedBy": "6ae64193c24fceb9b209b0d3",
+        "reassignedByRole": "WARDEN",
+        "timestamp": "2026-11-06T20:36:17.522Z",
+        "_id": "6aee3a418ae5ae94b619baf4"
+      }
+    ],
+    "workNotes": [
+      {
+        "note": "Inspected pipeline and prepared replacement fittings.",
+        "addedBy": "6ae702edefa562fe7c919408",
+        "addedByName": "Plumber Two",
+        "addedAt": "2026-11-06T20:35:42.537Z",
+        "attachments": [],
+        "_id": "6aee3a1e8ae5ae94b619bad4"
+      }
+    ],
+    "createdAt": "2026-11-06T20:35:36.178Z",
+    "updatedAt": "2026-11-06T20:36:17.524Z",
+    "__v": 7
+  },
+  {
+    "_id": "6aee3a998ae5ae94b619baf8",
+    "title": "Comprehensive QA Lifecycle 1793997465507",
+    "description": "Testing full lifecycle across all 10 portals.",
+    "category": "Plumbing",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "lifecycleState": "AWAITING_STUDENT_CONFIRMATION",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Reopened",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:37:45.542Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-06T20:37:45.625Z",
+        "note": "Complaint automatically routed to Plumbing department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Assigned",
+        "timestamp": "2026-11-06T20:37:54.241Z",
+        "note": "Assigned to Plumber Two. Reason: QA Workflow Assignment",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "In Progress",
+        "timestamp": "2026-11-06T20:37:54.303Z",
+        "note": "Work commenced by Plumber Two",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Resolved",
+        "timestamp": "2026-11-06T20:37:54.381Z",
+        "note": "Work completed by Plumber Two. Note: Replaced cracked fitting and verified pressure.",
+        "actor": "Plumber Two",
+        "actorId": "6ae702edefa562fe7c919408",
+        "staffId": "6ae702edefa562fe7c919408"
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:38:32.119Z",
+        "note": "Complaint reopened: Regression test: Water still dripping slightly.",
+        "actor": "Synthetic Student",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Reopened",
+        "timestamp": "2026-11-06T20:38:32.165Z",
+        "note": "Reassigned from Plumber Two to Plumbing Supervisor. Reason: Reopened job escalated to supervisor",
+        "actor": "Hostel Warden",
+        "actorId": "6ae64193c24fceb9b209b0d3",
+        "staffId": "6aee32fc9e82747fd2017ff1"
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6aee358d4af48359a5226bed",
+    "assignedTo": "6aee32fc9e82747fd2017ff1",
+    "assignedAt": "2026-11-06T20:38:32.165Z",
+    "acceptedAt": null,
+    "workStartedAt": "2026-11-06T20:37:54.303Z",
+    "escalationLevel": 0,
+    "lastEscalatedAt": null,
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": "2026-11-06T20:37:54.381Z",
+    "resolutionNote": "Replaced cracked fitting and verified pressure.",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": true,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [
+      {
+        "previousStaff": "6ae702edefa562fe7c919408",
+        "newStaff": "6aee32fc9e82747fd2017ff1",
+        "reason": "Reopened job escalated to supervisor",
+        "reassignedBy": "6ae64193c24fceb9b209b0d3",
+        "reassignedByRole": "WARDEN",
+        "timestamp": "2026-11-06T20:38:32.165Z",
+        "_id": "6aee3ac88ae5ae94b619bb2c"
+      }
+    ],
+    "workNotes": [
+      {
+        "note": "Inspected pipeline and prepared replacement fittings.",
+        "addedBy": "6ae702edefa562fe7c919408",
+        "addedByName": "Plumber Two",
+        "addedAt": "2026-11-06T20:37:54.357Z",
+        "attachments": [],
+        "_id": "6aee3aa28ae5ae94b619bb0a"
+      }
+    ],
+    "createdAt": "2026-11-06T20:37:45.555Z",
+    "updatedAt": "2026-11-06T20:38:32.168Z",
+    "__v": 7
+  },
+  {
+    "_id": "6aeec216d359db584ba890f0",
+    "title": "Release Lifecycle Test 1794032150484",
+    "description": "Testing full lifecycle from creation to feedback",
+    "category": "Electricity",
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "lifecycleState": "ROUTED",
+    "isConfidential": false,
+    "isAntiRagging": false,
+    "isSecurity": false,
+    "quickCategory": null,
+    "incidentId": null,
+    "status": "Pending",
+    "statusHistory": [
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-07T06:15:50.510Z",
+        "note": "Complaint raised by student",
+        "actor": "",
+        "actorId": null,
+        "staffId": null
+      },
+      {
+        "status": "Pending",
+        "timestamp": "2026-11-07T06:15:50.550Z",
+        "note": "Complaint automatically routed to Electrical department",
+        "actor": "System Router",
+        "actorId": null,
+        "staffId": null
+      }
+    ],
+    "media": [],
+    "feedback": {
+      "isSatisfied": null,
+      "submittedAt": null,
+      "media": []
+    },
+    "doorNumber": "101",
+    "studentId": "6a9141146bc5f921b15c2979",
+    "assignedTo": null,
+    "assignedAt": null,
+    "acceptedAt": null,
+    "workStartedAt": null,
+    "escalationLevel": 0,
+    "lastEscalatedAt": null,
+    "beforePhotos": [],
+    "afterPhotos": [],
+    "resolvedAt": null,
+    "resolutionNote": "",
+    "parentComplaintId": null,
+    "associatedComplaints": [],
+    "roomConfirmedWorking": false,
+    "followUpRequired": false,
+    "roommateConfirmation": {
+      "confirmedBy": null,
+      "confirmedAt": null,
+      "message": null
+    },
+    "reassignmentHistory": [],
+    "workNotes": [],
+    "createdAt": "2026-11-07T06:15:50.519Z",
+    "updatedAt": "2026-11-07T06:15:50.554Z",
+    "__v": 1
+  }
+]

@@ -16,7 +16,7 @@ const authMiddleware = async (req, res, next) => {
 
         // Validate account active status if ID present
         if (decoded.id) {
-            const liveUser = await User.findById(decoded.id, "isActive role dashboardPermissions exportPermissions").lean();
+            const liveUser = await User.findById(decoded.id, "isActive role name departmentId authorizedDepartments isSupervisor dashboardPermissions exportPermissions").lean();
             if (liveUser) {
                 if (liveUser.isActive === false) {
                     return res.status(403).json({
@@ -25,6 +25,10 @@ const authMiddleware = async (req, res, next) => {
                     });
                 }
                 if (liveUser.role) req.user.role = liveUser.role;
+                req.user.name = liveUser.name || req.user.name;
+                req.user.departmentId = liveUser.departmentId || null;
+                req.user.authorizedDepartments = liveUser.authorizedDepartments || [];
+                req.user.isSupervisor = Boolean(liveUser.isSupervisor);
                 req.user.dashboardPermissions = liveUser.dashboardPermissions || [];
                 req.user.exportPermissions = Boolean(liveUser.exportPermissions);
             }
@@ -82,13 +86,23 @@ const staffManagementMiddleware = (req, res, next) => {
  * 3. Authorized Anti-Ragging personnel (dashboardPermissions includes ANTI_RAGGING)
  * Absolute restriction: WARDEN, HEADWARDEN, SECURITY, MAINTENANCE, and STUDENT are BLOCKED.
  */
-const antiRaggingAccessMiddleware = (req, res, next) => {
+const antiRaggingAccessMiddleware = async (req, res, next) => {
     if (!req.user) {
         return res.status(401).json({ message: "Authentication required" });
     }
 
     const isAuthorizedAdmin = req.user.role === "MAIN_ADMIN" || req.user.role === "INCHARGE";
-    const isAntiRaggingSpecialist = (req.user.dashboardPermissions || []).includes("ANTI_RAGGING");
+    let isAntiRaggingSpecialist = (req.user.dashboardPermissions || []).includes("ANTI_RAGGING");
+
+    if (!isAuthorizedAdmin && !isAntiRaggingSpecialist && req.user.departmentId) {
+        try {
+            const Department = require("../models/Department");
+            const dept = await Department.findById(req.user.departmentId, "code");
+            if (dept && dept.code === "ANTI_RAGGING") {
+                isAntiRaggingSpecialist = true;
+            }
+        } catch (_) {}
+    }
 
     if (isAuthorizedAdmin || isAntiRaggingSpecialist) {
         next();
@@ -204,13 +218,34 @@ const admissionAdminMiddleware = (req, res, next) => {
     }
 };
 
+const wardenOrSupervisorMiddleware = (req, res, next) => {
+    if (req.user && (ELEVATED.includes(req.user.role) || req.user.isSupervisor)) {
+        next();
+    } else {
+        res.status(403).json({ message: "Access denied: Management or Supervisor rights required" });
+    }
+};
+
+/**
+ * Access restricted to authorized management roles: MAIN_ADMIN, INCHARGE, HEADWARDEN
+ */
+const managementOnlyMiddleware = (req, res, next) => {
+    if (req.user && ["MAIN_ADMIN", "INCHARGE", "HEADWARDEN"].includes(req.user.role)) {
+        next();
+    } else {
+        res.status(403).json({ message: "Access denied: Authorized management privileges required" });
+    }
+};
+
 module.exports = {
     authMiddleware,
     mainAdminOnlyMiddleware,
+    managementOnlyMiddleware,
     staffManagementMiddleware,
     antiRaggingAccessMiddleware,
     securityAccessMiddleware,
     wardenMiddleware,
+    wardenOrSupervisorMiddleware,
     wardenOrStaffMiddleware,
     wifiInchargeOrWardenMiddleware,
     wifiInchargeOnlyMiddleware,

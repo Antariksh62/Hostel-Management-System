@@ -1,11 +1,12 @@
 const RoomOccupancy = require("../models/RoomOccupancy");
+const Room = require("../models/Room");
 const { Student } = require("../models/User");
 const StudentRoster = require("../models/StudentRoster");
 const { ALL_ROOMS, MAX_STUDENTS_PER_ROOM, isValidRoom } = require("../utils/hostelRooms");
 const logger = require("../utils/logger");
 
 /**
- * Synchronize the RoomOccupancy collection with actual Student records and approved StudentRoster reservations in MongoDB.
+ * Synchronize the RoomOccupancy and legacy Room collections with actual Student records and approved StudentRoster reservations in MongoDB.
  * Preserves existing student assignments, even if over-capacity, and flags them for administrative review.
  */
 async function syncRoomOccupancy() {
@@ -13,7 +14,14 @@ async function syncRoomOccupancy() {
         const [studentAgg, rosterAgg] = await Promise.all([
             Student.aggregate([
                 { $match: { role: "STUDENT", doorNumber: { $exists: true, $nin: [null, ""] } } },
-                { $group: { _id: "$doorNumber", count: { $sum: 1 }, occupants: { $push: "$_id" } } }
+                {
+                    $group: {
+                        _id: "$doorNumber",
+                        count: { $sum: 1 },
+                        occupants: { $push: "$_id" },
+                        occupantDetails: { $push: { name: { $ifNull: ["$fullName", { $ifNull: ["$name", "$prn"] }] } } }
+                    }
+                }
             ]),
             StudentRoster.aggregate([
                 {
@@ -29,11 +37,15 @@ async function syncRoomOccupancy() {
 
         const occMap = {};
         studentAgg.forEach(item => {
-            occMap[item._id] = { occupants: item.occupants, reservations: [] };
+            occMap[item._id] = {
+                occupants: item.occupants,
+                occupantDetails: item.occupantDetails || [],
+                reservations: []
+            };
         });
         rosterAgg.forEach(item => {
             if (!occMap[item._id]) {
-                occMap[item._id] = { occupants: [], reservations: [] };
+                occMap[item._id] = { occupants: [], occupantDetails: [], reservations: [] };
             }
             occMap[item._id].reservations = item.reservations;
         });
@@ -58,7 +70,28 @@ async function syncRoomOccupancy() {
             };
         });
 
-        await RoomOccupancy.bulkWrite(ops);
+        const legacyRoomOps = ALL_ROOMS.map(roomNum => {
+            const data = occMap[roomNum] || { occupantDetails: [] };
+            return {
+                updateOne: {
+                    filter: { roomNumber: roomNum },
+                    update: {
+                        $set: {
+                            roomNumber: roomNum,
+                            capacity: MAX_STUDENTS_PER_ROOM,
+                            occupants: data.occupantDetails || []
+                        }
+                    },
+                    upsert: true
+                }
+            };
+        });
+
+        await Promise.all([
+            RoomOccupancy.bulkWrite(ops),
+            Room.bulkWrite(legacyRoomOps)
+        ]);
+
         const overCapacity = Object.entries(occMap)
             .map(([room, d]) => ({ room, count: d.occupants.length + d.reservations.length }))
             .filter(r => r.count > MAX_STUDENTS_PER_ROOM);
@@ -66,7 +99,7 @@ async function syncRoomOccupancy() {
         if (overCapacity.length > 0) {
             logger.warn(`[OCCUPANCY] Flagged ${overCapacity.length} over-capacity rooms requiring review: ${overCapacity.map(o => `${o.room} (${o.count}/${MAX_STUDENTS_PER_ROOM})`).join(", ")}`);
         } else {
-            logger.info(`[OCCUPANCY] Synchronized 77 rooms. All within capacity limit of ${MAX_STUDENTS_PER_ROOM}.`);
+            logger.info(`[OCCUPANCY] Synchronized 77 rooms across Room and RoomOccupancy collections. All within capacity limit of ${MAX_STUDENTS_PER_ROOM}.`);
         }
         return { totalSynced: ALL_ROOMS.length, overCapacityRooms: overCapacity };
     } catch (err) {
@@ -367,6 +400,23 @@ async function assignStudentRoomAtomic({ studentId, newRoom, previousRoom, admin
                 $set: { updatedAt: new Date() }
             }
         );
+    }
+
+    // Sync legacy Room collection for cleanRoom and fromRoom
+    try {
+        const roomsToSync = [cleanRoom];
+        if (fromRoom && isValidRoom(fromRoom)) roomsToSync.push(fromRoom);
+        for (const rm of roomsToSync) {
+            const curStudents = await Student.find({ doorNumber: rm, role: "STUDENT" }, "fullName name prn");
+            const occupantsList = curStudents.map(s => ({ name: s.fullName || s.name || s.prn }));
+            await Room.updateOne(
+                { roomNumber: rm },
+                { $set: { roomNumber: rm, capacity: MAX_STUDENTS_PER_ROOM, occupants: occupantsList } },
+                { upsert: true }
+            );
+        }
+    } catch (roomSyncErr) {
+        logger.warn(`Non-critical Room legacy sync error: ${roomSyncErr.message}`);
     }
 
     return { success: true, student, roomHistory: student.roomHistory };

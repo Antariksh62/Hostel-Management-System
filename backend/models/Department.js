@@ -8,7 +8,8 @@ const WorkloadPolicySchema = new mongoose.Schema({
         type: String,
         enum: ["LEAST_ACTIVE_LOAD", "ROUND_ROBIN", "SKILL_WEIGHTED"],
         default: "LEAST_ACTIVE_LOAD"
-    }
+    },
+    autoAssignIndividual: { type: Boolean, default: false }
 }, { _id: false });
 
 const EscalationPolicySchema = new mongoose.Schema({
@@ -52,6 +53,11 @@ const DepartmentSchema = new mongoose.Schema({
         type: String,
         trim: true
     }],
+    supervisor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: null
+    },
     notificationRecipients: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"

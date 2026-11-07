@@ -16,6 +16,10 @@ const { processComplaintForIncidents } = require("../services/incidentDetector")
 const { createNotification } = require("../services/notificationService");
 const { routeAndAssignComplaint } = require("../services/workloadRoutingService");
 const ComplaintEvent = require("../models/ComplaintEvent");
+const AuditLog = require("../models/AuditLog");
+
+// In-flight mutex to prevent concurrent duplicate submissions within short time window
+const inFlightSubmissions = new Map();
 
 const deleteComplaintFiles = (complaint) => {
     // Helper to safely delete a file given its URL
@@ -95,6 +99,37 @@ exports.createComplaint = async (req, res) => {
             else resolvedCategory = "Other";
         }
 
+        // ─── Duplicate Submission Prevention / Retry Filtering ───────────────
+        // Prevent duplicate complaints caused by accidental double-clicks or network retries within 5 seconds
+        const subKey = `${req.user.id}:${title.trim()}:${resolvedCategory}`;
+        if (inFlightSubmissions.has(subKey)) {
+            const inFlightResult = await inFlightSubmissions.get(subKey);
+            return res.status(200).json({
+                message: "Complaint already received and recorded (in-flight duplicate retry filtered)",
+                complaint: inFlightResult
+            });
+        }
+
+        let resolveSubmission = () => {};
+        const subPromise = new Promise(r => { resolveSubmission = r; });
+        inFlightSubmissions.set(subKey, subPromise);
+        setTimeout(() => inFlightSubmissions.delete(subKey), 5000);
+
+        const duplicateWindow = new Date(Date.now() - 5000);
+        const existingRecentComplaint = await Complaint.findOne({
+            studentId: req.user.id,
+            title: title.trim(),
+            category: resolvedCategory,
+            createdAt: { $gte: duplicateWindow }
+        });
+        if (existingRecentComplaint) {
+            resolveSubmission(existingRecentComplaint);
+            return res.status(200).json({
+                message: "Complaint already received and recorded (duplicate retry filtered)",
+                complaint: existingRecentComplaint
+            });
+        }
+
         let parentComplaint = null;
         if (parentComplaintId) {
             parentComplaint = await Complaint.findById(parentComplaintId);
@@ -120,6 +155,7 @@ exports.createComplaint = async (req, res) => {
         });
 
         await newComplaint.save();
+        resolveSubmission(newComplaint);
 
         // Record append-only SUBMITTED event
         await ComplaintEvent.create({
@@ -159,7 +195,8 @@ exports.createComplaint = async (req, res) => {
 
         const populatedComplaint = await Complaint.findById(newComplaint._id)
             .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
-            .populate("assignedTo", "name email")
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor")
             .populate("incidentId", "incidentNumber title status");
 
         emitComplaintCreated(populatedComplaint || newComplaint);
@@ -208,6 +245,9 @@ exports.createComplaint = async (req, res) => {
             complaint: populatedComplaint || newComplaint
         });
     } catch (err) {
+        if (typeof subKey !== "undefined") {
+            inFlightSubmissions.delete(subKey);
+        }
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };
@@ -220,10 +260,59 @@ exports.getStudentComplaints = async (req, res) => {
     try {
         const complaints = await Complaint.find({ studentId: req.user.id })
             .populate("studentId", "name fullName email prn rollNumber classDiv year branch doorNumber")
-            .populate("assignedTo", "name email")
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor")
             .sort({ createdAt: -1 })
             .lean();
         res.json(complaints);
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
+// =============================================================================
+// GET /api/complaints/:id
+// Get single complaint with strict role/department/anti-ragging authorization
+// =============================================================================
+exports.getComplaintById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const complaint = await Complaint.findById(id)
+            .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber mobileNumber")
+            .populate("assignedTo", "name email staffRole designation phoneNumber")
+            .populate("departmentId", "name code template supervisor")
+            .lean();
+
+        if (!complaint) return res.status(404).json({ message: "Complaint not found" });
+
+        // 🔒 Anti-ragging isolation
+        if (complaint.isAntiRagging || complaint.isConfidential || (complaint.category && complaint.category.match(/ragging/i))) {
+            const isAuthorizedAdmin = ["MAIN_ADMIN", "INCHARGE"].includes(req.user?.role);
+            const isAntiRaggingSpecialist = (req.user?.dashboardPermissions || []).includes("ANTI_RAGGING") ||
+                (req.user?.departmentId && String(req.user.departmentId) === String(complaint.departmentId?._id || complaint.departmentId));
+            const isStudentOwner = String(complaint.studentId?._id || complaint.studentId) === String(req.user?.id);
+
+            if (!isAuthorizedAdmin && !isAntiRaggingSpecialist && !isStudentOwner) {
+                return res.status(403).json({
+                    message: "Access denied: Strictly confidential Anti-Ragging clearance required",
+                    code: "ANTI_RAGGING_CONFIDENTIALITY_BOUNDARY"
+                });
+            }
+        }
+
+        // 🔒 Staff isolation: Can view if assigned to them, belongs to their department, or is supervisor
+        if (req.user?.role === "STAFF") {
+            const isAssigned = String(complaint.assignedTo?._id || complaint.assignedTo) === String(req.user.id);
+            const deptIdStr = String(complaint.departmentId?._id || complaint.departmentId || "");
+            const userDeptIdStr = String(req.user.departmentId || "");
+            const isDeptMember = deptIdStr && (deptIdStr === userDeptIdStr || (req.user.authorizedDepartments || []).map(String).includes(deptIdStr));
+
+            if (!isAssigned && !isDeptMember && !req.user.isSupervisor) {
+                return res.status(403).json({ message: "Access denied: You can only view complaints in your assigned department." });
+            }
+        }
+
+        res.json({ success: true, complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }
@@ -265,10 +354,16 @@ exports.getAllComplaints = async (req, res) => {
         }
 
         // 🔒 Mandatory Privacy Barrier: Anti-Ragging strictly isolated
+        const Department = require("../models/Department");
+        const antiRaggingDept = await Department.findOne({ code: "ANTI_RAGGING" });
+
         const isAntiRaggingAuthorized = ["MAIN_ADMIN", "INCHARGE"].includes(req.user?.role) ||
-            (req.user?.dashboardPermissions || []).includes("ANTI_RAGGING");
+            (req.user?.dashboardPermissions || []).includes("ANTI_RAGGING") ||
+            (req.user?.departmentId && antiRaggingDept && String(req.user.departmentId) === String(antiRaggingDept._id));
+
         if (!isAntiRaggingAuthorized) {
             filter.isAntiRagging = { $ne: true };
+            filter.isConfidential = { $ne: true };
             if (category && ["Anti-Ragging", "Anti Ragging", "Ragging"].includes(category)) {
                 return res.status(403).json({
                     message: "Access denied: Strictly confidential Anti-Ragging clearance required",
@@ -278,6 +373,22 @@ exports.getAllComplaints = async (req, res) => {
             if (!filter.category) {
                 filter.category = { $nin: ["Anti-Ragging", "Anti Ragging", "Ragging"] };
             }
+            if (antiRaggingDept) {
+                filter.departmentId = { $ne: antiRaggingDept._id };
+            }
+        }
+
+        // Optional department filter
+        const { department: deptQuery } = req.query;
+        if (deptQuery && deptQuery !== "all") {
+            const dDoc = await Department.findOne({
+                $or: [
+                    { _id: require("mongoose").isValidObjectId(deptQuery) ? deptQuery : null },
+                    { code: String(deptQuery).toUpperCase() },
+                    { name: deptQuery }
+                ]
+            });
+            if (dDoc) filter.departmentId = dDoc._id;
         }
 
         // 🔒 Staff Workload Isolation: Employees can access ONLY their own assigned complaints
@@ -302,7 +413,8 @@ exports.getAllComplaints = async (req, res) => {
 
         let complaints = await Complaint.find(filter)
             .populate("studentId", populateFields)
-            .populate("assignedTo", "name email")
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor")
             .sort({ createdAt: -1 })
             .lean();
 
@@ -337,6 +449,18 @@ exports.getAnalytics = async (req, res) => {
         if (req.user?.role === "WARDEN") {
             baseMatch.category = { $ne: "Internet" };
             baseMatch.quickCategory = { $ne: "WIFI_NOT_WORKING" };
+        }
+
+        const isAntiRaggingAuthorized = ["MAIN_ADMIN", "INCHARGE"].includes(req.user?.role) ||
+            (req.user?.dashboardPermissions || []).includes("ANTI_RAGGING");
+        if (!isAntiRaggingAuthorized) {
+            baseMatch.isAntiRagging = { $ne: true };
+            baseMatch.isConfidential = { $ne: true };
+            if (baseMatch.category) {
+                baseMatch.category = { $nin: ["Internet", "Anti-Ragging", "Anti Ragging", "Ragging"] };
+            } else {
+                baseMatch.category = { $nin: ["Anti-Ragging", "Anti Ragging", "Ragging"] };
+            }
         }
 
         const [statusSummary, byCategory, trend, avgResolution] = await Promise.all([
@@ -448,6 +572,21 @@ exports.updateComplaintStatus = async (req, res) => {
         }[status] || "";
 
         const existingDoc = await Complaint.findById(id);
+        if (!existingDoc) return res.status(404).json({ message: "Complaint not found" });
+
+        const currentStatus = existingDoc.status || "Pending";
+        const VALID_STATUS_TRANSITIONS = {
+            "Pending": ["In Progress", "Pending"],
+            "In Progress": ["Resolved", "In Progress"],
+            "Resolved": ["Reopened", "Resolved"],
+            "Reopened": ["In Progress", "Reopened"]
+        };
+        if (status !== currentStatus && !VALID_STATUS_TRANSITIONS[currentStatus]?.includes(status)) {
+            return res.status(400).json({
+                message: `Invalid status transition from "${currentStatus}" to "${status}". Allowed transitions: ${VALID_STATUS_TRANSITIONS[currentStatus]?.filter(s => s !== currentStatus).join(", ") || "none"}`
+            });
+        }
+
         const resolvedStaffId = req.user?.role === "STAFF"
             ? req.user._id
             : (existingDoc?.assignedTo || null);
@@ -470,12 +609,48 @@ exports.updateComplaintStatus = async (req, res) => {
             if (resolutionNote) update.resolutionNote = resolutionNote;
         }
 
-        const complaint = await Complaint.findByIdAndUpdate(id, update, { returnDocument: "after" });
-        if (!complaint) return res.status(404).json({ message: "Complaint not found" });
+        const complaint = await Complaint.findOneAndUpdate(
+            { _id: id, status: currentStatus },
+            update,
+            { returnDocument: "after" }
+        );
+        if (!complaint) {
+            return res.status(409).json({
+                message: "Concurrent update detected: The complaint status was modified simultaneously by another user. Please refresh and retry."
+            });
+        }
+
+        // Administrative & Operational Audit Logging
+        if (status === "Resolved") {
+            await AuditLog.create({
+                action: "COMPLAINT_RESOLVED",
+                performedBy: {
+                    id: req.user?.id || req.user?._id,
+                    name: req.user?.name || req.user?.role || "Staff",
+                    role: req.user?.role || "STAFF",
+                    email: req.user?.email || ""
+                },
+                target: { id: complaint._id, model: "Complaint", identifier: complaint.title },
+                details: { previousStatus: currentStatus, newStatus: status, resolutionNote: resolutionNote || defaultNote, outcome: "SUCCESS" }
+            }).catch(e => console.error("AuditLog COMPLAINT_RESOLVED error:", e.message));
+        } else if (status === "Reopened") {
+            await AuditLog.create({
+                action: "COMPLAINT_REOPENED",
+                performedBy: {
+                    id: req.user?.id || req.user?._id,
+                    name: req.user?.name || req.user?.role || "User",
+                    role: req.user?.role || "STUDENT",
+                    email: req.user?.email || ""
+                },
+                target: { id: complaint._id, model: "Complaint", identifier: complaint.title },
+                details: { previousStatus: currentStatus, newStatus: status, reason: resolutionNote || defaultNote, outcome: "SUCCESS" }
+            }).catch(e => console.error("AuditLog COMPLAINT_REOPENED error:", e.message));
+        }
 
         const populatedComplaint = await Complaint.findById(id)
             .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
-            .populate("assignedTo", "name email");
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor");
 
         emitComplaintStatusUpdated(populatedComplaint || complaint);
 
@@ -554,11 +729,32 @@ exports.assignComplaint = async (req, res) => {
         });
         await existingComplaint.save();
 
+        const isReassignment = existingComplaint.reassignmentHistory.length > 0 &&
+            String(existingComplaint.reassignmentHistory[existingComplaint.reassignmentHistory.length - 1].newStaff) === String(staffId);
+
+        await AuditLog.create({
+            action: isReassignment ? "COMPLAINT_REASSIGNED" : "COMPLAINT_ASSIGNED",
+            performedBy: {
+                id: req.user?.id || req.user?._id,
+                name: req.user?.name || "Management",
+                role: req.user?.role || "MANAGEMENT",
+                email: req.user?.email || ""
+            },
+            target: { id: existingComplaint._id, model: "Complaint", identifier: existingComplaint.title },
+            details: {
+                assignedStaffId: staffId,
+                staffName: staffMember.name,
+                reason,
+                outcome: "SUCCESS"
+            }
+        }).catch(e => console.error("AuditLog assignment error:", e.message));
+
         const complaint = existingComplaint;
 
         const populatedComplaint = await Complaint.findById(id)
             .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
-            .populate("assignedTo", "name email");
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor");
 
         emitComplaintAssigned(populatedComplaint || complaint);
 
@@ -598,6 +794,11 @@ exports.assignComplaint = async (req, res) => {
 
         res.json({ message: "Complaint assigned successfully", complaint: populatedComplaint || complaint });
     } catch (err) {
+        if (err.name === "VersionError") {
+            return res.status(409).json({
+                message: "Concurrent update detected: This complaint was modified simultaneously by another user. Please refresh and retry."
+            });
+        }
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };
@@ -743,7 +944,8 @@ exports.submitFeedback = async (req, res) => {
                     await rel.save();
                     const popRel = await Complaint.findById(rel._id)
                         .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
-                        .populate("assignedTo", "name email");
+                        .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor");
                     emitComplaintStatusUpdated(popRel || rel);
                 }
             }
@@ -777,7 +979,8 @@ exports.submitFeedback = async (req, res) => {
                     await rel.save();
                     const popRel = await Complaint.findById(rel._id)
                         .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
-                        .populate("assignedTo", "name email");
+                        .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor");
                     emitComplaintStatusUpdated(popRel || rel);
                 }
             }
@@ -787,11 +990,63 @@ exports.submitFeedback = async (req, res) => {
 
         const populatedComplaint = await Complaint.findById(id)
             .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
-            .populate("assignedTo", "name email");
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor");
 
         emitComplaintStatusUpdated(populatedComplaint || complaint);
 
         res.json({ message: "Feedback submitted successfully", complaint: populatedComplaint || complaint });
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
+// =============================================================================
+// POST /api/complaints/:id/reopen
+// Student / Management: Reopen a resolved complaint
+// =============================================================================
+exports.reopenComplaint = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { reason } = req.body;
+        const complaint = await Complaint.findById(id);
+        if (!complaint) return res.status(404).json({ message: "Complaint not found" });
+
+        const now = new Date();
+        const actorName = req.user.name || "Student";
+        complaint.status = "Reopened";
+        complaint.followUpRequired = true;
+        complaint.roomConfirmedWorking = false;
+        complaint.statusHistory.push({
+            status: "Reopened",
+            timestamp: now,
+            actor: actorName,
+            note: reason ? `Complaint reopened: ${reason}` : "Complaint reopened for further inspection"
+        });
+        await complaint.save();
+
+        await ComplaintEvent.create({
+            complaintId: complaint._id,
+            eventType: "REOPENED",
+            actor: { id: req.user.id, name: actorName, role: req.user.role },
+            newState: { status: "Reopened" },
+            note: reason || "Complaint reopened"
+        });
+
+        await AuditLog.create({
+            action: "COMPLAINT_REOPENED",
+            performedBy: { id: req.user.id, name: actorName, role: req.user.role, email: req.user.email || "" },
+            target: { id: complaint._id, model: "Complaint", identifier: complaint.title },
+            details: { reason: reason || "Complaint reopened for further inspection", outcome: "SUCCESS" }
+        }).catch(e => console.error("AuditLog error:", e.message));
+
+        const populated = await Complaint.findById(id)
+            .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor");
+
+        emitComplaintStatusUpdated(populated || complaint);
+        res.json({ success: true, message: "Complaint reopened successfully", complaint: populated || complaint });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }
@@ -950,7 +1205,8 @@ exports.getWifiQueue = async (req, res) => {
         // Mobile number is explicitly NOT populated in list queries to prevent leaks
         const complaints = await Complaint.find(filter)
             .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
-            .populate("assignedTo", "name email")
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor")
             .sort({ createdAt: -1 });
 
         res.json(complaints);
@@ -1001,7 +1257,8 @@ exports.updateWifiComplaintStatus = async (req, res) => {
 
         const updatedComplaint = await Complaint.findByIdAndUpdate(id, update, { new: true })
             .populate("studentId", "name fullName email prn rollNumber classDiv year doorNumber")
-            .populate("assignedTo", "name email");
+            .populate("assignedTo", "name email staffRole")
+            .populate("departmentId", "name code template supervisor");
 
         emitComplaintStatusUpdated(updatedComplaint);
         emitServiceHeatmapUpdate({

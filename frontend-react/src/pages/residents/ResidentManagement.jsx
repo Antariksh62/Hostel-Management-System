@@ -54,7 +54,7 @@ export default function ResidentManagement() {
           </TabsTrigger>
           <TabsTrigger value="reports" className="gap-2">
             <Layers className="size-4" />
-            <span>{t("nav.staff_performance", "Reports & Analytics")}</span>
+            <span>{t("residents.reports_tab", "Reports & Analytics")}</span>
           </TabsTrigger>
 
           {/* CSV Import is strictly exclusive to HEADWARDEN */}

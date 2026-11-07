@@ -25,7 +25,12 @@ export const SocketProvider = ({ children }) => {
         }
 
         // Initialize single Socket.IO connection
-        const socketInstance = io('http://localhost:5000', {
+        const socketUrl =
+            import.meta.env.VITE_SOCKET_URL ||
+            (import.meta.env.VITE_API_BASE_URL ? import.meta.env.VITE_API_BASE_URL.replace(/\/api\/?$/, "") : null) ||
+            'http://localhost:5000';
+
+        const socketInstance = io(socketUrl, {
             auth: { token },
             transports: ['websocket', 'polling'],
             reconnection: true,

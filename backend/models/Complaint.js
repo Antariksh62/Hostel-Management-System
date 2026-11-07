@@ -131,7 +131,7 @@ const ComplaintSchema = new mongoose.Schema({
         message:     { type: String, default: null }
     }
 
-}, { timestamps: true });
+}, { timestamps: true, optimisticConcurrency: true });
 
 // Optimized indexes for high-volume analytics queries & isolation filters
 ComplaintSchema.index({ departmentId: 1, status: 1 });

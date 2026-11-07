@@ -1,0 +1,578 @@
+[
+  {
+    "_id": "6ae67a08d68ed02348e01e90",
+    "action": "UPDATE_ROOM",
+    "performedBy": "6ae67a07622b540caf8461aa",
+    "adminName": "Capacity Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "warden@test-capacity.local",
+    "targetStudent": "6ae67a07622b540caf8461ac",
+    "studentName": "Student Beta",
+    "studentPRN": "CAP_PRN_002",
+    "details": {
+      "previousRoom": "310",
+      "newRoom": "311",
+      "reason": "Move B to 311",
+      "maxCapacity": 2
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-10-31T23:30:16.087Z",
+    "updatedAt": "2026-10-31T23:30:16.087Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae67a08d68ed02348e01e91",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae67a07622b540caf8461a8",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-capacity.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 2,
+      "appliedCount": 2,
+      "failedCount": 0,
+      "idempotencyKey": "prev_1793489416143"
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-10-31T23:30:16.230Z",
+    "updatedAt": "2026-10-31T23:30:16.230Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae67a18d68ed02348e01e92",
+    "action": "UPDATE_ROOM",
+    "performedBy": "6ae67a1750d1d1a7ce6ddbdd",
+    "adminName": "Capacity Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "warden@test-capacity.local",
+    "targetStudent": "6ae67a1850d1d1a7ce6ddbdf",
+    "studentName": "Student Beta",
+    "studentPRN": "CAP_PRN_002",
+    "details": {
+      "previousRoom": "310",
+      "newRoom": "311",
+      "reason": "Move B to 311",
+      "maxCapacity": 2
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-10-31T23:30:32.384Z",
+    "updatedAt": "2026-10-31T23:30:32.384Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae67a18d68ed02348e01e93",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae67a1750d1d1a7ce6ddbdb",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-capacity.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 2,
+      "appliedCount": 2,
+      "failedCount": 0,
+      "idempotencyKey": "prev_1793489432430"
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-10-31T23:30:32.503Z",
+    "updatedAt": "2026-10-31T23:30:32.503Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae67a27d68ed02348e01e94",
+    "action": "UPDATE_ROOM",
+    "performedBy": "6ae67a279016a0faca58b092",
+    "adminName": "Capacity Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "warden@test-capacity.local",
+    "targetStudent": "6ae67a279016a0faca58b094",
+    "studentName": "Student Beta",
+    "studentPRN": "CAP_PRN_002",
+    "details": {
+      "previousRoom": "310",
+      "newRoom": "311",
+      "reason": "Move B to 311",
+      "maxCapacity": 2
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-10-31T23:30:47.453Z",
+    "updatedAt": "2026-10-31T23:30:47.453Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae67a27d68ed02348e01e95",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae67a279016a0faca58b090",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-capacity.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 2,
+      "appliedCount": 2,
+      "failedCount": 0,
+      "idempotencyKey": "prev_1793489447487"
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-10-31T23:30:47.542Z",
+    "updatedAt": "2026-10-31T23:30:47.542Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae67a39d68ed02348e01e96",
+    "action": "CSV_EXPORT",
+    "performedBy": "6ae67a386081d00f89bab176",
+    "adminName": "Test Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-hms-exclusive.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 10
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-10-31T23:31:05.117Z",
+    "updatedAt": "2026-10-31T23:31:05.117Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae67a39d68ed02348e01e97",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae67a386081d00f89bab176",
+    "adminName": "Test Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-hms-exclusive.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 1,
+      "appliedCount": 1,
+      "failedCount": 0,
+      "idempotencyKey": null
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-10-31T23:31:05.184Z",
+    "updatedAt": "2026-10-31T23:31:05.184Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706198f3f999c93819a32",
+    "action": "REVEAL_CONTACT",
+    "performedBy": "6ae7061822000f8c27669439",
+    "adminName": "Test Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "test_res_warden@pict.edu",
+    "targetStudent": "6ae7061822000f8c2766943d",
+    "studentName": "Siddharth Ramesh Kulkarni",
+    "studentPRN": "TESTPRN_001",
+    "details": {
+      "reason": "On-demand contact inspection"
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:27:53.786Z",
+    "updatedAt": "2026-11-01T09:27:53.786Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706198f3f999c93819a33",
+    "action": "UPDATE_CONTACT",
+    "performedBy": "6ae7061822000f8c27669439",
+    "adminName": "Test Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "test_res_warden@pict.edu",
+    "targetStudent": "6ae7061822000f8c2766943d",
+    "studentName": "Siddharth Ramesh Kulkarni",
+    "studentPRN": "TESTPRN_001",
+    "details": {
+      "fieldsChanged": [
+        "guardianName",
+        "guardianPhone"
+      ]
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:27:53.877Z",
+    "updatedAt": "2026-11-01T09:27:53.877Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae7061a8f3f999c93819a34",
+    "action": "UPDATE_ROOM",
+    "performedBy": "6ae7061822000f8c27669439",
+    "adminName": "Test Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "test_res_warden@pict.edu",
+    "targetStudent": "6ae7061822000f8c2766943d",
+    "studentName": "Siddharth Ramesh Kulkarni",
+    "studentPRN": "TESTPRN_001",
+    "details": {
+      "previousRoom": "305",
+      "newRoom": "316",
+      "reason": "Single room upgrade",
+      "maxCapacity": 2
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:27:54.786Z",
+    "updatedAt": "2026-11-01T09:27:54.786Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706538f3f999c93819a35",
+    "action": "CSV_EXPORT",
+    "performedBy": "6ae7065309d8a52bb3a81301",
+    "adminName": "Test Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-hms-exclusive.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 13
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:28:51.741Z",
+    "updatedAt": "2026-11-01T09:28:51.741Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706538f3f999c93819a36",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae7065309d8a52bb3a81301",
+    "adminName": "Test Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-hms-exclusive.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 1,
+      "appliedCount": 1,
+      "failedCount": 0,
+      "idempotencyKey": null
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:28:51.824Z",
+    "updatedAt": "2026-11-01T09:28:51.824Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706bf8f3f999c93819a3d",
+    "action": "UPDATE_ROOM",
+    "performedBy": "6ae706be66732594ee56ac7f",
+    "adminName": "Capacity Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "warden@test-capacity.local",
+    "targetStudent": "6ae706be66732594ee56ac81",
+    "studentName": "Student Beta",
+    "studentPRN": "CAP_PRN_002",
+    "details": {
+      "previousRoom": "310",
+      "newRoom": "311",
+      "reason": "Move B to 311",
+      "maxCapacity": 2
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:30:39.196Z",
+    "updatedAt": "2026-11-01T09:30:39.196Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706bf8f3f999c93819a3e",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae706be66732594ee56ac7d",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-capacity.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 2,
+      "appliedCount": 2,
+      "failedCount": 0,
+      "idempotencyKey": "prev_1793525439236"
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:30:39.293Z",
+    "updatedAt": "2026-11-01T09:30:39.293Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70b988f3f999c93819a6d",
+    "action": "CSV_EXPORT",
+    "performedBy": "6ae70b98cf8046df7d5d7238",
+    "adminName": "Test Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-hms-exclusive.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 13
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:51:20.924Z",
+    "updatedAt": "2026-11-01T09:51:20.924Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70b998f3f999c93819a6e",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae70b98cf8046df7d5d7238",
+    "adminName": "Test Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-hms-exclusive.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 1,
+      "appliedCount": 1,
+      "failedCount": 0,
+      "idempotencyKey": null
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:51:21.021Z",
+    "updatedAt": "2026-11-01T09:51:21.021Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ba08f3f999c93819a6f",
+    "action": "UPDATE_ROOM",
+    "performedBy": "6ae70ba021980ddfeea000d7",
+    "adminName": "Capacity Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "warden@test-capacity.local",
+    "targetStudent": "6ae70ba021980ddfeea000d9",
+    "studentName": "Student Beta",
+    "studentPRN": "CAP_PRN_002",
+    "details": {
+      "previousRoom": "310",
+      "newRoom": "311",
+      "reason": "Move B to 311",
+      "maxCapacity": 2
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:51:28.944Z",
+    "updatedAt": "2026-11-01T09:51:28.944Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ba18f3f999c93819a70",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae70ba021980ddfeea000d5",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-capacity.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 2,
+      "appliedCount": 2,
+      "failedCount": 0,
+      "idempotencyKey": "prev_1793526688990"
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-01T09:51:29.061Z",
+    "updatedAt": "2026-11-01T09:51:29.061Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e08fd0a85d8abe1fa267",
+    "action": "CSV_EXPORT",
+    "performedBy": "6ae8e08e552a0a3869e61ffd",
+    "adminName": "Test Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-hms-exclusive.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 14
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-02T19:12:15.060Z",
+    "updatedAt": "2026-11-02T19:12:15.060Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e08fd0a85d8abe1fa268",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae8e08e552a0a3869e61ffd",
+    "adminName": "Test Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-hms-exclusive.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 1,
+      "appliedCount": 1,
+      "failedCount": 0,
+      "idempotencyKey": null
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-02T19:12:15.140Z",
+    "updatedAt": "2026-11-02T19:12:15.140Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e094d0a85d8abe1fa269",
+    "action": "UPDATE_ROOM",
+    "performedBy": "6ae8e094b20ab1c3c7588f3e",
+    "adminName": "Capacity Warden",
+    "adminRole": "WARDEN",
+    "adminEmail": "warden@test-capacity.local",
+    "targetStudent": "6ae8e094b20ab1c3c7588f40",
+    "studentName": "Student Beta",
+    "studentPRN": "CAP_PRN_002",
+    "details": {
+      "previousRoom": "310",
+      "newRoom": "311",
+      "reason": "Move B to 311",
+      "maxCapacity": 2
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-02T19:12:20.473Z",
+    "updatedAt": "2026-11-02T19:12:20.473Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e094d0a85d8abe1fa26a",
+    "action": "CSV_IMPORT",
+    "performedBy": "6ae8e094b20ab1c3c7588f3c",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@test-capacity.local",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "totalSubmitted": 2,
+      "appliedCount": 2,
+      "failedCount": 0,
+      "idempotencyKey": "prev_1793646740501"
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-02T19:12:20.543Z",
+    "updatedAt": "2026-11-02T19:12:20.543Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8f52541c1b884998b20d1",
+    "action": "CSV_EXPORT",
+    "performedBy": "6ae702edefa562fe7c919403",
+    "adminName": "Administrator",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 13
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-02T20:40:05.672Z",
+    "updatedAt": "2026-11-02T20:40:05.672Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8f5aa41c1b884998b20e2",
+    "action": "CSV_EXPORT",
+    "performedBy": "6ae702edefa562fe7c919403",
+    "adminName": "Administrator",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 13
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-02T20:42:18.707Z",
+    "updatedAt": "2026-11-02T20:42:18.707Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee31b2dc8bd3ae4e7d0d83",
+    "action": "CSV_EXPORT",
+    "performedBy": "6ae702edefa562fe7c919403",
+    "adminName": "Administrator",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 13
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-06T19:59:46.370Z",
+    "updatedAt": "2026-11-06T19:59:46.370Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39c38ae5ae94b619baae",
+    "action": "CSV_EXPORT",
+    "performedBy": "6a914115adc95407d6d77a67",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@pict.edu",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 13
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-06T20:34:11.259Z",
+    "updatedAt": "2026-11-06T20:34:11.259Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a328ae5ae94b619bae2",
+    "action": "CSV_EXPORT",
+    "performedBy": "6a914115adc95407d6d77a67",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@pict.edu",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 13
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-06T20:36:02.109Z",
+    "updatedAt": "2026-11-06T20:36:02.109Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3ab78ae5ae94b619bb12",
+    "action": "CSV_EXPORT",
+    "performedBy": "6a914115adc95407d6d77a67",
+    "adminName": "Head Warden",
+    "adminRole": "HEADWARDEN",
+    "adminEmail": "headwarden@pict.edu",
+    "targetStudent": null,
+    "studentName": "",
+    "studentPRN": "",
+    "details": {
+      "recordCount": 13
+    },
+    "ipAddress": "::1",
+    "createdAt": "2026-11-06T20:38:15.576Z",
+    "updatedAt": "2026-11-06T20:38:15.576Z",
+    "__v": 0
+  }
+]

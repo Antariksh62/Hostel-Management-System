@@ -4,6 +4,7 @@ const router   = express.Router();
 const {
     createComplaint,
     getStudentComplaints,
+    getComplaintById,
     getAllComplaints,
     getAnalytics,
     updateComplaintStatus,
@@ -19,6 +20,7 @@ const {
 const {
     authMiddleware,
     wardenMiddleware,
+    wardenOrSupervisorMiddleware,
     wardenOrStaffMiddleware,
     wifiInchargeOrWardenMiddleware,
     wifiInchargeOnlyMiddleware
@@ -66,13 +68,15 @@ router.post(
 // ─── Shared Warden / Staff routes ─────────────────────────────────────────────
 router.get("/",          authMiddleware, wardenOrStaffMiddleware, getAllComplaints);
 router.get("/all",       authMiddleware, wardenOrStaffMiddleware, getAllComplaints);
+router.get("/:id",       authMiddleware, getComplaintById);
 router.put("/:id/status", authMiddleware, wardenOrStaffMiddleware, updateComplaintStatus);
 
-// ─── Warden-only routes ───────────────────────────────────────────────────────
+// ─── Management & Department Supervisor Assignment routes ─────────────────────
 router.delete("/:id",       authMiddleware, wardenMiddleware, deleteComplaint);
-router.put("/assign/:id",   authMiddleware, wardenMiddleware, assignComplaint);
-router.patch("/:id/assign", authMiddleware, wardenMiddleware, assignComplaint);
-router.put("/:id/assign",   authMiddleware, wardenMiddleware, assignComplaint);
-router.post("/:id/reassign", authMiddleware, wardenMiddleware, reassignComplaint);
+router.put("/assign/:id",   authMiddleware, wardenOrSupervisorMiddleware, assignComplaint);
+router.patch("/:id/assign", authMiddleware, wardenOrSupervisorMiddleware, assignComplaint);
+router.put("/:id/assign",   authMiddleware, wardenOrSupervisorMiddleware, assignComplaint);
+router.post("/:id/reassign", authMiddleware, wardenOrSupervisorMiddleware, reassignComplaint);
+router.post("/:id/reopen",   authMiddleware, require("../controllers/complaintController").reopenComplaint);
 
 module.exports = router;

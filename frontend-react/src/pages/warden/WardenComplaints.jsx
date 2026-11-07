@@ -58,6 +58,7 @@ export default function WardenComplaints() {
   const [statusFilter, setStatusFilter] = useState(urlStatus || "all");
   const [timeFilter, setTimeFilter] = useState(urlTime || "all");
   const [categoryFilter, setCategoryFilter] = useState(urlCategory || "all");
+  const [departmentFilter, setDepartmentFilter] = useState("all");
   const [overdueOnly, setOverdueOnly] = useState(urlOverdue);
   const [customMonth, setCustomMonth] = useState("");
   const [selected, setSelected] = useState(null);
@@ -142,7 +143,31 @@ export default function WardenComplaints() {
     setExpandedGroups((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const availableDepartments = useMemo(() => {
+    const map = new Map();
+    complaints.forEach((c) => {
+      if (c.departmentId && c.departmentId.name) {
+        const id = c.departmentId._id || c.departmentId.code || c.departmentId.name;
+        if (!map.has(id)) {
+          map.set(id, c.departmentId);
+        }
+      }
+    });
+    return Array.from(map.values());
+  }, [complaints]);
+
   const filtered = complaints.filter((c) => {
+    // 0. Department Filter
+    if (departmentFilter !== "all") {
+      const dept = c.departmentId;
+      if (!dept) return false;
+      const deptId = dept._id || dept.id;
+      const deptCode = dept.code;
+      const deptName = dept.name;
+      if (deptId !== departmentFilter && deptCode !== departmentFilter && deptName !== departmentFilter) {
+        return false;
+      }
+    }
     // 1. Status Filter
     if (statusFilter !== "all") {
       const s = (c.status || "").toLowerCase();
@@ -309,9 +334,16 @@ export default function WardenComplaints() {
             <span>
               {t("auth.student_tab", "Student")}: <strong className="font-semibold text-foreground">{studentName}</strong> (PRN: <span className="font-mono">{prn}</span>)
             </span>
-            <span>
-              {t("complaints.assigned_to", "Assigned")}: <strong className="text-foreground">{assignedName}</strong>
-            </span>
+            <div className="flex items-center gap-2">
+              {c.departmentId?.name && (
+                <Badge variant="outline" className="text-[10px] font-mono bg-primary/5 text-primary border-primary/20">
+                  {c.departmentId.name}
+                </Badge>
+              )}
+              <span>
+                {t("complaints.assigned_to", "Assigned")}: <strong className="text-foreground">{assignedName}</strong>
+              </span>
+            </div>
           </div>
         }
         footer={
@@ -361,6 +393,22 @@ export default function WardenComplaints() {
         description={`${totalDisplayedItems} ${t("common.results", "views")} (${filtered.length} ${t("complaints.all_complaints", "total reports")})`}
         action={
           <div className="flex flex-wrap items-center gap-2">
+            {availableDepartments.length > 0 && (
+              <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
+                <SelectTrigger className="h-10 w-36 sm:w-44 text-xs">
+                  <SelectValue placeholder="All departments" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All departments</SelectItem>
+                  {availableDepartments.map((d) => (
+                    <SelectItem key={d._id || d.name} value={d._id || d.name}>
+                      {d.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+
             <Select value={timeFilter} onValueChange={setTimeFilter}>
               <SelectTrigger className="h-10 w-36 sm:w-40 text-xs">
                 <SelectValue placeholder="All time" />
@@ -400,9 +448,14 @@ export default function WardenComplaints() {
       />
 
       {/* Active Filter Indicators */}
-      {(overdueOnly || categoryFilter !== "all" || statusFilter !== "all" || timeFilter !== "all") && (
+      {(overdueOnly || categoryFilter !== "all" || statusFilter !== "all" || timeFilter !== "all" || departmentFilter !== "all") && (
         <div className="flex flex-wrap items-center gap-2 rounded-xl bg-muted/40 p-2.5 text-xs text-muted-foreground border border-border/50">
           <span className="font-semibold text-foreground">Active filter:</span>
+          {departmentFilter !== "all" && (
+            <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
+              Department: {availableDepartments.find(d => (d._id || d.name) === departmentFilter)?.name || departmentFilter}
+            </Badge>
+          )}
           {overdueOnly && (
             <Badge variant="outline" className="bg-red-500/10 text-red-600 border-red-500/30 font-bold">
               Overdue (&gt;48h)
@@ -429,6 +482,7 @@ export default function WardenComplaints() {
               setStatusFilter("all");
               setTimeFilter("all");
               setCategoryFilter("all");
+              setDepartmentFilter("all");
               setOverdueOnly(false);
               setSearchParams({ tab: searchParams.get("tab") || "complaints" });
             }}
@@ -550,6 +604,7 @@ export default function WardenComplaints() {
               <ComplaintMeta
                 items={[
                   { label: t("common.room", "Room"), value: `${t("common.room", "Room")} ${selected.doorNumber || selected.room || selected.studentId?.doorNumber || "—"}` },
+                  { label: "Responsible Department", value: selected.departmentId?.name || "Unassigned Queue" },
                   { label: t("complaints.category", "Category"), value: t(`categories.${selected.category}`, selected.category) },
                   { label: t("complaints.reported_on", "Reported"), value: formatDateTime(selected.createdAt) },
                   {

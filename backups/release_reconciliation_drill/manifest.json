@@ -1,0 +1,187 @@
+{
+  "backupId": "hostelhub_backup_2026-11-07T06-16-19-330Z",
+  "timestamp": "2026-11-07T06:16:19.340Z",
+  "sourceDatabase": "hostelDB",
+  "collections": {
+    "roomoccupancies": 77,
+    "dashboardinstances": 27,
+    "hostels": 0,
+    "maintenancerequests": 0,
+    "announcements": 0,
+    "beds": 0,
+    "escalationevents": 203,
+    "studentrosters": 21,
+    "complaintevents": 705,
+    "rooms": 77,
+    "complaints": 72,
+    "notifications": 1574,
+    "complaintcategories": 38,
+    "cleaningtasks": 0,
+    "incidents": 0,
+    "userpreferences": 0,
+    "departments": 18,
+    "blocks": 0,
+    "admissionimportbatches": 22,
+    "auditlogs": 264,
+    "floors": 0,
+    "users": 58,
+    "roomassets": 0,
+    "residentauditlogs": 29,
+    "cleaningschedules": 0,
+    "allocations": 0,
+    "otps": 0,
+    "dashboardtemplates": 8,
+    "antiraggingcases": 15,
+    "securityincidents": 18,
+    "inspections": 0
+  },
+  "mediaFiles": [
+    {
+      "filename": "0562af92-53d0-4f3c-9645-93690fc2184d.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "13f88ea2-219c-45b7-aae9-62e74bb1534d.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "1ab4d308-8964-4054-9597-ca338efcb7f3.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "37762a4d-5284-4321-bf26-b2a80cee0a11.png",
+      "sizeBytes": 70603,
+      "sha256": "e8b014632eabc94ad2b3dd56b042d9bc5357b4fec509a4f133d265ff2f1a1b44"
+    },
+    {
+      "filename": "4165169a-fa0c-424d-a58b-b145f48fa44b.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "51bc2870-bf38-4682-b6ae-4b18c2f741e3.mp4",
+      "sizeBytes": 32,
+      "sha256": "98b8c8086715a9016e46294b600b28568c3cdda48c0f313ec0bf95e84c43c106"
+    },
+    {
+      "filename": "55ca7907-8ee0-4dfc-94ee-5c8ccfb4b2a9.mp4",
+      "sizeBytes": 32,
+      "sha256": "98b8c8086715a9016e46294b600b28568c3cdda48c0f313ec0bf95e84c43c106"
+    },
+    {
+      "filename": "580c390e-7d75-426d-99a8-19f8654872d5.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "60e5b8b0-c06a-4115-88ef-905324708eeb.png",
+      "sizeBytes": 70603,
+      "sha256": "e8b014632eabc94ad2b3dd56b042d9bc5357b4fec509a4f133d265ff2f1a1b44"
+    },
+    {
+      "filename": "68cbe2f3-0eb9-46c8-b74b-eda6d5d68aee.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "6bf5e2fa-e64b-4e47-8e45-38d37c50a3bb.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "6c73e073-13cc-4f0e-8f5c-a0ae86197506.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "6e65e42e-7a39-4db0-8b54-b11de584660f.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "73e7d585-f915-49d5-99ac-f3712552357e.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "7ae1d1f8-088d-42ce-a3d2-ecc1efdcb677.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "8f37d0dd-ee37-4ebd-beb6-ee34b59ca7e8.mp4",
+      "sizeBytes": 32,
+      "sha256": "98b8c8086715a9016e46294b600b28568c3cdda48c0f313ec0bf95e84c43c106"
+    },
+    {
+      "filename": "91caf352-fd3b-4951-8a2a-6e5ba392d2aa.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "a40a4eed-645d-4d99-92e3-3ddb79272cf1.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "b1bf90f7-6d9c-44c6-bff4-b47b72c71083.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "b377c7d5-8de8-4348-8bd5-cb4139669aed.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "b4ca2002-53cd-400a-88b7-ab95d77d5b64.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "ba987a79-6c8e-4908-a352-6b4e9691a1f1.png",
+      "sizeBytes": 70603,
+      "sha256": "e8b014632eabc94ad2b3dd56b042d9bc5357b4fec509a4f133d265ff2f1a1b44"
+    },
+    {
+      "filename": "bacc2feb-041f-41e2-987c-c2481b74393f.mp4",
+      "sizeBytes": 32,
+      "sha256": "98b8c8086715a9016e46294b600b28568c3cdda48c0f313ec0bf95e84c43c106"
+    },
+    {
+      "filename": "bf8b6132-33d4-43cc-b357-9e1c09a0ace1.png",
+      "sizeBytes": 37,
+      "sha256": "cac05b847519572455ff5fbcadf38ef01f52943ca60981e3af5f02f6b1cb536d"
+    },
+    {
+      "filename": "c3ecb2cd-b9aa-4972-a182-197097c7fc2a.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    },
+    {
+      "filename": "d5d002b5-3fe1-4a13-82de-8e247041b02c.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "da8013f5-76e4-4ca5-809f-8afe656baf8a.jpg",
+      "sizeBytes": 18,
+      "sha256": "63a5e16ae7e6ca56392f4744a64a730fbd2c23d2e426c0e24e38c86d0dc48293"
+    },
+    {
+      "filename": "f130119b-017c-4c3c-a029-f640bb7dc992.png",
+      "sizeBytes": 70603,
+      "sha256": "e8b014632eabc94ad2b3dd56b042d9bc5357b4fec509a4f133d265ff2f1a1b44"
+    },
+    {
+      "filename": "f4346721-abe8-4cef-a7d7-3473dc8f7aad.jpg",
+      "sizeBytes": 7,
+      "sha256": "89a558cb468d5de1a7109c003c0cd1e8351d166e40ece1ac32d76adb73a75d36"
+    }
+  ],
+  "totalMediaFiles": 29,
+  "status": "COMPLETED"
+}

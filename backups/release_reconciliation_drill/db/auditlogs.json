@@ -1,0 +1,6004 @@
+[
+  {
+    "_id": "6ae70521861d42433b96bde8",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 5
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:23:45.354Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705948f3f999c9381999e",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 6,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:25:40.790Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705948f3f999c9381999f",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 6
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:25:40.794Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705a68f3f999c938199c0",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 3,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:25:58.011Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705a68f3f999c938199c1",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 3
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:25:58.015Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705b58f3f999c938199e3",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 3,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:26:13.867Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705b58f3f999c938199e4",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 3
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:26:13.869Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705b58f3f999c938199e5",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:26:13.895Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705f48f3f999c93819a10",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 3,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:27:16.689Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705f48f3f999c93819a11",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 3
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:27:16.691Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705f48f3f999c93819a12",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:27:16.719Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706058f3f999c93819a2f",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 3,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:27:33.275Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706058f3f999c93819a30",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 3
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:27:33.278Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706058f3f999c93819a31",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:27:33.306Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70b8e8f3f999c93819a6a",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 3,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:51:10.353Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70b8e8f3f999c93819a6b",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 3
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:51:10.356Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70b8e8f3f999c93819a6c",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T09:51:10.382Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70eaa4bc5e7f0f422f1f6",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae70eaa1f895998326989e3",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70eaa1f895998326989e7",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "isAvailable": false,
+      "reason": "On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:04:26.829Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70eaa4bc5e7f0f422f1f9",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae70eaa1f895998326989e3",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70eaa4bc5e7f0f422f1f7",
+      "model": "Department",
+      "identifier": "Specialized DEPT_6851"
+    },
+    "details": {
+      "code": "DEPT_6851",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:04:26.875Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70eaa4bc5e7f0f422f1fb",
+    "action": "CATEGORY_CREATED",
+    "performedBy": {
+      "id": "6ae70eaa1f895998326989e3",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70eaa4bc5e7f0f422f1fa",
+      "model": "ComplaintCategory",
+      "identifier": "Pressure Valve Leak DEPT_6851"
+    },
+    "details": {
+      "code": "PRESSURE_VALVE_LEAK_DEPT_6851",
+      "departmentId": "6ae6fdb559b04e4fca116c7c"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:04:26.898Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70eaa4bc5e7f0f422f1fd",
+    "action": "PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae70eaa1f895998326989e3",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70eaa1f895998326989e7",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previousPermissions": [
+        "PLUMBING"
+      ],
+      "newPermissions": [
+        "PLUMBING",
+        "ELECTRICAL"
+      ],
+      "confirmedMultipleAccess": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:04:26.960Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70eaa4bc5e7f0f422f1fe",
+    "action": "EXPORT_PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae70eaa1f895998326989e3",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70eaa1f895998326989e7",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previous": false,
+      "updated": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:04:26.984Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ed14bc5e7f0f422f207",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae70ed18906e94cdec0786f",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70ed18906e94cdec07873",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "isAvailable": false,
+      "reason": "On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:05:05.365Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ed14bc5e7f0f422f20a",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae70ed18906e94cdec0786f",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70ed14bc5e7f0f422f208",
+      "model": "Department",
+      "identifier": "Specialized DEPT_5382"
+    },
+    "details": {
+      "code": "DEPT_5382",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:05:05.401Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ed14bc5e7f0f422f20c",
+    "action": "CATEGORY_CREATED",
+    "performedBy": {
+      "id": "6ae70ed18906e94cdec0786f",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70ed14bc5e7f0f422f20b",
+      "model": "ComplaintCategory",
+      "identifier": "Pressure Valve Leak DEPT_5382"
+    },
+    "details": {
+      "code": "PRESSURE_VALVE_LEAK_DEPT_5382",
+      "departmentId": "6ae6fdb559b04e4fca116c7c"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:05:05.422Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ed14bc5e7f0f422f20e",
+    "action": "PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae70ed18906e94cdec0786f",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70ed18906e94cdec07873",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previousPermissions": [
+        "PLUMBING"
+      ],
+      "newPermissions": [
+        "PLUMBING",
+        "ELECTRICAL"
+      ],
+      "confirmedMultipleAccess": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:05:05.473Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ed14bc5e7f0f422f20f",
+    "action": "EXPORT_PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae70ed18906e94cdec0786f",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70ed18906e94cdec07873",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previous": false,
+      "updated": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:05:05.492Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9b9df6265526e2dfab",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae70f9b38084df050074ac5",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70f9b38084df050074ac9",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "isAvailable": false,
+      "reason": "On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:08:27.587Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9b9df6265526e2dfae",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae70f9b38084df050074ac5",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70f9b9df6265526e2dfac",
+      "model": "Department",
+      "identifier": "Specialized DEPT_7604"
+    },
+    "details": {
+      "code": "DEPT_7604",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:08:27.640Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9b9df6265526e2dfb0",
+    "action": "CATEGORY_CREATED",
+    "performedBy": {
+      "id": "6ae70f9b38084df050074ac5",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70f9b9df6265526e2dfaf",
+      "model": "ComplaintCategory",
+      "identifier": "Pressure Valve Leak DEPT_7604"
+    },
+    "details": {
+      "code": "PRESSURE_VALVE_LEAK_DEPT_7604",
+      "departmentId": "6ae6fdb559b04e4fca116c7c"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:08:27.665Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9b9df6265526e2dfb2",
+    "action": "PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae70f9b38084df050074ac5",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70f9b38084df050074ac9",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previousPermissions": [
+        "PLUMBING"
+      ],
+      "newPermissions": [
+        "PLUMBING",
+        "ELECTRICAL"
+      ],
+      "confirmedMultipleAccess": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:08:27.726Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9b9df6265526e2dfb3",
+    "action": "EXPORT_PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae70f9b38084df050074ac5",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70f9b38084df050074ac9",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previous": false,
+      "updated": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:08:27.748Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9c9df6265526e2dfee",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae70f9b38084df050074ac5",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae70f9c9df6265526e2dfe4",
+      "model": "Complaint",
+      "identifier": "Flush Tank Stuck in Room 201"
+    },
+    "details": {
+      "previousStaff": "Plumber Two",
+      "newStaff": "Plumber Beta",
+      "reason": "Reassigned for urgent specialized repair."
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:08:28.476Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71013dad70f7cb15824ac",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae71013d5ca1c51e256a49a",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71013d5ca1c51e256a49e",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "isAvailable": false,
+      "reason": "On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:10:27.865Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71013dad70f7cb15824af",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae71013d5ca1c51e256a49a",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71013dad70f7cb15824ad",
+      "model": "Department",
+      "identifier": "Specialized DEPT_7884"
+    },
+    "details": {
+      "code": "DEPT_7884",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:10:27.905Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71013dad70f7cb15824b1",
+    "action": "CATEGORY_CREATED",
+    "performedBy": {
+      "id": "6ae71013d5ca1c51e256a49a",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71013dad70f7cb15824b0",
+      "model": "ComplaintCategory",
+      "identifier": "Pressure Valve Leak DEPT_7884"
+    },
+    "details": {
+      "code": "PRESSURE_VALVE_LEAK_DEPT_7884",
+      "departmentId": "6ae6fdb559b04e4fca116c7c"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:10:27.925Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71013dad70f7cb15824b3",
+    "action": "PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae71013d5ca1c51e256a49a",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71013d5ca1c51e256a49e",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previousPermissions": [
+        "PLUMBING"
+      ],
+      "newPermissions": [
+        "PLUMBING",
+        "ELECTRICAL"
+      ],
+      "confirmedMultipleAccess": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:10:27.980Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71013dad70f7cb15824b4",
+    "action": "EXPORT_PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae71013d5ca1c51e256a49a",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71013d5ca1c51e256a49e",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previous": false,
+      "updated": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:10:27.999Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71014dad70f7cb15824e8",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae71013d5ca1c51e256a49a",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71014dad70f7cb15824df",
+      "model": "Complaint",
+      "identifier": "Flush Tank Stuck in Room 201"
+    },
+    "details": {
+      "previousStaff": "Plumber Two",
+      "newStaff": "Plumber Beta",
+      "reason": "Reassigned for urgent specialized repair."
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:10:28.770Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f44d04c02294c29ebe",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae710f3a457cd8019b3dc80",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae710f3a457cd8019b3dc84",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "isAvailable": false,
+      "reason": "On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:12.132Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f44d04c02294c29ec1",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae710f3a457cd8019b3dc80",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae710f44d04c02294c29ebf",
+      "model": "Department",
+      "identifier": "Specialized DEPT_2152"
+    },
+    "details": {
+      "code": "DEPT_2152",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:12.178Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f44d04c02294c29ec3",
+    "action": "CATEGORY_CREATED",
+    "performedBy": {
+      "id": "6ae710f3a457cd8019b3dc80",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae710f44d04c02294c29ec2",
+      "model": "ComplaintCategory",
+      "identifier": "Pressure Valve Leak DEPT_2152"
+    },
+    "details": {
+      "code": "PRESSURE_VALVE_LEAK_DEPT_2152",
+      "departmentId": "6ae6fdb559b04e4fca116c7c"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:12.202Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f44d04c02294c29ec5",
+    "action": "PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae710f3a457cd8019b3dc80",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae710f3a457cd8019b3dc84",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previousPermissions": [
+        "PLUMBING"
+      ],
+      "newPermissions": [
+        "PLUMBING",
+        "ELECTRICAL"
+      ],
+      "confirmedMultipleAccess": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:12.275Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f44d04c02294c29ec6",
+    "action": "EXPORT_PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae710f3a457cd8019b3dc80",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae710f3a457cd8019b3dc84",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previous": false,
+      "updated": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:12.306Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f54d04c02294c29f01",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae710f3a457cd8019b3dc80",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae710f44d04c02294c29ef7",
+      "model": "Complaint",
+      "identifier": "Flush Tank Stuck in Room 201"
+    },
+    "details": {
+      "previousStaff": "Plumber Alpha",
+      "newStaff": "Plumber Beta",
+      "reason": "Reassigned for urgent specialized repair."
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:13.052Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae7111d4d04c02294c29f29",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 3,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:53.569Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae7111d4d04c02294c29f2a",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 3
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:53.571Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae7111d4d04c02294c29f2b",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:14:53.599Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712d338dbca64eab83a76",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae712d2e877f6ba9ff63863",
+      "name": "Supreme Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@test-part3-p4567.pict.edu"
+    },
+    "target": {
+      "id": "6ae712d2e877f6ba9ff63869",
+      "model": "User",
+      "identifier": "plumber.beta@test-part3-p4567.pict.edu"
+    },
+    "details": {
+      "reason": "End of seasonal contract",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:22:11.043Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e438dbca64eab83a77",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae712e4fd036a83c5a24689",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae712e4fd036a83c5a2468d",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "isAvailable": false,
+      "reason": "On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:22:28.913Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e438dbca64eab83a7a",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae712e4fd036a83c5a24689",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae712e438dbca64eab83a78",
+      "model": "Department",
+      "identifier": "Specialized DEPT_8933"
+    },
+    "details": {
+      "code": "DEPT_8933",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:22:28.952Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e438dbca64eab83a7c",
+    "action": "CATEGORY_CREATED",
+    "performedBy": {
+      "id": "6ae712e4fd036a83c5a24689",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae712e438dbca64eab83a7b",
+      "model": "ComplaintCategory",
+      "identifier": "Pressure Valve Leak DEPT_8933"
+    },
+    "details": {
+      "code": "PRESSURE_VALVE_LEAK_DEPT_8933",
+      "departmentId": "6ae6fdb559b04e4fca116c7c"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:22:28.974Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e538dbca64eab83a7e",
+    "action": "PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae712e4fd036a83c5a24689",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae712e4fd036a83c5a2468d",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previousPermissions": [
+        "PLUMBING"
+      ],
+      "newPermissions": [
+        "PLUMBING",
+        "ELECTRICAL"
+      ],
+      "confirmedMultipleAccess": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:22:29.033Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e538dbca64eab83a7f",
+    "action": "EXPORT_PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae712e4fd036a83c5a24689",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae712e4fd036a83c5a2468d",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previous": false,
+      "updated": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:22:29.058Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e538dbca64eab83aba",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae712e4fd036a83c5a24689",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae712e538dbca64eab83ab0",
+      "model": "Complaint",
+      "identifier": "Flush Tank Stuck in Room 201"
+    },
+    "details": {
+      "previousStaff": "Plumber Alpha",
+      "newStaff": "Plumber Beta",
+      "reason": "Reassigned for urgent specialized repair."
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:22:29.645Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71349ac840cbadd9fa7dc",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae71349fbc0b24f2e3db7b7",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71349fbc0b24f2e3db7bb",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "isAvailable": false,
+      "reason": "On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:09.377Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71349ac840cbadd9fa7df",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae71349fbc0b24f2e3db7b7",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71349ac840cbadd9fa7dd",
+      "model": "Department",
+      "identifier": "Specialized DEPT_9395"
+    },
+    "details": {
+      "code": "DEPT_9395",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:09.422Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71349ac840cbadd9fa7e1",
+    "action": "CATEGORY_CREATED",
+    "performedBy": {
+      "id": "6ae71349fbc0b24f2e3db7b7",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71349ac840cbadd9fa7e0",
+      "model": "ComplaintCategory",
+      "identifier": "Pressure Valve Leak DEPT_9395"
+    },
+    "details": {
+      "code": "PRESSURE_VALVE_LEAK_DEPT_9395",
+      "departmentId": "6ae6fdb559b04e4fca116c7c"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:09.442Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71349ac840cbadd9fa7e3",
+    "action": "PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae71349fbc0b24f2e3db7b7",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71349fbc0b24f2e3db7bb",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previousPermissions": [
+        "PLUMBING"
+      ],
+      "newPermissions": [
+        "PLUMBING",
+        "ELECTRICAL"
+      ],
+      "confirmedMultipleAccess": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:09.506Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71349ac840cbadd9fa7e4",
+    "action": "EXPORT_PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae71349fbc0b24f2e3db7b7",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae71349fbc0b24f2e3db7bb",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previous": false,
+      "updated": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:09.537Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae7134aac840cbadd9fa81f",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae71349fbc0b24f2e3db7b7",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae7134aac840cbadd9fa815",
+      "model": "Complaint",
+      "identifier": "Flush Tank Stuck in Room 201"
+    },
+    "details": {
+      "previousStaff": "Plumber Alpha",
+      "newStaff": "Plumber Beta",
+      "reason": "Reassigned for urgent specialized repair."
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:10.176Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71351ac840cbadd9fa82e",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae713502c6d6b6a0cd7a2da",
+      "name": "Supreme Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@test-part3-p4567.pict.edu"
+    },
+    "target": {
+      "id": "6ae713502c6d6b6a0cd7a2e0",
+      "model": "User",
+      "identifier": "plumber.beta@test-part3-p4567.pict.edu"
+    },
+    "details": {
+      "reason": "End of seasonal contract",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:17.129Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71357ac840cbadd9fa84c",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 3,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:23.525Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71357ac840cbadd9fa84d",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 3
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:23.527Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71357ac840cbadd9fa84e",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-01T10:24:23.556Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e053d0a85d8abe1fa1f4",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c7c",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e053a28feacfb82b1c80",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "isAvailable": false,
+      "reason": "On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:15.940Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e053d0a85d8abe1fa1f7",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c7c",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e053d0a85d8abe1fa1f5",
+      "model": "Department",
+      "identifier": "Specialized DEPT_5957"
+    },
+    "details": {
+      "code": "DEPT_5957",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:15.977Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e053d0a85d8abe1fa1f9",
+    "action": "CATEGORY_CREATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c7c",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e053d0a85d8abe1fa1f8",
+      "model": "ComplaintCategory",
+      "identifier": "Pressure Valve Leak DEPT_5957"
+    },
+    "details": {
+      "code": "PRESSURE_VALVE_LEAK_DEPT_5957",
+      "departmentId": "6ae6fdb559b04e4fca116c7c"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:15.993Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa1fb",
+    "action": "PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c7c",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e053a28feacfb82b1c80",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previousPermissions": [
+        "PLUMBING"
+      ],
+      "newPermissions": [
+        "PLUMBING",
+        "ELECTRICAL"
+      ],
+      "confirmedMultipleAccess": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:16.036Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa1fc",
+    "action": "EXPORT_PERMISSIONS_UPDATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c7c",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e053a28feacfb82b1c80",
+      "model": "User",
+      "identifier": "plumber.alpha@pict.edu"
+    },
+    "details": {
+      "previous": false,
+      "updated": true
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:16.053Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa237",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c7c",
+      "name": "Super Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin.test@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e054d0a85d8abe1fa22d",
+      "model": "Complaint",
+      "identifier": "Flush Tank Stuck in Room 201"
+    },
+    "details": {
+      "previousStaff": "Plumber Alpha",
+      "newStaff": "Plumber Beta",
+      "reason": "Reassigned for urgent specialized repair."
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:16.477Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e069d0a85d8abe1fa246",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae8e0686a16141ba2b4d744",
+      "name": "Supreme Admin",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@test-part3-p4567.pict.edu"
+    },
+    "target": {
+      "id": "6ae8e0686a16141ba2b4d74a",
+      "model": "User",
+      "identifier": "plumber.beta@test-part3-p4567.pict.edu"
+    },
+    "details": {
+      "reason": "End of seasonal contract",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:37.350Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e06fd0a85d8abe1fa264",
+    "action": "WORK_TRANSFERRED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "fromStaff": "Plumber One",
+      "toStaff": "Plumber Two",
+      "count": 3,
+      "reason": "Automatic reallocation due to staff deactivation: On medical leave"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:43.095Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e06fd0a85d8abe1fa265",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "On medical leave",
+      "openJobsCount": 3
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:43.097Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e06fd0a85d8abe1fa266",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T19:11:43.120Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8f5aa41c1b884998b20dc",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae702edefa562fe7c919401",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "QA Audit Session Revocation Test",
+      "openJobsCount": 2
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T20:42:18.476Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8f5aa41c1b884998b20dd",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae702edefa562fe7c919401",
+      "name": "Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-02T20:42:18.492Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2e755edf91b5e3e1228e",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2e755edf91b5e3e1228c",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "details": {
+      "code": "BIOMETRIC",
+      "template": "SECURITY"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:45:57.298Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2e755edf91b5e3e1228f",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2e755edf91b5e3e1228c",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:45:57.336Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2e755edf91b5e3e12291",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2e755edf91b5e3e12290",
+      "model": "User",
+      "identifier": "biosup@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Chief Hardware Engineer",
+      "designation": "Chief Hardware Engineer",
+      "employeeId": "BIO-SUP-01",
+      "departmentId": "6aee2e755edf91b5e3e1228c",
+      "isSupervisor": true,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:45:57.496Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2e755edf91b5e3e12293",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2e755edf91b5e3e12292",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Hardware Technician",
+      "designation": "Hardware Technician",
+      "employeeId": "BIO-TECH-02",
+      "departmentId": "6aee2e755edf91b5e3e1228c",
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:45:57.586Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2e755edf91b5e3e12294",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2e755edf91b5e3e1228c",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:45:57.598Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2e755edf91b5e3e12295",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2e755edf91b5e3e12292",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "reason": "End of contract / test deactivation",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:45:57.751Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2ebb6915c2d7efd5f9ba",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2ebb6915c2d7efd5f9b9",
+      "model": "User",
+      "identifier": "biosup@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Chief Hardware Engineer",
+      "designation": "Chief Hardware Engineer",
+      "employeeId": "BIO-SUP-01",
+      "departmentId": null,
+      "isSupervisor": true,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:07.107Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2ebb6915c2d7efd5f9bc",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2ebb6915c2d7efd5f9bb",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Hardware Technician",
+      "designation": "Hardware Technician",
+      "employeeId": "BIO-TECH-02",
+      "departmentId": null,
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:07.196Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2ebb6915c2d7efd5f9dc",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2ebb6915c2d7efd5f9bb",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "reason": "End of contract / test deactivation",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:07.387Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eee255ede91358351a0",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eee255ede913583519f",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "details": {
+      "code": "BIOMETRIC",
+      "template": "SECURITY"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:58.889Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eee255ede91358351a1",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eee255ede913583519f",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:58.916Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eef255ede91358351a3",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eef255ede91358351a2",
+      "model": "User",
+      "identifier": "biosup@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Chief Hardware Engineer",
+      "designation": "Chief Hardware Engineer",
+      "employeeId": "BIO-SUP-01",
+      "departmentId": "6aee2eee255ede913583519f",
+      "isSupervisor": true,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:59.084Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eef255ede91358351a5",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eef255ede91358351a4",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Hardware Technician",
+      "designation": "Hardware Technician",
+      "employeeId": "BIO-TECH-02",
+      "departmentId": "6aee2eee255ede913583519f",
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:59.172Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eef255ede91358351a6",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eee255ede913583519f",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:59.183Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eef255ede91358351c6",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eef255ede91358351a4",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "reason": "End of contract / test deactivation",
+      "openJobsCount": 1
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:59.609Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eef255ede91358351c7",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eef255ede91358351a4",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:59.625Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eef255ede91358351c8",
+    "action": "STAFF_PASSWORD_RESET",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eef255ede91358351a4",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "note": "Password reset by administrator"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:47:59.709Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f4d505142004bc829b5",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829b4",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "details": {
+      "code": "BIOMETRIC",
+      "template": "SECURITY"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:49:33.192Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f4d505142004bc829b6",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829b4",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:49:33.216Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f4d505142004bc829b8",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829b7",
+      "model": "User",
+      "identifier": "biosup@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Chief Hardware Engineer",
+      "designation": "Chief Hardware Engineer",
+      "employeeId": "BIO-SUP-01",
+      "departmentId": "6aee2f4d505142004bc829b4",
+      "isSupervisor": true,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:49:33.345Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f4d505142004bc829ba",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829b9",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Hardware Technician",
+      "designation": "Hardware Technician",
+      "employeeId": "BIO-TECH-02",
+      "departmentId": "6aee2f4d505142004bc829b4",
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:49:33.434Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f4d505142004bc829bb",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829b4",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:49:33.447Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f4d505142004bc829d9",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829b9",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "reason": "End of contract / test deactivation",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:49:33.866Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f4d505142004bc829da",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829b9",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:49:33.882Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f4d505142004bc829db",
+    "action": "STAFF_PASSWORD_RESET",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829b9",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "note": "Password reset by administrator"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:49:33.970Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991a9",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991a8",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "details": {
+      "code": "BIOMETRIC",
+      "template": "SECURITY"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:50:19.204Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991aa",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991a8",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:50:19.225Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991ac",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991ab",
+      "model": "User",
+      "identifier": "biosup@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Chief Hardware Engineer",
+      "designation": "Chief Hardware Engineer",
+      "employeeId": "BIO-SUP-01",
+      "departmentId": "6aee2f7be8a7d6d90c3991a8",
+      "isSupervisor": true,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:50:19.349Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991ae",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991ad",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Hardware Technician",
+      "designation": "Hardware Technician",
+      "employeeId": "BIO-TECH-02",
+      "departmentId": "6aee2f7be8a7d6d90c3991a8",
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:50:19.429Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991af",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991a8",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:50:19.440Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991cd",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991ad",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "reason": "End of contract / test deactivation",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:50:19.888Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991ce",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991ad",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:50:19.904Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2f7be8a7d6d90c3991cf",
+    "action": "STAFF_PASSWORD_RESET",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991ad",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "note": "Password reset by administrator"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:50:19.991Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee30d0dc8bd3ae4e7d0d47",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d0dc8bd3ae4e7d0d46",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "details": {
+      "code": "BIOMETRIC",
+      "template": "SECURITY"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:56:00.658Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee30d0dc8bd3ae4e7d0d48",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d0dc8bd3ae4e7d0d46",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:56:00.696Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee30d0dc8bd3ae4e7d0d4a",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d0dc8bd3ae4e7d0d49",
+      "model": "User",
+      "identifier": "biosup@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Chief Hardware Engineer",
+      "designation": "Chief Hardware Engineer",
+      "employeeId": "BIO-SUP-01",
+      "departmentId": "6aee30d0dc8bd3ae4e7d0d46",
+      "isSupervisor": true,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:56:00.937Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee30d1dc8bd3ae4e7d0d4c",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d1dc8bd3ae4e7d0d4b",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Hardware Technician",
+      "designation": "Hardware Technician",
+      "employeeId": "BIO-TECH-02",
+      "departmentId": "6aee30d0dc8bd3ae4e7d0d46",
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:56:01.097Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee30d1dc8bd3ae4e7d0d4d",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d0dc8bd3ae4e7d0d46",
+      "model": "Department",
+      "identifier": "Biometric & Security Hardware"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:56:01.116Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee30d1dc8bd3ae4e7d0d6b",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d1dc8bd3ae4e7d0d4b",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "reason": "End of contract / test deactivation",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:56:01.829Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee30d1dc8bd3ae4e7d0d6c",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d1dc8bd3ae4e7d0d4b",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:56:01.857Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee30d2dc8bd3ae4e7d0d6d",
+    "action": "STAFF_PASSWORD_RESET",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d1dc8bd3ae4e7d0d4b",
+      "model": "User",
+      "identifier": "biotech@pict.edu"
+    },
+    "details": {
+      "note": "Password reset by administrator"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T19:56:02.020Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3354dc8bd3ae4e7d0dbc",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "reason": "QA Session Invalidation Security Test",
+      "openJobsCount": 4
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:06:44.716Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3354dc8bd3ae4e7d0dbd",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:06:44.735Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3561ecc2067d9387b36d",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee3554ecc2067d9387b33f",
+      "model": "Complaint",
+      "identifier": "Emergency Pipe Burst Room 101 (1793996116724)"
+    },
+    "details": {
+      "previousStaff": "Plumber Two",
+      "newStaff": "Plumbing Supervisor",
+      "reason": "Complex valve issue requiring senior supervisor intervention."
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:15:29.672Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3561ecc2067d9387b379",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "reason": "QA Session Invalidation Security Test",
+      "openJobsCount": 4
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:15:29.910Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3561ecc2067d9387b37a",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:15:29.938Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee35e5fa8ef36d704544e9",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee35d7fa8ef36d704544ac",
+      "model": "Complaint",
+      "identifier": "Emergency Pipe Burst Room 101 (1793996247946)"
+    },
+    "details": {
+      "previousStaff": "Plumber Two",
+      "newStaff": "Plumbing Supervisor",
+      "reason": "Complex valve issue requiring senior supervisor intervention."
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:17:41.949Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee35e6fa8ef36d704544f5",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "reason": "QA Session Invalidation Security Test",
+      "openJobsCount": 4
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:17:42.195Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee35e6fa8ef36d704544f6",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:17:42.225Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee382a3e11924212751f52",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "Integrity Drill Testing",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:22.239Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee382a3e11924212751f53",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:22.275Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38393e11924212751f54",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "Integrity Drill Testing",
+      "openJobsCount": 0
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:37.711Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38393e11924212751f55",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:37.740Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38393e11924212751f56",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:37.769Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38393e11924212751f57",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:37.789Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38393e11924212751f5f",
+    "action": "COMPLAINT_RESOLVED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee38393e11924212751f58",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "previousStatus": "In Progress",
+      "newStatus": "Resolved",
+      "resolutionNote": "Washer replaced",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:37.939Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38393e11924212751f61",
+    "action": "COMPLAINT_REOPENED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "Synthetic Student",
+      "role": "STUDENT",
+      "email": "student.synth@ms.pict.edu"
+    },
+    "target": {
+      "id": "6aee38393e11924212751f58",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "reason": "Water still dripping under pipe junction",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:37.985Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee383b3e11924212751f72",
+    "action": "COMPLAINT_ASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee383b66612aba561d93d6",
+      "model": "Complaint",
+      "identifier": "Concurrent Assignment Race Drill"
+    },
+    "details": {
+      "assignedStaffId": "6ae702edefa562fe7c919407",
+      "staffName": "Plumber One",
+      "reason": "Warden A assignment",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:39.932Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee383c3e11924212751f8c",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:27:40.344Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b29bd00b51fe79a522",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "Integrity Drill Testing",
+      "openJobsCount": 1
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:38.340Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b29bd00b51fe79a523",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:38.378Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b29bd00b51fe79a524",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:38.409Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b29bd00b51fe79a525",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:38.431Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b29bd00b51fe79a52d",
+    "action": "COMPLAINT_RESOLVED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b29bd00b51fe79a526",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "previousStatus": "In Progress",
+      "newStatus": "Resolved",
+      "resolutionNote": "Washer replaced",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:38.591Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b29bd00b51fe79a52f",
+    "action": "COMPLAINT_REOPENED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "Synthetic Student",
+      "role": "STUDENT",
+      "email": "student.synth@ms.pict.edu"
+    },
+    "target": {
+      "id": "6aee38b29bd00b51fe79a526",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "reason": "Water still dripping under pipe junction",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:38.648Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b29bd00b51fe79a531",
+    "action": "COMPLAINT_ASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b29bd00b51fe79a526",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "assignedStaffId": "6ae702edefa562fe7c919408",
+      "staffName": "Plumber Two",
+      "reason": "Audit coverage verification",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:38.749Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b49bd00b51fe79a54c",
+    "action": "COMPLAINT_ASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b497d2c9201f7ab3d9",
+      "model": "Complaint",
+      "identifier": "Concurrent Assignment Race Drill"
+    },
+    "details": {
+      "assignedStaffId": "6ae702edefa562fe7c919407",
+      "staffName": "Plumber One",
+      "reason": "Warden A assignment",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:40.263Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee38b49bd00b51fe79a566",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:29:40.622Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39038ae5ae94b619ba53",
+    "action": "STAFF_DEACTIVATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "details": {
+      "reason": "Integrity Drill Testing",
+      "openJobsCount": 2
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:30:59.380Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39038ae5ae94b619ba54",
+    "action": "STAFF_RESTORED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919407",
+      "model": "User",
+      "identifier": "plumber1@pict.edu"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:30:59.420Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39038ae5ae94b619ba55",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:30:59.455Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39038ae5ae94b619ba56",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:30:59.478Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39038ae5ae94b619ba5e",
+    "action": "COMPLAINT_RESOLVED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee39038ae5ae94b619ba57",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "previousStatus": "In Progress",
+      "newStatus": "Resolved",
+      "resolutionNote": "Washer replaced",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:30:59.646Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39038ae5ae94b619ba60",
+    "action": "COMPLAINT_REOPENED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "Synthetic Student",
+      "role": "STUDENT",
+      "email": "student.synth@ms.pict.edu"
+    },
+    "target": {
+      "id": "6aee39038ae5ae94b619ba57",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "reason": "Water still dripping under pipe junction",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:30:59.698Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39038ae5ae94b619ba62",
+    "action": "COMPLAINT_ASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee39038ae5ae94b619ba57",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "assignedStaffId": "6ae702edefa562fe7c919408",
+      "staffName": "Plumber Two",
+      "reason": "Audit coverage verification",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:30:59.794Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39058ae5ae94b619ba76",
+    "action": "COMPLAINT_ASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee3905de2e4e7818cf4618",
+      "model": "Complaint",
+      "identifier": "Concurrent Assignment Race Drill"
+    },
+    "details": {
+      "assignedStaffId": "6ae702edefa562fe7c919407",
+      "staffName": "Plumber One",
+      "reason": "Warden A assignment",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:31:01.257Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39058ae5ae94b619ba90",
+    "action": "DEPARTMENT_UPDATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae6fdb559b04e4fca116c7c",
+      "model": "Department",
+      "identifier": "Plumbing"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:31:01.532Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39af8ae5ae94b619baa0",
+    "action": "COMPLAINT_ASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee39a98ae5ae94b619ba98",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997225452"
+    },
+    "details": {
+      "assignedStaffId": "6ae702edefa562fe7c919408",
+      "staffName": "Plumber Two",
+      "reason": "QA Workflow Assignment",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:33:51.649Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39af8ae5ae94b619baaa",
+    "action": "COMPLAINT_RESOLVED",
+    "performedBy": {
+      "id": "6ae702edefa562fe7c919408",
+      "name": "Plumber Two",
+      "role": "STAFF",
+      "email": "plumber2@pict.edu"
+    },
+    "target": {
+      "id": "6aee39a98ae5ae94b619ba98",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997225452"
+    },
+    "details": {
+      "resolutionNote": "Replaced cracked fitting and verified pressure.",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:33:51.729Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39b28ae5ae94b619baad",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "isAvailable": true,
+      "reason": ""
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:33:54.921Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39c88ae5ae94b619bab4",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee39c88ae5ae94b619bab3",
+      "model": "Department",
+      "identifier": "Automated QA Dept 6752"
+    },
+    "details": {
+      "code": "QA_6752",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:34:16.765Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39c88ae5ae94b619bab6",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee39c88ae5ae94b619bab5",
+      "model": "User",
+      "identifier": "synth.tech.6770@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Specialist Technician",
+      "designation": "Specialist Technician",
+      "employeeId": "",
+      "departmentId": "6aee39c88ae5ae94b619bab3",
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:34:16.843Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39d28ae5ae94b619babd",
+    "action": "COMPLAINT_REOPENED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "Synthetic Student",
+      "role": "STUDENT",
+      "email": "student.synth@ms.pict.edu"
+    },
+    "target": {
+      "id": "6aee39a98ae5ae94b619ba98",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997225452"
+    },
+    "details": {
+      "reason": "Regression test: Water still dripping slightly.",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:34:26.614Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39d28ae5ae94b619bac2",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee39a98ae5ae94b619ba98",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997225452"
+    },
+    "details": {
+      "previousStaff": "Plumber Two",
+      "newStaff": "Plumbing Supervisor",
+      "reason": "Reopened job escalated to supervisor"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:34:26.640Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a1e8ae5ae94b619bace",
+    "action": "COMPLAINT_ASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee3a188ae5ae94b619bac4",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997336076"
+    },
+    "details": {
+      "assignedStaffId": "6ae702edefa562fe7c919408",
+      "staffName": "Plumber Two",
+      "reason": "QA Workflow Assignment",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:35:42.475Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a1e8ae5ae94b619bad8",
+    "action": "COMPLAINT_RESOLVED",
+    "performedBy": {
+      "id": "6ae702edefa562fe7c919408",
+      "name": "Plumber Two",
+      "role": "STAFF",
+      "email": "plumber2@pict.edu"
+    },
+    "target": {
+      "id": "6aee3a188ae5ae94b619bac4",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997336076"
+    },
+    "details": {
+      "resolutionNote": "Replaced cracked fitting and verified pressure.",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:35:42.566Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a218ae5ae94b619badb",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "isAvailable": true,
+      "reason": ""
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:35:45.751Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a378ae5ae94b619bae8",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee3a378ae5ae94b619bae7",
+      "model": "Department",
+      "identifier": "Automated QA Dept 7597"
+    },
+    "details": {
+      "code": "QA_7597",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:36:07.611Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a378ae5ae94b619baea",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee3a378ae5ae94b619bae9",
+      "model": "User",
+      "identifier": "synth.tech.7614@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Specialist Technician",
+      "designation": "Specialist Technician",
+      "employeeId": "",
+      "departmentId": "6aee3a378ae5ae94b619bae7",
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:36:07.696Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a418ae5ae94b619baf1",
+    "action": "COMPLAINT_REOPENED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "Synthetic Student",
+      "role": "STUDENT",
+      "email": "student.synth@ms.pict.edu"
+    },
+    "target": {
+      "id": "6aee3a188ae5ae94b619bac4",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997336076"
+    },
+    "details": {
+      "reason": "Regression test: Water still dripping slightly.",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:36:17.503Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a418ae5ae94b619baf6",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee3a188ae5ae94b619bac4",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997336076"
+    },
+    "details": {
+      "previousStaff": "Plumber Two",
+      "newStaff": "Plumbing Supervisor",
+      "reason": "Reopened job escalated to supervisor"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:36:17.528Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3aa28ae5ae94b619bb04",
+    "action": "COMPLAINT_ASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee3a998ae5ae94b619baf8",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997465507"
+    },
+    "details": {
+      "assignedStaffId": "6ae702edefa562fe7c919408",
+      "staffName": "Plumber Two",
+      "reason": "QA Workflow Assignment",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:37:54.249Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3aa28ae5ae94b619bb0e",
+    "action": "COMPLAINT_RESOLVED",
+    "performedBy": {
+      "id": "6ae702edefa562fe7c919408",
+      "name": "Plumber Two",
+      "role": "STAFF",
+      "email": "plumber2@pict.edu"
+    },
+    "target": {
+      "id": "6aee3a998ae5ae94b619baf8",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997465507"
+    },
+    "details": {
+      "resolutionNote": "Replaced cracked fitting and verified pressure.",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:37:54.391Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3aa58ae5ae94b619bb11",
+    "action": "AVAILABILITY_CHANGED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6ae702edefa562fe7c919408",
+      "model": "User",
+      "identifier": "plumber2@pict.edu"
+    },
+    "details": {
+      "isAvailable": true,
+      "reason": ""
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:37:57.724Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3abd8ae5ae94b619bb20",
+    "action": "DEPARTMENT_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee3abd8ae5ae94b619bb1f",
+      "model": "Department",
+      "identifier": "Automated QA Dept 1292"
+    },
+    "details": {
+      "code": "QA_1292",
+      "template": "GENERAL_STAFF"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:38:21.303Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3abd8ae5ae94b619bb22",
+    "action": "STAFF_CREATED",
+    "performedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN",
+      "email": "mainadmin@pict.edu"
+    },
+    "target": {
+      "id": "6aee3abd8ae5ae94b619bb21",
+      "model": "User",
+      "identifier": "synth.tech.1307@pict.edu"
+    },
+    "details": {
+      "role": "STAFF",
+      "staffRole": "Specialist Technician",
+      "designation": "Specialist Technician",
+      "employeeId": "",
+      "departmentId": "6aee3abd8ae5ae94b619bb1f",
+      "isSupervisor": false,
+      "permissions": []
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:38:21.404Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3ac88ae5ae94b619bb29",
+    "action": "COMPLAINT_REOPENED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "Synthetic Student",
+      "role": "STUDENT",
+      "email": "student.synth@ms.pict.edu"
+    },
+    "target": {
+      "id": "6aee3a998ae5ae94b619baf8",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997465507"
+    },
+    "details": {
+      "reason": "Regression test: Water still dripping slightly.",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:38:32.132Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3ac88ae5ae94b619bb2e",
+    "action": "COMPLAINT_REASSIGNED",
+    "performedBy": {
+      "id": "6ae64193c24fceb9b209b0d3",
+      "name": "Hostel Warden",
+      "role": "WARDEN",
+      "email": "warden@pict.edu"
+    },
+    "target": {
+      "id": "6aee3a998ae5ae94b619baf8",
+      "model": "Complaint",
+      "identifier": "Comprehensive QA Lifecycle 1793997465507"
+    },
+    "details": {
+      "previousStaff": "Plumber Two",
+      "newStaff": "Plumbing Supervisor",
+      "reason": "Reopened job escalated to supervisor"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T20:38:32.174Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee4bbb8ae5ae94b619bb8c",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2ebb6915c2d7efd5f9c7",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 124 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T21:50:51.898Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee4bbb8ae5ae94b619bb93",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eef255ede91358351b1",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T21:50:51.909Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee4bbb8ae5ae94b619bb9a",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829c8",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T21:50:51.917Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee4bbb8ae5ae94b619bba1",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f5c505142004bc829e6",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T21:50:51.924Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee4bbb8ae5ae94b619bba8",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991bc",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T21:50:51.932Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee4e138ae5ae94b619bbbb",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d1dc8bd3ae4e7d0d5a",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 125 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:00:51.903Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee4e138ae5ae94b619bbc2",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee316632220474cbfe9503",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee31a6dc8bd3ae4e7d0d78",
+      "model": "Complaint",
+      "identifier": "Browser QA Tap Leakage Synthetic"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:00:51.914Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee506b8ae5ae94b619bbd5",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee32fc9e82747fd2017ff0",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee3348dc8bd3ae4e7d0d98",
+      "model": "Complaint",
+      "identifier": "Emergency Pipe Burst Room 101 (1793995592365)"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 124 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:10:51.931Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee51978ae5ae94b619bbe2",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee350a75ac5b1698a5d328",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee3554ecc2067d9387b33f",
+      "model": "Complaint",
+      "identifier": "Emergency Pipe Burst Room 101 (1793996116724)"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 120 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:15:51.933Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551b8ae5ae94b619bbfb",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383b66612aba561d93d6",
+      "model": "Complaint",
+      "identifier": "Concurrent Assignment Race Drill"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:51.942Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551b8ae5ae94b619bc02",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b29bd00b51fe79a526",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:51.954Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551b8ae5ae94b619bc09",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b497d2c9201f7ab3d9",
+      "model": "Complaint",
+      "identifier": "Concurrent Assignment Race Drill"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:51.963Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551b8ae5ae94b619bc10",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383b3e11924212751f62",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793996859542"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:51.974Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551b8ae5ae94b619bc17",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383b3e11924212751f63",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793996859542"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:51.983Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551b8ae5ae94b619bc1e",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383c3e11924212751f77",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Alpha 1793996859999"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:51.993Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc25",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383c3e11924212751f78",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Beta 1793996859999"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.001Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc2c",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383c3e11924212751f79",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Gamma 1793996859999"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.009Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc33",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383c3e11924212751f8d",
+      "model": "Complaint",
+      "identifier": "Concurrent Mapping Drill 1793996860313"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.018Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc3a",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a53c",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793996979984"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.027Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc41",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a53d",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793996979984"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.038Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc48",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a551",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Alpha 1793996980284"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.048Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc4f",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a552",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Beta 1793996980284"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.059Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc56",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a553",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Gamma 1793996980284"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.071Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc5d",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a567",
+      "model": "Complaint",
+      "identifier": "Concurrent Mapping Drill 1793996980569"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 121 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.084Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee551c8ae5ae94b619bc64",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38393e11924212751f58",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 123 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:30:52.094Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee56478ae5ae94b619bc71",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39038ae5ae94b619ba57",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 125 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:35:51.951Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee57738ae5ae94b619bc7f",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba6d",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793997061048"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 130 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:40:51.960Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee57738ae5ae94b619bc86",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba7b",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Alpha 1793997061280"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 130 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:40:51.969Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee57738ae5ae94b619bc8d",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba7c",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Beta 1793997061280"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 130 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:40:51.977Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee57738ae5ae94b619bc94",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba7d",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Gamma 1793997061280"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 130 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:40:51.986Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee57738ae5ae94b619bc9b",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba91",
+      "model": "Complaint",
+      "identifier": "Concurrent Mapping Drill 1793997061489"
+    },
+    "details": {
+      "escalationLevel": 1,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 130 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:40:51.992Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee589f8ae5ae94b619bca8",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c297b",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6a9141146bc5f921b15c2982",
+      "model": "Complaint",
+      "identifier": "No Internet Connection"
+    },
+    "details": {
+      "escalationLevel": 8,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 101681 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:45:51.966Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee589f8ae5ae94b619bcaf",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a97dde88b3a8d1e37d443e9",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae6dbe7d68ed02348e01eba",
+      "model": "Complaint",
+      "identifier": "Wi-Fi connection problem in room"
+    },
+    "details": {
+      "escalationLevel": 8,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8178 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:45:51.975Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee589f8ae5ae94b619bcb6",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae7061822000f8c2766943d",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae7061922000f8c27669441",
+      "model": "Complaint",
+      "identifier": "Test Res Wi-Fi Down"
+    },
+    "details": {
+      "escalationLevel": 8,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 7998 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-06T22:45:51.982Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bd95",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c297b",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6a9141146bc5f921b15c2985",
+      "model": "Complaint",
+      "identifier": "Dim Tube Light"
+    },
+    "details": {
+      "escalationLevel": 6,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 101861 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.740Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bd9c",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a97dde88b3a8d1e37d443e9",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6a9e8342323c7d6978f44c0b",
+      "model": "Complaint",
+      "identifier": "Flickering Tube Light in Room 204"
+    },
+    "details": {
+      "escalationLevel": 6,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 87165 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.748Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bda3",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a97dde88b3a8d1e37d443e9",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae6d8a6d68ed02348e01ea6",
+      "model": "Complaint",
+      "identifier": "My roomate is making a lot of noise, attached proof"
+    },
+    "details": {
+      "escalationLevel": 6,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8370 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.754Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdaa",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a97dde88b3a8d1e37d443e9",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae6db10d68ed02348e01eb2",
+      "model": "Complaint",
+      "identifier": "swutch not gfudgfu"
+    },
+    "details": {
+      "escalationLevel": 6,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8359 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.761Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdb1",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e06edfb34922c06de4dc",
+      "model": "Complaint",
+      "identifier": "E2E Test Job 1"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6154 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.769Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdb8",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e06fdfb34922c06de4de",
+      "model": "Complaint",
+      "identifier": "E2E Unfinished Job for Reallocation"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6154 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.776Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdbf",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae7128c59d4960462a78382",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae7128c59d4960462a78388",
+      "model": "Complaint",
+      "identifier": "P4 Switch Sparking"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8125 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.783Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdc6",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae712b0391109525efc0326",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae712b0391109525efc032c",
+      "model": "Complaint",
+      "identifier": "P4 Switch Sparking"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8124 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.789Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdcd",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae712c135b7241af0dba16f",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae712c135b7241af0dba175",
+      "model": "Complaint",
+      "identifier": "P4 Switch Sparking"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8124 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.795Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdd4",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c82",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e054d0a85d8abe1fa1fd",
+      "model": "Complaint",
+      "identifier": "Shower Valve Jammed in Room 201"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6155 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.802Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bddb",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c82",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e054d0a85d8abe1fa205",
+      "model": "Complaint",
+      "identifier": "Basin Pipe Leaking in Room 201"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6155 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.809Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bde2",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c82",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e054d0a85d8abe1fa20d",
+      "model": "Complaint",
+      "identifier": "Concurrent Plumbing Issue #1 Room 201"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6155 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.816Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bde9",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c82",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e054d0a85d8abe1fa20e",
+      "model": "Complaint",
+      "identifier": "Concurrent Plumbing Issue #2 Room 201"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6155 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.823Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdf0",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c82",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e054d0a85d8abe1fa211",
+      "model": "Complaint",
+      "identifier": "Concurrent Plumbing Issue #4 Room 201"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6155 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.830Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdf7",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c82",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e054d0a85d8abe1fa212",
+      "model": "Complaint",
+      "identifier": "Concurrent Plumbing Issue #3 Room 201"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6155 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.837Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619bdfe",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae8e053a28feacfb82b1c82",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e054d0a85d8abe1fa22d",
+      "model": "Complaint",
+      "identifier": "Flush Tank Stuck in Room 201"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6155 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.843Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee82cf8ae5ae94b619be05",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae8e06edfb34922c06de4dd",
+      "model": "Complaint",
+      "identifier": "E2E Test Job 2"
+    },
+    "details": {
+      "escalationLevel": 5,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 6154 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:45:51.850Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee83fb8ae5ae94b619be12",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c297b",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6a9141146bc5f921b15c2982",
+      "model": "Complaint",
+      "identifier": "No Internet Connection"
+    },
+    "details": {
+      "escalationLevel": 9,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 101866 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:50:51.726Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee83fb8ae5ae94b619be19",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a97dde88b3a8d1e37d443e9",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae6dbe7d68ed02348e01eba",
+      "model": "Complaint",
+      "identifier": "Wi-Fi connection problem in room"
+    },
+    "details": {
+      "escalationLevel": 9,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8363 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:50:51.734Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee83fb8ae5ae94b619be20",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae7061822000f8c2766943d",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae7061922000f8c27669441",
+      "model": "Complaint",
+      "identifier": "Test Res Wi-Fi Down"
+    },
+    "details": {
+      "escalationLevel": 9,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8183 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T01:50:51.743Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea1478ae5ae94b619bebd",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2ebb6915c2d7efd5f9c7",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 489 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T03:55:51.786Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea1478ae5ae94b619bec4",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2eef255ede91358351b1",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T03:55:51.794Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea1478ae5ae94b619becb",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f4d505142004bc829c8",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T03:55:51.802Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea1478ae5ae94b619bed2",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f5c505142004bc829e6",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T03:55:51.809Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea1478ae5ae94b619bed9",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee2f7be8a7d6d90c3991bc",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T03:55:51.817Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea39f8ae5ae94b619beec",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee30d1dc8bd3ae4e7d0d5a",
+      "model": "Complaint",
+      "identifier": "Solar panel inverter alarm on hostel roof"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 490 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:05:51.807Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea39f8ae5ae94b619bef3",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee316632220474cbfe9503",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee31a6dc8bd3ae4e7d0d78",
+      "model": "Complaint",
+      "identifier": "Browser QA Tap Leakage Synthetic"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:05:51.822Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea5f78ae5ae94b619bf06",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee32fc9e82747fd2017ff0",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee3348dc8bd3ae4e7d0d98",
+      "model": "Complaint",
+      "identifier": "Emergency Pipe Burst Room 101 (1793995592365)"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 489 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:15:51.810Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeea7238ae5ae94b619bf13",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee350a75ac5b1698a5d328",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee3554ecc2067d9387b33f",
+      "model": "Complaint",
+      "identifier": "Emergency Pipe Burst Room 101 (1793996116724)"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 485 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:20:51.821Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf2c",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383b66612aba561d93d6",
+      "model": "Complaint",
+      "identifier": "Concurrent Assignment Race Drill"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.853Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf33",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b29bd00b51fe79a526",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.868Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf3a",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b497d2c9201f7ab3d9",
+      "model": "Complaint",
+      "identifier": "Concurrent Assignment Race Drill"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.875Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf41",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383b3e11924212751f62",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793996859542"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.882Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf48",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383b3e11924212751f63",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793996859542"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.888Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf4f",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383c3e11924212751f77",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Alpha 1793996859999"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.896Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf56",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383c3e11924212751f78",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Beta 1793996859999"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.903Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf5d",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383c3e11924212751f79",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Gamma 1793996859999"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.909Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf64",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee383c3e11924212751f8d",
+      "model": "Complaint",
+      "identifier": "Concurrent Mapping Drill 1793996860313"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.918Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf6b",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a53c",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793996979984"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.924Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf72",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a53d",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793996979984"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.933Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf79",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a551",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Alpha 1793996980284"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.939Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf80",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a552",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Beta 1793996980284"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.946Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf87",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a553",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Gamma 1793996980284"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.953Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf8e",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38b49bd00b51fe79a567",
+      "model": "Complaint",
+      "identifier": "Concurrent Mapping Drill 1793996980569"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 486 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.960Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeaaa78ae5ae94b619bf95",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee38393e11924212751f58",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 488 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:35:51.967Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeabd38ae5ae94b619bfa2",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39038ae5ae94b619ba57",
+      "model": "Complaint",
+      "identifier": "State Transition Integrity Drill"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 490 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:40:51.863Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeacff8ae5ae94b619bfb0",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba6d",
+      "model": "Complaint",
+      "identifier": "Idempotency Stutter Drill 1793997061048"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 495 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:45:51.863Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeacff8ae5ae94b619bfb7",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba7b",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Alpha 1793997061280"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 495 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:45:51.869Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeacff8ae5ae94b619bfbe",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba7c",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Beta 1793997061280"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 495 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:45:51.876Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeacff8ae5ae94b619bfc5",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba7d",
+      "model": "Complaint",
+      "identifier": "Parallel Drill Gamma 1793997061280"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 495 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:45:51.883Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeacff8ae5ae94b619bfcc",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6aee358d4af48359a5226bed",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6aee39058ae5ae94b619ba91",
+      "model": "Complaint",
+      "identifier": "Concurrent Mapping Drill 1793997061489"
+    },
+    "details": {
+      "escalationLevel": 2,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 495 mins (Deadline: 120 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:45:51.890Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeae2b8ae5ae94b619bfd9",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c297b",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6a9141146bc5f921b15c2982",
+      "model": "Complaint",
+      "identifier": "No Internet Connection"
+    },
+    "details": {
+      "escalationLevel": 10,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 102046 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:50:51.873Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeae2b8ae5ae94b619bfe0",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6a97dde88b3a8d1e37d443e9",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae6dbe7d68ed02348e01eba",
+      "model": "Complaint",
+      "identifier": "Wi-Fi connection problem in room"
+    },
+    "details": {
+      "escalationLevel": 10,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8543 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:50:51.881Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeeae2b8ae5ae94b619bfe7",
+    "action": "COMPLAINT_ESCALATED",
+    "performedBy": {
+      "id": "6ae7061822000f8c2766943d",
+      "name": "System Escalation Engine",
+      "role": "SYSTEM",
+      "email": "system@pict.edu"
+    },
+    "target": {
+      "id": "6ae7061922000f8c27669441",
+      "model": "Complaint",
+      "identifier": "Test Res Wi-Fi Down"
+    },
+    "details": {
+      "escalationLevel": 10,
+      "triggerType": "UNACKNOWLEDGED_DEADLINE",
+      "reason": "Job unacknowledged for 8363 mins (Deadline: 60 mins)",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T04:50:51.889Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aeec14cd359db584ba890ce",
+    "action": "COMPLAINT_REOPENED",
+    "performedBy": {
+      "id": "6a9141146bc5f921b15c2979",
+      "name": "John Doe",
+      "role": "STUDENT",
+      "email": "student1@test.com"
+    },
+    "target": {
+      "id": "6aeec14cd359db584ba890c6",
+      "model": "Complaint",
+      "identifier": "Release Lifecycle Test 1794031948341"
+    },
+    "details": {
+      "reason": "Flickering started again after 10 minutes",
+      "outcome": "SUCCESS"
+    },
+    "ipAddress": "",
+    "timestamp": "2026-11-07T06:12:28.522Z",
+    "__v": 0
+  }
+]

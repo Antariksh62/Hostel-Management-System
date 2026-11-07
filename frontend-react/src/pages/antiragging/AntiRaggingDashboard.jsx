@@ -48,10 +48,12 @@ export default function AntiRaggingDashboard() {
     isAnonymous: true,
   });
 
-  const { data: cases = [], isLoading, error } = useQuery({
+  const { data: casesData, isLoading, error } = useQuery({
     queryKey: ["antiragging-cases"],
-    queryFn: () => api.get("/anti-ragging/cases").then((r) => r.data || []),
+    queryFn: () => api.get("/anti-ragging/cases").then((r) => r.data?.cases || (Array.isArray(r.data) ? r.data : [])),
   });
+
+  const cases = Array.isArray(casesData) ? casesData : [];
 
   // Socket updates
   useEffect(() => {

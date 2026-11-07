@@ -1,0 +1,491 @@
+[
+  {
+    "_id": "6ae6fdb559b04e4fca116c7f",
+    "instanceId": "PLUMBING_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map",
+      "materials"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-01T08:52:05.881Z",
+    "createdBy": null,
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "isActive": true,
+    "name": "Plumbing Primary Workspace",
+    "settings": {},
+    "templateId": "PLUMBER",
+    "updatedAt": "2026-11-07T06:09:30.164Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c8e",
+    "instanceId": "ELECTRICAL_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map",
+      "materials"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-01T08:52:05.900Z",
+    "createdBy": null,
+    "departmentId": "6ae6fdb559b04e4fca116c8c",
+    "isActive": true,
+    "name": "Electrical Primary Workspace",
+    "settings": {},
+    "templateId": "ELECTRICIAN",
+    "updatedAt": "2026-11-07T06:09:30.226Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c9d",
+    "instanceId": "WORKSHOP_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-01T08:52:05.916Z",
+    "createdBy": null,
+    "departmentId": "6ae6fdb559b04e4fca116c9b",
+    "isActive": true,
+    "name": "Workshop Primary Workspace",
+    "settings": {},
+    "templateId": "WORKSHOP",
+    "updatedAt": "2026-11-07T06:09:30.249Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116cac",
+    "instanceId": "CLEANING_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-01T08:52:05.930Z",
+    "createdBy": null,
+    "departmentId": "6ae6fdb559b04e4fca116caa",
+    "isActive": true,
+    "name": "Cleaning Primary Workspace",
+    "settings": {},
+    "templateId": "CLEANING",
+    "updatedAt": "2026-11-07T06:09:30.272Z"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116cb9",
+    "instanceId": "WIFI_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "network_monitor",
+      "router_map",
+      "work_history"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-01T08:52:05.940Z",
+    "createdBy": null,
+    "departmentId": "6ae6fdb559b04e4fca116cb6",
+    "isActive": true,
+    "name": "Wi-Fi Primary Workspace",
+    "settings": {},
+    "templateId": "WIFI",
+    "updatedAt": "2026-11-07T06:09:30.293Z"
+  },
+  {
+    "_id": "6ae6fde259b04e4fca116d32",
+    "instanceId": "SECURITY_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "incident_reporting",
+      "assigned_incidents",
+      "incident_history"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-01T08:52:50.669Z",
+    "createdBy": null,
+    "departmentId": "6ae6fde259b04e4fca116d30",
+    "isActive": true,
+    "name": "Security Primary Workspace",
+    "settings": {},
+    "templateId": "SECURITY",
+    "updatedAt": "2026-11-07T06:09:30.312Z"
+  },
+  {
+    "_id": "6ae6fde259b04e4fca116d3a",
+    "instanceId": "ANTI_RAGGING_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "confidential_cases",
+      "investigation_workflow",
+      "case_notes",
+      "actions_taken"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-01T08:52:50.676Z",
+    "createdBy": null,
+    "departmentId": "6ae6fde259b04e4fca116d38",
+    "isActive": true,
+    "name": "Anti-Ragging Primary Workspace",
+    "settings": {},
+    "templateId": "ANTI_RAGGING",
+    "updatedAt": "2026-11-07T06:09:30.325Z"
+  },
+  {
+    "_id": "6ae70eaa4bc5e7f0f422f1f8",
+    "instanceId": "DEPT_6851_INSTANCE_1",
+    "name": "Specialized DEPT_6851 Workspace",
+    "departmentId": "6ae70eaa4bc5e7f0f422f1f7",
+    "templateId": "GENERAL_STAFF",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "isActive": true,
+    "createdBy": "6ae70eaa1f895998326989e3",
+    "createdAt": "2026-11-01T10:04:26.871Z",
+    "updatedAt": "2026-11-01T10:04:26.871Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70eaa4bc5e7f0f422f1fc",
+    "instanceId": "INST_1793527466928_RX8M",
+    "name": "Plumbing Quick Response Unit 2",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "templateId": "PLUMBING_OPS",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "inventory"
+    ],
+    "isActive": true,
+    "createdBy": "6ae70eaa1f895998326989e3",
+    "createdAt": "2026-11-01T10:04:26.930Z",
+    "updatedAt": "2026-11-01T10:04:26.930Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ed14bc5e7f0f422f209",
+    "instanceId": "DEPT_5382_INSTANCE_1",
+    "name": "Specialized DEPT_5382 Workspace",
+    "departmentId": "6ae70ed14bc5e7f0f422f208",
+    "templateId": "GENERAL_STAFF",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "isActive": true,
+    "createdBy": "6ae70ed18906e94cdec0786f",
+    "createdAt": "2026-11-01T10:05:05.399Z",
+    "updatedAt": "2026-11-01T10:05:05.399Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ed14bc5e7f0f422f20d",
+    "instanceId": "INST_1793527505447_QGH5",
+    "name": "Plumbing Quick Response Unit 2",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "templateId": "PLUMBING_OPS",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "inventory"
+    ],
+    "isActive": true,
+    "createdBy": "6ae70ed18906e94cdec0786f",
+    "createdAt": "2026-11-01T10:05:05.448Z",
+    "updatedAt": "2026-11-01T10:05:05.448Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9b9df6265526e2dfad",
+    "instanceId": "DEPT_7604_INSTANCE_1",
+    "name": "Specialized DEPT_7604 Workspace",
+    "departmentId": "6ae70f9b9df6265526e2dfac",
+    "templateId": "GENERAL_STAFF",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "isActive": true,
+    "createdBy": "6ae70f9b38084df050074ac5",
+    "createdAt": "2026-11-01T10:08:27.634Z",
+    "updatedAt": "2026-11-01T10:08:27.634Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9b9df6265526e2dfb1",
+    "instanceId": "INST_1793527707695_SHXK",
+    "name": "Plumbing Quick Response Unit 2",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "templateId": "PLUMBING_OPS",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "inventory"
+    ],
+    "isActive": true,
+    "createdBy": "6ae70f9b38084df050074ac5",
+    "createdAt": "2026-11-01T10:08:27.696Z",
+    "updatedAt": "2026-11-01T10:08:27.696Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71013dad70f7cb15824ae",
+    "instanceId": "DEPT_7884_INSTANCE_1",
+    "name": "Specialized DEPT_7884 Workspace",
+    "departmentId": "6ae71013dad70f7cb15824ad",
+    "templateId": "GENERAL_STAFF",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "isActive": true,
+    "createdBy": "6ae71013d5ca1c51e256a49a",
+    "createdAt": "2026-11-01T10:10:27.903Z",
+    "updatedAt": "2026-11-01T10:10:27.903Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71013dad70f7cb15824b2",
+    "instanceId": "INST_1793527827952_7NE4",
+    "name": "Plumbing Quick Response Unit 2",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "templateId": "PLUMBING_OPS",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "inventory"
+    ],
+    "isActive": true,
+    "createdBy": "6ae71013d5ca1c51e256a49a",
+    "createdAt": "2026-11-01T10:10:27.953Z",
+    "updatedAt": "2026-11-01T10:10:27.953Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f44d04c02294c29ec0",
+    "instanceId": "DEPT_2152_INSTANCE_1",
+    "name": "Specialized DEPT_2152 Workspace",
+    "departmentId": "6ae710f44d04c02294c29ebf",
+    "templateId": "GENERAL_STAFF",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "isActive": true,
+    "createdBy": "6ae710f3a457cd8019b3dc80",
+    "createdAt": "2026-11-01T10:14:12.175Z",
+    "updatedAt": "2026-11-01T10:14:12.175Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f44d04c02294c29ec4",
+    "instanceId": "INST_1793528052236_ANP4",
+    "name": "Plumbing Quick Response Unit 2",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "templateId": "PLUMBING_OPS",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "inventory"
+    ],
+    "isActive": true,
+    "createdBy": "6ae710f3a457cd8019b3dc80",
+    "createdAt": "2026-11-01T10:14:12.238Z",
+    "updatedAt": "2026-11-01T10:14:12.238Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e438dbca64eab83a79",
+    "instanceId": "DEPT_8933_INSTANCE_1",
+    "name": "Specialized DEPT_8933 Workspace",
+    "departmentId": "6ae712e438dbca64eab83a78",
+    "templateId": "GENERAL_STAFF",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "isActive": true,
+    "createdBy": "6ae712e4fd036a83c5a24689",
+    "createdAt": "2026-11-01T10:22:28.950Z",
+    "updatedAt": "2026-11-01T10:22:28.950Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e538dbca64eab83a7d",
+    "instanceId": "INST_1793528549002_6AB5",
+    "name": "Plumbing Quick Response Unit 2",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "templateId": "PLUMBING_OPS",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "inventory"
+    ],
+    "isActive": true,
+    "createdBy": "6ae712e4fd036a83c5a24689",
+    "createdAt": "2026-11-01T10:22:29.004Z",
+    "updatedAt": "2026-11-01T10:22:29.004Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71349ac840cbadd9fa7de",
+    "instanceId": "DEPT_9395_INSTANCE_1",
+    "name": "Specialized DEPT_9395 Workspace",
+    "departmentId": "6ae71349ac840cbadd9fa7dd",
+    "templateId": "GENERAL_STAFF",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "isActive": true,
+    "createdBy": "6ae71349fbc0b24f2e3db7b7",
+    "createdAt": "2026-11-01T10:24:09.416Z",
+    "updatedAt": "2026-11-01T10:24:09.416Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71349ac840cbadd9fa7e2",
+    "instanceId": "INST_1793528649471_TB2C",
+    "name": "Plumbing Quick Response Unit 2",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "templateId": "PLUMBING_OPS",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "inventory"
+    ],
+    "isActive": true,
+    "createdBy": "6ae71349fbc0b24f2e3db7b7",
+    "createdAt": "2026-11-01T10:24:09.472Z",
+    "updatedAt": "2026-11-01T10:24:09.472Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e053d0a85d8abe1fa1f6",
+    "instanceId": "DEPT_5957_INSTANCE_1",
+    "name": "Specialized DEPT_5957 Workspace",
+    "departmentId": "6ae8e053d0a85d8abe1fa1f5",
+    "templateId": "GENERAL_STAFF",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "isActive": true,
+    "createdBy": "6ae8e053a28feacfb82b1c7c",
+    "createdAt": "2026-11-02T19:11:15.971Z",
+    "updatedAt": "2026-11-02T19:11:15.971Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e054d0a85d8abe1fa1fa",
+    "instanceId": "INST_1793646676014_E7XQ",
+    "name": "Plumbing Quick Response Unit 2",
+    "departmentId": "6ae6fdb559b04e4fca116c7c",
+    "templateId": "PLUMBING_OPS",
+    "assignedEmployees": [],
+    "activeModules": [
+      "assigned_work",
+      "work_history",
+      "inventory"
+    ],
+    "isActive": true,
+    "createdBy": "6ae8e053a28feacfb82b1c7c",
+    "createdAt": "2026-11-02T19:11:16.014Z",
+    "updatedAt": "2026-11-02T19:11:16.014Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee2eee7db02e3fb8db6982",
+    "instanceId": "BIOMETRIC_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-06T19:47:58.880Z",
+    "createdBy": "6ae6fde23b3b2d876a2144bd",
+    "departmentId": "6aee30d0dc8bd3ae4e7d0d46",
+    "isActive": true,
+    "name": "Biometric & Security Hardware Workspace",
+    "settings": {},
+    "templateId": "SECURITY",
+    "updatedAt": "2026-11-06T19:56:00.645Z"
+  },
+  {
+    "_id": "6aee39c87db02e3fb8db9b18",
+    "instanceId": "QA_6752_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-06T20:34:16.760Z",
+    "createdBy": "6ae6fde23b3b2d876a2144bd",
+    "departmentId": "6aee39c88ae5ae94b619bab3",
+    "isActive": true,
+    "name": "Automated QA Dept 6752 Workspace",
+    "settings": {},
+    "templateId": "GENERAL_STAFF",
+    "updatedAt": "2026-11-06T20:34:16.760Z"
+  },
+  {
+    "_id": "6aee3a377db02e3fb8db9c51",
+    "instanceId": "QA_7597_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-06T20:36:07.605Z",
+    "createdBy": "6ae6fde23b3b2d876a2144bd",
+    "departmentId": "6aee3a378ae5ae94b619bae7",
+    "isActive": true,
+    "name": "Automated QA Dept 7597 Workspace",
+    "settings": {},
+    "templateId": "GENERAL_STAFF",
+    "updatedAt": "2026-11-06T20:36:07.605Z"
+  },
+  {
+    "_id": "6aee3abd7db02e3fb8dba090",
+    "instanceId": "QA_1292_INSTANCE_1",
+    "__v": 0,
+    "activeModules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "assignedEmployees": [],
+    "createdAt": "2026-11-06T20:38:21.299Z",
+    "createdBy": "6ae6fde23b3b2d876a2144bd",
+    "departmentId": "6aee3abd8ae5ae94b619bb1f",
+    "isActive": true,
+    "name": "Automated QA Dept 1292 Workspace",
+    "settings": {},
+    "templateId": "GENERAL_STAFF",
+    "updatedAt": "2026-11-06T20:38:21.299Z"
+  }
+]

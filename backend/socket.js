@@ -4,12 +4,19 @@ const logger = require("./utils/logger");
 
 let io = null;
 
-const MANAGEMENT_ROLES = ["WARDEN", "HEADWARDEN", "INCHARGE"];
+const MANAGEMENT_ROLES = ["WARDEN", "HEADWARDEN", "INCHARGE", "MAIN_ADMIN"];
 
 const initSocket = (server) => {
+    const defaultOrigins = ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"];
+    const envOrigins = (process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || "")
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+    const allowedOrigins = envOrigins.length > 0 ? Array.from(new Set([...envOrigins, ...defaultOrigins])) : defaultOrigins;
+
     io = new Server(server, {
         cors: {
-            origin: "http://localhost:5173",
+            origin: allowedOrigins,
             credentials: true
         }
     });
@@ -37,7 +44,7 @@ const initSocket = (server) => {
         }
     });
 
-    io.on("connection", (socket) => {
+    io.on("connection", async (socket) => {
         const { id, role } = socket.user;
         logger.info(`🔌 Socket connected: ${socket.id} (User: ${id}, Role: ${role})`);
 
@@ -49,9 +56,48 @@ const initSocket = (server) => {
             socket.join(`role:${role}`);
         }
 
-        // Join management/wardens room (WARDEN, HEADWARDEN, INCHARGE only — excluding STAFF)
+        // Join management/wardens room
         if (MANAGEMENT_ROLES.includes(role)) {
             socket.join("wardens");
+            socket.join("management");
+        }
+
+        // Join department-specific rooms
+        try {
+            const { User } = require("./models/User");
+            const Department = require("./models/Department");
+            const liveUser = await User.findById(id, "departmentId authorizedDepartments dashboardPermissions staffRole").lean();
+
+            if (liveUser) {
+                if (liveUser.departmentId) {
+                    socket.join(`dept:${liveUser.departmentId}`);
+                    const d = await Department.findById(liveUser.departmentId, "code").lean();
+                    if (d && d.code) socket.join(`dept:${d.code}`);
+                }
+
+                if (Array.isArray(liveUser.authorizedDepartments)) {
+                    for (const authDeptId of liveUser.authorizedDepartments) {
+                        socket.join(`dept:${authDeptId}`);
+                    }
+                }
+
+                if (Array.isArray(liveUser.dashboardPermissions)) {
+                    for (const perm of liveUser.dashboardPermissions) {
+                        socket.join(`dept:${perm.toUpperCase()}`);
+                    }
+                }
+
+                // Fallback by staffRole
+                const sr = liveUser.staffRole || "";
+                if (sr.match(/plumb/i)) socket.join("dept:PLUMBING");
+                else if (sr.match(/elect/i)) socket.join("dept:ELECTRICAL");
+                else if (sr.match(/carpent|furn|work/i)) socket.join("dept:WORKSHOP");
+                else if (sr.match(/clean|house/i)) socket.join("dept:CLEANING");
+                else if (sr.match(/secur/i)) socket.join("dept:SECURITY");
+                else if (sr.match(/ragging/i)) socket.join("dept:ANTI_RAGGING");
+            }
+        } catch (err) {
+            logger.error(`Error joining department rooms for user ${id}: ${err.message}`);
         }
 
         socket.on("disconnect", (reason) => {
@@ -81,22 +127,42 @@ const getEntityId = (entity) => {
 const emitComplaintCreated = (complaint) => {
     if (!io) return;
     const cid = getEntityId(complaint._id || complaint.id);
+    const complaintObj = complaint.toObject ? complaint.toObject() : complaint;
     const payload = {
         complaintId: cid,
-        complaint: complaint.toObject ? complaint.toObject() : complaint
+        complaint: complaintObj
     };
     const studentIdStr = getEntityId(complaint.studentId);
     
     const cat = complaint.quickCategory || complaint.category;
     const isWifi = cat === "WIFI_NOT_WORKING" || cat === "Internet";
+    const isAntiRagging = complaint.isAntiRagging || complaint.isConfidential || (cat && cat.match(/ragging/i));
 
     const rooms = [];
-    if (isWifi) {
-        rooms.push("role:WIFI_INCHARGE");
-    } else {
-        rooms.push("wardens");
-    }
     if (studentIdStr) rooms.push(`user:${studentIdStr}`);
+
+    if (isAntiRagging) {
+        // Strict privacy: Anti-Ragging emitted ONLY to authorized committee, Incharge, and Main Admin
+        rooms.push("role:MAIN_ADMIN");
+        rooms.push("role:INCHARGE");
+        rooms.push("dept:ANTI_RAGGING");
+        if (complaint.departmentId) {
+            rooms.push(`dept:${getEntityId(complaint.departmentId)}`);
+        }
+    } else {
+        if (isWifi) {
+            rooms.push("role:WIFI_INCHARGE");
+        }
+        rooms.push("wardens");
+        rooms.push("role:MAIN_ADMIN");
+        if (complaint.departmentId) {
+            const deptId = getEntityId(complaint.departmentId);
+            rooms.push(`dept:${deptId}`);
+            if (complaint.departmentId.code) {
+                rooms.push(`dept:${complaint.departmentId.code}`);
+            }
+        }
+    }
 
     io.to(rooms).emit("complaint:created", payload);
 };
@@ -104,25 +170,44 @@ const emitComplaintCreated = (complaint) => {
 const emitComplaintStatusUpdated = (complaint) => {
     if (!io) return;
     const cid = getEntityId(complaint._id || complaint.id);
+    const complaintObj = complaint.toObject ? complaint.toObject() : complaint;
     const payload = {
         complaintId: cid,
         status: complaint.status,
-        complaint: complaint.toObject ? complaint.toObject() : complaint
+        complaint: complaintObj
     };
     const studentIdStr = getEntityId(complaint.studentId);
     const assignedStaffId = getEntityId(complaint.assignedTo);
 
     const cat = complaint.quickCategory || complaint.category;
     const isWifi = cat === "WIFI_NOT_WORKING" || cat === "Internet";
+    const isAntiRagging = complaint.isAntiRagging || complaint.isConfidential || (cat && cat.match(/ragging/i));
 
     const rooms = [];
-    if (isWifi) {
-        rooms.push("role:WIFI_INCHARGE");
-    } else {
-        rooms.push("wardens");
-    }
     if (studentIdStr) rooms.push(`user:${studentIdStr}`);
     if (assignedStaffId) rooms.push(`user:${assignedStaffId}`);
+
+    if (isAntiRagging) {
+        rooms.push("role:MAIN_ADMIN");
+        rooms.push("role:INCHARGE");
+        rooms.push("dept:ANTI_RAGGING");
+        if (complaint.departmentId) {
+            rooms.push(`dept:${getEntityId(complaint.departmentId)}`);
+        }
+    } else {
+        if (isWifi) {
+            rooms.push("role:WIFI_INCHARGE");
+        }
+        rooms.push("wardens");
+        rooms.push("role:MAIN_ADMIN");
+        if (complaint.departmentId) {
+            const deptId = getEntityId(complaint.departmentId);
+            rooms.push(`dept:${deptId}`);
+            if (complaint.departmentId.code) {
+                rooms.push(`dept:${complaint.departmentId.code}`);
+            }
+        }
+    }
 
     io.to(rooms).emit("complaint:status-updated", payload);
 };
@@ -130,26 +215,45 @@ const emitComplaintStatusUpdated = (complaint) => {
 const emitComplaintAssigned = (complaint) => {
     if (!io) return;
     const cid = getEntityId(complaint._id || complaint.id);
+    const complaintObj = complaint.toObject ? complaint.toObject() : complaint;
     const payload = {
         complaintId: cid,
         assignedTo: complaint.assignedTo,
         status: complaint.status,
-        complaint: complaint.toObject ? complaint.toObject() : complaint
+        complaint: complaintObj
     };
     const studentIdStr = getEntityId(complaint.studentId);
     const assignedStaffId = getEntityId(complaint.assignedTo);
 
     const cat = complaint.quickCategory || complaint.category;
     const isWifi = cat === "WIFI_NOT_WORKING" || cat === "Internet";
+    const isAntiRagging = complaint.isAntiRagging || complaint.isConfidential || (cat && cat.match(/ragging/i));
 
     const rooms = [];
-    if (isWifi) {
-        rooms.push("role:WIFI_INCHARGE");
-    } else {
-        rooms.push("wardens");
-    }
     if (studentIdStr) rooms.push(`user:${studentIdStr}`);
     if (assignedStaffId) rooms.push(`user:${assignedStaffId}`);
+
+    if (isAntiRagging) {
+        rooms.push("role:MAIN_ADMIN");
+        rooms.push("role:INCHARGE");
+        rooms.push("dept:ANTI_RAGGING");
+        if (complaint.departmentId) {
+            rooms.push(`dept:${getEntityId(complaint.departmentId)}`);
+        }
+    } else {
+        if (isWifi) {
+            rooms.push("role:WIFI_INCHARGE");
+        }
+        rooms.push("wardens");
+        rooms.push("role:MAIN_ADMIN");
+        if (complaint.departmentId) {
+            const deptId = getEntityId(complaint.departmentId);
+            rooms.push(`dept:${deptId}`);
+            if (complaint.departmentId.code) {
+                rooms.push(`dept:${complaint.departmentId.code}`);
+            }
+        }
+    }
 
     io.to(rooms).emit("complaint:assigned", payload);
 };
@@ -158,7 +262,7 @@ const emitComplaintDeleted = (complaintId, studentId = null) => {
     if (!io) return;
     const cid = getEntityId(complaintId);
     const payload = { complaintId: cid };
-    const rooms = ["wardens", "role:WIFI_INCHARGE"];
+    const rooms = ["wardens", "role:WIFI_INCHARGE", "role:MAIN_ADMIN"];
     const studentIdStr = getEntityId(studentId);
     if (studentIdStr) rooms.push(`user:${studentIdStr}`);
     io.to(rooms).emit("complaint:deleted", payload);

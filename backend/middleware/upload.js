@@ -22,8 +22,13 @@ const ALLOWED_EXTS = new Set([
 ]);
 
 // ─── Storage: UUID filenames (no user-controlled strings hit the filesystem) ───
+const uploadDir = process.env.UPLOAD_DIR || path.join(__dirname, "../uploads");
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 const storage = multer.diskStorage({
-    destination: (_req, _file, cb) => cb(null, "uploads/"),
+    destination: (_req, _file, cb) => cb(null, uploadDir),
     filename:    (_req, _file,  cb) => {
         cb(null, uuidv4());
     }

@@ -2,6 +2,7 @@ const Complaint = require("../models/Complaint");
 const Department = require("../models/Department");
 const EscalationEvent = require("../models/EscalationEvent");
 const ComplaintEvent = require("../models/ComplaintEvent");
+const AuditLog = require("../models/AuditLog");
 const { broadcastNotification } = require("./notificationService");
 
 /**
@@ -101,6 +102,13 @@ async function evaluateEscalations() {
                 newState: { escalationLevel: newLevel, triggerType },
                 note: `[Cycle ${newLevel}] ${reason}. Management alerted.`
             });
+
+            await AuditLog.create({
+                action: "COMPLAINT_ESCALATED",
+                performedBy: { id: comp.studentId || comp._id, name: "System Escalation Engine", role: "SYSTEM", email: "system@pict.edu" },
+                target: { id: comp._id, model: "Complaint", identifier: comp.title },
+                details: { escalationLevel: newLevel, triggerType, reason, outcome: "SUCCESS" }
+            }).catch(e => console.error("AuditLog escalation error:", e.message));
 
             // Scoped notifications: Do NOT send Anti-Ragging escalations to WARDEN or HEADWARDEN!
             const targetRoles = comp.isAntiRagging

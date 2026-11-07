@@ -12,7 +12,21 @@ const { broadcastNotification } = require("./notificationService");
  * MAIN_ADMIN can create any account.
  * INCHARGE can only create operational staff accounts (PLUMBING, ELECTRICAL, WORKSHOP, CLEANING, WIFI).
  */
-async function createStaffAccount({ name, email, password, role = "STAFF", staffRole, departmentId, dashboardPermissions = [], actor }) {
+async function createStaffAccount({
+    name,
+    email,
+    password,
+    role = "STAFF",
+    staffRole,
+    designation,
+    employeeId = "",
+    phoneNumber = "",
+    departmentId,
+    authorizedDepartments = [],
+    isSupervisor = false,
+    dashboardPermissions = [],
+    actor
+}) {
     if (!name || !email || !password) {
         throw new Error("Name, email and password are required.");
     }
@@ -37,17 +51,29 @@ async function createStaffAccount({ name, email, password, role = "STAFF", staff
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    const finalDesignation = designation || staffRole || "Technician";
+
     const newStaff = await Staff.create({
         name: name.trim(),
         email: cleanEmail,
         password: hashedPassword,
         role: role === "WIFI_INCHARGE" ? "WIFI_INCHARGE" : "STAFF",
-        staffRole: staffRole || "Technician",
+        staffRole: finalDesignation,
+        designation: finalDesignation,
+        employeeId: employeeId ? employeeId.trim() : "",
+        phoneNumber: phoneNumber ? phoneNumber.trim() : "",
         departmentId: departmentId || null,
+        authorizedDepartments: Array.isArray(authorizedDepartments) ? authorizedDepartments : [],
+        isSupervisor: Boolean(isSupervisor),
         dashboardPermissions,
         isActive: true,
         isAvailable: true
     });
+
+    // If marked as supervisor for department, update Department record
+    if (isSupervisor && departmentId) {
+        await Department.findByIdAndUpdate(departmentId, { supervisor: newStaff._id });
+    }
 
     // Record Audit Log
     await AuditLog.create({
@@ -57,6 +83,10 @@ async function createStaffAccount({ name, email, password, role = "STAFF", staff
         details: {
             role: newStaff.role,
             staffRole: newStaff.staffRole,
+            designation: newStaff.designation,
+            employeeId: newStaff.employeeId,
+            departmentId: newStaff.departmentId,
+            isSupervisor: newStaff.isSupervisor,
             permissions: dashboardPermissions
         }
     });
@@ -67,9 +97,127 @@ async function createStaffAccount({ name, email, password, role = "STAFF", staff
         email: newStaff.email,
         role: newStaff.role,
         staffRole: newStaff.staffRole,
+        designation: newStaff.designation,
+        employeeId: newStaff.employeeId,
+        phoneNumber: newStaff.phoneNumber,
         departmentId: newStaff.departmentId,
+        authorizedDepartments: newStaff.authorizedDepartments,
+        isSupervisor: newStaff.isSupervisor,
         dashboardPermissions: newStaff.dashboardPermissions
     };
+}
+
+/**
+ * Updates staff account profile and operational assignment details.
+ */
+async function updateStaffAccount({
+    staffId,
+    name,
+    email,
+    employeeId,
+    phoneNumber,
+    designation,
+    staffRole,
+    departmentId,
+    authorizedDepartments,
+    isSupervisor,
+    actor
+}) {
+    const staff = await User.findById(staffId);
+    if (!staff) throw new Error("Staff member not found");
+
+    if (actor.role === "INCHARGE" && (staff.role === "HEADWARDEN" || staff.role === "MAIN_ADMIN")) {
+        throw new Error("Unauthorized to modify elevated administrative accounts.");
+    }
+
+    if (name) staff.name = name.trim();
+    if (email) {
+        const cleanEmail = email.trim().toLowerCase();
+        if (cleanEmail !== staff.email) {
+            const exists = await User.findOne({ email: cleanEmail, _id: { $ne: staff._id } });
+            if (exists) throw new Error(`An account with email '${cleanEmail}' already exists.`);
+            staff.email = cleanEmail;
+        }
+    }
+
+    if (employeeId !== undefined) staff.employeeId = employeeId.trim();
+    if (phoneNumber !== undefined) staff.phoneNumber = phoneNumber.trim();
+
+    const newDesignation = designation || staffRole;
+    if (newDesignation) {
+        staff.designation = newDesignation.trim();
+        staff.staffRole = newDesignation.trim();
+    }
+
+    if (departmentId !== undefined) staff.departmentId = departmentId || null;
+    if (authorizedDepartments !== undefined) {
+        staff.authorizedDepartments = Array.isArray(authorizedDepartments) ? authorizedDepartments : [];
+    }
+
+    if (isSupervisor !== undefined) {
+        staff.isSupervisor = Boolean(isSupervisor);
+        if (staff.isSupervisor && staff.departmentId) {
+            await Department.findByIdAndUpdate(staff.departmentId, { supervisor: staff._id });
+        }
+    }
+
+    await staff.save();
+
+    await AuditLog.create({
+        action: "STAFF_UPDATED",
+        performedBy: { id: actor.id, name: actor.name, role: actor.role, email: actor.email },
+        target: { id: staff._id, model: "User", identifier: staff.email },
+        details: {
+            name: staff.name,
+            designation: staff.designation,
+            departmentId: staff.departmentId,
+            isSupervisor: staff.isSupervisor
+        }
+    });
+
+    return {
+        id: staff._id,
+        name: staff.name,
+        email: staff.email,
+        role: staff.role,
+        designation: staff.designation,
+        employeeId: staff.employeeId,
+        phoneNumber: staff.phoneNumber,
+        departmentId: staff.departmentId,
+        authorizedDepartments: staff.authorizedDepartments,
+        isSupervisor: staff.isSupervisor,
+        dashboardPermissions: staff.dashboardPermissions,
+        isActive: staff.isActive
+    };
+}
+
+/**
+ * Resets a staff member's password securely with bcrypt.
+ */
+async function resetStaffPassword({ staffId, newPassword, actor }) {
+    if (!newPassword || newPassword.length < 6) {
+        throw new Error("New password must be at least 6 characters long.");
+    }
+
+    const staff = await User.findById(staffId);
+    if (!staff) throw new Error("Staff member not found");
+
+    if (actor.role === "INCHARGE" && (staff.role === "HEADWARDEN" || staff.role === "MAIN_ADMIN")) {
+        throw new Error("Unauthorized to reset elevated administrator passwords.");
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    staff.password = await bcrypt.hash(newPassword, salt);
+    await staff.save();
+
+    await AuditLog.create({
+        action: "STAFF_PASSWORD_RESET",
+        performedBy: { id: actor.id, name: actor.name, role: actor.role, email: actor.email },
+        target: { id: staff._id, model: "User", identifier: staff.email },
+        details: { note: "Password reset by administrator" }
+    });
+
+    return { success: true, message: `Password reset successfully for ${staff.name}` };
 }
 
 /**
@@ -271,6 +419,8 @@ async function updateEmployeeAvailability({ staffId, isAvailable, availabilityRe
 
 module.exports = {
     createStaffAccount,
+    updateStaffAccount,
+    resetStaffPassword,
     deactivateStaffAccount,
     restoreStaffAccount,
     transferUnfinishedWork,

@@ -1,0 +1,638 @@
+[
+  {
+    "_id": "6ae6fdb559b04e4fca116c7c",
+    "code": "PLUMBING",
+    "__v": 0,
+    "complaintCategories": [
+      "Plumbing",
+      "Tap broken",
+      "Water leakage",
+      "Water not coming"
+    ],
+    "createdAt": "2026-11-01T08:52:05.868Z",
+    "createdBy": null,
+    "description": "Hostel plumbing, pipe fittings, water supply lines, and sanitary maintenance.",
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": true,
+    "modules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map",
+      "materials"
+    ],
+    "name": "Plumbing",
+    "notificationRecipients": [],
+    "template": "PLUMBER",
+    "updatedAt": "2026-11-07T06:09:30.152Z",
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 2,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    },
+    "supervisor": "6aee32fc9e82747fd2017ff1"
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c8c",
+    "code": "ELECTRICAL",
+    "__v": 0,
+    "complaintCategories": [
+      "Electrical",
+      "Fan not working",
+      "Socket damaged",
+      "Switch broken"
+    ],
+    "createdAt": "2026-11-01T08:52:05.897Z",
+    "createdBy": null,
+    "description": "Electrical infrastructure, lighting, fans, power sockets, and board maintenance.",
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": true,
+    "modules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map",
+      "materials"
+    ],
+    "name": "Electrical",
+    "notificationRecipients": [],
+    "template": "ELECTRICIAN",
+    "updatedAt": "2026-11-07T06:09:30.221Z",
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 2,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    }
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116c9b",
+    "code": "WORKSHOP",
+    "__v": 0,
+    "complaintCategories": [
+      "Workshop",
+      "Furniture",
+      "Study table wobbling",
+      "Bed frame broken",
+      "Door hinge problem"
+    ],
+    "createdAt": "2026-11-01T08:52:05.913Z",
+    "createdBy": null,
+    "description": "Carpentry, metalwork, bed frames, study tables, cupboards, door hinges and locks.",
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 180,
+      "startDeadlineMinutes": 360,
+      "resolveDeadlineMinutes": 2880,
+      "reEscalationIntervalMinutes": 720
+    },
+    "isActive": true,
+    "isSystem": true,
+    "modules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map"
+    ],
+    "name": "Workshop",
+    "notificationRecipients": [],
+    "template": "WORKSHOP",
+    "updatedAt": "2026-11-07T06:09:30.243Z",
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 2,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    }
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116caa",
+    "code": "CLEANING",
+    "__v": 0,
+    "complaintCategories": [
+      "Cleaning",
+      "Cleanliness",
+      "Room cleaning",
+      "Washroom cleaning"
+    ],
+    "createdAt": "2026-11-01T08:52:05.927Z",
+    "createdBy": null,
+    "description": "Unified hostel cleaning, washrooms, corridors, premises, and waste clearance.",
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 60,
+      "startDeadlineMinutes": 120,
+      "resolveDeadlineMinutes": 720,
+      "reEscalationIntervalMinutes": 240
+    },
+    "isActive": true,
+    "isSystem": true,
+    "modules": [
+      "assigned_work",
+      "work_history",
+      "spatial_map"
+    ],
+    "name": "Cleaning",
+    "notificationRecipients": [],
+    "template": "CLEANING",
+    "updatedAt": "2026-11-07T06:09:30.268Z",
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 15,
+      "weightPending": 1,
+      "weightOverdue": 2,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    }
+  },
+  {
+    "_id": "6ae6fdb559b04e4fca116cb6",
+    "code": "WIFI",
+    "__v": 0,
+    "complaintCategories": [
+      "Wi-Fi",
+      "Internet",
+      "Wi-Fi not working"
+    ],
+    "createdAt": "2026-11-01T08:52:05.937Z",
+    "createdBy": null,
+    "description": "Hostel Wi-Fi network, access points, routers, authentication, and bandwidth monitoring.",
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 60,
+      "startDeadlineMinutes": 120,
+      "resolveDeadlineMinutes": 720,
+      "reEscalationIntervalMinutes": 180
+    },
+    "isActive": true,
+    "isSystem": true,
+    "modules": [
+      "assigned_work",
+      "network_monitor",
+      "router_map",
+      "work_history"
+    ],
+    "name": "Wi-Fi",
+    "notificationRecipients": [],
+    "template": "WIFI",
+    "updatedAt": "2026-11-07T06:09:30.289Z",
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 20,
+      "weightPending": 1,
+      "weightOverdue": 2,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    }
+  },
+  {
+    "_id": "6ae6fde259b04e4fca116d30",
+    "code": "SECURITY",
+    "__v": 0,
+    "complaintCategories": [
+      "Security",
+      "Security incident"
+    ],
+    "createdAt": "2026-11-01T08:52:50.668Z",
+    "createdBy": null,
+    "description": "Hostel security, entrance checkpoints, safety patrol, and incident management.",
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 30,
+      "startDeadlineMinutes": 60,
+      "resolveDeadlineMinutes": 360,
+      "reEscalationIntervalMinutes": 60
+    },
+    "isActive": true,
+    "isSystem": true,
+    "modules": [
+      "incident_reporting",
+      "assigned_incidents",
+      "incident_history"
+    ],
+    "name": "Security",
+    "notificationRecipients": [],
+    "template": "SECURITY",
+    "updatedAt": "2026-11-07T06:09:30.307Z",
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 5,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    }
+  },
+  {
+    "_id": "6ae6fde259b04e4fca116d38",
+    "code": "ANTI_RAGGING",
+    "__v": 0,
+    "complaintCategories": [
+      "Anti-Ragging",
+      "Ragging incident"
+    ],
+    "createdAt": "2026-11-01T08:52:50.674Z",
+    "createdBy": null,
+    "description": "Confidential anti-ragging cell, incident investigations, hearings, and compliance tracking.",
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 15,
+      "startDeadlineMinutes": 30,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 120
+    },
+    "isActive": true,
+    "isSystem": true,
+    "modules": [
+      "confidential_cases",
+      "investigation_workflow",
+      "case_notes",
+      "actions_taken"
+    ],
+    "name": "Anti-Ragging",
+    "notificationRecipients": [],
+    "template": "ANTI_RAGGING",
+    "updatedAt": "2026-11-07T06:09:30.321Z",
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 5,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    }
+  },
+  {
+    "_id": "6ae70eaa4bc5e7f0f422f1f7",
+    "name": "Specialized DEPT_6851",
+    "code": "DEPT_6851",
+    "description": "Custom operational department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "Specialized DEPT_6851"
+    ],
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD"
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae70eaa1f895998326989e3",
+    "createdAt": "2026-11-01T10:04:26.867Z",
+    "updatedAt": "2026-11-01T10:04:26.867Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70ed14bc5e7f0f422f208",
+    "name": "Specialized DEPT_5382",
+    "code": "DEPT_5382",
+    "description": "Custom operational department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "Specialized DEPT_5382"
+    ],
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD"
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae70ed18906e94cdec0786f",
+    "createdAt": "2026-11-01T10:05:05.396Z",
+    "updatedAt": "2026-11-01T10:05:05.396Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70f9b9df6265526e2dfac",
+    "name": "Specialized DEPT_7604",
+    "code": "DEPT_7604",
+    "description": "Custom operational department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "Specialized DEPT_7604"
+    ],
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD"
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae70f9b38084df050074ac5",
+    "createdAt": "2026-11-01T10:08:27.627Z",
+    "updatedAt": "2026-11-01T10:08:27.627Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71013dad70f7cb15824ad",
+    "name": "Specialized DEPT_7884",
+    "code": "DEPT_7884",
+    "description": "Custom operational department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "Specialized DEPT_7884"
+    ],
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD"
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae71013d5ca1c51e256a49a",
+    "createdAt": "2026-11-01T10:10:27.899Z",
+    "updatedAt": "2026-11-01T10:10:27.899Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae710f44d04c02294c29ebf",
+    "name": "Specialized DEPT_2152",
+    "code": "DEPT_2152",
+    "description": "Custom operational department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "Specialized DEPT_2152"
+    ],
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD"
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae710f3a457cd8019b3dc80",
+    "createdAt": "2026-11-01T10:14:12.170Z",
+    "updatedAt": "2026-11-01T10:14:12.170Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712e438dbca64eab83a78",
+    "name": "Specialized DEPT_8933",
+    "code": "DEPT_8933",
+    "description": "Custom operational department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "Specialized DEPT_8933"
+    ],
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD"
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae712e4fd036a83c5a24689",
+    "createdAt": "2026-11-01T10:22:28.947Z",
+    "updatedAt": "2026-11-01T10:22:28.947Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71349ac840cbadd9fa7dd",
+    "name": "Specialized DEPT_9395",
+    "code": "DEPT_9395",
+    "description": "Custom operational department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "Specialized DEPT_9395"
+    ],
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD"
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae71349fbc0b24f2e3db7b7",
+    "createdAt": "2026-11-01T10:24:09.412Z",
+    "updatedAt": "2026-11-01T10:24:09.412Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e053d0a85d8abe1fa1f5",
+    "name": "Specialized DEPT_5957",
+    "code": "DEPT_5957",
+    "description": "Custom operational department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "Specialized DEPT_5957"
+    ],
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 3,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD"
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae8e053a28feacfb82b1c7c",
+    "createdAt": "2026-11-02T19:11:15.968Z",
+    "updatedAt": "2026-11-02T19:11:15.968Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39c88ae5ae94b619bab3",
+    "name": "Automated QA Dept 6752",
+    "code": "QA_6752",
+    "description": "Auto-created QA department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "QA Testing"
+    ],
+    "supervisor": null,
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 2,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae6fde23b3b2d876a2144bd",
+    "createdAt": "2026-11-06T20:34:16.758Z",
+    "updatedAt": "2026-11-06T20:34:16.758Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a378ae5ae94b619bae7",
+    "name": "Automated QA Dept 7597",
+    "code": "QA_7597",
+    "description": "Auto-created QA department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "QA Testing"
+    ],
+    "supervisor": null,
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 2,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae6fde23b3b2d876a2144bd",
+    "createdAt": "2026-11-06T20:36:07.604Z",
+    "updatedAt": "2026-11-06T20:36:07.604Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3abd8ae5ae94b619bb1f",
+    "name": "Automated QA Dept 1292",
+    "code": "QA_1292",
+    "description": "Auto-created QA department",
+    "template": "GENERAL_STAFF",
+    "modules": [
+      "assigned_work",
+      "work_history"
+    ],
+    "complaintCategories": [
+      "QA Testing"
+    ],
+    "supervisor": null,
+    "notificationRecipients": [],
+    "workloadPolicy": {
+      "maxActiveJobsPerEmployee": 10,
+      "weightPending": 1,
+      "weightOverdue": 2,
+      "balancingStrategy": "LEAST_ACTIVE_LOAD",
+      "autoAssignIndividual": false
+    },
+    "escalationPolicy": {
+      "ackDeadlineMinutes": 120,
+      "startDeadlineMinutes": 240,
+      "resolveDeadlineMinutes": 1440,
+      "reEscalationIntervalMinutes": 360
+    },
+    "isActive": true,
+    "isSystem": false,
+    "createdBy": "6ae6fde23b3b2d876a2144bd",
+    "createdAt": "2026-11-06T20:38:21.298Z",
+    "updatedAt": "2026-11-06T20:38:21.298Z",
+    "__v": 0
+  }
+]

@@ -8,10 +8,25 @@ const logger = require("./utils/logger");
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+
+const defaultOrigins = ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"];
+const envOrigins = (process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || "")
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean);
+const allowedOrigins = envOrigins.length > 0 ? Array.from(new Set([...envOrigins, ...defaultOrigins])) : defaultOrigins;
 
 app.use(cors({
-    origin: ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"],
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, curl, server-to-server)
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error("CORS policy violation: Origin not allowed"));
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     credentials: true
@@ -20,6 +35,27 @@ app.use(cors({
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
+
+// ─── Health Check Endpoints ──────────────────────────────────────────────────
+const healthHandler = (_req, res) => {
+    const isDbConnected = mongoose.connection.readyState === 1;
+    const status = isDbConnected ? 200 : 503;
+    res.status(status).json({
+        status: isDbConnected ? "ok" : "degraded",
+        uptimeSeconds: Math.floor(process.uptime()),
+        timestamp: new Date().toISOString(),
+        database: {
+            connected: isDbConnected,
+            state: ["disconnected", "connected", "connecting", "disconnecting"][mongoose.connection.readyState] || "unknown"
+        },
+        memory: {
+            rssMb: Math.round(process.memoryUsage().rss / (1024 * 1024)),
+            heapUsedMb: Math.round(process.memoryUsage().heapUsed / (1024 * 1024))
+        }
+    });
+};
+app.get("/health", healthHandler);
+app.get("/api/health", healthHandler);
 
 // Request logging
 app.use((req, _res, next) => {
@@ -60,6 +96,10 @@ app.use("/api/security", securityRoutes);
 app.use("/api/anti-ragging", antiRaggingRoutes);
 app.use("/api/staff", departmentStaffRoutes);
 app.use("/api/department-staff", departmentStaffRoutes);
+
+// ─── Static / Protected Media Serving ────────────────────────────────────────
+const protectedMedia = require("./middleware/protectedMedia");
+app.use("/uploads", protectedMedia);
 
 // ─── Global error handler for Multer / validation errors ──────────────────────
 app.use((err, _req, res, _next) => {

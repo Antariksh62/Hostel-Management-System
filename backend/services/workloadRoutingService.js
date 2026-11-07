@@ -78,34 +78,79 @@ async function _doRouteAndAssign({ complaintId, selectedCategory, studentId, act
     const complaint = await Complaint.findById(complaintId);
     if (!complaint) throw new Error("Complaint not found");
 
+    if (complaint.status === "Resolved") {
+        throw new Error("Cannot route or assign a complaint that is already Resolved. Please reopen the complaint first if further maintenance is required.");
+    }
+
     // 1. Resolve Target Department
     let department = null;
-    let categoryDoc = await ComplaintCategory.findOne({ name: selectedCategory, isActive: true }).populate("departmentId");
+    let categoryDoc = await ComplaintCategory.findOne({
+        name: { $regex: new RegExp(`^${selectedCategory}$`, "i") },
+        isActive: true
+    }).populate("departmentId");
 
-    if (categoryDoc && categoryDoc.departmentId) {
+    if (categoryDoc && categoryDoc.departmentId && categoryDoc.departmentId.isActive !== false) {
         department = categoryDoc.departmentId;
     } else {
-        // Fallback matching by name/code
+        // Fallback matching by active department complaintCategories or code/name
         const catUpper = String(selectedCategory || "").toUpperCase();
-        if (catUpper.includes("PLUMB") || catUpper.includes("WATER")) {
-            department = await Department.findOne({ code: "PLUMBING" });
-        } else if (catUpper.includes("ELECT")) {
-            department = await Department.findOne({ code: "ELECTRICAL" });
-        } else if (catUpper.includes("FURN") || catUpper.includes("WORKSHOP") || catUpper.includes("TABLE") || catUpper.includes("BED")) {
-            department = await Department.findOne({ code: "WORKSHOP" });
-        } else if (catUpper.includes("CLEAN")) {
-            department = await Department.findOne({ code: "CLEANING" });
-        } else if (catUpper.includes("WIFI") || catUpper.includes("INTERNET")) {
-            department = await Department.findOne({ code: "WIFI" });
-        } else if (catUpper.includes("SECURITY")) {
-            department = await Department.findOne({ code: "SECURITY" });
-        } else if (catUpper.includes("RAGGING")) {
-            department = await Department.findOne({ code: "ANTI_RAGGING" });
+        let queryCode = null;
+        if (catUpper.includes("PLUMB") || catUpper.includes("WATER") || catUpper.includes("TAP") || catUpper.includes("LEAK")) {
+            queryCode = "PLUMBING";
+        } else if (catUpper.includes("ELECT") || catUpper.includes("FAN") || catUpper.includes("SWITCH") || catUpper.includes("LIGHT") || catUpper.includes("POWER")) {
+            queryCode = "ELECTRICAL";
+        } else if (catUpper.includes("FURN") || catUpper.includes("WORKSHOP") || catUpper.includes("TABLE") || catUpper.includes("BED") || catUpper.includes("DOOR") || catUpper.includes("CARPENT")) {
+            queryCode = "WORKSHOP";
+        } else if (catUpper.includes("CLEAN") || catUpper.includes("HYGIENE") || catUpper.includes("WASHROOM") || catUpper.includes("CORRIDOR") || catUpper.includes("SWEEP")) {
+            queryCode = "CLEANING";
+        } else if (catUpper.includes("WIFI") || catUpper.includes("INTERNET") || catUpper.includes("NETWORK") || catUpper.includes("ROUTER")) {
+            queryCode = "WIFI";
+        } else if (catUpper.includes("SECURITY") || catUpper.includes("GUARD") || catUpper.includes("THEFT") || catUpper.includes("GATE")) {
+            queryCode = "SECURITY";
+        } else if (catUpper.includes("RAGGING") || catUpper.includes("HARASS")) {
+            queryCode = "ANTI_RAGGING";
+        }
+
+        if (queryCode) {
+            department = await Department.findOne({ code: queryCode, isActive: true });
         }
     }
 
+    // If no active department is configured for this category, route to Management Review Queue
     if (!department) {
-        department = await Department.findOne({ code: "PLUMBING" }); // ultimate fallback
+        complaint.departmentId = null;
+        complaint.lifecycleState = "SUBMITTED";
+        complaint.status = "Pending";
+        complaint.statusHistory.push({
+            status: "Pending",
+            note: `No active department mapping configured for category '${selectedCategory}'. Routed to Management Review Queue.`,
+            timestamp: new Date(),
+            actor: "System Router"
+        });
+        await complaint.save();
+
+        await ComplaintEvent.create({
+            complaintId: complaint._id,
+            eventType: "ROUTED",
+            actor: { name: "System Workload Router", role: "SYSTEM" },
+            note: `No configured department mapping for '${selectedCategory}'. Placed in Management Review Queue.`
+        });
+
+        broadcastNotification({
+            roles: ["WARDEN", "HEADWARDEN", "INCHARGE", "MAIN_ADMIN"],
+            type: "UNROUTED_COMPLAINT_MANAGEMENT_REVIEW",
+            title: "Complaint in Management Review",
+            message: `Complaint #${complaint._id.toString().slice(-6)} has no configured department mapping for category "${selectedCategory}". Management review required.`,
+            link: "/admin-dashboard?tab=complaints"
+        }).catch(() => {});
+
+        return {
+            success: true,
+            status: "MANAGEMENT_REVIEW",
+            department: null,
+            assignedEmployee: null,
+            message: "No configured department mapping. Placed in Management Review Queue."
+        };
     }
 
     complaint.departmentId = department._id;
@@ -123,16 +168,52 @@ async function _doRouteAndAssign({ complaintId, selectedCategory, studentId, act
         eventType: "ROUTED",
         actor,
         newState: { departmentId: department._id, departmentCode: department.code, departmentName: department.name },
-        note: `Complaint routed to ${department.name} department based on selected category '${selectedCategory}'`
+        note: `Complaint automatically routed to ${department.name} department based on category '${selectedCategory}'`
     });
 
-    // 2. Find eligible, active, available employees
+    complaint.statusHistory.push({
+        status: "Pending",
+        note: `Complaint automatically routed to ${department.name} department`,
+        timestamp: new Date(),
+        actor: "System Router"
+    });
+
+    // 2. Department routing vs individual staff assignment:
+    // By default, complaints are routed to the department unassigned queue where department supervisors
+    // or authorized staff can assign or claim them. Automatic individual assignment is only performed if
+    // the department's workloadPolicy explicitly specifies autoAssignIndividual: true.
+    const autoAssign = Boolean(department.workloadPolicy && department.workloadPolicy.autoAssignIndividual);
+
+    if (!autoAssign) {
+        complaint.assignedTo = null;
+        complaint.lifecycleState = "ROUTED";
+        complaint.status = "Pending";
+        await complaint.save();
+
+        await ComplaintEvent.create({
+            complaintId: complaint._id,
+            eventType: "ROUTED",
+            actor: { name: "System Workload Router", role: "SYSTEM" },
+            note: `Complaint routed to ${department.name} department queue. Awaiting supervisor or staff assignment.`
+        });
+
+        return {
+            success: true,
+            status: "ROUTED_TO_DEPARTMENT",
+            department: department.name,
+            assignedEmployee: null,
+            message: `Routed to ${department.name} department queue.`
+        };
+    }
+
+    // 3. Find eligible, active, available employees (when autoAssignIndividual is enabled)
     const query = {
         role: { $in: ["STAFF", "WIFI_INCHARGE"] },
         isActive: true,
         isAvailable: true,
         $or: [
             { departmentId: department._id },
+            { authorizedDepartments: department._id },
             { dashboardPermissions: department.code },
             { staffRole: new RegExp(department.name, "i") }
         ]
@@ -267,6 +348,10 @@ async function reassignComplaint({ complaintId, newStaffId, reason, actor }) {
 
     const complaint = await Complaint.findById(complaintId);
     if (!complaint) throw new Error("Complaint not found");
+
+    if (complaint.status === "Resolved") {
+        throw new Error("Cannot reassign a complaint that is already Resolved. Please reopen the complaint first if further maintenance is required.");
+    }
 
     const newStaff = await User.findById(newStaffId);
     if (!newStaff || !["STAFF", "WIFI_INCHARGE"].includes(newStaff.role)) {

@@ -1,0 +1,614 @@
+[
+  {
+    "_id": "6ae704e6861d42433b96bdb8",
+    "incidentNumber": "SEC-966706",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:22:46.707Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:22:46.709Z",
+    "updatedAt": "2026-11-01T09:22:46.709Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae704fc861d42433b96bdce",
+    "incidentNumber": "SEC-988811",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:23:08.811Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:23:08.813Z",
+    "updatedAt": "2026-11-01T09:23:08.813Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70521861d42433b96bde4",
+    "incidentNumber": "SEC-025296",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:23:45.296Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:23:45.298Z",
+    "updatedAt": "2026-11-01T09:23:45.298Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705948f3f999c9381998e",
+    "incidentNumber": "SEC-140668",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:25:40.668Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:25:40.671Z",
+    "updatedAt": "2026-11-01T09:25:40.671Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705a58f3f999c938199b6",
+    "incidentNumber": "SEC-157917",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:25:57.917Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:25:57.919Z",
+    "updatedAt": "2026-11-01T09:25:57.919Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705b58f3f999c938199d9",
+    "incidentNumber": "SEC-173787",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:26:13.787Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:26:13.788Z",
+    "updatedAt": "2026-11-01T09:26:13.788Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae705f48f3f999c93819a06",
+    "incidentNumber": "SEC-236618",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:27:16.618Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:27:16.620Z",
+    "updatedAt": "2026-11-01T09:27:16.620Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae706058f3f999c93819a25",
+    "incidentNumber": "SEC-253198",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:27:33.198Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:27:33.200Z",
+    "updatedAt": "2026-11-01T09:27:33.200Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae70b8e8f3f999c93819a60",
+    "incidentNumber": "SEC-670264",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T09:51:10.264Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T09:51:10.266Z",
+    "updatedAt": "2026-11-01T09:51:10.266Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae7111d4d04c02294c29f1f",
+    "incidentNumber": "SEC-093480",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T10:14:53.480Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T10:14:53.482Z",
+    "updatedAt": "2026-11-01T10:14:53.482Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae7128c36dc7355dcd89373",
+    "incidentNumber": "SEC-460395",
+    "title": "Unauthorized Visitor at Main Gate",
+    "description": "Individual without college ID refused sign-in",
+    "location": "Main Gate",
+    "severity": "HIGH",
+    "status": "INVESTIGATING",
+    "reportedBy": {
+      "id": "6ae7128c59d4960462a7837f",
+      "name": "Incharge Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": "6ae7128c59d4960462a78386",
+    "assignedAt": "2026-11-01T10:21:00.395Z",
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Incharge Officer",
+        "actorId": "6ae7128c59d4960462a7837f",
+        "timestamp": "2026-11-01T10:21:00.395Z",
+        "details": {
+          "severity": "HIGH",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T10:21:00.403Z",
+    "updatedAt": "2026-11-01T10:21:00.403Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712b138dbca64eab83a51",
+    "incidentNumber": "SEC-497117",
+    "title": "Unauthorized Visitor at Main Gate",
+    "description": "Individual without college ID refused sign-in",
+    "location": "Main Gate",
+    "severity": "HIGH",
+    "status": "INVESTIGATING",
+    "reportedBy": {
+      "id": "6ae712b0391109525efc0323",
+      "name": "Incharge Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": "6ae712b0391109525efc032a",
+    "assignedAt": "2026-11-01T10:21:37.117Z",
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Incharge Officer",
+        "actorId": "6ae712b0391109525efc0323",
+        "timestamp": "2026-11-01T10:21:37.117Z",
+        "details": {
+          "severity": "HIGH",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T10:21:37.125Z",
+    "updatedAt": "2026-11-01T10:21:37.125Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae712c138dbca64eab83a5c",
+    "incidentNumber": "SEC-513814",
+    "title": "Unauthorized Visitor at Main Gate",
+    "description": "Individual without college ID refused sign-in",
+    "location": "Main Gate",
+    "severity": "HIGH",
+    "status": "INVESTIGATING",
+    "reportedBy": {
+      "id": "6ae712c135b7241af0dba16c",
+      "name": "Incharge Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": "6ae712c135b7241af0dba173",
+    "assignedAt": "2026-11-01T10:21:53.814Z",
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Incharge Officer",
+        "actorId": "6ae712c135b7241af0dba16c",
+        "timestamp": "2026-11-01T10:21:53.814Z",
+        "details": {
+          "severity": "HIGH",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T10:21:53.816Z",
+    "updatedAt": "2026-11-01T10:21:53.816Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae71357ac840cbadd9fa842",
+    "incidentNumber": "SEC-663432",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-01T10:24:23.432Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-01T10:24:23.435Z",
+    "updatedAt": "2026-11-01T10:24:23.435Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae8e06fd0a85d8abe1fa25a",
+    "incidentNumber": "SEC-703040",
+    "title": "E2E Perimeter Gate Check",
+    "description": "Visitor logged without pass",
+    "location": "Main Gate",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6a914115adc95407d6d77a66",
+      "name": "Security Officer",
+      "role": "INCHARGE"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Staff",
+        "actorId": "6a914115adc95407d6d77a66",
+        "timestamp": "2026-11-02T19:11:43.040Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-02T19:11:43.041Z",
+    "updatedAt": "2026-11-02T19:11:43.041Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee39ce8ae5ae94b619bab7",
+    "incidentNumber": "SEC-262253",
+    "title": "Gate Perimeter Check 1793997262248",
+    "description": "Routine gate perimeter inspection logged.",
+    "location": "Main Gate B",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Main System Administrator",
+        "actorId": "6ae6fde23b3b2d876a2144bd",
+        "timestamp": "2026-11-06T20:34:22.253Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate B"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-06T20:34:22.255Z",
+    "updatedAt": "2026-11-06T20:34:22.255Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3a3d8ae5ae94b619baeb",
+    "incidentNumber": "SEC-373097",
+    "title": "Gate Perimeter Check 1793997373092",
+    "description": "Routine gate perimeter inspection logged.",
+    "location": "Main Gate B",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Main System Administrator",
+        "actorId": "6ae6fde23b3b2d876a2144bd",
+        "timestamp": "2026-11-06T20:36:13.097Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate B"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-06T20:36:13.098Z",
+    "updatedAt": "2026-11-06T20:36:13.098Z",
+    "__v": 0
+  },
+  {
+    "_id": "6aee3ac38ae5ae94b619bb23",
+    "incidentNumber": "SEC-507061",
+    "title": "Gate Perimeter Check 1793997507054",
+    "description": "Routine gate perimeter inspection logged.",
+    "location": "Main Gate B",
+    "severity": "LOW",
+    "status": "REPORTED",
+    "reportedBy": {
+      "id": "6ae6fde23b3b2d876a2144bd",
+      "name": "Main System Administrator",
+      "role": "MAIN_ADMIN"
+    },
+    "assignedTo": null,
+    "assignedAt": null,
+    "resolvedAt": null,
+    "resolutionSummary": "",
+    "auditHistory": [
+      {
+        "action": "REPORTED",
+        "actor": "Main System Administrator",
+        "actorId": "6ae6fde23b3b2d876a2144bd",
+        "timestamp": "2026-11-06T20:38:27.061Z",
+        "details": {
+          "severity": "LOW",
+          "location": "Main Gate B"
+        }
+      }
+    ],
+    "notes": [],
+    "createdAt": "2026-11-06T20:38:27.065Z",
+    "updatedAt": "2026-11-06T20:38:27.065Z",
+    "__v": 0
+  }
+]

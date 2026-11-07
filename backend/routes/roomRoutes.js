@@ -131,12 +131,9 @@ router.get("/", authMiddleware, async (req, res) => {
 
 // ================= DELETE ROOM =================
 router.delete("/:id", authMiddleware, wardenMiddleware, async (req, res) => {
-    try {
-        await Room.findByIdAndDelete(req.params.id);
-        res.json({ message: "Room deleted from legacy registry" });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    return res.status(403).json({
+        message: "Deleting rooms is disabled. The hostel operates with a fixed, immutable 77-room inventory (101-509)."
+    });
 });
 
 module.exports = router;

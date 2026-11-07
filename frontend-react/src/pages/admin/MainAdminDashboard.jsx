@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import {
   ShieldAlert, Users, Layers, AlertTriangle, Activity, RefreshCw,
   Plus, ArrowRight, UserCheck, UserX, Clock, Phone, Building2,
-  FileText, Search, Filter, CheckCircle2, ChevronRight, Lock, Eye
+  FileText, Search, Filter, CheckCircle2, ChevronRight, Lock, Eye,
+  Edit, KeyRound, ShieldCheck
 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AppShell, PageHeader, EmptyState } from "@/components/hms/app-shell";
@@ -30,7 +31,10 @@ export default function MainAdminDashboard() {
 
   // Modal states
   const [showCreateDept, setShowCreateDept] = useState(false);
+  const [showEditDept, setShowEditDept] = useState(false);
   const [showCreateStaff, setShowCreateStaff] = useState(false);
+  const [showEditStaff, setShowEditStaff] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
   const [showCreateCategory, setShowCreateCategory] = useState(false);
   const [showCreateInstance, setShowCreateInstance] = useState(false);
   const [showTransferWork, setShowTransferWork] = useState(false);
@@ -42,8 +46,33 @@ export default function MainAdminDashboard() {
   const [selectedComplaintTitle, setSelectedComplaintTitle] = useState("");
 
   // Form states
-  const [deptForm, setDeptForm] = useState({ name: "", code: "", description: "", template: "GENERAL_STAFF" });
-  const [staffForm, setStaffForm] = useState({ name: "", email: "", password: "", staffRole: "Technician", departmentId: "", dashboardPermissions: [] });
+  const [deptForm, setDeptForm] = useState({ name: "", code: "", description: "", template: "GENERAL_STAFF", complaintCategories: "" });
+  const [editDeptForm, setEditDeptForm] = useState({ id: "", name: "", description: "", supervisor: "", complaintCategories: "", isActive: true });
+  const [staffForm, setStaffForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    employeeId: "",
+    phoneNumber: "",
+    designation: "Technician",
+    staffRole: "Technician",
+    departmentId: "",
+    isSupervisor: false,
+    dashboardPermissions: []
+  });
+  const [editStaffForm, setEditStaffForm] = useState({
+    id: "",
+    name: "",
+    email: "",
+    employeeId: "",
+    phoneNumber: "",
+    departmentId: "",
+    designation: "",
+    staffRole: "Technician",
+    isSupervisor: false,
+    isActive: true
+  });
+  const [resetPasswordForm, setResetPasswordForm] = useState({ id: "", name: "", newPassword: "" });
   const [categoryForm, setCategoryForm] = useState({ name: "", departmentId: "", description: "", defaultPriority: "Medium", isConfidential: false });
   const [instanceForm, setInstanceForm] = useState({ name: "", departmentId: "", templateId: "GENERAL_STAFF", activeModules: ["assigned_work", "work_history"] });
   const [transferForm, setTransferForm] = useState({ fromStaffId: "", toStaffId: "", reason: "" });
@@ -95,6 +124,11 @@ export default function MainAdminDashboard() {
     queryFn: () => api.get("/anti-ragging/cases?limit=20").then((r) => r.data?.cases || []).catch(() => []),
   });
 
+  const { data: overviewStats, isLoading: overviewLoading } = useQuery({
+    queryKey: ["admin-overview-stats"],
+    queryFn: () => api.get("/admin/overview/stats").then((r) => r.data || null).catch(() => null),
+  });
+
   // Socket updates
   useEffect(() => {
     if (!socket) return;
@@ -121,8 +155,20 @@ export default function MainAdminDashboard() {
     onSuccess: () => {
       toast.success("Department created successfully");
       setShowCreateDept(false);
-      setDeptForm({ name: "", code: "", description: "", template: "GENERAL_STAFF" });
+      setDeptForm({ name: "", code: "", description: "", template: "GENERAL_STAFF", complaintCategories: "" });
       queryClient.invalidateQueries({ queryKey: ["admin-departments"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-overview-stats"] });
+    },
+    onError: (err) => toast.error(err.response?.data?.message || err.message)
+  });
+
+  const updateDeptMutation = useMutation({
+    mutationFn: ({ id, ...data }) => api.patch(`/admin/departments/${id}`, data),
+    onSuccess: () => {
+      toast.success("Department updated successfully");
+      setShowEditDept(false);
+      queryClient.invalidateQueries({ queryKey: ["admin-departments"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-overview-stats"] });
     },
     onError: (err) => toast.error(err.response?.data?.message || err.message)
   });
@@ -132,8 +178,41 @@ export default function MainAdminDashboard() {
     onSuccess: () => {
       toast.success("Staff account created successfully");
       setShowCreateStaff(false);
-      setStaffForm({ name: "", email: "", password: "", staffRole: "Technician", departmentId: "", dashboardPermissions: [] });
+      setStaffForm({
+        name: "",
+        email: "",
+        password: "",
+        employeeId: "",
+        phoneNumber: "",
+        designation: "Technician",
+        staffRole: "Technician",
+        departmentId: "",
+        isSupervisor: false,
+        dashboardPermissions: []
+      });
       queryClient.invalidateQueries({ queryKey: ["admin-staff"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-overview-stats"] });
+    },
+    onError: (err) => toast.error(err.response?.data?.message || err.message)
+  });
+
+  const updateStaffMutation = useMutation({
+    mutationFn: ({ id, ...data }) => api.patch(`/admin/staff/${id}`, data),
+    onSuccess: () => {
+      toast.success("Staff account updated successfully");
+      setShowEditStaff(false);
+      queryClient.invalidateQueries({ queryKey: ["admin-staff"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-overview-stats"] });
+    },
+    onError: (err) => toast.error(err.response?.data?.message || err.message)
+  });
+
+  const resetPasswordMutation = useMutation({
+    mutationFn: ({ id, newPassword }) => api.post(`/admin/staff/${id}/reset-password`, { newPassword }),
+    onSuccess: () => {
+      toast.success("Password reset successfully");
+      setShowResetPassword(false);
+      setResetPasswordForm({ id: "", name: "", newPassword: "" });
     },
     onError: (err) => toast.error(err.response?.data?.message || err.message)
   });
@@ -385,6 +464,146 @@ export default function MainAdminDashboard() {
                 </div>
               </div>
             </div>
+
+            {/* Department Breakdown Overview Table */}
+            <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
+              <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-blue-600" />
+                    Department Workload & SLA Breakdown
+                  </h4>
+                  <p className="text-xs text-slate-500">Live tally of active, in-progress, resolved, and overdue complaints by operational department.</p>
+                </div>
+                <Button size="sm" variant="outline" onClick={() => queryClient.invalidateQueries({ queryKey: ["admin-overview-stats"] })} className="cursor-pointer h-8 text-xs">
+                  <RefreshCw className="w-3.5 h-3.5 mr-1" />
+                  Refresh
+                </Button>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+                    <tr>
+                      <th className="p-3">Department</th>
+                      <th className="p-3">Code</th>
+                      <th className="p-3 text-center">Pending</th>
+                      <th className="p-3 text-center">In Progress</th>
+                      <th className="p-3 text-center">Resolved</th>
+                      <th className="p-3 text-center">Overdue</th>
+                      <th className="p-3 text-right">Total Assigned</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                    {(overviewStats?.departmentBreakdown || []).length === 0 ? (
+                      <tr>
+                        <td colSpan={7} className="p-6 text-center text-slate-400">
+                          No department metrics recorded.
+                        </td>
+                      </tr>
+                    ) : (
+                      overviewStats.departmentBreakdown.map((row) => (
+                        <tr key={row.departmentId} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
+                          <td className="p-3 font-semibold text-slate-900 dark:text-white">{row.name}</td>
+                          <td className="p-3 font-mono text-[11px] text-slate-500">{row.code}</td>
+                          <td className="p-3 text-center">
+                            <span className={row.pending > 0 ? "font-bold text-amber-600" : "text-slate-400"}>
+                              {row.pending}
+                            </span>
+                          </td>
+                          <td className="p-3 text-center">
+                            <span className={row.inProgress > 0 ? "font-bold text-blue-600" : "text-slate-400"}>
+                              {row.inProgress}
+                            </span>
+                          </td>
+                          <td className="p-3 text-center">
+                            <span className="font-semibold text-emerald-600">{row.resolved}</span>
+                          </td>
+                          <td className="p-3 text-center">
+                            {row.overdue > 0 ? (
+                              <Badge variant="destructive" className="text-[10px] font-bold">
+                                {row.overdue}
+                              </Badge>
+                            ) : (
+                              <span className="text-slate-400">0</span>
+                            )}
+                          </td>
+                          <td className="p-3 text-right font-bold text-slate-900 dark:text-white">
+                            {row.total}
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Staff Workloads Overview Table */}
+            <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
+              <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Users className="w-4 h-4 text-emerald-600" />
+                    Staff Capacity & Workload Balance
+                  </h4>
+                  <p className="text-xs text-slate-500">Active assigned jobs and historical completions per staff member.</p>
+                </div>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+                    <tr>
+                      <th className="p-3">Staff Member</th>
+                      <th className="p-3">Department</th>
+                      <th className="p-3">Designation</th>
+                      <th className="p-3 text-center">Active Workload</th>
+                      <th className="p-3 text-center">Completed Work</th>
+                      <th className="p-3 text-right">Account Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                    {(overviewStats?.staffWorkloads || []).length === 0 ? (
+                      <tr>
+                        <td colSpan={6} className="p-6 text-center text-slate-400">
+                          No staff data available.
+                        </td>
+                      </tr>
+                    ) : (
+                      overviewStats.staffWorkloads.map((s) => (
+                        <tr key={s.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
+                          <td className="p-3 font-medium text-slate-900 dark:text-white">
+                            <div className="flex items-center gap-1.5">
+                              <span>{s.name}</span>
+                              {s.isSupervisor && (
+                                <Badge variant="outline" className="text-[9px] bg-purple-50 text-purple-700 border-purple-200">
+                                  Supervisor
+                                </Badge>
+                              )}
+                            </div>
+                            <div className="text-[10px] text-slate-400 font-mono">{s.email}</div>
+                          </td>
+                          <td className="p-3">{s.department || "General"}</td>
+                          <td className="p-3 text-slate-600 dark:text-slate-400">{s.designation || "Staff"}</td>
+                          <td className="p-3 text-center">
+                            <Badge variant={s.activeJobs > 3 ? "critical" : s.activeJobs > 0 ? "warning" : "secondary"}>
+                              {s.activeJobs} jobs
+                            </Badge>
+                          </td>
+                          <td className="p-3 text-center font-semibold text-emerald-600">
+                            {s.resolvedJobs} completed
+                          </td>
+                          <td className="p-3 text-right">
+                            <Badge variant={s.isActive ? "success" : "secondary"}>
+                              {s.isActive ? "Active" : "Deactivated"}
+                            </Badge>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </TabsContent>
 
           {/* TAB 2: LIVE GLOBAL COMPLAINT FEED */}
@@ -526,27 +745,75 @@ export default function MainAdminDashboard() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {departments.map((dept) => (
-                <div key={dept._id} className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-base font-bold text-slate-900 dark:text-white">{dept.name}</span>
-                    <Badge variant={dept.isActive ? "default" : "secondary"}>
-                      {dept.isActive ? "Active" : "Inactive"}
-                    </Badge>
+                <div key={dept._id} className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3 flex flex-col justify-between">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-base font-bold text-slate-900 dark:text-white">{dept.name}</span>
+                      <div className="flex items-center gap-1.5">
+                        <Badge variant="outline" className="text-[10px] uppercase font-mono">{dept.code}</Badge>
+                        <Badge variant={dept.isActive ? "default" : "secondary"}>
+                          {dept.isActive ? "Active" : "Inactive"}
+                        </Badge>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-500 line-clamp-2">{dept.description || "Operational hostel department."}</p>
+
+                    <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg text-xs space-y-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-500 font-medium">Supervisor:</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {dept.supervisor?.name || "None Assigned"}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-500 font-medium">Active Staff:</span>
+                        <span className="font-semibold">{dept.staffMembers?.length || dept.employeeCount || 0} members</span>
+                      </div>
+                      <div className="pt-1 border-t border-slate-200 dark:border-slate-700">
+                        <span className="text-[11px] text-slate-500 block mb-1">Handled Categories:</span>
+                        <div className="flex flex-wrap gap-1">
+                          {(dept.complaintCategories || []).length === 0 ? (
+                            <span className="text-[10px] text-slate-400 italic">None configured</span>
+                          ) : (
+                            dept.complaintCategories.map((c) => (
+                              <span key={c} className="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 text-[10px] font-medium">
+                                {c}
+                              </span>
+                            ))
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-slate-500">{dept.description}</p>
-                  <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg text-xs space-y-1">
-                    <div className="flex justify-between">
-                      <span className="text-slate-500">Template:</span>
-                      <span className="font-semibold">{dept.template}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-500">Ack Deadline:</span>
-                      <span className="font-semibold">{dept.escalationPolicy?.ackDeadlineMinutes || 120} mins</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-500">Resolve Deadline:</span>
-                      <span className="font-semibold">{dept.escalationPolicy?.resolveDeadlineMinutes || 1440} mins</span>
-                    </div>
+
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        setEditDeptForm({
+                          id: dept._id,
+                          name: dept.name,
+                          description: dept.description || "",
+                          supervisor: dept.supervisor?._id || dept.supervisor || "",
+                          complaintCategories: (dept.complaintCategories || []).join(", "),
+                          isActive: dept.isActive !== false
+                        });
+                        setShowEditDept(true);
+                      }}
+                      className="h-8 text-xs cursor-pointer flex-1"
+                    >
+                      <Edit className="w-3.5 h-3.5 mr-1" />
+                      Configure
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => updateDeptMutation.mutate({ id: dept._id, isActive: !dept.isActive })}
+                      className={`h-8 text-xs cursor-pointer ${dept.isActive ? "text-amber-600 hover:text-amber-700" : "text-emerald-600"}`}
+                    >
+                      {dept.isActive ? "Deactivate" : "Activate"}
+                    </Button>
                   </div>
                 </div>
               ))}
@@ -672,12 +939,12 @@ export default function MainAdminDashboard() {
                   <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
                     <tr>
                       <th className="p-3">Staff Member</th>
-                      <th className="p-3">Department</th>
-                      <th className="p-3">Role</th>
-                      <th className="p-3">Workload (Active / Score)</th>
-                      <th className="p-3">Availability</th>
-                      <th className="p-3">Permissions</th>
-                      <th className="p-3">Export Access</th>
+                      <th className="p-3">Employee ID & Phone</th>
+                      <th className="p-3">Department & Designation</th>
+                      <th className="p-3">Role & Supervisor</th>
+                      <th className="p-3">Workload</th>
+                      <th className="p-3">Account Status</th>
+                      <th className="p-3">Joined Date</th>
                       <th className="p-3 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -685,11 +952,27 @@ export default function MainAdminDashboard() {
                     {staffList.map((s) => (
                       <tr key={s.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
                         <td className="p-3 font-medium text-slate-900 dark:text-white">
-                          <div>{s.name}</div>
+                          <div className="font-semibold">{s.name}</div>
                           <div className="text-[11px] text-slate-400 font-mono">{s.email}</div>
                         </td>
-                        <td className="p-3">{s.department}</td>
-                        <td className="p-3">{s.staffRole}</td>
+                        <td className="p-3">
+                          <div className="font-mono text-[11px]">{s.employeeId || "—"}</div>
+                          <div className="text-[11px] text-slate-500">{s.phoneNumber || "—"}</div>
+                        </td>
+                        <td className="p-3">
+                          <div className="font-semibold text-slate-800 dark:text-slate-200">{s.department || "General"}</div>
+                          <div className="text-[11px] text-slate-500">{s.designation || "Staff"}</div>
+                        </td>
+                        <td className="p-3">
+                          <div className="flex items-center gap-1.5">
+                            <span>{s.staffRole || "Technician"}</span>
+                            {s.isSupervisor && (
+                              <Badge variant="outline" className="text-[9px] bg-purple-50 text-purple-700 border-purple-200">
+                                Supervisor
+                              </Badge>
+                            )}
+                          </div>
+                        </td>
                         <td className="p-3">
                           <span className="font-semibold text-slate-800 dark:text-slate-200">
                             {s.activeWorkload || 0} active
@@ -697,28 +980,49 @@ export default function MainAdminDashboard() {
                           <span className="text-[11px] text-slate-400 ml-1.5">(Score: {s.workloadScore || 0})</span>
                         </td>
                         <td className="p-3">
-                          <Badge variant={s.isAvailable ? "success" : "secondary"}>
-                            {s.isAvailable ? "Available" : "Unavailable"}
+                          <Badge variant={s.isActive ? "success" : "secondary"}>
+                            {s.isActive ? "Active" : "Deactivated"}
                           </Badge>
                         </td>
-                        <td className="p-3">
-                          <div className="flex flex-wrap gap-1">
-                            {(s.dashboardPermissions || []).map(p => (
-                              <Badge key={p} variant="outline" className="text-[10px]">{p}</Badge>
-                            ))}
-                          </div>
+                        <td className="p-3 text-slate-500 font-mono text-[11px]">
+                          {s.createdAt ? new Date(s.createdAt).toLocaleDateString() : "—"}
                         </td>
-                        <td className="p-3">
+                        <td className="p-3 text-right space-x-1">
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => updateExportMutation.mutate({ id: s.id, exportPermissions: !s.exportPermissions })}
-                            className={`h-6 text-[10px] cursor-pointer ${s.exportPermissions ? "bg-emerald-50 text-emerald-700 border-emerald-300 dark:bg-emerald-950/30 dark:text-emerald-400" : "text-slate-500"}`}
+                            onClick={() => {
+                              setEditStaffForm({
+                                id: s.id,
+                                name: s.name,
+                                email: s.email,
+                                employeeId: s.employeeId || "",
+                                phoneNumber: s.phoneNumber || "",
+                                departmentId: s.departmentId || "",
+                                designation: s.designation || "",
+                                staffRole: s.staffRole || "Technician",
+                                isSupervisor: Boolean(s.isSupervisor),
+                                isActive: s.isActive !== false
+                              });
+                              setShowEditStaff(true);
+                            }}
+                            className="h-7 text-xs px-2 cursor-pointer"
                           >
-                            {s.exportPermissions ? "Export Allowed" : "No Export"}
+                            <Edit className="w-3 h-3 mr-1" />
+                            Edit
                           </Button>
-                        </td>
-                        <td className="p-3 text-right space-x-1.5">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setResetPasswordForm({ id: s.id, name: s.name, newPassword: "" });
+                              setShowResetPassword(true);
+                            }}
+                            className="h-7 text-xs px-2 cursor-pointer text-amber-600 hover:text-amber-700"
+                          >
+                            <KeyRound className="w-3 h-3 mr-1" />
+                            Reset PW
+                          </Button>
                           <Button
                             size="sm"
                             variant="outline"
@@ -727,23 +1031,15 @@ export default function MainAdminDashboard() {
                               setPendingPerms(s.dashboardPermissions || []);
                               setShowPermConfirm(true);
                             }}
-                            className="h-7 text-xs cursor-pointer"
+                            className="h-7 text-xs px-2 cursor-pointer"
                           >
-                            Permissions
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={() => toggleAvailabilityMutation.mutate({ id: s.id, isAvailable: !s.isAvailable })}
-                            className="h-7 text-xs cursor-pointer"
-                          >
-                            {s.isAvailable ? "Mark Off-Duty" : "Mark Available"}
+                            Perms
                           </Button>
                           <Button
                             size="sm"
                             variant="ghost"
                             onClick={() => toggleActiveMutation.mutate({ id: s.id, active: !s.isActive })}
-                            className={`h-7 text-xs cursor-pointer ${s.isActive ? "text-red-600 hover:text-red-700" : "text-emerald-600"}`}
+                            className={`h-7 text-xs px-2 cursor-pointer ${s.isActive ? "text-red-600 hover:text-red-700" : "text-emerald-600"}`}
                           >
                             {s.isActive ? "Deactivate" : "Restore"}
                           </Button>
@@ -977,22 +1273,40 @@ export default function MainAdminDashboard() {
 
         {/* CREATE STAFF MODAL */}
         <Dialog open={showCreateStaff} onOpenChange={setShowCreateStaff}>
-          <DialogContent>
+          <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Add Staff Member</DialogTitle>
               <DialogDescription>Create a new employee login and assign department membership.</DialogDescription>
             </DialogHeader>
             <div className="space-y-3 py-2">
               <div>
-                <label className="text-xs font-semibold">Full Name</label>
+                <label className="text-xs font-semibold">Full Name *</label>
                 <Input
                   placeholder="e.g. Ramesh Kumar"
                   value={staffForm.name}
                   onChange={(e) => setStaffForm({ ...staffForm, name: e.target.value })}
                 />
               </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-xs font-semibold">Employee ID</label>
+                  <Input
+                    placeholder="EMP-1042"
+                    value={staffForm.employeeId}
+                    onChange={(e) => setStaffForm({ ...staffForm, employeeId: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold">Phone Number</label>
+                  <Input
+                    placeholder="+91 9876543210"
+                    value={staffForm.phoneNumber}
+                    onChange={(e) => setStaffForm({ ...staffForm, phoneNumber: e.target.value })}
+                  />
+                </div>
+              </div>
               <div>
-                <label className="text-xs font-semibold">Email Address</label>
+                <label className="text-xs font-semibold">Login Email / ID *</label>
                 <Input
                   placeholder="ramesh.plumber@hostel.pict.edu"
                   value={staffForm.email}
@@ -1000,7 +1314,7 @@ export default function MainAdminDashboard() {
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold">Password</label>
+                <label className="text-xs font-semibold">Password *</label>
                 <Input
                   type="password"
                   placeholder="Secure password"
@@ -1008,8 +1322,32 @@ export default function MainAdminDashboard() {
                   onChange={(e) => setStaffForm({ ...staffForm, password: e.target.value })}
                 />
               </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-xs font-semibold">Designation</label>
+                  <Input
+                    placeholder="e.g. Senior Electrician"
+                    value={staffForm.designation}
+                    onChange={(e) => setStaffForm({ ...staffForm, designation: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold">Staff Role</label>
+                  <select
+                    value={staffForm.staffRole}
+                    onChange={(e) => setStaffForm({ ...staffForm, staffRole: e.target.value })}
+                    className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 text-xs bg-transparent"
+                  >
+                    <option value="Technician">Technician</option>
+                    <option value="Attendant">Attendant</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Security Officer">Security Officer</option>
+                    <option value="Committee Member">Committee Member</option>
+                  </select>
+                </div>
+              </div>
               <div>
-                <label className="text-xs font-semibold">Primary Department</label>
+                <label className="text-xs font-semibold">Primary Department *</label>
                 <select
                   value={staffForm.departmentId}
                   onChange={(e) => setStaffForm({ ...staffForm, departmentId: e.target.value })}
@@ -1021,11 +1359,254 @@ export default function MainAdminDashboard() {
                   ))}
                 </select>
               </div>
+              <div className="flex items-center gap-2 pt-1">
+                <input
+                  type="checkbox"
+                  id="supervisorCheck"
+                  checked={staffForm.isSupervisor}
+                  onChange={(e) => setStaffForm({ ...staffForm, isSupervisor: e.target.checked })}
+                  className="rounded border-slate-300"
+                />
+                <label htmlFor="supervisorCheck" className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                  Designate as Department Supervisor (Can assign complaints to colleagues)
+                </label>
+              </div>
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setShowCreateStaff(false)}>Cancel</Button>
-              <Button onClick={() => createStaffMutation.mutate(staffForm)} disabled={createStaffMutation.isPending}>
+              <Button
+                onClick={() => createStaffMutation.mutate(staffForm)}
+                disabled={createStaffMutation.isPending || !staffForm.name || !staffForm.email || !staffForm.password || !staffForm.departmentId}
+              >
                 Create Staff Account
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* EDIT DEPARTMENT MODAL */}
+        <Dialog open={showEditDept} onOpenChange={setShowEditDept}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Configure Department</DialogTitle>
+              <DialogDescription>Update department details, supervisor, handled categories, and status.</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-3 py-2">
+              <div>
+                <label className="text-xs font-semibold">Department Name</label>
+                <Input
+                  value={editDeptForm.name}
+                  onChange={(e) => setEditDeptForm({ ...editDeptForm, name: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold">Description</label>
+                <Input
+                  value={editDeptForm.description}
+                  onChange={(e) => setEditDeptForm({ ...editDeptForm, description: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold">Department Supervisor</label>
+                <select
+                  value={editDeptForm.supervisor}
+                  onChange={(e) => setEditDeptForm({ ...editDeptForm, supervisor: e.target.value })}
+                  className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 text-xs bg-transparent"
+                >
+                  <option value="">None Assigned</option>
+                  {staffList.filter(s => s.isActive).map((s) => (
+                    <option key={s.id} value={s.id}>{s.name} ({s.department})</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="text-xs font-semibold">Handled Complaint Categories (comma separated)</label>
+                <Input
+                  placeholder="e.g. Water leakage, Tap broken, Clogged drain"
+                  value={editDeptForm.complaintCategories}
+                  onChange={(e) => setEditDeptForm({ ...editDeptForm, complaintCategories: e.target.value })}
+                />
+                <span className="text-[10px] text-slate-400">Separate multiple categories with commas.</span>
+              </div>
+              <div className="flex items-center gap-2 pt-2">
+                <input
+                  type="checkbox"
+                  id="activeDeptCheck"
+                  checked={editDeptForm.isActive}
+                  onChange={(e) => setEditDeptForm({ ...editDeptForm, isActive: e.target.checked })}
+                  className="rounded border-slate-300"
+                />
+                <label htmlFor="activeDeptCheck" className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                  Department Active (Inactive departments retain historical complaints safely)
+                </label>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setShowEditDept(false)}>Cancel</Button>
+              <Button
+                onClick={() => {
+                  const categoriesArray = editDeptForm.complaintCategories
+                    ? editDeptForm.complaintCategories.split(",").map(s => s.trim()).filter(Boolean)
+                    : [];
+                  updateDeptMutation.mutate({
+                    id: editDeptForm.id,
+                    name: editDeptForm.name,
+                    description: editDeptForm.description,
+                    supervisor: editDeptForm.supervisor || null,
+                    complaintCategories: categoriesArray,
+                    isActive: editDeptForm.isActive
+                  });
+                }}
+                disabled={updateDeptMutation.isPending}
+              >
+                Save Department
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* EDIT STAFF MODAL */}
+        <Dialog open={showEditStaff} onOpenChange={setShowEditStaff}>
+          <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Edit Staff Account</DialogTitle>
+              <DialogDescription>Modify employee profile, designation, department transfer, or supervisor status.</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-3 py-2">
+              <div>
+                <label className="text-xs font-semibold">Full Name</label>
+                <Input
+                  value={editStaffForm.name}
+                  onChange={(e) => setEditStaffForm({ ...editStaffForm, name: e.target.value })}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-xs font-semibold">Employee ID</label>
+                  <Input
+                    value={editStaffForm.employeeId}
+                    onChange={(e) => setEditStaffForm({ ...editStaffForm, employeeId: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold">Phone Number</label>
+                  <Input
+                    value={editStaffForm.phoneNumber}
+                    onChange={(e) => setEditStaffForm({ ...editStaffForm, phoneNumber: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs font-semibold">Email / Login ID</label>
+                <Input
+                  value={editStaffForm.email}
+                  onChange={(e) => setEditStaffForm({ ...editStaffForm, email: e.target.value })}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-xs font-semibold">Designation</label>
+                  <Input
+                    value={editStaffForm.designation}
+                    onChange={(e) => setEditStaffForm({ ...editStaffForm, designation: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold">Staff Role</label>
+                  <select
+                    value={editStaffForm.staffRole}
+                    onChange={(e) => setEditStaffForm({ ...editStaffForm, staffRole: e.target.value })}
+                    className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 text-xs bg-transparent"
+                  >
+                    <option value="Technician">Technician</option>
+                    <option value="Attendant">Attendant</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Security Officer">Security Officer</option>
+                    <option value="Committee Member">Committee Member</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-xs font-semibold">Department Assignment / Transfer</label>
+                <select
+                  value={editStaffForm.departmentId}
+                  onChange={(e) => setEditStaffForm({ ...editStaffForm, departmentId: e.target.value })}
+                  className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 text-xs bg-transparent"
+                >
+                  <option value="">Select Department</option>
+                  {departments.map((d) => (
+                    <option key={d._id} value={d._id}>{d.name} ({d.code})</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center gap-2 pt-1">
+                <input
+                  type="checkbox"
+                  id="editSupervisorCheck"
+                  checked={editStaffForm.isSupervisor}
+                  onChange={(e) => setEditStaffForm({ ...editStaffForm, isSupervisor: e.target.checked })}
+                  className="rounded border-slate-300"
+                />
+                <label htmlFor="editSupervisorCheck" className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                  Department Supervisor Privileges
+                </label>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setShowEditStaff(false)}>Cancel</Button>
+              <Button
+                onClick={() => {
+                  updateStaffMutation.mutate({
+                    id: editStaffForm.id,
+                    name: editStaffForm.name,
+                    email: editStaffForm.email,
+                    employeeId: editStaffForm.employeeId,
+                    phoneNumber: editStaffForm.phoneNumber,
+                    departmentId: editStaffForm.departmentId,
+                    designation: editStaffForm.designation,
+                    staffRole: editStaffForm.staffRole,
+                    isSupervisor: editStaffForm.isSupervisor
+                  });
+                }}
+                disabled={updateStaffMutation.isPending}
+              >
+                Save Changes
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* RESET PASSWORD MODAL */}
+        <Dialog open={showResetPassword} onOpenChange={setShowResetPassword}>
+          <DialogContent className="max-w-sm">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <KeyRound className="w-5 h-5 text-amber-600" />
+                Reset Password
+              </DialogTitle>
+              <DialogDescription>
+                Set a new password for <strong>{resetPasswordForm.name}</strong>.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-3 py-2">
+              <div>
+                <label className="text-xs font-semibold">New Password (minimum 6 characters)</label>
+                <Input
+                  type="password"
+                  placeholder="Enter new password"
+                  value={resetPasswordForm.newPassword}
+                  onChange={(e) => setResetPasswordForm({ ...resetPasswordForm, newPassword: e.target.value })}
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setShowResetPassword(false)}>Cancel</Button>
+              <Button
+                onClick={() => resetPasswordMutation.mutate({ id: resetPasswordForm.id, newPassword: resetPasswordForm.newPassword })}
+                disabled={resetPasswordMutation.isPending || !resetPasswordForm.newPassword || resetPasswordForm.newPassword.length < 6}
+                className="bg-amber-600 hover:bg-amber-700 text-white"
+              >
+                Reset Password
               </Button>
             </DialogFooter>
           </DialogContent>

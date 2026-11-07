@@ -11,6 +11,7 @@ const { validate, schemas }                         = require("../middleware/val
 router.post("/register", registerLimiter, validate(schemas.register), register);
 router.post("/login",    loginLimiter, validate(schemas.login), login);
 router.post("/refresh",  require("../controllers/authController").refresh);
+router.get("/me",        authMiddleware, require("../controllers/authController").getMe);
 
 // ─── Student — OTP flow ───────────────────────────────────────────────────────
 router.post("/student/send-otp",

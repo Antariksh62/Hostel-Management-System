@@ -1,0 +1,738 @@
+[
+  {
+    "_id": "6aeec0997db02e3fb8dbc2ca",
+    "roomNumber": "101",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [
+      {
+        "name": "John Doe",
+        "_id": "6aeec099d359db584ba890a5"
+      },
+      {
+        "name": "Synthetic Student",
+        "_id": "6aeec099d359db584ba890a6"
+      }
+    ],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2d4",
+    "roomNumber": "102",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [
+      {
+        "name": "Pre-existing Student",
+        "_id": "6aeec099d359db584ba890a7"
+      },
+      {
+        "name": "Candidate B",
+        "_id": "6aeec099d359db584ba890a8"
+      }
+    ],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2d6",
+    "roomNumber": "103",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2d7",
+    "roomNumber": "104",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2d8",
+    "roomNumber": "105",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2da",
+    "roomNumber": "106",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2db",
+    "roomNumber": "107",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2dc",
+    "roomNumber": "108",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2de",
+    "roomNumber": "109",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2df",
+    "roomNumber": "110",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2e0",
+    "roomNumber": "111",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2e2",
+    "roomNumber": "112",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2e3",
+    "roomNumber": "113",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2e4",
+    "roomNumber": "114",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2e6",
+    "roomNumber": "115",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2e7",
+    "roomNumber": "116",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2e8",
+    "roomNumber": "117",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2e9",
+    "roomNumber": "201",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [
+      {
+        "name": "Aditi Patil",
+        "_id": "6aeec099d359db584ba890a9"
+      }
+    ],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2eb",
+    "roomNumber": "202",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2ec",
+    "roomNumber": "203",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2ed",
+    "roomNumber": "204",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [
+      {
+        "name": "Antariksh",
+        "_id": "6aeec099d359db584ba890aa"
+      }
+    ],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2ee",
+    "roomNumber": "205",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2f0",
+    "roomNumber": "206",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2f1",
+    "roomNumber": "207",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2f2",
+    "roomNumber": "208",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2f4",
+    "roomNumber": "209",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2f5",
+    "roomNumber": "210",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2f6",
+    "roomNumber": "211",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2f8",
+    "roomNumber": "212",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2f9",
+    "roomNumber": "213",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2fb",
+    "roomNumber": "214",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2fc",
+    "roomNumber": "215",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2fd",
+    "roomNumber": "216",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2fe",
+    "roomNumber": "217",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc2ff",
+    "roomNumber": "301",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc300",
+    "roomNumber": "302",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc301",
+    "roomNumber": "303",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc302",
+    "roomNumber": "304",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc303",
+    "roomNumber": "305",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [
+      {
+        "name": "Ananya Suresh Joshi",
+        "_id": "6aeec099d359db584ba890ab"
+      }
+    ],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc304",
+    "roomNumber": "306",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc305",
+    "roomNumber": "307",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc306",
+    "roomNumber": "308",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc307",
+    "roomNumber": "309",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc308",
+    "roomNumber": "310",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc309",
+    "roomNumber": "311",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc30a",
+    "roomNumber": "312",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc30b",
+    "roomNumber": "313",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc30c",
+    "roomNumber": "314",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc30d",
+    "roomNumber": "315",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc30e",
+    "roomNumber": "316",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [
+      {
+        "name": "Siddharth Ramesh Kulkarni",
+        "_id": "6aeec099d359db584ba890ac"
+      }
+    ],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc30f",
+    "roomNumber": "317",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc310",
+    "roomNumber": "401",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc311",
+    "roomNumber": "402",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc312",
+    "roomNumber": "403",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [
+      {
+        "name": "Existing Enrolled Student",
+        "_id": "6aeec099d359db584ba890ad"
+      }
+    ],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc313",
+    "roomNumber": "404",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc314",
+    "roomNumber": "405",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc315",
+    "roomNumber": "406",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc316",
+    "roomNumber": "407",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc317",
+    "roomNumber": "408",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc318",
+    "roomNumber": "409",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc319",
+    "roomNumber": "410",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc31a",
+    "roomNumber": "411",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc31b",
+    "roomNumber": "412",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc31c",
+    "roomNumber": "413",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc31d",
+    "roomNumber": "414",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc31e",
+    "roomNumber": "415",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc31f",
+    "roomNumber": "416",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc320",
+    "roomNumber": "417",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc321",
+    "roomNumber": "501",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc322",
+    "roomNumber": "502",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc323",
+    "roomNumber": "503",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc324",
+    "roomNumber": "504",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc325",
+    "roomNumber": "505",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc326",
+    "roomNumber": "506",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc327",
+    "roomNumber": "507",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc328",
+    "roomNumber": "508",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  },
+  {
+    "_id": "6aeec0997db02e3fb8dbc329",
+    "roomNumber": "509",
+    "__v": 0,
+    "capacity": 2,
+    "createdAt": "2026-11-07T06:09:29.776Z",
+    "occupants": [],
+    "updatedAt": "2026-11-07T06:09:29.776Z"
+  }
+]

@@ -182,7 +182,11 @@ exports.sendOTP = async (req, res) => {
         );
 
         const isDev = process.env.NODE_ENV !== "production";
-        logger.info(`OTP generated for ${email}: ${rawOTP}`);
+        if (isDev) {
+            logger.info(`[DEV] OTP generated for ${email}: ${rawOTP}`);
+        } else {
+            logger.info(`OTP successfully generated and dispatched for ${email}`);
+        }
 
         let emailDelivered = false;
         let etherealPreview = null;

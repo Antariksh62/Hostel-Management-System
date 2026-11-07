@@ -1,0 +1,131 @@
+{
+  "timestamp": "2026-11-06T20:16:10.399Z",
+  "systemHealth": {
+    "status": "PASS",
+    "response": {
+      "status": "ok",
+      "uptimeSeconds": 12,
+      "timestamp": "2026-11-06T20:16:13.304Z",
+      "database": {
+        "connected": true,
+        "state": "connected"
+      },
+      "memory": {
+        "rssMb": 120,
+        "heapUsedMb": 54
+      }
+    }
+  },
+  "roleVerifications": {
+    "MAIN_ADMIN": "PASS",
+    "INCHARGE": "PASS",
+    "HEADWARDEN": "PASS",
+    "WARDEN": "PASS",
+    "DEPARTMENT_SUPERVISOR": "PASS",
+    "DEPARTMENT_STAFF": "PASS",
+    "STUDENT": "PASS",
+    "ANTI_RAGGING_MEMBER": "PASS"
+  },
+  "realTimeMultiUserWorkflow": {
+    "complaintCreatedEvent": "PASS",
+    "assignmentRealtimeSync": "PASS",
+    "inProgressRealtimeSync": "PASS",
+    "resolutionRealtimeSync": "PASS",
+    "databasePersistence": "PASS"
+  },
+  "operationalWorkflows": {
+    "STUDENT_OTP_ELIGIBILITY": "PASS",
+    "COMPLAINT_REOPENING": "PASS",
+    "COMPLAINT_REASSIGNMENT": "PASS",
+    "AUTONOMOUS_ESCALATION": "PASS",
+    "STAFF_DEACTIVATION_REVOCATION": "PASS"
+  },
+  "securityBoundaries": {
+    "wardenAntiRaggingBlocked": true,
+    "headwardenAntiRaggingBlocked": true,
+    "staffResidentDirectoryBlocked": true,
+    "uiRouteGuardActive": true
+  },
+  "responsiveViewports": {
+    "mobile_compact_360x740": {
+      "width": 360,
+      "height": 740,
+      "overflowValid": true
+    },
+    "mobile_modern_390x844": {
+      "width": 390,
+      "height": 844,
+      "overflowValid": true
+    },
+    "tablet_portrait_768x1024": {
+      "width": 768,
+      "height": 1024,
+      "overflowValid": true
+    },
+    "desktop_small_1024x768": {
+      "width": 1024,
+      "height": 768,
+      "overflowValid": true
+    },
+    "desktop_standard_1280x800": {
+      "width": 1280,
+      "height": 800,
+      "overflowValid": true
+    },
+    "desktop_wide_1440x900": {
+      "width": 1440,
+      "height": 900,
+      "overflowValid": true
+    }
+  },
+  "themesVerified": {
+    "light": "PASS",
+    "dark": "PASS",
+    "details": {
+      "isDark": true,
+      "bg": "oklch(0.148 0.008 264)"
+    }
+  },
+  "consoleErrors": [],
+  "networkErrors": [],
+  "performanceMetrics": {
+    "loadTimeMs": 242,
+    "domContentLoadedMs": 234,
+    "responseEndMs": 14,
+    "memoryUsage": {
+      "usedJSHeapSizeMB": "59.42",
+      "totalJSHeapSizeMB": "62.35"
+    }
+  },
+  "screenshotsCaptured": [
+    "01_login_page_en.png",
+    "02_login_page_mr.png",
+    "03_main_admin_overview.png",
+    "04_main_admin_departments_tab.png",
+    "05_main_admin_staff_tab.png",
+    "06_incharge_dashboard.png",
+    "07_headwarden_dashboard.png",
+    "08_headwarden_reports_csv.png",
+    "09_warden_dashboard.png",
+    "10_warden_rooms_map.png",
+    "11_supervisor_portal.png",
+    "12_staff_portal.png",
+    "13_student_dashboard.png",
+    "14_student_complaints.png",
+    "15_anti_ragging_dashboard.png",
+    "16_realtime_warden_receives_complaint.png",
+    "17_realtime_staff_receives_assignment.png",
+    "18_realtime_student_in_progress.png",
+    "19_realtime_student_resolved.png",
+    "20_realtime_warden_resolved.png",
+    "21_realtime_incharge_monitoring.png",
+    "22_viewport_mobile_compact_360x740.png",
+    "22_viewport_mobile_modern_390x844.png",
+    "22_viewport_tablet_portrait_768x1024.png",
+    "22_viewport_desktop_small_1024x768.png",
+    "22_viewport_desktop_standard_1280x800.png",
+    "22_viewport_desktop_wide_1440x900.png",
+    "23_theme_light_mode.png",
+    "24_theme_dark_mode.png"
+  ]
+}

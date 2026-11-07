@@ -1,0 +1,1631 @@
+[
+  {
+    "_id": "6ae5cf3e95584524eff7f9e5",
+    "prn": "STUDENT1",
+    "email": "student1@test.com",
+    "name": "John Doe",
+    "rollNumber": "101",
+    "branch": "CS",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "101",
+    "studentMobile": "9876543210",
+    "parentMobile": "9876543211",
+    "admissionStatus": "APPROVED",
+    "registrationStatus": "REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6a9141146bc5f921b15c2979",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "reason": "Pre-existing registered student auto-backfilled to authorized roster",
+        "timestamp": "2026-10-31T11:21:34.141Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.916Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T09:29:06.245Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae711289de2df7c05c52fab",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T10:15:09.639Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae7136bf1158f5f46f35918",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T10:24:48.357Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-02T19:12:03.167Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "LEGACY_STUDENT_BACKFILLED",
+        "performedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "details": {
+          "studentId": "6a9141146bc5f921b15c2979",
+          "prn": "student1",
+          "email": "student1@test.com"
+        },
+        "timestamp": "2026-10-31T11:21:34.141Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-10-31T23:22:30.916Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793525346223-AB3500",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T09:29:06.245Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae711289de2df7c05c52fab",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793528109617-B17F1E",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T10:15:09.639Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae7136bf1158f5f46f35918",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793528688339-031699",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T10:24:48.358Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793646723139-3DE278",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-02T19:12:03.167Z"
+      }
+    ],
+    "createdAt": "2026-10-31T11:21:34.162Z",
+    "updatedAt": "2026-11-06T19:56:00.267Z",
+    "__v": 5
+  },
+  {
+    "_id": "6ae5cf3e95584524eff7f9e6",
+    "prn": "STUDENT2",
+    "email": "student2@test.com",
+    "name": "Jane Smith",
+    "rollNumber": "N/A",
+    "branch": "CE",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "101",
+    "studentMobile": "9876543210",
+    "parentMobile": "9876543211",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6a9141146bc5f921b15c297a",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "reason": "Pre-existing registered student auto-backfilled to authorized roster",
+        "timestamp": "2026-10-31T11:21:34.199Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.922Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "LEGACY_STUDENT_BACKFILLED",
+        "performedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "details": {
+          "studentId": "6a9141146bc5f921b15c297a",
+          "prn": "student2",
+          "email": "student2@test.com"
+        },
+        "timestamp": "2026-10-31T11:21:34.199Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-10-31T23:22:30.923Z"
+      }
+    ],
+    "createdAt": "2026-10-31T11:21:34.202Z",
+    "updatedAt": "2026-10-31T23:22:30.924Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae5cf3e95584524eff7f9e7",
+    "prn": "STUDENT3",
+    "email": "student3@test.com",
+    "name": "Alice Johnson",
+    "rollNumber": "N/A",
+    "branch": "CE",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "101",
+    "studentMobile": "9876543210",
+    "parentMobile": "9876543211",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6a9141146bc5f921b15c297b",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "reason": "Pre-existing registered student auto-backfilled to authorized roster",
+        "timestamp": "2026-10-31T11:21:34.243Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.927Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "LEGACY_STUDENT_BACKFILLED",
+        "performedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "details": {
+          "studentId": "6a9141146bc5f921b15c297b",
+          "prn": "student3",
+          "email": "student3@test.com"
+        },
+        "timestamp": "2026-10-31T11:21:34.243Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-10-31T23:22:30.928Z"
+      }
+    ],
+    "createdAt": "2026-10-31T11:21:34.248Z",
+    "updatedAt": "2026-10-31T23:22:30.928Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae5cf3e95584524eff7f9e8",
+    "prn": "F24CE307",
+    "email": "f24ce307@ms.pict.edu",
+    "name": "Antariksh",
+    "rollNumber": "31107",
+    "branch": "CE",
+    "year": "TY",
+    "division": "TY-1",
+    "doorNumber": "204",
+    "studentMobile": "9876543210",
+    "parentMobile": "9876543211",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6a97dde88b3a8d1e37d443e9",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "reason": "Pre-existing registered student auto-backfilled to authorized roster",
+        "timestamp": "2026-10-31T11:21:34.257Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.933Z"
+      },
+      {
+        "fromStatus": "REVOKED",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6a914115adc95407d6d77a66",
+          "name": "Administrator",
+          "role": "INCHARGE"
+        },
+        "reason": "Eligibility restored after administrative review",
+        "timestamp": "2026-11-01T05:17:47.852Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T09:29:06.252Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "LEGACY_STUDENT_BACKFILLED",
+        "performedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "details": {
+          "studentId": "6a97dde88b3a8d1e37d443e9",
+          "prn": "f24ce307",
+          "email": "f24ce307@ms.pict.edu"
+        },
+        "timestamp": "2026-10-31T11:21:34.257Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-10-31T23:22:30.934Z"
+      },
+      {
+        "action": "ELIGIBILITY_RESTORED",
+        "performedBy": {
+          "id": "6a914115adc95407d6d77a66",
+          "name": "Administrator",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "previousStatus": "REVOKED",
+          "reason": "Eligibility restored after administrative review"
+        },
+        "timestamp": "2026-11-01T05:17:47.853Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793525346223-AB3500",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T09:29:06.252Z"
+      }
+    ],
+    "createdAt": "2026-10-31T11:21:34.260Z",
+    "updatedAt": "2026-11-01T09:29:06.253Z",
+    "__v": 3
+  },
+  {
+    "_id": "6ae63a6d8c05010096d6ca3c",
+    "prn": "CAND_A_1793473133911",
+    "email": "cand_a_1793473133911@ms.pict.edu",
+    "name": "Candidate A",
+    "rollNumber": "101",
+    "branch": "CS",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "102",
+    "studentMobile": "9876543210",
+    "parentMobile": "9876543211",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "NOT_REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": null,
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "PENDING_APPROVAL",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.963Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "PENDING_APPROVAL"
+        },
+        "timestamp": "2026-10-31T23:22:30.963Z"
+      }
+    ],
+    "createdAt": "2026-10-31T18:58:53.914Z",
+    "updatedAt": "2026-10-31T23:22:30.964Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae63a6d8c05010096d6ca3d",
+    "prn": "CAND_B_1793473133920",
+    "email": "cand_b_1793473133920@ms.pict.edu",
+    "name": "Candidate B",
+    "rollNumber": "102",
+    "branch": "IT",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "102",
+    "studentMobile": "9876543212",
+    "parentMobile": "9876543213",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6ae63a6e8c05010096d6ca3f",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "PENDING_APPROVAL",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae63a6d8c05010096d6ca38",
+          "name": "Hardening Incharge",
+          "role": "INCHARGE"
+        },
+        "reason": "Approved by Administrator",
+        "timestamp": "2026-10-31T18:58:53.978Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.938Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "ADMISSION_APPROVED",
+        "performedBy": {
+          "id": "6ae63a6d8c05010096d6ca38",
+          "name": "Hardening Incharge",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "previousStatus": "PENDING_APPROVAL",
+          "reason": "Approved by Administrator"
+        },
+        "timestamp": "2026-10-31T18:58:53.981Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-10-31T23:22:30.939Z"
+      }
+    ],
+    "createdAt": "2026-10-31T18:58:53.923Z",
+    "updatedAt": "2026-10-31T23:22:30.940Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae63a6e8c05010096d6ca40",
+    "prn": "TEMP_1793473134095",
+    "email": "temp_1793473134095@ms.pict.edu",
+    "name": "Temporary Student",
+    "rollNumber": "999",
+    "branch": "CS",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "103",
+    "studentMobile": "9876543218",
+    "parentMobile": "9876543219",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "NOT_REGISTERED",
+    "rejectionReason": "Disciplinary issue",
+    "userId": null,
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "PENDING_APPROVAL",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae63a6d8c05010096d6ca36",
+          "name": "Hardening Head Warden",
+          "role": "HEADWARDEN"
+        },
+        "reason": "Approved by Administrator",
+        "timestamp": "2026-10-31T18:58:54.123Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae63a6d8c05010096d6ca36",
+          "name": "Hardening Head Warden",
+          "role": "HEADWARDEN"
+        },
+        "reason": "Disciplinary issue",
+        "timestamp": "2026-10-31T18:58:54.163Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "ADMISSION_APPROVED",
+        "performedBy": {
+          "id": "6ae63a6d8c05010096d6ca36",
+          "name": "Hardening Head Warden",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "previousStatus": "PENDING_APPROVAL",
+          "reason": "Approved by Administrator"
+        },
+        "timestamp": "2026-10-31T18:58:54.125Z"
+      },
+      {
+        "action": "ELIGIBILITY_REVOKED",
+        "performedBy": {
+          "id": "6ae63a6d8c05010096d6ca36",
+          "name": "Hardening Head Warden",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "previousStatus": "APPROVED",
+          "reason": "Disciplinary issue"
+        },
+        "timestamp": "2026-10-31T18:58:54.164Z"
+      }
+    ],
+    "createdAt": "2026-10-31T18:58:54.097Z",
+    "updatedAt": "2026-10-31T18:58:54.166Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae63a6e8c05010096d6ca43",
+    "prn": "RACE_134195",
+    "email": "race_1793473134195@ms.pict.edu",
+    "name": "Race Test Student",
+    "rollNumber": "555",
+    "branch": "CS",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "402",
+    "studentMobile": "9988776655",
+    "parentMobile": "9988776644",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "Revoked prior to registration completion",
+    "userId": null,
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "PENDING_APPROVAL",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae63a6d8c05010096d6ca36",
+          "name": "Hardening Head Warden",
+          "role": "HEADWARDEN"
+        },
+        "reason": "Approved by Administrator",
+        "timestamp": "2026-10-31T18:58:54.228Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae63a6d8c05010096d6ca38",
+          "name": "Hardening Incharge",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked prior to registration completion",
+        "timestamp": "2026-10-31T18:59:01.032Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "ADMISSION_APPROVED",
+        "performedBy": {
+          "id": "6ae63a6d8c05010096d6ca36",
+          "name": "Hardening Head Warden",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "previousStatus": "PENDING_APPROVAL",
+          "reason": "Approved by Administrator"
+        },
+        "timestamp": "2026-10-31T18:58:54.230Z"
+      },
+      {
+        "action": "ELIGIBILITY_REVOKED",
+        "performedBy": {
+          "id": "6ae63a6d8c05010096d6ca38",
+          "name": "Hardening Incharge",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "previousStatus": "APPROVED",
+          "reason": "Revoked prior to registration completion"
+        },
+        "timestamp": "2026-10-31T18:59:01.033Z"
+      }
+    ],
+    "createdAt": "2026-10-31T18:58:54.198Z",
+    "updatedAt": "2026-10-31T18:59:01.036Z",
+    "__v": 2
+  },
+  {
+    "_id": "6ae63a758c05010096d6ca47",
+    "prn": "I2K221041089",
+    "email": "i2k221041089@ms.pict.edu",
+    "name": "Existing Enrolled Student",
+    "rollNumber": "556",
+    "branch": "CS",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "403",
+    "studentMobile": "9988771122",
+    "parentMobile": "9988771133",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "Testing retention",
+    "userId": "6ae63a758c05010096d6ca46",
+    "importBatchId": null,
+    "statusHistory": [],
+    "auditTrail": [],
+    "createdAt": "2026-10-31T18:59:01.094Z",
+    "updatedAt": "2026-10-31T18:59:04.832Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ae63a788c05010096d6ca4b",
+    "prn": "PRN_UNIQ_1793473144919",
+    "email": "uniq_1793473144919@ms.pict.edu",
+    "name": "Unique Student 1",
+    "rollNumber": "701",
+    "branch": "CS",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "101",
+    "studentMobile": "9876500001",
+    "parentMobile": "9876500002",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "NOT_REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": null,
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "PENDING_APPROVAL",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.968Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "PENDING_APPROVAL"
+        },
+        "timestamp": "2026-10-31T23:22:30.968Z"
+      }
+    ],
+    "createdAt": "2026-10-31T18:59:04.921Z",
+    "updatedAt": "2026-10-31T23:22:30.969Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae63a788c05010096d6ca4f",
+    "prn": "ADDITIVE_1793473144940",
+    "email": "additive_1793473144940@ms.pict.edu",
+    "name": "Additive Import Student",
+    "rollNumber": "801",
+    "branch": "CS",
+    "year": "FY",
+    "division": "1",
+    "doorNumber": "104",
+    "studentMobile": "9876511111",
+    "parentMobile": "9876511112",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "NOT_REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": null,
+    "importBatchId": "6ae63a788c05010096d6ca4e",
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "PENDING_APPROVAL",
+        "changedBy": {
+          "id": "6ae63a6d8c05010096d6ca36",
+          "name": "Hardening Head Warden",
+          "role": "HEADWARDEN"
+        },
+        "reason": "Uploaded via roster import",
+        "timestamp": "2026-10-31T18:59:04.949Z"
+      },
+      {
+        "fromStatus": "PENDING_APPROVAL",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.972Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "ROSTER_CREATED_FROM_IMPORT",
+        "performedBy": {
+          "id": "6ae63a6d8c05010096d6ca36",
+          "name": "Hardening Head Warden",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "batchId": "BATCH-1793473144940-329C4C",
+          "initialStatus": "PENDING_APPROVAL"
+        },
+        "timestamp": "2026-10-31T18:59:04.949Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "PENDING_APPROVAL"
+        },
+        "timestamp": "2026-10-31T23:22:30.973Z"
+      }
+    ],
+    "createdAt": "2026-10-31T18:59:04.955Z",
+    "updatedAt": "2026-10-31T23:22:30.973Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae63f2186f464776f4c02ef",
+    "prn": "PRN_PRE_133837",
+    "email": "pre_exist_1793473133837@ms.pict.edu",
+    "name": "Pre-existing Student",
+    "rollNumber": "N/A",
+    "branch": "CE",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "102",
+    "studentMobile": "9876543210",
+    "parentMobile": "9876543211",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6ae63a6d8c05010096d6ca3b",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "reason": "Pre-existing registered student auto-backfilled to authorized roster",
+        "timestamp": "2026-10-31T19:18:57.160Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-10-31T23:22:30.944Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "LEGACY_STUDENT_BACKFILLED",
+        "performedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "details": {
+          "studentId": "6ae63a6d8c05010096d6ca3b",
+          "prn": "PRN_PRE_133837",
+          "email": "pre_exist_1793473133837@ms.pict.edu"
+        },
+        "timestamp": "2026-10-31T19:18:57.161Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae67831af7ebd67c7777458",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793488950893-1243B6",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-10-31T23:22:30.945Z"
+      }
+    ],
+    "createdAt": "2026-10-31T19:18:57.235Z",
+    "updatedAt": "2026-10-31T23:22:30.945Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae6ff6c7954ce19873948c4",
+    "prn": "TESTPRN_001",
+    "email": "test_res_sid@ms.pict.edu",
+    "name": "Siddharth Ramesh Kulkarni",
+    "rollNumber": "31105",
+    "branch": "CE",
+    "year": "TY",
+    "division": "TE-1",
+    "doorNumber": "316",
+    "studentMobile": "9820011111",
+    "parentMobile": "9820099999",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6ae67a491574ce763d542231",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "reason": "Pre-existing registered student auto-backfilled to authorized roster",
+        "timestamp": "2026-11-01T08:59:24.339Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T09:29:06.257Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "LEGACY_STUDENT_BACKFILLED",
+        "performedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "details": {
+          "studentId": "6ae67a491574ce763d542231",
+          "prn": "TESTPRN_001",
+          "email": "test_res_sid@ms.pict.edu"
+        },
+        "timestamp": "2026-11-01T08:59:24.339Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793525346223-AB3500",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T09:29:06.257Z"
+      }
+    ],
+    "createdAt": "2026-11-01T08:59:24.350Z",
+    "updatedAt": "2026-11-01T09:29:06.258Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae6ff6c7954ce19873948c5",
+    "prn": "TESTPRN_002",
+    "email": "test_res_ananya@ms.pict.edu",
+    "name": "Ananya Suresh Joshi",
+    "rollNumber": "21210",
+    "branch": "IT",
+    "year": "SY",
+    "division": "SE-2",
+    "doorNumber": "305",
+    "studentMobile": "9820044444",
+    "parentMobile": "9820055555",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6ae67a491574ce763d542232",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "reason": "Pre-existing registered student auto-backfilled to authorized roster",
+        "timestamp": "2026-11-01T08:59:24.385Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T09:29:06.262Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "LEGACY_STUDENT_BACKFILLED",
+        "performedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "details": {
+          "studentId": "6ae67a491574ce763d542232",
+          "prn": "TESTPRN_002",
+          "email": "test_res_ananya@ms.pict.edu"
+        },
+        "timestamp": "2026-11-01T08:59:24.385Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793525346223-AB3500",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T09:29:06.262Z"
+      }
+    ],
+    "createdAt": "2026-11-01T08:59:24.389Z",
+    "updatedAt": "2026-11-01T09:29:06.263Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae6ff6c7954ce19873948c6",
+    "prn": "TESTPRN_003",
+    "email": "test_res_rohit@ms.pict.edu",
+    "name": "Rohit Unassigned Verma",
+    "rollNumber": "11101",
+    "branch": "ENTC",
+    "year": "FY",
+    "division": "FE-1",
+    "doorNumber": "101",
+    "studentMobile": "9820077777",
+    "parentMobile": "9876543211",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": "6ae67a491574ce763d542233",
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "reason": "Pre-existing registered student auto-backfilled to authorized roster",
+        "timestamp": "2026-11-01T08:59:24.407Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T09:29:06.267Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "LEGACY_STUDENT_BACKFILLED",
+        "performedBy": {
+          "name": "System Legacy Migration",
+          "role": "SYSTEM"
+        },
+        "details": {
+          "studentId": "6ae67a491574ce763d542233",
+          "prn": "TESTPRN_003",
+          "email": "test_res_rohit@ms.pict.edu"
+        },
+        "timestamp": "2026-11-01T08:59:24.407Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae7065d2e97ef4fe456fe2b",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793525346223-AB3500",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T09:29:06.267Z"
+      }
+    ],
+    "createdAt": "2026-11-01T08:59:24.410Z",
+    "updatedAt": "2026-11-01T09:29:06.268Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae70dd659b04e4fca118bb0",
+    "email": "student.part3@ms.pict.edu",
+    "__v": 3,
+    "admissionStatus": "REVOKED",
+    "auditTrail": [
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae711289de2df7c05c52fab",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793528109617-B17F1E",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T10:15:09.647Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae7136bf1158f5f46f35918",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793528688339-031699",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-01T10:24:48.363Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793646723139-3DE278",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-02T19:12:03.174Z"
+      }
+    ],
+    "createdAt": "2026-11-01T10:00:54.309Z",
+    "division": "",
+    "importBatchId": null,
+    "prn": "F24CE991",
+    "registrationStatus": "NOT_REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "rollNumber": "24191",
+    "statusHistory": [
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae711289de2df7c05c52fab",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T10:15:09.646Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae7136bf1158f5f46f35918",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-01T10:24:48.363Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-02T19:12:03.174Z"
+      }
+    ],
+    "updatedAt": "2026-11-02T19:12:03.175Z",
+    "userId": null,
+    "year": "FY"
+  },
+  {
+    "_id": "6ae8e07a83f085ffa8890a53",
+    "prn": "F24CE888",
+    "email": "manual.valid@ms.pict.edu",
+    "name": "Manual Valid Student Renamed",
+    "rollNumber": "10999",
+    "branch": "CE",
+    "year": "FY",
+    "division": "2",
+    "doorNumber": "105",
+    "studentMobile": "9876543210",
+    "parentMobile": "9876543211",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": null,
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Manually registered by Administrator",
+        "timestamp": "2026-11-02T19:11:54.040Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Disciplinary fee clearance pending",
+        "timestamp": "2026-11-02T19:11:54.093Z"
+      },
+      {
+        "fromStatus": "REVOKED",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "reason": "Dues settled upon verification",
+        "timestamp": "2026-11-02T19:11:54.111Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-02T19:12:03.177Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "MANUAL_STUDENT_ADDED",
+        "performedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "name": "Manual Valid Student",
+          "prn": "F24CE888",
+          "email": "manual.valid@ms.pict.edu",
+          "doorNumber": "104",
+          "initialStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-02T19:11:54.040Z"
+      },
+      {
+        "action": "STUDENT_DETAILS_UPDATED",
+        "performedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "changes": {
+            "name": {
+              "from": "Manual Valid Student",
+              "to": "Manual Valid Student Renamed"
+            },
+            "rollNumber": {
+              "from": "10888",
+              "to": "10999"
+            },
+            "division": {
+              "from": "1",
+              "to": "2"
+            },
+            "doorNumber": {
+              "from": "104",
+              "to": "105"
+            }
+          }
+        },
+        "timestamp": "2026-11-02T19:11:54.085Z"
+      },
+      {
+        "action": "ELIGIBILITY_REVOKED",
+        "performedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "previousStatus": "APPROVED",
+          "reason": "Disciplinary fee clearance pending"
+        },
+        "timestamp": "2026-11-02T19:11:54.093Z"
+      },
+      {
+        "action": "ELIGIBILITY_RESTORED",
+        "performedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "previousStatus": "REVOKED",
+          "reason": "Dues settled upon verification"
+        },
+        "timestamp": "2026-11-02T19:11:54.112Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793646723139-3DE278",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-02T19:12:03.178Z"
+      }
+    ],
+    "createdAt": "2026-11-02T19:11:54.044Z",
+    "updatedAt": "2026-11-02T19:12:03.179Z",
+    "__v": 4
+  },
+  {
+    "_id": "6ae8e08383f085ffa8890a57",
+    "prn": "F24CE701",
+    "email": "sync.absent1@ms.pict.edu",
+    "name": "Absent Student One",
+    "rollNumber": "24701",
+    "branch": "CE",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "106",
+    "studentMobile": "9876543201",
+    "parentMobile": "9876543202",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "NOT_REGISTERED",
+    "rejectionReason": "Revoked via Full Roster Sync (absent from latest official uploaded roster)",
+    "userId": null,
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "reason": "Manually registered by Administrator",
+        "timestamp": "2026-11-02T19:12:03.054Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Revoked via Full Roster Sync",
+        "timestamp": "2026-11-02T19:12:03.184Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "MANUAL_STUDENT_ADDED",
+        "performedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "name": "Absent Student One",
+          "prn": "F24CE701",
+          "email": "sync.absent1@ms.pict.edu",
+          "doorNumber": "106",
+          "initialStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-02T19:12:03.054Z"
+      },
+      {
+        "action": "FULL_SYNC_BULK_REVOKED",
+        "performedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793646723139-3DE278",
+          "previousStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-02T19:12:03.184Z"
+      }
+    ],
+    "createdAt": "2026-11-02T19:12:03.057Z",
+    "updatedAt": "2026-11-02T19:12:03.185Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae8e08383f085ffa8890a59",
+    "prn": "F24CE702",
+    "email": "sync.present@ms.pict.edu",
+    "name": "Present Student Updated",
+    "rollNumber": "10702",
+    "branch": "CE",
+    "year": "FY",
+    "division": "1",
+    "doorNumber": "107",
+    "studentMobile": "9876543203",
+    "parentMobile": "9876543204",
+    "admissionStatus": "APPROVED",
+    "registrationStatus": "REGISTRATION_STARTED",
+    "rejectionReason": "",
+    "userId": null,
+    "importBatchId": "6ae8e08383f085ffa8890a5b",
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "reason": "Manually registered by Administrator",
+        "timestamp": "2026-11-02T19:12:03.075Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Approved via batch import",
+        "timestamp": "2026-11-02T19:12:03.158Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "MANUAL_STUDENT_ADDED",
+        "performedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "name": "Present Student",
+          "prn": "F24CE702",
+          "email": "sync.present@ms.pict.edu",
+          "doorNumber": "107",
+          "initialStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-02T19:12:03.075Z"
+      },
+      {
+        "action": "ROSTER_UPDATED_FROM_IMPORT",
+        "performedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "batchId": "BATCH-1793646723139-3DE278",
+          "autoApprove": true
+        },
+        "timestamp": "2026-11-02T19:12:03.158Z"
+      }
+    ],
+    "createdAt": "2026-11-02T19:12:03.076Z",
+    "updatedAt": "2026-11-02T20:43:26.301Z",
+    "__v": 1
+  },
+  {
+    "_id": "6ae8e08383f085ffa8890a5d",
+    "prn": "F24CE601",
+    "email": "active.session@ms.pict.edu",
+    "name": "Active Session Student",
+    "rollNumber": "24601",
+    "branch": "CE",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "108",
+    "studentMobile": "9876543220",
+    "parentMobile": "9876543221",
+    "admissionStatus": "REVOKED",
+    "registrationStatus": "NOT_REGISTERED",
+    "rejectionReason": "Administrative suspension",
+    "userId": null,
+    "importBatchId": null,
+    "statusHistory": [
+      {
+        "fromStatus": "NONE",
+        "toStatus": "APPROVED",
+        "changedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "reason": "Manually registered by Administrator",
+        "timestamp": "2026-11-02T19:12:03.207Z"
+      },
+      {
+        "fromStatus": "APPROVED",
+        "toStatus": "REVOKED",
+        "changedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "reason": "Administrative suspension",
+        "timestamp": "2026-11-02T19:12:03.231Z"
+      }
+    ],
+    "auditTrail": [
+      {
+        "action": "MANUAL_STUDENT_ADDED",
+        "performedBy": {
+          "id": "6ae8e07983f085ffa8890a4e",
+          "name": "Head Warden Master",
+          "role": "HEADWARDEN"
+        },
+        "details": {
+          "name": "Active Session Student",
+          "prn": "F24CE601",
+          "email": "active.session@ms.pict.edu",
+          "doorNumber": "108",
+          "initialStatus": "APPROVED"
+        },
+        "timestamp": "2026-11-02T19:12:03.207Z"
+      },
+      {
+        "action": "ELIGIBILITY_REVOKED",
+        "performedBy": {
+          "id": "6ae8e07a83f085ffa8890a4f",
+          "name": "Incharge Master",
+          "role": "INCHARGE"
+        },
+        "details": {
+          "previousStatus": "APPROVED",
+          "reason": "Administrative suspension"
+        },
+        "timestamp": "2026-11-02T19:12:03.232Z"
+      }
+    ],
+    "createdAt": "2026-11-02T19:12:03.209Z",
+    "updatedAt": "2026-11-02T19:12:03.232Z",
+    "__v": 1
+  },
+  {
+    "_id": "6aee358d4af48359a5226bec",
+    "prn": "PRN-SYNTH-99",
+    "email": "student.synth@ms.pict.edu",
+    "name": "Synthetic Student",
+    "rollNumber": "101",
+    "branch": "CS",
+    "year": "FY",
+    "division": "",
+    "doorNumber": "101",
+    "studentMobile": "9876543210",
+    "parentMobile": "9876543211",
+    "admissionStatus": "APPROVED",
+    "registrationStatus": "REGISTERED",
+    "rejectionReason": "",
+    "userId": null,
+    "importBatchId": null,
+    "statusHistory": [],
+    "auditTrail": [],
+    "createdAt": "2026-11-06T20:16:13.391Z",
+    "updatedAt": "2026-11-06T20:16:13.391Z",
+    "__v": 0
+  }
+]

@@ -1,0 +1,288 @@
+{
+  "timestamp": "2026-11-06T20:38:39.643Z",
+  "metrics": {
+    "totalFeatures": 39,
+    "passedFeatures": 39,
+    "fixedFeatures": 6,
+    "failedFeatures": 0,
+    "consoleErrorsCount": 0,
+    "networkErrorsCount": 0
+  },
+  "featureMatrix": [
+    {
+      "feature": "Authentication: Login Shell & Form Render",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Rendered cleanly (Title: \"PICT Hostel Management System\")"
+    },
+    {
+      "feature": "Authentication: Invalid Credentials Rejection",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Rejected with HTTP 400"
+    },
+    {
+      "feature": "Authentication: Student OTP Domain Whitelist",
+      "initial": "FAIL",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Unregistered email rejected (403); enrolled student accepted (200)"
+    },
+    {
+      "feature": "Localization: Bilingual Preference Update",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Marathi language preference saved in database"
+    },
+    {
+      "feature": "Student Portal: Home Dashboard",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Metrics and room assignment card loaded"
+    },
+    {
+      "feature": "Student Portal: Complaints Directory & Filter",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "List of complaints and status tabs active"
+    },
+    {
+      "feature": "Student Portal: Complaint Creation & Input Validation",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Empty rejected; valid complaint created ID: 6aee3a998ae5ae94b619baf8"
+    },
+    {
+      "feature": "Student Portal: Duplicate Submission Idempotency Filter",
+      "initial": "PASS",
+      "fix": "Synchronous in-flight mutex",
+      "retest": "PASS",
+      "notes": "Duplicate retry absorbed cleanly"
+    },
+    {
+      "feature": "Student Portal: Room & Roommate Information",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Room details and occupant roster view verified"
+    },
+    {
+      "feature": "Student Portal: Student Profile Management",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Profile contact details rendered cleanly"
+    },
+    {
+      "feature": "Staff Portal: Work Assignment Board",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Active jobs queue loaded"
+    },
+    {
+      "feature": "Staff Portal: Start Work, Note & Resolution Cycle",
+      "initial": "PASS",
+      "fix": "Normalized resolutionNote parameter",
+      "retest": "PASS",
+      "notes": "Lifecycle transitions: Assigned -> In Progress -> Resolved"
+    },
+    {
+      "feature": "Staff Portal: Resolution History Log",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Completed jobs history and timestamps displayed"
+    },
+    {
+      "feature": "Staff Portal: Issue Hotspot Spatial Heatmap",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Floor-level maintenance cluster visualizer active"
+    },
+    {
+      "feature": "Staff Portal: Availability & Shift Management",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Availability flag persisted in User schema"
+    },
+    {
+      "feature": "Warden Portal: Operational KPI Overview",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Active complaints, room status and pending assignments displayed"
+    },
+    {
+      "feature": "Warden Portal: 77-Room Interactive Spatial Matrix",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "77 hostel rooms mapped across all blocks"
+    },
+    {
+      "feature": "Warden Portal: Complaint Dispatch & Operations Grid",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Management grid with multi-filter and assignment drawers"
+    },
+    {
+      "feature": "Warden Portal: Maintenance Staff Directory",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Staff roster, active workloads and contact links"
+    },
+    {
+      "feature": "Warden Portal: Service Outage & Calendar Monitor",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Utility outage monitoring and service schedule tracking"
+    },
+    {
+      "feature": "Warden Portal: Staff Performance Analytics",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Resolution velocity, SLA compliance and workload charts"
+    },
+    {
+      "feature": "Head Warden Portal: Supervisory Overview",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Hostel-wide operational metrics and administrative navigation"
+    },
+    {
+      "feature": "Head Warden Portal: Student Admission & Roster Module",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Batch roster ingestion and student provisioning active"
+    },
+    {
+      "feature": "Head Warden Portal: Secure Resident CSV Export",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Head Warden granted CSV download (200); staff blocked (403)"
+    },
+    {
+      "feature": "Hostel Incharge: HOIDSS Executive Dashboard",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "High-level KPI metrics, active complaints and service alerts"
+    },
+    {
+      "feature": "Hostel Incharge: Monthly Trends & SLA Breach Analytics",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "SLA breach tracking and monthly volume analytics verified"
+    },
+    {
+      "feature": "Hostel Incharge: Broadcast Announcements System",
+      "initial": "FAIL",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Broadcast announcement saved and dispatched to residents"
+    },
+    {
+      "feature": "Main Admin: Central Administration Control Panel",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Centralized management dashboard loaded"
+    },
+    {
+      "feature": "Main Admin: Dynamic Department Management",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Created department ID: 6aee3abd8ae5ae94b619bb1f"
+    },
+    {
+      "feature": "Main Admin: Staff Account Provisioning",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Staff account created: synth.tech.1307@pict.edu"
+    },
+    {
+      "feature": "Main Admin: Immutable Operational Audit Trail",
+      "initial": "PASS",
+      "fix": "Enforced managementOnlyMiddleware",
+      "retest": "PASS",
+      "notes": "Retrieved 100 append-only audit entries"
+    },
+    {
+      "feature": "Specialized: Wi-Fi In-Charge Specialist Dashboard",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Bandwidth metrics, access point status and open tickets queue"
+    },
+    {
+      "feature": "Specialized: Security Incident & Gate Log System",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Incident recorded with timestamp and severity marker"
+    },
+    {
+      "feature": "Specialized: Anti-Ragging Investigation Vault & Isolation",
+      "initial": "FAIL",
+      "fix": "Fixed API array destructuring in AntiRaggingDashboard.jsx",
+      "retest": "PASS",
+      "notes": "Confidential vault accessible to committee; regular staff blocked (403)"
+    },
+    {
+      "feature": "Notifications: In-App Center & Mark All Read",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Notification stream and unread badge cleared"
+    },
+    {
+      "feature": "UI/UX: High-Contrast Light & Dark Theme Switching",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Theme classes applied cleanly with OKLCH tokens"
+    },
+    {
+      "feature": "Regression: Complaint Reopening & Status Invalidation",
+      "initial": "FAIL",
+      "fix": "Mounted POST /api/complaints/:id/reopen endpoint",
+      "retest": "PASS",
+      "notes": "Status transitioned from Resolved to Reopened; audit logged"
+    },
+    {
+      "feature": "Regression: Operational Reassignment with Audit History",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Reassigned to supervisor; ComplaintEvent and AuditLog appended"
+    },
+    {
+      "feature": "Build: Vite React 19 Production Compilation",
+      "initial": "PASS",
+      "fix": "None",
+      "retest": "PASS",
+      "notes": "Zero JSX, styling, or compilation errors"
+    }
+  ],
+  "consoleErrors": [],
+  "networkErrors": []
+}
